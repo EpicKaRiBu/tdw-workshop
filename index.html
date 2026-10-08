@@ -70,7 +70,7 @@ function lookUp(){done('Schauen Sie nach vorne.','Hier geht es weiter, sobald Ih
 /* ---------- Ankommen (5 Antippen + Vormittag) ---------- */
 const arrivalSteps=[
   ['rolle','In welchem Bereich arbeiten Sie?',C.roles],
-  ['groesse','Wie groß ist Ihre Organisation?',C.sizes.map(s=>s+' Mitarbeitende')],
+  ['stimmung0','Wenn Sie an KI in Ihrer Arbeit denken – was überwiegt gerade?',C.moods],
   ['nutzung','Wie oft nutzen Sie KI beruflich?',C.usage],
   ['regeln','Gibt es bei Ihnen Regeln für KI?',C.rules],
 ];
@@ -132,7 +132,7 @@ function work(){
 /* ---------- Montag + Stimmung ---------- */
 function monday(){
   if(!answered('montag')){textQ('Mein erster Schritt – ab morgen','Mitnehmen','montag','Was tun Sie als Erstes – und wann? z. B. „Am Donnerstag in der Teamsitzung …“',render,'Auf die Wand',true);return}
-  if(!answered('stimmung')){choice('Wenn Sie jetzt an KI in Ihrer Arbeit denken – was überwiegt?','Zum Schluss',C.moods,'stimmung',render);return}
+  if(!answered('stimmung')){choice('Und jetzt, nach diesem Nachmittag – was überwiegt?','Zum Schluss',C.moods,'stimmung',render,'<p class="m s">Dieselbe Frage wie beim Ankommen. Vorne sehen Sie gleich, ob sich etwas bewegt hat.</p>');return}
   const m=store.get('a.montag');
   main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Danke!</p></div>`+
    (m&&m.text?`<div class="card"><p class="s m" style="margin:0 0 6px">Ihr Schritt:</p><p style="margin:0">${esc(m.text)}</p></div><a class="go" style="text-align:center;text-decoration:none" href="mailto:?subject=${encodeURIComponent('Mein erster Schritt nach dem Workshop')}&body=${encodeURIComponent(m.text+'\n\nAus dem Workshop „KI als Organisationskompetenz“, Tag der Weiterbildung 2026')}">Als Erinnerung an mich mailen</a><p class="hint">Geht über Ihr eigenes Mailprogramm. Wir speichern keine Adresse.</p>`:'');
