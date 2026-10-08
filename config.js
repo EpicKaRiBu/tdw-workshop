@@ -18,9 +18,9 @@ window.TDW = {
   usage: ['täglich', 'wöchentlich', 'selten', 'nie'],
   rules: ['ja, schriftlich', 'informell', 'nein', 'weiß nicht'],
   paths: [
-    { id: 'regeln', name: 'Regeln', zone: 'Zone links', color: '#2F4B7C', text: 'Leitlinie entwerfen oder die bestehende prüfen.' },
-    { id: 'kontext', name: 'Kontext', zone: 'Zone Mitte', color: '#2E6B66', text: 'Eine wiederkehrende Aufgabe: Was braucht die KI, was bleibt menschlich?' },
-    { id: 'menschen', name: 'Menschen', zone: 'Zone rechts', color: '#8C3B5A', text: 'Begeisterte, Skeptische, Überforderte mitnehmen.' }
+    { id: 'regeln', name: 'Regeln', zone: 'Zone links', color: '#2F4B7C', text: 'Eine KI-Leitlinie für Ihr Haus entwerfen – oder die bestehende prüfen.' },
+    { id: 'kontext', name: 'Kontext', zone: 'Zone Mitte', color: '#2E6B66', text: 'Für eine wiederkehrende Aufgabe festlegen, was die KI braucht und was Menschen entscheiden.' },
+    { id: 'menschen', name: 'Menschen', zone: 'Zone rechts', color: '#8C3B5A', text: 'Ihr Team einschätzen und mitnehmen – mit Plan und Antworten auf Einwände.' }
   ],
   moods: ['neugierig', 'zuversichtlich', 'skeptisch', 'besorgt', 'überfordert']
 };

@@ -128,7 +128,7 @@ function arrival(){
 function pathChoice(inArrival){
   const cur=store.get('a.pfad');
   main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>Woran möchten Sie später arbeiten?</h1><p class="m s">40 Minuten in Kleingruppen. Sie können später noch wechseln.</p>`+
-   C.paths.map((p,i)=>`<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span></button>`).join('')+
+   C.paths.map((p,i)=>{const I=(window.Pfade&&Pfade.info[p.id])||{};return `<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span>${I.fuer?`<br><span class="s m">Für: ${I.fuer}</span><br><span class="s m">Sie nehmen mit: ${I.mit}</span>`:''}</button>`}).join('')+
    `<p class="hint">Das vierte Modul „Wissen &amp; Assistenten“ gibt es danach online.</p>`;
   main.querySelectorAll('.opt').forEach(b=>b.onclick=async()=>{await send('pfad',{i:+b.dataset.i});render()});
 }
