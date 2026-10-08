@@ -3,7 +3,7 @@ window.TDW = {
   url: 'https://nqkbtfhoixgplmxcpxyn.supabase.co',
   key: 'sb_publishable_C4iTUIUu-CJA4WdyHxjAVw_VAL-cp2F',
   session: '1910',
-  participantUrl: 'ki.arminfradler.at',
+  participantUrl: 'mitmachen.arminfradler.at',
   quiz: [
     { q: 'Wie viel Prozent der Mitarbeitenden in der österreichischen Erwachsenenbildung haben KI schon genutzt?', o: ['rund 45 %', 'rund 70 %', 'rund 95 %'], a: 2, src: 'Uni Graz / Ö-Cert 2026', note: 'Und wie viele Einrichtungen haben einheitliche Regeln? Schauen wir uns diesen Raum an.' },
     { q: 'Wie lang dürfen Aufgaben inzwischen sein, die KI-Agenten selbstständig erledigen – gemessen daran, wie lange ein Mensch dafür braucht?', o: ['rund 15 Minuten', 'rund 2 Stunden', 'rund 16 Stunden'], a: 2, src: 'METR, Anfang 2026 (Aufgaben, die zur Hälfte gelingen)', note: 'Das verdoppelt sich derzeit etwa alle vier Monate. Die Technik-Uhr läuft schnell – die Organisations-Uhr stellen Sie.' },
