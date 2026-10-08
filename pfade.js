@@ -74,6 +74,7 @@ const KONTEXT={
   aufgaben:['Kursausschreibungen','Programmheft-Texte','Förderanträge','Sachberichte','Newsletter','Social Media','Feedback auswerten','Anfragen von Teilnehmenden','Anmeldebestätigungen','Protokolle','Abrechnungsunterlagen','Bedarfsanalyse / neue Angebote'],
   aufwand:['unter 10 Stunden','10–50 Stunden','50–150 Stunden','über 150 Stunden'],
   bausteine:['Leitbild / Haltung','Stilregeln (Ton, Gendern, Anrede)','Gute Beispiele aus dem eigenen Haus','Vorlage / Gliederung','Vorgaben von Fördergebern','Fachbegriffe / Glossar','Beschreibung der Zielgruppe','Zahlen und Daten zum Anlass'],
+  anregen:['Kritisch gegenlesen – mit den Augen des Fördergebers','Erst Fragen stellen, dann schreiben','Varianten zur Auswahl statt einer Lösung','Aus Sicht der Zielgruppe prüfen'],
   menschlich:['Was betont wird – und was nicht','Der Ton gegenüber Fördergebern','Ehrlichkeit bei Problemen','Ob Zahlen stimmen','Die Freigabe vor dem Versand','Was zur Haltung des Hauses passt'],
   pruefer:['die Person, die nutzt','eine zweite Person im Team','die Bereichsleitung','die Geschäftsführung'],
   beispiel:{aufgabe:'Kursausschreibungen (Bildungswerk Apfelland, erfunden)',kontext:['Leitbild (grün)','Stilregeln: Sie-Form, gendern mit Doppelpunkt, keine Werbesprache (grün)','Drei gelungene Ausschreibungen vom Vorjahr (grün)','Vorlage mit Pflichtangaben: Termin, Ort, Kosten, Förderung (grün)'],menschlich:['Ob der Kurs zur Zielgruppe passt','Preis und Förderhinweis','Freigabe vor Veröffentlichung'],qualitaet:['Alle Pflichtangaben vollständig','Klingt nach uns, nicht nach Werbung','Verständlich für Menschen ohne Vorwissen']}
@@ -196,7 +197,7 @@ function regelnDoc(s,all){
     if(s.nt&&s.nt[d.k])c+=' '+s.nt[d.k];
     return {t:d.t,c,gap:pruef?['geregelt','teilweise geregelt','fehlt'][(s.hat||{})[d.k]??2]:null};
   });
-  const extra=['Wir dokumentieren, wer an welcher KI-Schulung oder Lernzeit teilgenommen hat (Nachweis nach Art. 4 AI Act).','Wir überprüfen diese Leitlinie alle sechs Monate – die Technik ändert sich schnell.'];
+  const extra=['Wer KI-Ergebnisse verwendet, muss sie fachlich beurteilen können. Neue Kolleg:innen erarbeiten zentrale Aufgaben zuerst selbst und nutzen KI dann als Sparringpartner.','Wir dokumentieren, wer an welcher KI-Schulung oder Lernzeit teilgenommen hat (Nachweis nach Art. 4 AI Act).','Wir überprüfen diese Leitlinie alle sechs Monate – die Technik ändert sich schnell.'];
   const offen=[];
   if(ort.br===0)offen.push('Betriebsrat einbinden (Mitbestimmung bei Systemen, die Daten von Beschäftigten verarbeiten, ArbVG §§ 96, 96a – fachlich prüfen lassen).');
   if(ort.sens===0)offen.push('Für sensible Zielgruppen prüfen, ob zusätzliche Regeln nötig sind (z. B. Beratung, AMS-Daten).');
@@ -235,8 +236,11 @@ function kontext(){
   }
   if(s.step===3){
     s.mh=s.mh||[];
-    m.innerHTML=head(p,4,total,'Was bleibt menschliche Entscheidung?')+`<p class="m s">Hier zieht Ihre Gruppe die Linie: Was gibt Ihr Haus ab – und was behält es?</p><div class="opts">${KONTEXT.menschlich.map((x,i)=>`<button class="opt ${s.mh.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+note('Weiteres, das bei Ihnen Menschen entscheiden …',s.mhNote)+nav();
-    m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.mh=s.mh.includes(i)?s.mh.filter(x=>x!==i):s.mh.concat(i);b.classList.toggle('sel');save(p,s)});
+    s.an=s.an||[];
+    m.innerHTML=head(p,4,total,'Wo ziehen Sie die Linie?')+`<p class="m s">Abgeben, anregen lassen, behalten – wie in der Leitfrage. Was entscheiden bei dieser Aufgabe Menschen?</p><div class="opts" id="mh">${KONTEXT.menschlich.map((x,i)=>`<button class="opt ${s.mh.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+note('Weiteres, das bei Ihnen Menschen entscheiden …',s.mhNote)+
+      `<p class="s" style="margin:18px 0 6px"><b>Und wo soll die KI Sie anregen, statt zu schreiben?</b></p><div class="opts" id="an">${KONTEXT.anregen.map((x,i)=>`<button class="opt ${s.an.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+nav();
+    m.querySelectorAll('#mh .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.mh=s.mh.includes(i)?s.mh.filter(x=>x!==i):s.mh.concat(i);b.classList.toggle('sel');save(p,s)});
+    m.querySelectorAll('#an .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.an=s.an.includes(i)?s.an.filter(x=>x!==i):s.an.concat(i);b.classList.toggle('sel');save(p,s)});
     bind(s,p,kontext).onclick=()=>{s.mhNote=$('#nt').value.trim();s.step=4;save(p,s);kontext()};return;
   }
   if(s.step===4){
@@ -257,12 +261,13 @@ function kontextDoc(s){
   return {kind:'kontext',title:'Kontext-Rezept: '+s.aufgabe,aufgabe:s.aufgabe,aufwand:KONTEXT.aufwand[s.aufwand]??'',
     kontext:bs.filter(x=>x.a<3).map(x=>`${x.b} (${amp[x.a]})`),draussen:bs.filter(x=>x.a===3).map(x=>x.b),
     menschlich:(s.mh||[]).map(i=>KONTEXT.menschlich[i]).concat(s.mhNote?[s.mhNote]:[]),
+    anregen:(s.an||[]).map(i=>KONTEXT.anregen[i]),
     qualitaet:(s.q||[]).filter(Boolean),pruefer:KONTEXT.pruefer[s.pr]??''};
 }
 function skillMd(d){
   const slug=d.aufgabe.toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40)||'aufgabe';
   const L=a=>a.map(x=>'- '+x).join('\n');
-  return `---\nname: ${slug}\ndescription: Erstellt Entwürfe für „${d.aufgabe}“ nach den Regeln unseres Hauses. Verwenden, wenn ${d.aufgabe} geschrieben oder überarbeitet werden sollen.\n---\n\n# ${d.aufgabe}\n\n## Unterlagen, die du nutzt\n${L(d.kontext.length?d.kontext:['(Unterlagen ergänzen)'])}\n\n## Was du nie verwendest\n${L(d.draussen.length?d.draussen.concat(['Namen und Daten von Teilnehmenden']):['Namen und Daten von Teilnehmenden'])}\n\n## So gehst du vor\n1. Lies die Unterlagen oben.\n2. Erstelle einen Entwurf. Erfinde keine Zahlen, Namen oder Ergebnisse – fehlt etwas, markiere es mit [FEHLT: …].\n3. Prüfe den Entwurf gegen die Qualitätskriterien.\n4. Schließe mit einer Liste „Bitte prüfen“.\n\n## Qualitätskriterien\n${L(d.qualitaet.length?d.qualitaet:['(ergänzen)'])}\n\n## Das entscheiden Menschen (in „Bitte prüfen“ aufführen)\n${L(d.menschlich.length?d.menschlich:['Freigabe vor Verwendung'])}\n\nVor der Verwendung prüft: ${d.pruefer||'(festlegen)'}.\n`;
+  return `---\nname: ${slug}\ndescription: Erstellt Entwürfe für „${d.aufgabe}“ nach den Regeln unseres Hauses. Verwenden, wenn ${d.aufgabe} geschrieben oder überarbeitet werden sollen.\n---\n\n# ${d.aufgabe}\n\n## Unterlagen, die du nutzt\n${L(d.kontext.length?d.kontext:['(Unterlagen ergänzen)'])}\n\n## Was du nie verwendest\n${L(d.draussen.length?d.draussen.concat(['Namen und Daten von Teilnehmenden']):['Namen und Daten von Teilnehmenden'])}\n\n## So gehst du vor\n${['Lies die Unterlagen oben.'].concat(d.anregen&&d.anregen.length?['Bevor du schreibst, rege an: '+d.anregen.join('; ')+'.']:[],['Erstelle einen Entwurf. Erfinde keine Zahlen, Namen oder Ergebnisse – fehlt etwas, markiere es mit [FEHLT: …].','Prüfe den Entwurf gegen die Qualitätskriterien.','Schließe mit einer Liste „Bitte prüfen“.']).map((x,i)=>(i+1)+'. '+x).join('\n')}\n\n## Qualitätskriterien\n${L(d.qualitaet.length?d.qualitaet:['(ergänzen)'])}\n\n## Das entscheiden Menschen (in „Bitte prüfen“ aufführen)\n${L(d.menschlich.length?d.menschlich:['Freigabe vor Verwendung'])}\n\nVor der Verwendung prüft: ${d.pruefer||'(festlegen)'}.\n`;
 }
 
 /* ---------------- Modul Wissen (online) ---------------- */
@@ -409,6 +414,7 @@ function docHtml(d){
     b+=`<p><b>Aufgabe:</b> ${esc(d.aufgabe)}${d.aufwand?` · <b>Aufwand pro Jahr:</b> ${esc(d.aufwand)}`:''}</p>`;
     b+=`<h3>Das bekommt die KI</h3><ul>${li(d.kontext)}</ul>`;
     if(d.draussen.length)b+=`<h3>Bleibt draußen (rot)</h3><ul>${li(d.draussen)}</ul>`;
+    if(d.anregen&&d.anregen.length)b+=`<h3>Hier soll die KI anregen statt schreiben</h3><ul>${li(d.anregen)}</ul>`;
     b+=`<h3>Das entscheiden Menschen</h3><ul>${li(d.menschlich)}</ul><h3>Woran wir ein gutes Ergebnis erkennen</h3><ul>${li(d.qualitaet)}</ul><p><b>Prüft vor der Verwendung:</b> ${esc(d.pruefer)}</p>`;
     b+=`<p><i>Dieses Rezept ist der Entwurf eines „Skills“. Die passende Skill-Datei (SKILL.md) können Sie herunterladen und einer KI geben – oder Sie sagen ihr: „Mach daraus einen Skill.“</i></p>`;
   }else if(d.kind==='wissen'){
