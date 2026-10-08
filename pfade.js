@@ -9,7 +9,7 @@ const $=s=>document.querySelector(s);
 
 /* ---------------- Steckbriefe der Module ---------------- */
 const INFO={
-  regeln:{titel:'Regeln & Verantwortung',tun:'Sie treffen vier Grundsatzentscheidungen für Ihr Haus – jede an einem echten Fall, mit Abwägung.',fuer:'Leitung, Geschäftsführung, wer Regeln verantwortet',mit:'Einen Leitlinien-Entwurf für Ihr Haus – oder, wenn Sie schon eine Leitlinie haben, eine Lückenliste.',dauer:'25–35 Minuten'},
+  regeln:{titel:'Regeln & Verantwortung',tun:'Sie treffen fünf Grundsatzentscheidungen für Ihr Haus – zu Tools, Daten, Prüfung, KI in Kursen und heiklen Einsätzen. Jede an einem echten Fall, mit Abwägung.',fuer:'Leitung, Geschäftsführung, wer Regeln verantwortet',mit:'Einen Leitlinien-Entwurf für Ihr Haus – oder, wenn Sie schon eine Leitlinie haben, eine Lückenliste.',dauer:'25–35 Minuten'},
   kontext:{titel:'Delegieren mit Kontext',tun:'Sie nehmen eine Aufgabe, die bei Ihnen regelmäßig wiederkommt, und legen fest: Welche Unterlagen braucht die KI, damit das Ergebnis gut wird – und was entscheiden weiterhin Menschen?',fuer:'Bildungsmanagement, Programmplanung, Marketing, Verwaltung',mit:'Ein Kontext-Rezept als Teamstandard – und eine fertige Skill-Datei, die Sie einer KI geben können.',dauer:'25–35 Minuten'},
   wissen:{titel:'Wissen & Assistenten',tun:'Sie sichten, welches Wissen Ihres Hauses eine KI braucht, was draußen bleibt und wer es pflegt – und planen daraus Ihren ersten KI-Ordner.',fuer:'Digitalverantwortliche, Qualitätsmanagement, Leitung größerer Häuser',mit:'Einen Bauplan und eine fertige Ordner-Vorlage (ZIP) mit Anweisungen, Pflegeplan und ersten Skills.',dauer:'25–35 Minuten'},
   menschen:{titel:'Menschen mitnehmen',tun:'Sie schätzen Ihr Team ein, wählen die zwei Hebel, die bei Ihnen am meisten bewirken, und finden Antworten auf typische Einwände.',fuer:'Leitung, Personalverantwortliche, Teamleitungen',mit:'Einen 30-Tage-Plan und einen Gesprächsleitfaden für Ihr Team.',dauer:'20–30 Minuten'}
@@ -24,32 +24,38 @@ const REGELN={
     {k:'sens',q:'Arbeiten Sie mit sensiblen Gruppen (z. B. AMS, Basisbildung, Beratung)?',o:['Ja','Nein']}
   ],
   d:[
-    {k:'tools',t:'Welche Tools dürfen genutzt werden?',fall:'Eine Kollegin nutzt seit Monaten privat ChatGPT für Kursausschreibungen. Gut gemeint – aber niemand weiß davon.',
+    {k:'tools',pruef:'Wenn morgen jemand ein neues Tool vorschlägt: Wer entscheidet – und in wie vielen Tagen? Eine Freigabe, die drei Monate dauert, erzeugt neue Schatten-KI.',t:'Welche Tools dürfen genutzt werden?',fall:'Eine Kollegin nutzt seit Monaten privat ChatGPT für Kursausschreibungen. Gut gemeint – aber niemand weiß davon.',
       warum:'Private Gratis-Konten haben keinen Auftragsverarbeitungsvertrag (Art. 28 DSGVO), Eingaben können zum Training verwendet werden. Eine Freigabeliste schafft einen legalen Weg und löst Schatten-KI ab, statt sie zu verbieten.',
       o:[['Jedes Tool','Maximale Freiheit, aber keine Kontrolle über Daten und Verträge.'],
          ['Eine Freigabeliste','Ausgewählte Tools mit Vertrag. Neue Tools werden kurz geprüft.'],
          ['Nur ein Firmentool','Einfach und sicher, aber manchmal nicht das beste Werkzeug.']]},
-    {k:'daten',t:'Welche Daten dürfen in welches Tool?',fall:'Jemand will die Anwesenheitsliste eines AMS-Kurses sortieren lassen – mit Namen und SV-Nummern.',
+    {k:'daten',pruef:'Nennen Sie ein Dokument aus Ihrem Alltag, bei dem Ihre Gruppe über die Farbe uneinig ist. Genau dort braucht Ihre Regel ein Beispiel.',t:'Welche Daten dürfen in welches Tool?',fall:'Jemand will die Anwesenheitsliste eines AMS-Kurses sortieren lassen – mit Namen und SV-Nummern.',
       warum:'Personenbezogene Daten brauchen eine Rechtsgrundlage und einen Vertrag mit dem Anbieter. Gesundheitsdaten zählen zu den besonders geschützten Kategorien (Art. 9 DSGVO). Achtung: Pseudonymisierte Daten bleiben personenbezogen (EDSA-Leitlinien 01/2025).',
       o:[['Datenampel','Grün in jedes Tool, Gelb nur in freigegebene, Rot nie in frei zugängliche Tools.'],
          ['Nur Grünes','Am sichersten, aber KI hilft dann bei internen Texten nicht.'],
          ['Gelb nach Anonymisierung überall','Flexibel, verlangt aber echtes Anonymisieren – Namen weglassen reicht oft nicht.']]},
-    {k:'verantwortung',t:'Wer prüft und verantwortet KI-Ergebnisse?',fall:'Ein KI-Entwurf eines Sachberichts enthält eine geschönte Zahl. Er geht fast so ans Land.',
+    {k:'verantwortung',pruef:'Prüfen braucht Können: Könnte die Person, die bei Ihnen prüft, das Ergebnis auch ohne KI erstellen? Und wer lernt es gerade?',t:'Wer prüft und verantwortet KI-Ergebnisse?',fall:'Ein KI-Entwurf eines Sachberichts enthält eine geschönte Zahl. Er geht fast so ans Land.',
       warum:'Verantwortung lässt sich nicht an eine KI abgeben. Wer mehr Vertrauen in die KI hat, prüft nachweislich weniger kritisch (Microsoft/Carnegie Mellon 2025). Eine klare Prüfregel schützt vor falschen Zahlen gegenüber Fördergebern.',
       o:[['Wer nutzt, prüft','Eigenverantwortung, schnell – braucht Vertrauen und Schulung.'],
          ['Vier Augen bei allem nach außen','Sicherer bei Berichten und Öffentlichkeitsarbeit, etwas langsamer.'],
          ['Freigabe durch die Leitung','Höchste Kontrolle, kann zum Engpass werden.']]},
-    {k:'heikel',t:'Was gilt bei heiklen Einsätzen?',fall:'Die Leitung möchte 60 Bewerbungen für Kursplätze von KI vorsortieren lassen.',
+    {k:'kurse',t:'Was gilt für KI in Ihren Kursen?',fall:'Eine Trainerin merkt: Die Hausaufgaben im Deutschkurs sind plötzlich fehlerfrei. Ein Teilnehmer fragt, ob er für den Abschlusstest übersetzen lassen darf.',
+      pruef:'Wissen Ihre Trainer:innen – auch die auf Honorarbasis –, was sie Teilnehmenden zu KI sagen sollen? Und mit welchen Konten arbeiten sie selbst mit Daten von Teilnehmenden?',
+      warum:'Erledigt ist nicht gelernt: KI, die Lösungen liefert, kann Lernen verhindern – als Tutor eingesetzt kann sie es fördern (Bastani et al., PNAS 2025). Viele Trainer:innen arbeiten auf Honorarbasis mit eigenen Geräten und Konten; eine Leitlinie erreicht sie nur, wenn sie ausdrücklich für sie gilt. Und Teilnehmende sollen nicht gedrängt werden, private KI-Konten mit eigenen Daten anzulegen.',
+      o:[['Ohne KI, wo Lernen das Ziel ist','Übungen und Prüfungen, die eigenes Können zeigen sollen, ohne KI. In anderen Phasen nach Ansage der Trainerin.'],
+         ['Offen – mit Offenlegen und Reflexion','Teilnehmende dürfen KI nutzen, sagen wofür und reflektieren, was sie selbst gelernt haben. Prüfungen zeigen eigenes Können.'],
+         ['Trainer:innen entscheiden je Kurs','Auf Basis gemeinsamer Grundsätze des Hauses, die alle Trainer:innen kennen.']]},
+    {k:'heikel',pruef:'Wo entscheidet bei Ihnen heute schon Software über Menschen mit – Anmeldesysteme, Wartelisten, Vorauswahl von Bewerbungen?',t:'Was gilt bei heiklen Einsätzen?',fall:'Die Leitung möchte 60 Bewerbungen für Kursplätze von KI vorsortieren lassen.',
       warum:'KI bei Zulassung, Bewertung von Lernenden oder Personalauswahl gilt im AI Act als Hochrisiko (Anhang III). Die Pflichten gelten ab Dezember 2027 – die Diskriminierungsrisiken schon heute.',
       o:[['Nie','Keine KI bei Personalauswahl, Kursplatzvergabe oder Bewertung von Menschen.'],
          ['Nur als Unterstützung','KI darf zuarbeiten, entscheiden und begründen muss ein Mensch – dokumentiert.'],
          ['Im Einzelfall nach Prüfung','Leitung und ggf. Betriebsrat prüfen vorab. Ab Dezember 2027 gelten Hochrisiko-Pflichten.']]}
   ],
   opt:[
-    {k:'kennz',t:'Kennzeichnen wir KI nach außen?',fall:'Für Social Media entsteht ein KI-Bild „zufriedener Teilnehmender“.',
+    {k:'kennz',pruef:'Würde es Ihre Teilnehmenden stören, wenn sie es wüssten? Wenn ja: kennzeichnen – auch ohne Pflicht.',t:'Kennzeichnen wir KI nach außen?',fall:'Für Social Media entsteht ein KI-Bild „zufriedener Teilnehmender“.',
       warum:'Seit August 2026 (Art. 50 AI Act): Chatbots müssen sich als KI zu erkennen geben, realistische KI-Bilder und Deepfakes sind zu kennzeichnen. Texte, die ein Mensch geprüft und verantwortet, fallen in der Regel nicht darunter.',
       o:[['Immer','Alles, was KI erstellt hat und nach außen geht.'],['Wo nötig','Chatbots, realistische Bilder, Deepfakes (Art. 50) – sonst nicht.'],['Bei Bildern und Chatbots, Texte nach Prüfung nicht','Texte, die ein Mensch geprüft und verantwortet hat, gelten als eigene.']]},
-    {k:'agenten',t:'Was dürfen Agenten selbstständig tun?',fall:'Ein Assistent soll Anfragen aus dem Postfach selbstständig beantworten.',
+    {k:'agenten',pruef:'Welche Ihrer Systeme dürfen heute schon selbst Mails versenden oder Daten ändern – und wer im Haus weiß das?',t:'Was dürfen Agenten selbstständig tun?',fall:'Ein Assistent soll Anfragen aus dem Postfach selbstständig beantworten.',
       warum:'Versteckte Anweisungen in Mails oder Webseiten können Agenten umlenken. Gefährlich wird es, wenn ein Agent zugleich fremde Inhalte liest, auf sensible Daten zugreift und nach außen handeln kann.',
       o:[['Nichts ohne Freigabe','Agenten bereiten vor, ein Mensch schickt ab.'],['Lesen und vorbereiten','Handeln nach außen nur mit Freigabe – nie die „gefährliche Dreierkombination“.'],['Routinen nach Freigabe der Leitung','Einzelne, geprüfte Abläufe dürfen laufen.']]}
   ]
@@ -64,6 +70,9 @@ const CLAUSE={
   verantwortung:['Wer KI nutzt, prüft das Ergebnis auf Richtigkeit, Vollständigkeit und Ton – und verantwortet es wie eine eigene Arbeit.',
          'Wer KI nutzt, prüft das Ergebnis. Alles, was nach außen geht (Berichte, Öffentlichkeitsarbeit, Schreiben an Fördergeber), liest zusätzlich eine zweite Person.',
          'KI-gestützte Berichte und Texte für die Öffentlichkeit gibt die Leitung frei.'],
+  kurse:['Wo es um eigenes Lernen und Prüfen geht, arbeiten Teilnehmende ohne KI. In anderen Phasen ist KI erlaubt, wenn die Trainerin oder der Trainer es vorsieht und erklärt.',
+         'Teilnehmende dürfen KI nutzen, wenn sie offenlegen, wofür, und reflektieren, was sie selbst gelernt haben. Prüfungen gestalten wir so, dass eigenes Können sichtbar wird.',
+         'Trainer:innen entscheiden je Kurs über den Einsatz von KI – auf Basis gemeinsamer Grundsätze des Hauses, die wir allen Trainer:innen mitgeben.'],
   heikel:['KI wird nicht eingesetzt, um über Menschen zu entscheiden – weder bei Personalauswahl noch bei Kursplatzvergabe oder Leistungsbewertung.',
          'Bei Entscheidungen über Menschen darf KI höchstens zuarbeiten. Entscheidung und Begründung trifft ein Mensch und dokumentiert sie.',
          'Einsätze mit Bezug zu Personalauswahl, Kursplatzvergabe oder Bewertung prüfen Leitung [und Betriebsrat] vorab im Einzelfall. Ab Dezember 2027 gelten dafür die Hochrisiko-Pflichten des AI Act.'],
@@ -74,6 +83,8 @@ const KONTEXT={
   aufgaben:['Kursausschreibungen','Programmheft-Texte','Förderanträge','Sachberichte','Newsletter','Social Media','Feedback auswerten','Anfragen von Teilnehmenden','Anmeldebestätigungen','Protokolle','Abrechnungsunterlagen','Bedarfsanalyse / neue Angebote'],
   aufwand:['unter 10 Stunden','10–50 Stunden','50–150 Stunden','über 150 Stunden'],
   bausteine:['Leitbild / Haltung','Stilregeln (Ton, Gendern, Anrede)','Gute Beispiele aus dem eigenen Haus','Vorlage / Gliederung','Vorgaben von Fördergebern','Fachbegriffe / Glossar','Beschreibung der Zielgruppe','Zahlen und Daten zum Anlass'],
+  rechnung:'Grobe Rechnung: Wenn sich ein Viertel davon einsparen ließe – wie viele Stunden wären das im Jahr? Und wofür würden Sie sie verwenden?',
+  koennen:'Prüfen braucht Können: Wer bei Ihnen kann diese Aufgabe auch ohne KI – und wer lernt sie gerade? Für Lernende ist dieselbe Aufgabe Übung, nicht Routine.',
   anregen:['Kritisch gegenlesen – mit den Augen des Fördergebers','Erst Fragen stellen, dann schreiben','Varianten zur Auswahl statt einer Lösung','Aus Sicht der Zielgruppe prüfen'],
   menschlich:['Was betont wird – und was nicht','Der Ton gegenüber Fördergebern','Ehrlichkeit bei Problemen','Ob Zahlen stimmen','Die Freigabe vor dem Versand','Was zur Haltung des Hauses passt'],
   pruefer:['die Person, die nutzt','eine zweite Person im Team','die Bereichsleitung','die Geschäftsführung'],
@@ -88,6 +99,7 @@ const MENSCHEN={
     ['„Das ist doch Schummeln.“',['„Nicht, wenn du prüfst und dazu stehst. Unterschrieben wird von dir – wie bei jedem Entwurf.“','„Wir sagen offen, wo wir KI nutzen. Heimlich wäre das Problem.“']],
     ['„Und unsere Daten?“',['„Dafür gibt es die Datenampel: Rotes kommt nie in frei zugängliche Tools.“','„Wir nutzen nur freigegebene Tools mit Vertrag.“']]
   ],
+  pruefHebel:'Prüfstein: Was würde die skeptischste Person in Ihrem Team zu diesen zwei Hebeln sagen? Wenn Ihnen keine Antwort einfällt, fragen Sie sie.',
   zeit:[['Dem Team','Für Entlastung und weniger Überstunden.'],['Den Teilnehmenden','Für mehr Beratung und Begleitung.'],['Neuen Vorhaben','Für Angebote, die bisher liegen blieben.'],['Noch offen','Das klären wir im Team.']]
 };
 const WISSEN={
@@ -177,7 +189,7 @@ function regeln(){
   if(di<all.length){
     const d=all[di];s.ch=s.ch||{};s.nt=s.nt||{};
     const pruef=s.mode===1;
-    m.innerHTML=head(p,s.step+1,total,d.t)+caseBox(d.fall)+warum(d.warum)+
+    m.innerHTML=head(p,s.step+1,total,d.t)+caseBox(d.fall)+(d.pruef?`<p class="s" style="margin:-4px 0 12px"><b>Prüfstein für Ihre Gruppe:</b> ${esc(d.pruef)}</p>`:'')+warum(d.warum)+
       (pruef?`<p class="s" style="margin:14px 0 6px"><b>Regelt Ihre Leitlinie das schon?</b></p><div class="tri" id="hat">${['ja','teilweise','nein'].map((x,i)=>`<button data-v="${i}" class="${(s.hat||{})[d.k]===i?'sel':''}">${x}</button>`).join('')}</div><p class="s" style="margin:14px 0 0"><b>Wie sollte es geregelt sein?</b></p>`:'')+
       optList(d.o,s.ch[d.k])+note('Eigene Formulierung oder Bedingung …',s.nt[d.k])+
       (di===REGELN.d.length-1&&!s.withOpt?`<button class="opt" id="more" style="text-align:center;margin-bottom:10px">Schnell fertig? Zwei Zusatzfragen: Kennzeichnung und Agenten</button>`:'')+
@@ -197,7 +209,7 @@ function regelnDoc(s,all){
     if(s.nt&&s.nt[d.k])c+=' '+s.nt[d.k];
     return {t:d.t,c,gap:pruef?['geregelt','teilweise geregelt','fehlt'][(s.hat||{})[d.k]??2]:null};
   });
-  const extra=['Wer KI-Ergebnisse verwendet, muss sie fachlich beurteilen können. Neue Kolleg:innen erarbeiten zentrale Aufgaben zuerst selbst und nutzen KI dann als Sparringpartner.','Wir dokumentieren, wer an welcher KI-Schulung oder Lernzeit teilgenommen hat (Nachweis nach Art. 4 AI Act).','Wir überprüfen diese Leitlinie alle sechs Monate – die Technik ändert sich schnell.'];
+  const extra=['Diese Leitlinie gilt auch für Trainer:innen und Mitarbeitende auf Honorarbasis. Sie erhalten sie mit dem Vertrag. Niemand wird gedrängt, private KI-Konten für die Arbeit oder für Teilnehmende anzulegen.','Wer KI-Ergebnisse verwendet, muss sie fachlich beurteilen können. Neue Kolleg:innen erarbeiten zentrale Aufgaben zuerst selbst und nutzen KI dann als Sparringpartner.','Wir dokumentieren, wer an welcher KI-Schulung oder Lernzeit teilgenommen hat (Nachweis nach Art. 4 AI Act).','Wir überprüfen diese Leitlinie alle sechs Monate – die Technik ändert sich schnell.'];
   const offen=[];
   if(ort.br===0)offen.push('Betriebsrat einbinden (Mitbestimmung bei Systemen, die Daten von Beschäftigten verarbeiten, ArbVG §§ 96, 96a – fachlich prüfen lassen).');
   if(ort.sens===0)offen.push('Für sensible Zielgruppen prüfen, ob zusätzliche Regeln nötig sind (z. B. Beratung, AMS-Daten).');
@@ -220,7 +232,7 @@ function kontext(){
     bind(s,p,kontext).onclick=()=>{s.step=1;save(p,s);kontext()};return;
   }
   if(s.step===1){
-    m.innerHTML=head(p,2,total,'Welche Aufgabe nehmen Sie sich vor?')+`<p class="m s">Eine, die bei Ihnen regelmäßig wiederkommt.</p><div class="opts">${KONTEXT.aufgaben.map(a=>`<button class="opt ${s.aufgabe===a?'sel':''}" data-a="${esc(a)}">${esc(a)}</button>`).join('')}</div><input type="text" id="own" maxlength="60" placeholder="… oder eigene Aufgabe" value="${esc(KONTEXT.aufgaben.includes(s.aufgabe)?'':s.aufgabe||'')}"><p class="s" style="margin:16px 0 6px"><b>Wie viel Zeit kostet sie Ihr Haus im Jahr?</b></p><div class="tri" id="auf" style="grid-template-columns:1fr 1fr">${KONTEXT.aufwand.map((x,i)=>`<button data-v="${i}" class="${s.aufwand===i?'sel':''}">${x}</button>`).join('')}</div>`+nav(true,'Weiter',!s.aufgabe);
+    m.innerHTML=head(p,2,total,'Welche Aufgabe nehmen Sie sich vor?')+`<p class="m s">Eine, die bei Ihnen regelmäßig wiederkommt.</p><div class="opts">${KONTEXT.aufgaben.map(a=>`<button class="opt ${s.aufgabe===a?'sel':''}" data-a="${esc(a)}">${esc(a)}</button>`).join('')}</div><input type="text" id="own" maxlength="60" placeholder="… oder eigene Aufgabe" value="${esc(KONTEXT.aufgaben.includes(s.aufgabe)?'':s.aufgabe||'')}"><p class="s" style="margin:16px 0 6px"><b>Wie viel Zeit kostet sie Ihr Haus im Jahr?</b></p><div class="tri" id="auf" style="grid-template-columns:1fr 1fr">${KONTEXT.aufwand.map((x,i)=>`<button data-v="${i}" class="${s.aufwand===i?'sel':''}">${x}</button>`).join('')}</div><p class="hint" style="margin-top:10px">${esc(KONTEXT.rechnung)}</p>`+nav(true,'Weiter',!s.aufgabe);
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{s.aufgabe=b.dataset.a;$('#own').value='';m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',x===b));save(p,s);$('#nx').disabled=false});
     $('#own').oninput=e=>{if(e.target.value.trim()){s.aufgabe=e.target.value.trim();m.querySelectorAll('.opts .opt').forEach(x=>x.classList.remove('sel'));$('#nx').disabled=false;save(p,s)}};
     $('#auf').querySelectorAll('button').forEach(b=>b.onclick=()=>{s.aufwand=+b.dataset.v;$('#auf').querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));save(p,s)});
@@ -238,7 +250,7 @@ function kontext(){
     s.mh=s.mh||[];
     s.an=s.an||[];
     m.innerHTML=head(p,4,total,'Wo ziehen Sie die Linie?')+`<p class="m s">Abgeben, anregen lassen, behalten – wie in der Leitfrage. Was entscheiden bei dieser Aufgabe Menschen?</p><div class="opts" id="mh">${KONTEXT.menschlich.map((x,i)=>`<button class="opt ${s.mh.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+note('Weiteres, das bei Ihnen Menschen entscheiden …',s.mhNote)+
-      `<p class="s" style="margin:18px 0 6px"><b>Und wo soll die KI Sie anregen, statt zu schreiben?</b></p><div class="opts" id="an">${KONTEXT.anregen.map((x,i)=>`<button class="opt ${s.an.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+nav();
+      `<div class="card" style="border-left:5px solid var(--pencil);margin-top:14px"><p class="s" style="margin:0">${esc(KONTEXT.koennen)}</p></div><p class="s" style="margin:18px 0 6px"><b>Und wo soll die KI Sie anregen, statt zu schreiben?</b></p><div class="opts" id="an">${KONTEXT.anregen.map((x,i)=>`<button class="opt ${s.an.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+nav();
     m.querySelectorAll('#mh .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.mh=s.mh.includes(i)?s.mh.filter(x=>x!==i):s.mh.concat(i);b.classList.toggle('sel');save(p,s)});
     m.querySelectorAll('#an .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.an=s.an.includes(i)?s.an.filter(x=>x!==i):s.an.concat(i);b.classList.toggle('sel');save(p,s)});
     bind(s,p,kontext).onclick=()=>{s.mhNote=$('#nt').value.trim();s.step=4;save(p,s);kontext()};return;
@@ -373,7 +385,7 @@ function menschen(){
   }
   if(s.step===1){
     const v=hebelVorschlag(s.g||[0,0,0,0]);s.h=s.h||v.h.slice();
-    m.innerHTML=head(p,2,total,'Welche zwei Hebel ziehen Sie zuerst?')+`<div class="card" style="border-left:5px solid var(--kontext)"><p class="s" style="margin:0"><b>Unser Vorschlag:</b> ${esc(v.grund)}</p></div><p class="s m">Vorausgewählt – Sie können frei ändern.</p><div class="opts">${MENSCHEN.hebel.map((h,i)=>`<button class="opt ${s.h.includes(i)?'sel':''}" data-i="${i}"><b>${esc(h[0])}</b><br><span class="s m">${esc(h[1])}</span></button>`).join('')}</div>`+nav(true,'Weiter',s.h.length!==2);
+    m.innerHTML=head(p,2,total,'Welche zwei Hebel ziehen Sie zuerst?')+`<div class="card" style="border-left:5px solid var(--kontext)"><p class="s" style="margin:0"><b>Unser Vorschlag:</b> ${esc(v.grund)}</p></div><p class="s m">Vorausgewählt – Sie können frei ändern.</p><p class="s" style="margin:0 0 10px">${esc(MENSCHEN.pruefHebel)}</p><div class="opts">${MENSCHEN.hebel.map((h,i)=>`<button class="opt ${s.h.includes(i)?'sel':''}" data-i="${i}"><b>${esc(h[0])}</b><br><span class="s m">${esc(h[1])}</span></button>`).join('')}</div>`+nav(true,'Weiter',s.h.length!==2);
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.hManual=true;if(s.h.includes(i))s.h=s.h.filter(x=>x!==i);else if(s.h.length<2)s.h=s.h.concat(i);m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',s.h.includes(+x.dataset.i)));$('#nx').disabled=s.h.length!==2;save(p,s)});
     bind(s,p,menschen).onclick=()=>{s.h.forEach(i=>room('p3_hebel'+i,{i:1}));s.step=2;save(p,s);menschen()};return;
   }
@@ -472,5 +484,5 @@ function result(p,s,d,back){
   function showCode(c){$('#codeBox').innerHTML=`<div class="card" style="text-align:center"><p class="s m" style="margin:0">Ihr Abholcode</p><p style="font-family:var(--type);font-size:34px;margin:6px 0">${esc(c)}</p><p class="s" style="margin:0">abholen auf <b>${esc(A().C.participantUrl)}</b> → „Ergebnis abholen“</p></div>`}
 }
 
-window.Pfade={render(id){({regeln,kontext,menschen,wissen})[id]()},info:INFO};
+window.Pfade={render(id){({regeln,kontext,menschen,wissen})[id]()},info:INFO,data:{REGELN,CLAUSE,KONTEXT,MENSCHEN,WISSEN,hebelVorschlag}};
 })();
