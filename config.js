@@ -5,11 +5,11 @@ window.TDW = {
   session: '1910',
   participantUrl: 'ki.arminfradler.at',
   quiz: [
-    { q: 'Wie viel Prozent der Mitarbeitenden in der österreichischen Erwachsenenbildung haben KI schon genutzt?', o: ['rund 45 %', 'rund 70 %', 'rund 95 %'], a: 2, src: 'Uni Graz / Ö-Cert 2026' },
-    { q: 'Seit wann müssen sich Chatbots in der EU als KI zu erkennen geben?', o: ['seit August 2026', 'ab Dezember 2027', 'ab 2030'], a: 0, src: 'AI Act, Art. 50' },
+    { q: 'Wie viel Prozent der Mitarbeitenden in der österreichischen Erwachsenenbildung haben KI schon genutzt?', o: ['rund 45 %', 'rund 70 %', 'rund 95 %'], a: 2, src: 'Uni Graz / Ö-Cert 2026', note: 'Und wie viele Einrichtungen haben einheitliche Regeln? Schauen wir uns diesen Raum an.' },
+    { q: 'Wie lang dürfen Aufgaben inzwischen sein, die KI-Agenten selbstständig erledigen – gemessen daran, wie lange ein Mensch dafür braucht?', o: ['rund 15 Minuten', 'rund 2 Stunden', 'rund 16 Stunden'], a: 2, src: 'METR, Anfang 2026 (Aufgaben, die zur Hälfte gelingen)', note: 'Das verdoppelt sich derzeit etwa alle vier Monate. Die Technik-Uhr läuft schnell – die Organisations-Uhr stellen Sie.' },
+    { q: 'Ärzt:innen arbeiteten monatelang mit KI-Unterstützung. Ohne KI fanden sie danach …', o: ['mehr Polypen', 'gleich viele', 'weniger Polypen'], a: 2, src: 'Lancet Gastroenterology & Hepatology 2025', note: 'Was wir abgeben, verlernen wir. Das ist kein Grund gegen KI – aber einer für bewusste Entscheidungen.' },
     { q: 'Die Mail der „Förderstelle Apfelland“: echt oder Phishing?', o: ['Echt', 'Phishing'], a: 1, mail: true, src: 'fiktives Beispiel' },
-    { q: 'Was ist ein „Harness“?', o: ['ein neues KI-Modell', 'die Arbeitsumgebung rund um das Modell', 'ein Trick für bessere Prompts'], a: 1, src: 'Agent = Modell + Harness' },
-    { q: 'Ärzt:innen nach Monaten mit KI-Unterstützung – ohne KI fanden sie danach …', o: ['mehr Polypen', 'gleich viele', 'weniger Polypen'], a: 2, src: 'Lancet Gastro Hep 2025' }
+    { q: 'Seit wann müssen sich Chatbots in der EU als KI zu erkennen geben?', o: ['seit August 2026', 'ab Dezember 2027', 'ab 2030'], a: 0, src: 'AI Act, Art. 50' }
   ],
   usecases: ['Anfragen von Teilnehmenden', 'Anmeldungen & Bestätigungen', 'Protokolle', 'Kursausschreibungen', 'Sachberichte an Fördergeber', 'Feedback auswerten', 'Bedarfsanalyse neue Angebote', 'Social Media'],
   context: ['Stichworte & Zielgruppe', 'Leitbild & Ton', 'Vorgaben des Fördergebers', 'Vorjahresbericht als Beispiel'],
