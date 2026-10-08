@@ -69,6 +69,7 @@ input[type=text]{width:100%;font:inherit;font-size:18px;padding:13px;border:1.5p
 
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="pfade.js"></script>
 <script>
 (()=>{
 const C=window.TDW, $=s=>document.querySelector(s), main=$('#main');
@@ -83,6 +84,7 @@ $('#dsLink').onclick=e=>{e.preventDefault();$('#ds').showModal()};
 
 let sb=null,state={slide:'start'};
 try{sb=supabase.createClient(C.url,C.key)}catch(e){}
+window.TDWAPP={get sb(){return sb},store,send,toast:t=>toast(t),C,SESSION,main};
 
 async function send(q,value){
   store.set('a.'+q,value);
@@ -167,8 +169,7 @@ function paths(){
 }
 function work(){
   const cur=store.get('a.pfad');if(!cur){pathChoice(false);return}
-  const p=C.paths[cur.i];
-  main.innerHTML=`<div class="kick">Arbeitsphase · ${p.name}</div><div class="path" data-tab="${p.zone}" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p class="hand">Die Arbeitsschritte erscheinen hier.</p><p class="m s">(Prototyp: Pfad-Module folgen.)</p>`;
+  window.Pfade.render(C.paths[cur.i].id);
 }
 
 /* ---------- Montag + Stimmung ---------- */
@@ -179,7 +180,7 @@ function monday(){
   main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Danke!</p></div>`+
    (m&&m.text?`<div class="card"><p class="s m" style="margin:0 0 6px">Ihr Schritt:</p><p style="margin:0">${esc(m.text)}</p></div><a class="go" style="text-align:center;text-decoration:none" href="mailto:?subject=${encodeURIComponent('Mein erster Schritt nach dem Workshop')}&body=${encodeURIComponent(m.text+'\n\nAus dem Workshop „KI als Organisationskompetenz“, Tag der Weiterbildung 2026')}">Als Erinnerung an mich mailen</a><p class="hint">Geht über Ihr eigenes Mailprogramm. Wir speichern keine Adresse.</p>`:'');
 }
-function end(){main.innerHTML=`<div class="kick">Danke!</div><h1>Alles zum Nachlesen</h1><div class="card"><p style="margin:0">Werkzeuge, Ihr Ergebnis per Abholcode und alle vier Module:</p><p style="font-family:var(--type);font-size:20px;margin:10px 0 0">${C.participantUrl}</p></div><p class="hand">Gute Heimfahrt!</p>`}
+function end(){main.innerHTML=`<div class="kick">Danke!</div><h1>Alles zum Nachlesen</h1><div class="card"><p style="margin:0">Werkzeuge, Ihr Ergebnis per Abholcode und alle vier Module:</p><p style="font-family:var(--type);font-size:20px;margin:10px 0 0">${C.participantUrl}</p></div><a class="go" style="display:block;text-align:center;text-decoration:none" href="abholen.html">Ergebnis mit Abholcode abholen</a><p class="hand">Gute Heimfahrt!</p>`}
 
 /* ---------- Router ---------- */
 function render(){

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ergebnis abholen · KI als Organisationskompetenz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;--type:"Special Elite","Courier New",monospace;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:18px}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}
+h1{font-family:var(--type);font-weight:400;font-size:30px;margin:0 0 10px}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px;margin:18px 0}
+input{font:inherit;font-family:var(--type);font-size:24px;text-transform:uppercase;padding:12px;border:1.5px solid var(--line);border-radius:6px;width:100%;max-width:320px;background:#fff;color:var(--ink)}
+button{font:inherit;cursor:pointer;padding:14px 18px;border:none;border-radius:6px;background:var(--ink);color:var(--paper);font-family:var(--type);font-size:17px;margin:10px 10px 0 0}
+button.light{background:var(--card);color:var(--ink);border:1.5px solid var(--line)}
+.err{color:var(--pencil)}
+#doc h2{font-family:var(--type);font-weight:400}#doc h3{margin:18px 0 6px}#doc small{color:var(--muted)}
+@media print{.noprint{display:none}body{background:#fff}.card{border:none;padding:0}}
+</style>
+</head>
+<body>
+<main>
+  <div class="kick noprint">Tag der Weiterbildung 2026 · KI als Organisationskompetenz</div>
+  <h1 class="noprint">Ergebnis abholen</h1>
+  <div class="noprint"><p>Geben Sie den Abholcode ein, den Ihre Gruppe im Workshop bekommen hat (z. B. <b>APFEL-273</b>).</p>
+  <input id="c" maxlength="14" placeholder="CODE-000" autocomplete="off"><br><button id="go">Abholen</button><p id="msg"></p></div>
+  <div id="out" style="display:none">
+    <div class="card" id="doc"></div>
+    <div class="noprint"><button id="dl">Als Word herunterladen</button><button class="light" onclick="print()">Drucken / als PDF speichern</button></div>
+  </div>
+  <p class="noprint" style="font-size:14px;color:var(--muted);margin-top:40px">Dokumente werden anonym gespeichert und nach vier Wochen automatisch gelöscht.</p>
+</main>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(()=>{
+const C=window.TDW,$=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const sb=supabase.createClient(C.url,C.key);
+let cur=null;
+const li=a=>(a||[]).map(x=>`<li>${esc(x)}</li>`).join('');
+function html(d){
+  let b='';
+  if(d.kind==='regeln'){b+=d.items.map((x,n)=>`<h3>${n+1}. ${esc(x.t)}${x.gap?` <small>(${esc(x.gap)})</small>`:''}</h3><p>${esc(x.c)}</p>`).join('')+`<h3>Außerdem</h3><ul>${li(d.extra)}</ul><h3>Noch zu klären</h3><ul>${li(d.offen)}</ul>`}
+  else if(d.kind==='kontext'){b+=`<p><b>Aufgabe:</b> ${esc(d.aufgabe)}${d.aufwand?` · <b>Aufwand pro Jahr:</b> ${esc(d.aufwand)}`:''}</p><h3>Das bekommt die KI</h3><ul>${li(d.kontext)}</ul>${d.draussen&&d.draussen.length?`<h3>Bleibt draußen oder wird anonymisiert (rot)</h3><ul>${li(d.draussen)}</ul>`:''}<h3>Das entscheiden Menschen</h3><ul>${li(d.menschlich)}</ul><h3>Woran wir ein gutes Ergebnis erkennen</h3><ul>${li(d.qualitaet)}</ul><p><b>Prüft vor der Verwendung:</b> ${esc(d.pruefer)}</p><p><i>Tipp: Dieses Rezept ist der Entwurf eines „Skills“. Geben Sie es einer KI mit dem Satz „Mach daraus einen Skill“.</i></p>`}
+  else{b+=`<h3>Unser Team (geschätzt)</h3><ul>${li(d.gruppen)}</ul><h3>Unsere zwei Hebel</h3><ul>${li(d.hebel)}</ul><h3>Die 30 Tage</h3>${(d.wochen||[]).map(w=>`<p><b>${esc(w[0])}:</b> ${esc(w[1])}</p>`).join('')}<h3>Wenn jemand sagt …</h3>${(d.antworten||[]).map(a=>`<p><b>${esc(a[0])}</b><br>${esc(a[1])}</p>`).join('')}<h3>Die gewonnene Zeit gehört</h3><p>${esc(d.zeit)}</p>`}
+  return `<h2>${esc(d.title)}</h2>${b}<hr><p><small>Entwurf zur Diskussion in Ihrer Organisation. Orientierung, keine Rechtsberatung – vor Beschluss prüfen lassen. Entstanden im Workshop „KI als Organisationskompetenz“, Tag der Weiterbildung 2026 (Armin Fradler). Stand Oktober 2026.</small></p>`;
+}
+async function get(code){
+  $('#msg').textContent='Suche …';$('#msg').className='';
+  const {data,error}=await sb.rpc('get_pickup',{p_code:code.trim().toUpperCase()});
+  if(error||!data){$('#msg').textContent='Kein Ergebnis zu diesem Code gefunden. Bitte prüfen Sie die Schreibweise.';$('#msg').className='err';return}
+  cur=data.doc;$('#doc').innerHTML=html(cur);$('#out').style.display='block';$('#msg').textContent='';
+}
+$('#go').onclick=()=>get($('#c').value);
+$('#c').onkeydown=e=>{if(e.key==='Enter')get($('#c').value)};
+$('#dl').onclick=()=>{
+  const h=`<html><head><meta charset="utf-8"><style>body{font-family:Calibri,Arial,sans-serif;font-size:11pt;line-height:1.4}h2{font-size:16pt}h3{font-size:12pt}small{color:#666}</style></head><body>${html(cur)}</body></html>`;
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+h],{type:'application/msword'}));a.download=(cur.title||'Ergebnis').replace(/[^\wäöüÄÖÜß -]/g,'').slice(0,60)+'.doc';a.click();
+};
+const q=new URLSearchParams(location.search).get('code');if(q){$('#c').value=q;get(q)}
+})();
+</script>
+</body>
+</html>
