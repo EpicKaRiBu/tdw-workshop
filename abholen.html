@@ -4,8 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ergebnis abholen · KI als Organisationskompetenz</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="fonts/fonts.css" rel="stylesheet">
 <style>
 :root{--paper:#F3ECDD;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;--type:"Special Elite","Courier New",monospace;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
 *{box-sizing:border-box}
@@ -35,7 +34,7 @@ button.light{background:var(--card);color:var(--ink);border:1.5px solid var(--li
   <p class="noprint" style="font-size:14px;color:var(--muted);margin-top:40px">Dokumente werden anonym gespeichert und nach vier Wochen automatisch gelöscht.</p>
 </main>
 <script src="config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="vendor/supabase-2.49.4.js"></script>
 <script>
 (()=>{
 const C=window.TDW,$=s=>document.querySelector(s);

@@ -3,6 +3,7 @@ window.TDW = {
   url: 'https://nqkbtfhoixgplmxcpxyn.supabase.co',
   key: 'sb_publishable_C4iTUIUu-CJA4WdyHxjAVw_VAL-cp2F',
   session: '1910',
+  date: '2026-10-19',          // nur an diesem Tag zeigt die Startseite die Mitmach-App, sonst die Werkzeuge
   participantUrl: 'mitmachen.arminfradler.at',
   quiz: [
     { q: 'Wie viele Mitarbeitende in der österreichischen Erwachsenenbildung nutzen KI fast täglich?', o: ['rund 15 %', 'rund 30 %', 'rund 50 %'], a: 2, src: 'Uni Graz / Ö-Cert 2026 (über 300 Befragte)', note: 'Die Hälfte – fast täglich. Und wie viele Häuser haben dafür Regeln? Schauen wir uns diesen Raum an.' },

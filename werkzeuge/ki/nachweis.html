@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schulungsnachweis · KI als Organisationskompetenz</title>
+<meta name="description" content="Vorlage für Ihr internes KI-Schulungsregister nach Art. 4 AI Act: Maßnahme dokumentieren, ausdrucken, ablegen.">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../site.css" rel="stylesheet">
+<style>
+.form{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.form .full{grid-column:1/-1}
+@media (max-width:640px){.form{grid-template-columns:1fr}}
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.presets button{font:inherit;font-size:15px;padding:9px 12px;border:1.5px solid var(--line);border-radius:5px;background:var(--card);cursor:pointer}
+.presets button.sel{border-color:var(--ink);background:#fff;box-shadow:inset 3px 0 0 var(--pencil)}
+#blatt{background:#fff;border:1px solid var(--line);padding:34px 38px;margin:26px 0 10px;color:#222;font-size:16px;line-height:1.5}
+#blatt h2{font-family:var(--type);font-weight:400;font-size:26px;margin:0 0 4px}
+#blatt .sub{color:#666;font-size:14px;margin:0 0 20px}
+#blatt table{background:none;font-size:15px}
+#blatt td{border-bottom:1px solid #ddd;padding:8px 6px}
+#blatt td:first-child{width:34%;color:#555}
+#blatt .sig{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:40px}
+#blatt .sig div{border-top:1px solid #444;padding-top:6px;font-size:13px;color:#555}
+#blatt .fn{font-size:12px;color:#777;margin-top:26px}
+@media print{body *{visibility:hidden}#blatt,#blatt *{visibility:visible}#blatt{position:absolute;left:0;top:0;border:none;margin:0;padding:0;width:100%}}
+</style>
+</head>
+<body>
+<header class="top"><a href="./">KI als Organisationskompetenz · Werkzeuge</a><nav><a href="./#module">Module</a><a href="datenampel.html">Datenampel</a><a href="tools.html">Tool-Landkarte</a><a href="quellen.html">Quellen</a></nav></header>
+<main>
+  <p class="kick">Für Ihr Team · Art. 4 AI Act</p>
+  <h1>Schulungsnachweis</h1>
+  <p class="lead">Organisationen, die KI einsetzen, setzen Maßnahmen für die KI-Kompetenz ihrer Leute – und dokumentieren sie. Ein internes Register genügt. Dieses Blatt ist ein Eintrag dafür.</p>
+  <div class="note ok s">Alles, was Sie hier eintragen, bleibt in Ihrem Browser. Es wird nichts gespeichert oder gesendet.</div>
+
+  <p style="margin:22px 0 4px"><b>Welche Maßnahme?</b></p>
+  <div class="presets" id="presets">
+    <button type="button" data-p="tdw" class="sel">Workshop am Tag der Weiterbildung 2026</button>
+    <button type="button" data-p="team">Teamsitzung mit dem Starter-Kit</button>
+    <button type="button" data-p="modul">Modul auf dieser Seite</button>
+    <button type="button" data-p="frei">Andere Maßnahme</button>
+  </div>
+
+  <div class="form">
+    <div><label for="name">Name der Person</label><input type="text" id="name" maxlength="80" placeholder="Vor- und Nachname"></div>
+    <div><label for="org">Organisation</label><input type="text" id="org" maxlength="100"></div>
+    <div class="full"><label for="titel">Maßnahme</label><input type="text" id="titel" maxlength="160"></div>
+    <div><label for="datum">Datum</label><input type="date" id="datum"></div>
+    <div><label for="dauer">Dauer</label><input type="text" id="dauer" maxlength="40"></div>
+    <div><label for="durch">Durchgeführt von</label><input type="text" id="durch" maxlength="120"></div>
+    <div><label for="art">Form</label><input type="text" id="art" maxlength="80"></div>
+    <div class="full"><label for="inhalt">Inhalte</label><textarea id="inhalt" rows="5"></textarea></div>
+  </div>
+
+  <div id="blatt" aria-live="polite"></div>
+  <button class="btn" type="button" onclick="print()">Drucken / als PDF speichern</button>
+  <button class="btn light" type="button" id="word">Als Word herunterladen</button>
+
+  <h2>Was ins Register gehört</h2>
+  <ul>
+    <li>Wer hat teilgenommen, wann, an welcher Maßnahme, mit welchen Inhalten.</li>
+    <li>Welche KI-Werkzeuge die Person im Haus nutzt – und welche Regeln dafür gelten.</li>
+    <li>Wann die nächste Auffrischung geplant ist. Die Technik ändert sich schnell; einmal im Jahr ist ein guter Rhythmus.</li>
+  </ul>
+  <p class="m s">Seit dem Digital Omnibus (in Kraft seit 27.7.2026) verlangt Art. 4 AI Act, Maßnahmen zu setzen und sie zu dokumentieren. Ein bestimmtes Zertifikat ist nicht vorgeschrieben. <a href="quellen.html">Quellen</a> · Orientierung, keine Rechtsberatung.</p>
+</main>
+<footer class="site"><span>Armin Fradler · <a href="https://arminfradler.at">arminfradler.at</a></span><span><a href="../../datenschutz.html">Datenschutz</a> · <a href="https://arminfradler.at/impressum">Impressum</a></span><span>Orientierung, keine Rechtsberatung</span></footer>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const P={
+  tdw:{titel:'Workshop „KI als Organisationskompetenz – Use Cases, Leitlinien und neue Arbeitsweisen in der Erwachsenenbildung“, Tag der Weiterbildung 2026',datum:'2026-10-19',dauer:'2 Stunden',durch:'Armin Fradler (Referent), Bildungsnetzwerk Steiermark (Veranstalter)',art:'Präsenz-Workshop mit Arbeitsphase',
+    inhalt:'Einsatzfelder und Grenzen von KI in Bildungsorganisationen · Prompt, Kontext und Harness: wie Arbeit mit KI heute funktioniert · Datenampel und Datenschutz · Risiken: Phishing, Prompt Injection, Agenten · Rechtsrahmen: AI Act (Art. 4, Art. 50, Hochrisiko) · Arbeitsphase: Leitlinie, Kontext-Rezept oder Teamplan für die eigene Organisation'},
+  team:{titel:'Teamsitzung „Gemeinsam mit KI anfangen“ (Team-Starter-Kit)',datum:'',dauer:'45 Minuten',durch:'',art:'Teamsitzung',
+    inhalt:'Bisherige KI-Nutzung offen besprochen · Datenampel geübt · Gemeinsam ausprobiert: Auftrag mit und ohne Kontext · Prüfen der Ergebnisse · Vereinbarung: Regel, Werkzeug, Ansprechperson, Rückblick'},
+  modul:{titel:'Selbstlernmodul „KI als Organisationskompetenz“: [Modul eintragen]',datum:'',dauer:'ca. 30 Minuten',durch:'Selbstlernmodul (mitmachen.arminfradler.at)',art:'Online, selbstständig',inhalt:''},
+  frei:{titel:'',datum:'',dauer:'',durch:'',art:'',inhalt:''}
+};
+const F=['titel','datum','dauer','durch','art','inhalt'];
+function apply(k){const p=P[k];F.forEach(f=>$(f).value=p[f]||'');render()}
+function fmt(d){if(!d)return '';const [y,m,t]=d.split('-');return `${+t}.${+m}.${y}`}
+function render(){
+  const v=id=>$(id).value.trim();
+  $('blatt').innerHTML=`<h2>Nachweis einer Maßnahme zur KI-Kompetenz</h2><p class="sub">Eintrag für das interne Register nach Art. 4 der Verordnung (EU) 2024/1689 (AI Act)</p>
+  <table>
+    <tr><td>Name</td><td>${esc(v('name'))||'&nbsp;'}</td></tr>
+    <tr><td>Organisation</td><td>${esc(v('org'))||'&nbsp;'}</td></tr>
+    <tr><td>Maßnahme</td><td>${esc(v('titel'))||'&nbsp;'}</td></tr>
+    <tr><td>Datum · Dauer</td><td>${esc(fmt(v('datum')))}${v('dauer')?' · '+esc(v('dauer')):''}</td></tr>
+    <tr><td>Durchgeführt von</td><td>${esc(v('durch'))||'&nbsp;'}</td></tr>
+    <tr><td>Form</td><td>${esc(v('art'))||'&nbsp;'}</td></tr>
+    <tr><td>Inhalte</td><td>${esc(v('inhalt')).replace(/\n/g,'<br>')||'&nbsp;'}</td></tr>
+  </table>
+  <div class="sig"><div>Ort, Datum</div><div>Unterschrift der teilnehmenden Person</div></div>
+  <div class="sig" style="margin-top:30px"><div>Zur Kenntnis: Leitung</div><div>Nächste Auffrischung geplant für</div></div>
+  <p class="fn">Eigendokumentation der Organisation. Vorlage: mitmachen.arminfradler.at/werkzeuge/ki</p>`;
+}
+document.querySelectorAll('#presets button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#presets button').forEach(x=>x.classList.toggle('sel',x===b));apply(b.dataset.p)});
+document.querySelectorAll('input,textarea').forEach(e=>e.addEventListener('input',render));
+$('word').onclick=()=>{
+  const html=`<html><head><meta charset="utf-8"><style>body{font-family:Calibri,Arial,sans-serif;font-size:11pt}td{padding:6px;border-bottom:1px solid #ccc;vertical-align:top}</style></head><body>${$('blatt').innerHTML}</body></html>`;
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+html],{type:'application/msword'}));a.download='KI-Schulungsnachweis.doc';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+};
+apply('tdw');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tool-Landkarte · KI als Organisationskompetenz</title>
+<meta name="description" content="Welche KI-Werkzeuge passen zu Bildungsorganisationen? Was Sie schon haben, Lizenzen, europäische Plattformen, Empfehlung nach Größe. Stand Oktober 2026.">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../site.css" rel="stylesheet">
+</head>
+<body>
+<header class="top"><a href="./">KI als Organisationskompetenz · Werkzeuge</a><nav><a href="./#module">Module</a><a href="datenampel.html">Datenampel</a><a href="tools.html">Tool-Landkarte</a><a href="quellen.html">Quellen</a></nav></header>
+<main>
+  <p class="kick">Nachschlagen · Werkzeuge</p>
+  <h1>Tool-Landkarte</h1>
+  <span class="stand">Stand 8. Oktober 2026</span>
+  <p class="lead">Die meisten Organisationen haben schon ein KI-Werkzeug mit Vertrag im Haus – ohne es zu wissen. Der erste Schritt ist darum selten „ein neues Tool kaufen“, sondern meist: <b>das vorhandene mit Dienstkonto nutzen und private Gratis-Konten ablösen.</b></p>
+  <div class="note">Preise und Funktionen ändern sich monatlich. Prüfen Sie vor einer Entscheidung die aktuellen Angaben des Anbieters. Keine bezahlten Empfehlungen, keine Partnerlinks.</div>
+
+  <h2>Überall dasselbe Muster</h2>
+  <p>Die drei Stufen aus dem Workshop finden Sie bei jedem Anbieter wieder – nur mit anderen Namen:</p>
+  <div class="tablewrap"><table>
+    <tr><th>Stufe</th><th>Microsoft</th><th>Google</th><th>OpenAI · Anthropic</th></tr>
+    <tr><td><b>Prompt</b><br><span class="s m">ein Satz</span></td><td>Copilot Chat</td><td>Gemini-App</td><td>Chat</td></tr>
+    <tr><td><b>Kontext</b><br><span class="s m">ein Schreibtisch</span></td><td>Copilot Notebooks</td><td>NotebookLM</td><td>Projekte</td></tr>
+    <tr><td><b>Harness</b><br><span class="s m">ein Büro</span></td><td>Skills in SharePoint, Agents</td><td>Gems, Agenten</td><td>Projekte mit Anweisungen, Skills, Agenten</td></tr>
+  </table></div>
+
+  <h2>1 · Was Sie wahrscheinlich schon haben</h2>
+  <div class="card tabbed"><span class="tab" style="background:var(--kontext)">Microsoft 365</span>
+    <h3 style="margin-top:0">Copilot Chat</h3>
+    <ul>
+      <li><b>Ohne Aufpreis</b> in berechtigten Microsoft-365-Business- und Enterprise-Abos.</li>
+      <li><b>Mit dem Dienstkonto angemeldet</b> gilt der Schutz Ihrer Microsoft-Umgebung, Eingaben werden nicht zum Training verwendet. Copilot Chat fällt unter die EU Data Boundary – mit Ausnahmen, die Microsoft dokumentiert (etwa bei hoher Auslastung). Für rote Daten trotzdem nicht ohne Prüfung.</li>
+      <li><b>Notebooks</b> (Kontext aus eigenen Dateien) sind seit Juni 2026 auch ohne Copilot-Lizenz verfügbar.</li>
+      <li><b>Agents</b> lassen sich bauen, ihre Nutzung wird nach Verbrauch abgerechnet. Legen Sie fest, wer Agents erstellen darf.</li>
+      <li><b>Skills:</b> Teams können in SharePoint Arbeitsanleitungen als <code>SKILL.md</code> ablegen – derselbe offene Standard wie in den Modulen hier.</li>
+    </ul>
+  </div>
+  <div class="card tabbed"><span class="tab" style="background:var(--regeln)">Google</span>
+    <h3 style="margin-top:0">Google Workspace for Nonprofits</h3>
+    <ul>
+      <li>Gemini-App, Gems und <b>NotebookLM</b> sind enthalten. Gemini direkt in Gmail und Docs gibt es mit dem rabattierten Business-Standard-Tarif.</li>
+      <li>Laut Google werden Daten aus Workspace-Konten nicht ohne Zustimmung zum Training verwendet.</li>
+      <li>Ob Ihr Verein teilnahmeberechtigt ist, prüfen Sie beim Anbieter.</li>
+    </ul>
+  </div>
+
+  <h2>2 · Wenn mehr gebraucht wird: Lizenzen</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Angebot</th><th>Preis</th><th>Datenstandort</th><th>Einordnung</th></tr>
+    <tr><td><b>Microsoft 365 Copilot Business</b></td><td>18,20 € pro Person und Monat (Aktion 15,60 € bis Ende 2026), Gemeinnützige günstiger</td><td>EU Data Boundary, mit den Ausnahmen oben</td><td>Greift auf Mails, Dateien und Teams zu. <b>Vorher Berechtigungen aufräumen</b> – sonst findet Copilot, was niemand finden sollte.</td></tr>
+    <tr><td><b>ChatGPT Business</b></td><td>pro Person</td><td>keine Garantie für Verarbeitung in der EU</td><td>Kein Training mit Ihren Daten. Für Gelb geeignet, für Rot nicht.</td></tr>
+    <tr><td><b>ChatGPT Enterprise / Edu</b></td><td>auf Anfrage</td><td>Speicherung und Verarbeitung in der EU wählbar</td><td>Für größere Häuser.</td></tr>
+    <tr><td><b>Claude Team / Enterprise</b></td><td>pro Person</td><td>keine EU-Datenresidenz in claude.ai; EU-Verarbeitung über Cloud-Plattformen (AWS, Google)</td><td>Stark bei Texten und Agenten. Datenstandort bewusst entscheiden.</td></tr>
+  </table></div>
+
+  <h2>3 · Europäische Plattformen</h2>
+  <p>Sie bündeln mehrere Modelle unter einem Vertrag mit Hosting in der EU. Für kleine Häuser ohne Microsoft 365 ist ein Guthaben-Modell oft günstiger als Lizenzen pro Person.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Anbieter</th><th>Modell</th><th>Preis (laut Drittquellen)</th><th>Hinweis</th></tr>
+    <tr><td><b>Langdock</b> (Berlin)</td><td>pro Person</td><td>ca. 25 € pro Person und Monat</td><td>Hosting in der EU, Nutzungslimits beachten.</td></tr>
+    <tr><td><b>nele.ai</b> (Deutschland)</td><td>Guthaben für die ganze Organisation</td><td>ab ca. 10 € pro Monat</td><td>Server in Deutschland. Je Modell prüfen, wo es läuft.</td></tr>
+    <tr><td><b>Le Chat</b> (Mistral, Frankreich)</td><td>pro Person</td><td>Pro ca. 15 $, Team ca. 25 $</td><td>Europäischer Modellanbieter.</td></tr>
+  </table></div>
+
+  <h2>4 · Spezialwerkzeuge</h2>
+  <ul>
+    <li><b>Übersetzen:</b> DeepL im Pro-Tarif (mit Auftragsverarbeitungsvertrag).</li>
+    <li><b>Transkription und Protokolle:</b> nur mit Zustimmung aller. Beratungsgespräche sind rot.</li>
+    <li><b>Bilder und Video:</b> Realistische KI-Bilder von Menschen müssen gekennzeichnet werden (Art. 50 AI Act).</li>
+    <li><b>Lokal betriebene Modelle:</b> technisch möglich, auch für sensible Daten. Brauchen IT-Kompetenz und ersetzen keine rechtliche Prüfung.</li>
+  </ul>
+
+  <h2>5 · Nicht für die Arbeit: private Gratis-Konten</h2>
+  <div class="note">Eingaben können zum Training verwendet werden, und es gibt keinen Vertrag zur Auftragsverarbeitung. <b>Regel: private Konten höchstens für Grünes.</b> Das ist die Schatten-KI, die abgelöst werden soll – nicht durch ein Verbot, sondern durch ein besseres Angebot.</div>
+
+  <h2>Empfehlung nach Größe</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Größe</th><th>Ein guter Start</th></tr>
+    <tr><td><b>bis 10 Personen</b><br><span class="s m">keine eigene IT</span></td><td>Mit Microsoft 365: Copilot Chat mit Dienstkonto für Grün und Gelb. Ohne: eine europäische Plattform mit Guthaben-Modell. Private Konten ablösen.</td></tr>
+    <tr><td><b>10 bis 50</b></td><td>Freigabeliste mit zwei, drei Tools – etwa Copilot Chat für alle, dazu eine EU-Plattform oder ChatGPT Business, DeepL Pro. Eine Ansprechperson benennen.</td></tr>
+    <tr><td><b>über 50</b></td><td>Copilot Chat für alle, Lizenzen gezielt für Vielnutzende. Vorher Berechtigungen aufräumen, Regeln für Agents, Betriebsrat einbinden. Bei sensiblen Daten Enterprise-Angebote mit Verarbeitung in der EU.</td></tr>
+  </table></div>
+  <p class="hand">Das beste Tool ist das, das schon im Vertrag ist – und für das es Regeln gibt.</p>
+  <p class="m s">Copilot ist nicht immer das stärkste Modell, aber oft der sicherste Start. Wichtiger als das Werkzeug ist der eigene Ordner mit Anweisungen, Wissen und Skills: Er funktioniert mit jedem gängigen Werkzeug (<a href="modul.html?m=wissen">Modul Wissen</a>).</p>
+
+  <p class="src" style="margin-top:30px">Quellen: Microsoft Support und Microsoft Learn (Copilot Chat, Datenschutz, SharePoint-Skills), Google for Nonprofits, OpenAI Help Center (Data Residency), Anbieterseiten und Vergleichsportale für Preise. Alle Links unter <a href="quellen.html#tools">Quellen</a>. Orientierung, keine Rechtsberatung.</p>
+</main>
+<footer class="site"><span>Armin Fradler · <a href="https://arminfradler.at">arminfradler.at</a></span><span><a href="../../datenschutz.html">Datenschutz</a> · <a href="https://arminfradler.at/impressum">Impressum</a></span><span>Orientierung, keine Rechtsberatung</span></footer>
+</body>
+</html>

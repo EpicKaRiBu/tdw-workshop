@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Modul · KI als Organisationskompetenz</title>
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../../app.css" rel="stylesheet">
+<style>
+header a{color:var(--ink);text-decoration:none;font-family:var(--type);font-size:15px}
+header button{background:none;border:none;color:var(--muted);font-size:14px;text-decoration:underline;padding:4px}
+main{padding-bottom:60px}
+main a{color:var(--ink);text-decoration-color:var(--pencil)}
+footer{position:static;margin-top:30px}
+</style>
+</head>
+<body>
+<header><a href="./">← Alle Werkzeuge</a><button id="reset" type="button">Neu beginnen</button></header>
+<main id="main"><p class="m">Einen Moment …</p></main>
+<footer><span>Alles bleibt auf diesem Gerät · nichts wird gesendet</span><span><a href="../../datenschutz.html">Datenschutz</a> · <a href="https://arminfradler.at/impressum">Impressum</a></span></footer>
+<script src="../../config.js"></script>
+<script src="../../pfade.js"></script>
+<script>
+(()=>{
+const C=window.TDW,main=document.getElementById('main');
+const ids=['regeln','kontext','menschen','wissen'];
+const id=new URLSearchParams(location.search).get('m');
+const mem={};
+const store={get(k){try{const v=localStorage.getItem('tdw.web.'+k);return v===null?mem[k]:JSON.parse(v)}catch(e){return mem[k]}},
+             set(k,v){mem[k]=v;try{localStorage.setItem('tdw.web.'+k,JSON.stringify(v))}catch(e){}}};
+function toast(t){const d=document.createElement('p');d.className='hint';d.style.color='var(--pencil)';d.textContent=t;main.prepend(d);setTimeout(()=>d.remove(),4000)}
+/* Eigenständiger Modus: keine Server-Verbindung, keine Raum-Daten, kein Abholcode */
+window.TDWAPP={sb:null,store,send:async()=>{},toast,C,SESSION:'WEB',main,standalone:true};
+if(!ids.includes(id)){location.replace('./');return}
+document.title=Pfade.info[id].titel+' · KI als Organisationskompetenz';
+document.getElementById('reset').onclick=()=>{if(confirm('Dieses Modul von vorn beginnen? Ihre bisherigen Eingaben auf diesem Gerät werden gelöscht.')){store.set('pfad.'+id,{step:-1});try{localStorage.removeItem('tdw.web.pfad.'+id)}catch(e){}Pfade.render(id);scrollTo(0,0)}};
+/* Bei einem neuen Schritt nach oben scrollen (nicht bei Hinweisen oder Auswahl im selben Schritt) */
+let last='';
+new MutationObserver(()=>{const k=(main.querySelector('.kick')?.textContent||'')+(main.querySelector('h1')?.textContent||'');if(k!==last){last=k;scrollTo(0,0)}}).observe(main,{childList:true});
+Pfade.render(id);
+})();
+</script>
+</body>
+</html>

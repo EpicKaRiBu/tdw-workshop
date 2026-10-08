@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Die Datenampel · KI als Organisationskompetenz</title>
+<meta name="description" content="Was darf in welches KI-Tool? Die Datenampel für Bildungsorganisationen – mit Beispielen, typischen Fallen und Karte zum Ausdrucken.">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../site.css" rel="stylesheet">
+<style>
+.lvl{border-radius:0 6px 6px 6px;padding:22px 22px 16px;margin:40px 0 18px;position:relative;color:#fff}
+.lvl::before{content:attr(data-tab);position:absolute;top:-28px;left:0;height:28px;padding:6px 14px 0;border-radius:6px 6px 0 0;background:inherit;font-family:var(--type);font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+.lvl h3{font-family:var(--type);font-weight:400;font-size:28px;margin:0 0 6px}
+.lvl.g{background:var(--green)}.lvl.y{background:var(--yellow);color:var(--ink)}.lvl.r{background:var(--red)}
+.lvl .to{background:rgba(255,255,255,.16);border-radius:4px;padding:10px 14px;margin-top:10px}
+.lvl.y .to{background:rgba(255,255,255,.35)}
+.quiz details{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin:0 0 10px}
+.quiz summary{cursor:pointer;font-weight:600;list-style:none}
+.quiz summary::-webkit-details-marker{display:none}
+.quiz summary::after{content:"Farbe zeigen";float:right;font-family:var(--type);font-size:13px;color:var(--muted);font-weight:400}
+.quiz details[open] summary::after{content:""}
+.quiz details p{margin:10px 0 2px;font-size:16px}
+/* Druckkarte (DIN A6 quer) */
+.karte{width:148mm;max-width:100%;aspect-ratio:148/105;background:#fff;border:1px solid var(--line);padding:6mm 7mm;display:flex;flex-direction:column;gap:2.5mm;font-size:13.5px;line-height:1.3;color:#222;margin:10px 0 14px}
+.karte .t{font-family:var(--type);font-size:20px;display:flex;justify-content:space-between;align-items:baseline}
+.karte .t span{font-family:var(--hand);color:var(--pencil);font-size:21px}
+.karte .row{display:grid;grid-template-columns:19mm 1fr;gap:3mm;align-items:center;border-radius:3px;padding:2.4mm 3mm;color:#fff}
+.karte .row>b{font-family:var(--type);font-weight:400;font-size:17px}
+.karte .row.g{background:var(--green)}.karte .row.y{background:var(--yellow);color:#222}.karte .row.r{background:var(--red)}
+.karte .q{border-top:1px dashed #bbb;padding-top:2mm;font-size:13px}
+.karte .f{font-size:9.5px;color:#777;margin-top:auto}
+@media print{
+  body.nurKarte main>*:not(#kartenBox){display:none!important}
+  body.nurKarte #kartenBox>*:not(.karte){display:none!important}
+  body.nurKarte .karte{border:1px dashed #999;margin:0}
+  .karte .row{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .lvl{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:12mm}
+}
+</style>
+</head>
+<body>
+<header class="top"><a href="./">KI als Organisationskompetenz · Werkzeuge</a><nav><a href="./#module">Module</a><a href="datenampel.html">Datenampel</a><a href="tools.html">Tool-Landkarte</a><a href="quellen.html">Quellen</a></nav></header>
+<main>
+  <p class="kick">Nachschlagen · Daten</p>
+  <h1>Die Datenampel</h1>
+  <p class="lead">Eine Frage vor jedem Einfügen: <b>Welche Farbe hat das?</b> Drei Stufen, die jede und jeder im Team ohne Juristerei anwenden kann.</p>
+  <p class="m s">Die Ampel ersetzt keine Datenschutzprüfung. Sie sorgt dafür, dass im Alltag die richtigen Fragen gestellt werden – bevor etwas in ein KI-Werkzeug kopiert wird.</p>
+
+  <div class="lvl g" data-tab="Grün"><h3>Öffentliches</h3>
+    <p>Was ohnehin öffentlich ist oder sein dürfte und niemanden erkennbar macht.</p>
+    <p class="s"><b>Zum Beispiel:</b> Kursausschreibungen von der Website, Programmheft, Leitbild, öffentliche Förderrichtlinien, Pressetexte, eigene Texte ohne Bezug zu Personen.</p>
+    <div class="to"><b>→ darf in jedes Tool.</b> Auch hier gilt: Ergebnis prüfen, bevor es verwendet wird.</div></div>
+
+  <div class="lvl y" data-tab="Gelb"><h3>Internes ohne Personenbezug</h3>
+    <p>Was nicht nach außen gehört, aber keine Person betrifft.</p>
+    <p class="s"><b>Zum Beispiel:</b> Konzepte, Qualitätshandbuch, Kalkulationen, Entwürfe von Förderanträgen, interne Abläufe, Protokolle ohne Namen und ohne Personalthemen.</p>
+    <div class="to"><b>→ nur in freigegebene Tools.</b> Das heißt: Es gibt einen Vertrag (Auftragsverarbeitung), Eingaben werden nicht zum Training verwendet, und der Speicherort ist bekannt.</div></div>
+
+  <div class="lvl r" data-tab="Rot"><h3>Personen &amp; Sensibles</h3>
+    <p>Alles, womit eine Person erkennbar wird – direkt oder über Umwege.</p>
+    <p class="s"><b>Zum Beispiel:</b> Teilnehmendenlisten, Anwesenheiten, Noten und Prüfungsergebnisse, AMS-Daten, Beratungsgespräche, Gesundheitsangaben, Personal- und Bewerbungsunterlagen, Fotos von Menschen, Mailverläufe mit Namen.</p>
+    <div class="to"><b>→ nie in frei zugängliche Tools.</b> Sonst nur, wenn Ihr Haus es für genau diesen Zweck freigegeben hat: mit Vertrag, Rechtsgrundlage und – bei sensiblen Daten – Folgenabschätzung.</div></div>
+
+  <h2>Der Schnelltest</h2>
+  <p>Drei Fragen, in dieser Reihenfolge. Die erste, bei der Sie „ja“ sagen, gibt die Farbe:</p>
+  <ol>
+    <li><b>Könnte jemand, der uns kennt, daraus eine Person erkennen?</b> → <span class="amp r">rot</span></li>
+    <li><b>Wäre es unangenehm, wenn es morgen in der Zeitung stünde?</b> → <span class="amp y">gelb</span></li>
+    <li><b>Steht es so oder so ähnlich auf unserer Website?</b> → <span class="amp g">grün</span></li>
+  </ol>
+  <p class="m s">Im Zweifel gilt die strengere Farbe.</p>
+
+  <h2>Die sechs Fallen</h2>
+  <div class="note"><b>1 · „Ohne Namen“ heißt nicht anonym.</b> „Feedback Kurs Mittwoch, 8 Personen“ – in einer kleinen Gruppe ist jede Person erkennbar. Auch Daten, bei denen Namen durch Kürzel ersetzt wurden, bleiben personenbezogen, solange sich die Zuordnung herstellen lässt (EDSA-Leitlinien 01/2025 zur Pseudonymisierung).</div>
+  <div class="note"><b>2 · Screenshots und Fotos.</b> Im Hintergrund stehen Namen in der Seitenleiste, Mailadressen, Gesichter. Vor dem Hochladen zuschneiden.</div>
+  <div class="note"><b>3 · Mailverläufe.</b> Signaturen und zitierte frühere Mails enthalten mehr Personen als die eine Frage, um die es geht.</div>
+  <div class="note"><b>4 · Aufnahmen und Transkripte.</b> Besprechungen aufzeichnen und zusammenfassen lassen braucht die Zustimmung aller. Beratungsgespräche sind immer rot.</div>
+  <div class="note"><b>5 · Erzählende Freitexte.</b> „Die Teilnehmerin mit den drei Kindern aus dem Abendkurs“ – Geschichten machen Menschen erkennbar, auch ohne Namen.</div>
+  <div class="note"><b>6 · Zugriff statt Einfügen.</b> Wenn eine KI selbst auf Postfach oder Laufwerk zugreift (Connectors, Agenten), entscheidet nicht mehr das Einfügen, sondern die Berechtigung. Vorher aufräumen, wer was sehen darf – sonst findet die KI, was niemand finden sollte.</div>
+
+  <h2>Und wenn es rot ist?</h2>
+  <p>Oft lässt sich die Aufgabe trotzdem mit KI lösen – nur anders:</p>
+  <ul>
+    <li><b>Struktur statt Inhalt:</b> Die KI baut die Vorlage, Tabelle oder Gliederung. Die echten Daten tragen Sie selbst ein.</li>
+    <li><b>Zahlen statt Einzelfälle:</b> „9 von 12 würden den Kurs weiterempfehlen“ statt der Freitexte.</li>
+    <li><b>Erfundene Beispiele:</b> Lassen Sie die KI an einem ausgedachten Fall arbeiten und übertragen Sie das Ergebnis.</li>
+    <li><b>Platzhalter</b> wie [Teilnehmerin A] helfen – machen Daten aber nicht automatisch anonym. Prüfen Sie, ob der Rest eine Person verrät.</li>
+    <li><b>Freigegebenes Tool:</b> Wenn Ihr Haus ein Werkzeug mit Vertrag für genau diesen Zweck freigegeben hat, gelten dessen Regeln.</li>
+  </ul>
+
+  <h2>Üben: Welche Farbe?</h2>
+  <div class="quiz">
+    <details><summary>Anwesenheitsliste eines AMS-Kurses</summary><p><span class="amp r">rot</span> Namen, oft Sozialversicherungsnummern, dazu der Bezug zum AMS.</p></details>
+    <details><summary>Kursausschreibung von unserer Website</summary><p><span class="amp g">grün</span> Öffentlich, betrifft niemanden persönlich.</p></details>
+    <details><summary>Protokoll der Teamsitzung, ohne Namen</summary><p><span class="amp y">gelb</span> Intern – solange keine Personalthemen drinstehen. Sonst rot.</p></details>
+    <details><summary>Feedback „Kurs Mittwoch, 8 Personen“, ohne Namen</summary><p><span class="amp r">rot</span> Kleine Gruppe, Tag und Kurs sind bekannt: Wer dabei war, ist erkennbar.</p></details>
+    <details><summary>Qualitätshandbuch</summary><p><span class="amp y">gelb</span> Internes Wissen ohne Personenbezug.</p></details>
+    <details><summary>Bewerbung einer Trainerin</summary><p><span class="amp r">rot</span> Personaldaten. Dazu: KI bei Personalauswahl gilt im AI Act als Hochrisiko (Anhang III).</p></details>
+    <details><summary>Leitbild des Hauses</summary><p><span class="amp g">grün</span> Steht meist ohnehin auf der Website.</p></details>
+    <details><summary>Zahlen: „Kursauslastung 2025 nach Bereichen“</summary><p><span class="amp y">gelb</span> Intern, aber ohne Personen. Bei sehr kleinen Bereichen prüfen, ob Rückschlüsse möglich sind.</p></details>
+  </div>
+
+  <h2 id="karte">Die Karte zum Ausdrucken</h2>
+  <div id="kartenBox">
+    <p>DIN A6 – passt neben jeden Bildschirm. Drucken Sie sie für Ihr ganzes Team.</p>
+    <div class="karte" aria-label="Datenampel-Karte">
+      <div class="t">DATENAMPEL <span>Welche Farbe hat das?</span></div>
+      <div class="row g"><b>GRÜN</b><span>Öffentliches – Website, Programm, Leitbild.<br><b style="font-family:inherit;font-size:inherit">Jedes Tool.</b></span></div>
+      <div class="row y"><b>GELB</b><span>Internes ohne Personen – Konzepte, Handbuch.<br><b style="font-family:inherit;font-size:inherit">Nur freigegebene Tools mit Vertrag.</b></span></div>
+      <div class="row r"><b>ROT</b><span>Personen &amp; Sensibles – Teilnehmende, AMS, Gesundheit, Personal.<br><b style="font-family:inherit;font-size:inherit">Nie in frei zugängliche Tools.</b></span></div>
+      <div class="q"><b>Namen weglassen macht nicht anonym.</b> Im Zweifel: die strengere Farbe.</div>
+      <div class="f">Orientierung, keine Rechtsberatung · mitmachen.arminfradler.at</div>
+    </div>
+    <button class="btn" id="druck" type="button">Nur die Karte drucken</button>
+  </div>
+
+  <h2>Rechtlicher Hintergrund</h2>
+  <ul class="s">
+    <li><b>Personenbezogene Daten</b> sind alle Informationen über eine identifizierte oder identifizierbare Person (Art. 4 Nr. 1 DSGVO).</li>
+    <li><b>Besondere Kategorien</b> wie Gesundheitsdaten sind besonders geschützt (Art. 9 DSGVO).</li>
+    <li><b>Auftragsverarbeitung:</b> Wer personenbezogene Daten an einen Dienst gibt, braucht einen Vertrag mit ihm (Art. 28 DSGVO).</li>
+    <li><b>Datenschutz-Folgenabschätzung</b> bei voraussichtlich hohem Risiko (Art. 35 DSGVO).</li>
+    <li><b>Pseudonymisierte Daten</b> bleiben personenbezogen, solange eine Zuordnung möglich ist (EDSA-Leitlinien 01/2025).</li>
+  </ul>
+  <p class="src">Alle Links unter <a href="quellen.html">Quellen &amp; Begriffe</a>. Stand Oktober 2026. Orientierung, keine Rechtsberatung – im Zweifel Ihre Datenschutzbeauftragte oder Ihren Datenschutzbeauftragten fragen.</p>
+</main>
+<footer class="site"><span>Armin Fradler · <a href="https://arminfradler.at">arminfradler.at</a></span><span><a href="../../datenschutz.html">Datenschutz</a> · <a href="https://arminfradler.at/impressum">Impressum</a></span><span>Orientierung, keine Rechtsberatung</span></footer>
+<script>
+document.getElementById('druck').onclick=()=>{document.body.classList.add('nurKarte');window.print();setTimeout(()=>document.body.classList.remove('nurKarte'),500)};
+</script>
+</body>
+</html>

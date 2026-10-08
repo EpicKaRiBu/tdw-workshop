@@ -1,0 +1,2 @@
+supabase-2.49.4.js – @supabase/supabase-js 2.49.4 (UMD-Build), unverändert.
+Lizenz: MIT, Copyright (c) 2020 Supabase. https://github.com/supabase/supabase-js/blob/master/LICENSE
