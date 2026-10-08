@@ -173,7 +173,7 @@ function work(){
 
 /* ---------- Montag + Stimmung ---------- */
 function monday(){
-  if(!answered('montag')){textQ('Mein erster Schritt – ab morgen','Mitnehmen','montag','Was tun Sie als Erstes?',render,'Auf die Wand',true);return}
+  if(!answered('montag')){textQ('Mein erster Schritt – ab morgen','Mitnehmen','montag','Was tun Sie als Erstes – und wann? z. B. „Am Donnerstag in der Teamsitzung …“',render,'Auf die Wand',true);return}
   if(!answered('stimmung')){choice('Wenn Sie jetzt an KI in Ihrer Arbeit denken – was überwiegt?','Zum Schluss',C.moods,'stimmung',render);return}
   const m=store.get('a.montag');
   main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Danke!</p></div>`+
