@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KI als Organisationskompetenz · Mitmachen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--paper-d:#E9DFCB;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;
+  --regeln:#2F4B7C;--kontext:#2E6B66;--wissen:#B07A22;--menschen:#8C3B5A;
+  --type:"Special Elite","Courier New",monospace;--hand:"Caveat","Segoe Print",cursive;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:18px;-webkit-text-size-adjust:100%}
+body{min-height:100vh;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .27 0 0 0 0 .16 0 0 0 .08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+header b{font-family:var(--type);font-weight:400;font-size:15px;letter-spacing:.04em}
+.live{font-size:13px;color:var(--muted)}.live i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3F7D4E;margin-right:6px}
+.live.off i{background:#B23A2E}
+main{padding:20px 16px 90px;max-width:560px;margin:0 auto}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+h1{font-family:var(--type);font-weight:400;font-size:27px;line-height:1.2;margin:0 0 16px}
+p{line-height:1.45;margin:0 0 12px}
+.hand{font-family:var(--hand);color:var(--pencil);font-size:28px;line-height:1.15}
+.m{color:var(--muted)}.s{font-size:15px}
+.opts{display:flex;flex-direction:column;gap:10px;margin:8px 0 18px}
+button{font:inherit;color:inherit;cursor:pointer}
+.opt{display:block;width:100%;text-align:left;padding:15px 16px;background:var(--card);border:1.5px solid var(--line);border-radius:6px;font-size:18px;min-height:52px}
+.opt:active{transform:scale(.99)}
+.opt.sel{border-color:var(--ink);background:#fff;box-shadow:inset 4px 0 0 var(--pencil)}
+.go{display:block;width:100%;padding:16px;background:var(--ink);color:var(--paper);border:none;border-radius:6px;font-family:var(--type);font-size:18px;letter-spacing:.04em;margin-top:6px}
+.go:disabled{opacity:.4}
+textarea{width:100%;min-height:110px;font:inherit;font-size:18px;padding:14px;border:1.5px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);resize:vertical}
+.hint{font-size:14px;color:var(--muted);margin:6px 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px;margin-bottom:14px}
+.prog{display:flex;gap:6px;margin-bottom:16px}.prog span{flex:1;height:5px;background:var(--line);border-radius:3px}.prog span.on{background:var(--ink)}
+.uc{margin-bottom:14px}.uc p{margin:0 0 6px;font-weight:600}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tri button{padding:10px 4px;border:1.5px solid var(--line);background:var(--card);border-radius:5px;font-size:14px}
+.tri button.sel[data-v="0"]{background:#3F7D4E;color:#fff;border-color:#3F7D4E}
+.tri button.sel[data-v="1"]{background:#D3A221;border-color:#D3A221}
+.tri button.sel[data-v="2"]{background:#C9BCA2;border-color:#C9BCA2}
+.done{text-align:center;padding:30px 10px}
+.done .check{font-family:var(--hand);font-size:64px;color:var(--pencil);line-height:1}
+.path{color:#fff;border-radius:0 6px 6px 6px;padding:18px;margin:22px 0 14px;position:relative}
+.path::before{content:attr(data-tab);position:absolute;top:-24px;left:0;height:24px;padding:4px 12px 0;border-radius:6px 6px 0 0;background:inherit;font-family:var(--type);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.path h2{font-family:var(--type);font-weight:400;margin:0 0 6px;font-size:26px}
+.letter{background:#fff;border:1px solid var(--line);padding:14px;font-family:var(--type);font-size:14px;line-height:1.5;margin-bottom:14px}
+footer{position:fixed;left:0;right:0;bottom:0;background:var(--paper-d);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+footer a{color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);max-width:520px;width:calc(100% - 32px);padding:20px}
+dialog::backdrop{background:rgba(0,0,0,.4)}
+input[type=text]{width:100%;font:inherit;font-size:18px;padding:13px;border:1.5px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+</style>
+</head>
+<body>
+<header><b>KI als Organisationskompetenz</b><span class="live off" id="live"><i></i><span id="liveT">verbinde …</span></span></header>
+<main id="main"><p class="m">Einen Moment …</p></main>
+<footer><span>anonym · ohne Konto · Daten in Frankfurt</span><a href="#" id="dsLink">Datenschutz</a></footer>
+<dialog id="ds">
+  <h1 style="font-size:22px">Datenschutz in Kürze</h1>
+  <p class="s"><b>Verantwortlich:</b> Armin Fradler, Oberwart (info@arminfradler.at).</p>
+  <p class="s"><b>Was gespeichert wird:</b> nur Ihre anonymen Antworten und eine zufällige Kennung dieses Geräts. Keine Namen, keine Mailadressen, keine Cookies, keine Analyse-Tools.</p>
+  <p class="s"><b>Wo und wie lange:</b> Supabase, Rechenzentrum Frankfurt (EU), Auftragsverarbeitung. Automatische Löschung nach vier Wochen.</p>
+  <p class="s"><b>Freitexte:</b> Bitte keine Namen eingeben. Mailadressen und Telefonnummern werden automatisch entfernt. Anonyme Antworten können zum Ordnen an einen KI-Dienst gegeben werden; das Ergebnis ist gekennzeichnet.</p>
+  <p class="s"><b>Ihre Rechte:</b> Auskunft, Berichtigung, Löschung, Beschwerde bei der Datenschutzbehörde. Da wir Sie nicht identifizieren können, genügt es, die Antwort hier zu ändern oder leer zu lassen.</p>
+  <button class="go" onclick="document.getElementById('ds').close()">Schließen</button>
+</dialog>
+
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(()=>{
+const C=window.TDW, $=s=>document.querySelector(s), main=$('#main');
+const params=new URLSearchParams(location.search);
+const SESSION=(params.get('s')||C.session).toUpperCase()==='TEST'?'TEST':C.session;
+const store={get(k){try{return JSON.parse(localStorage.getItem('tdw.'+SESSION+'.'+k))}catch(e){return mem[k]}},set(k,v){mem[k]=v;try{localStorage.setItem('tdw.'+SESSION+'.'+k,JSON.stringify(v))}catch(e){}}};
+const mem={};
+let pid=store.get('pid');if(!pid){pid=(crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-8xxx-xxxxxxxxxxxx'.replace(/x/g,()=>(Math.random()*16|0).toString(16)));store.set('pid',pid)}
+const answered=k=>store.get('a.'+k)!==null&&store.get('a.'+k)!==undefined;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('#dsLink').onclick=e=>{e.preventDefault();$('#ds').showModal()};
+
+let sb=null,state={slide:'start'};
+try{sb=supabase.createClient(C.url,C.key)}catch(e){}
+
+async function send(q,value){
+  store.set('a.'+q,value);
+  if(!sb)return;
+  const {error}=await sb.rpc('submit_response',{p_session:SESSION,p_question:q,p_participant:pid,p_value:value});
+  if(error){console.warn(error);toast('Konnte nicht senden – bitte nochmal versuchen.')}
+}
+function toast(t){const d=document.createElement('p');d.className='hint';d.style.color='var(--pencil)';d.textContent=t;main.prepend(d);setTimeout(()=>d.remove(),4000)}
+function setLive(on){$('#live').classList.toggle('off',!on);$('#liveT').textContent=on?'live':'offline'}
+
+/* ---------- Bausteine ---------- */
+function choice(title,kick,opts,key,next,extra=''){
+  const cur=store.get('a.'+key);
+  main.innerHTML=`<div class="kick">${kick}</div><h1>${title}</h1>${extra}<div class="opts">${opts.map((o,i)=>`<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
+  main.querySelectorAll('.opt').forEach(b=>b.onclick=async()=>{const i=+b.dataset.i;await send(key,{i});next()});
+}
+function textQ(title,kick,key,ph,next,btn='Absenden',skip=false){
+  const cur=store.get('a.'+key);
+  main.innerHTML=`<div class="kick">${kick}</div><h1>${title}</h1><textarea id="t" maxlength="280" placeholder="${ph}">${cur?esc(cur.text):''}</textarea><p class="hint">Bitte keine Namen. Anonym.</p><button class="go" id="b">${btn}</button>${skip?'<button class="opt" id="skip" style="margin-top:10px;text-align:center">Überspringen</button>':''}`;
+  $('#b').onclick=async()=>{const t=$('#t').value.trim();if(!t)return;await send(key,{text:t});next()};
+  if(skip)$('#skip').onclick=()=>{store.set('a.'+key,{skipped:true});next()};
+}
+function done(msg,sub=''){main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">${msg}</p><p class="m s">${sub}</p></div>`}
+function lookUp(){done('Schauen Sie nach vorne.','Hier geht es weiter, sobald Ihre Mitarbeit gefragt ist.')}
+
+/* ---------- Ankommen (5 Antippen + Vormittag) ---------- */
+const arrivalSteps=[
+  ['rolle','In welchem Bereich arbeiten Sie?',C.roles],
+  ['groesse','Wie groß ist Ihre Organisation?',C.sizes.map(s=>s+' Mitarbeitende')],
+  ['nutzung','Wie oft nutzen Sie KI beruflich?',C.usage],
+  ['regeln','Gibt es bei Ihnen Regeln für KI?',C.rules],
+];
+function arrival(){
+  const k=arrivalSteps.findIndex(([key])=>!answered(key));
+  const prog=n=>`<div class="prog">${[0,1,2,3,4,5].map(j=>`<span class="${j<n?'on':''}"></span>`).join('')}</div>`;
+  if(k>=0){const [key,t,o]=arrivalSteps[k];choice(t,'Willkommen · '+(k+1)+' von 6',o,key,render,prog(k));return}
+  if(!answered('pfad')){pathChoice(true);return}
+  if(!answered('vormittag')){textQ('Was ist Ihnen vom Vormittag geblieben?','Willkommen · 6 von 6','vormittag','Ein Gedanke, ein Satz, eine Frage …',render,'Absenden',true);return}
+  done('Danke – Sie sind angekommen.','Wir starten um 14:00. Lassen Sie diese Seite offen.');
+}
+function pathChoice(inArrival){
+  const cur=store.get('a.pfad');
+  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>Woran möchten Sie später arbeiten?</h1><p class="m s">40 Minuten in Kleingruppen. Sie können später noch wechseln.</p>`+
+   C.paths.map((p,i)=>`<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span></button>`).join('')+
+   `<p class="hint">Das vierte Modul „Wissen &amp; Assistenten“ gibt es danach online.</p>`;
+  main.querySelectorAll('.opt').forEach(b=>b.onclick=async()=>{await send('pfad',{i:+b.dataset.i});render()});
+}
+
+/* ---------- Use-Case-Landkarte ---------- */
+function usecases(){
+  const cur=store.get('a.uc'), v=cur?cur.v.slice():C.usecases.map(()=>null);
+  main.innerHTML=`<div class="kick">Use-Case-Landkarte</div><h1>Wo lohnt sich KI bei Ihnen?</h1>`+
+    C.usecases.map((u,j)=>`<div class="uc"><p>${u}</p><div class="tri" data-j="${j}">${['lohnt sich','kritisch','kein Thema'].map((l,k)=>`<button data-v="${k}" class="${v[j]===k?'sel':''}">${l}</button>`).join('')}</div></div>`).join('')+
+    `<button class="go" id="b" ${v.includes(null)?'disabled':''}>Absenden</button>`;
+  main.querySelectorAll('.tri').forEach(t=>t.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    v[+t.dataset.j]=+b.dataset.v;t.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));$('#b').disabled=v.includes(null)}));
+  $('#b').onclick=async()=>{await send('uc',{v});done('Danke!','Die Landkarte entsteht gerade vorne.')};
+}
+
+/* ---------- Quiz ---------- */
+function quiz(){
+  const qi=state.qi??0, Q=C.quiz[qi];
+  if(!store.get('nick')){
+    main.innerHTML=`<div class="kick">Quiz um den Pokal</div><h1>Ihr Spitzname</h1><p class="m s">Kein echter Name – erscheint nur, wenn Sie gewinnen.</p><input type="text" id="n" maxlength="24" placeholder="z. B. Datenampel-Fan"><button class="go" id="b" style="margin-top:12px">Los</button>`;
+    $('#b').onclick=async()=>{const n=$('#n').value.trim();if(!n)return;store.set('nick',n);await send('nick',{text:n});render()};return}
+  if(!Q){lookUp();return}
+  const key='quiz'+qi, cur=store.get('a.'+key);
+  if(state.reveal){done(cur&&cur.i===Q.a?'Richtig!':'Diesmal nicht.',`Richtig ist: ${esc(Q.o[Q.a])}`);return}
+  if(cur){done('Antwort ist drin.','Auflösung gleich vorne.');return}
+  const mail=Q.mail?`<div class="letter">Von: Förderstelle Apfelland &lt;foerderung@apfelland-service.at&gt;<br>Betreff: Nachreichung Abrechnung<br><br>… fehlt uns noch die aktualisierte Bankverbindung. Bitte bestätigen Sie diese bis Freitag über das gesicherte Portal …</div>`:'';
+  main.innerHTML=`<div class="kick">Quiz · Frage ${qi+1} von ${C.quiz.length}</div><h1>${esc(Q.q)}</h1>${mail}<div class="opts">${Q.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
+  main.querySelectorAll('.opt').forEach(b=>b.onclick=async()=>{await send(key,{i:+b.dataset.i});render()});
+}
+
+/* ---------- Pfade ---------- */
+function paths(){
+  const cur=store.get('a.pfad');
+  if(!cur){pathChoice(false);return}
+  const p=C.paths[cur.i];
+  main.innerHTML=`<div class="kick">Ihr Lernpfad</div><div class="path" data-tab="${p.zone}" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p>Gehen Sie in die <b>${p.zone}</b>. Gern mit Kolleg:innen aus Ihrem Haus.</p><button class="opt" id="w" style="text-align:center">Pfad wechseln</button>`;
+  $('#w').onclick=()=>pathChoice(false);
+}
+function work(){
+  const cur=store.get('a.pfad');if(!cur){pathChoice(false);return}
+  const p=C.paths[cur.i];
+  main.innerHTML=`<div class="kick">Arbeitsphase · ${p.name}</div><div class="path" data-tab="${p.zone}" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p class="hand">Die Arbeitsschritte erscheinen hier.</p><p class="m s">(Prototyp: Pfad-Module folgen.)</p>`;
+}
+
+/* ---------- Montag + Stimmung ---------- */
+function monday(){
+  if(!answered('montag')){textQ('Mein erster Schritt am Montag','Mitnehmen','montag','Was tun Sie als Erstes?',render,'Auf die Wand',true);return}
+  if(!answered('stimmung')){choice('Wenn Sie jetzt an KI in Ihrer Arbeit denken – was überwiegt?','Zum Schluss',C.moods,'stimmung',render);return}
+  const m=store.get('a.montag');
+  main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Danke!</p></div>`+
+   (m&&m.text?`<div class="card"><p class="s m" style="margin:0 0 6px">Ihr Schritt:</p><p style="margin:0">${esc(m.text)}</p></div><a class="go" style="text-align:center;text-decoration:none" href="mailto:?subject=${encodeURIComponent('Mein erster Schritt am Montag')}&body=${encodeURIComponent(m.text+'\n\nAus dem Workshop „KI als Organisationskompetenz“, Tag der Weiterbildung 2026')}">Als Erinnerung an mich mailen</a><p class="hint">Geht über Ihr eigenes Mailprogramm. Wir speichern keine Adresse.</p>`:'');
+}
+function end(){main.innerHTML=`<div class="kick">Danke!</div><h1>Alles zum Nachlesen</h1><div class="card"><p style="margin:0">Werkzeuge, Ihr Ergebnis per Abholcode und alle vier Module:</p><p style="font-family:var(--type);font-size:20px;margin:10px 0 0">${C.participantUrl}</p></div><p class="hand">Gute Heimfahrt!</p>`}
+
+/* ---------- Router ---------- */
+function render(){
+  const s=state.slide;
+  if(s==='start'||s==='arrival')return arrival();
+  if(s==='morning')return answered('vormittag')?lookUp():textQ('Was ist Ihnen vom Vormittag geblieben?','Brücke zum Vormittag','vormittag','Ein Gedanke, ein Satz …',lookUp);
+  if(s==='mirror')return arrivalSteps.some(([k])=>!answered(k))?arrival():lookUp();
+  if(s==='usecases')return answered('uc')?done('Danke!','Die Landkarte entsteht gerade vorne.'):usecases();
+  if(s==='context')return answered('kontext')?done('Danke!','Gleich sehen Sie das Ergebnis live.'):choice('Was geben wir der KI als Nächstes?','Live · Sie steuern',C.context,'kontext',()=>done('Danke!','Gleich sehen Sie das Ergebnis live.'));
+  if(s==='quiz')return quiz();
+  if(s==='paths')return paths();
+  if(s==='control')return work();
+  if(s==='monday')return monday();
+  if(s==='end')return end();
+  lookUp();
+}
+
+async function init(){
+  if(!sb){setLive(false);render();return}
+  const {data,error}=await sb.from('sessions').select('state').eq('code',SESSION).single();
+  if(error){setLive(false)}else{state=data.state||state;setLive(true)}
+  render();
+  sb.channel('s-'+SESSION).on('postgres_changes',{event:'UPDATE',schema:'public',table:'sessions',filter:'code=eq.'+SESSION},p=>{
+    const prev=JSON.stringify(state);state=p.new.state||state;if(JSON.stringify(state)!==prev)render();
+  }).subscribe(st=>setLive(st==='SUBSCRIBED'));
+}
+init();
+})();
+</script>
+</body>
+</html>
