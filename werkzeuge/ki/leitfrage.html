@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Die Leitfrage · KI als Organisationskompetenz</title>
+<meta name="description" content="Wo lassen wir uns Arbeit abnehmen – und wo Denken? Ein Modell für Organisationen: abgeben, anregen lassen, behalten. Mit Denk-Check, Anleitungen und Sparring-Skill.">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../site.css" rel="stylesheet">
+<style>
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:26px 0 10px}
+@media (max-width:760px){.cols{grid-template-columns:1fr}}
+.col{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:20px;text-align:center}
+.col h3{margin:0 0 2px;font-size:28px}
+.col .role{margin:0 0 14px;color:var(--muted);font-size:16px}
+.col ul{list-style:none;padding:0;margin:0}.col li{margin:8px 0;font-size:21px}
+.c1 h3,.c1 li{font-family:var(--type);font-weight:400}
+.c2 h3{color:var(--kontext);font-family:var(--type);font-weight:400}.c2 li,.c2 .role{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--kontext)}
+.c3 h3,.c3 li,.c3 .role{font-family:var(--hand);color:var(--pencil)}.c3 h3{font-size:38px}.c3 li{font-size:30px;margin:4px 0}.c3 .role{font-size:22px}
+.ins{counter-reset:i}.ins>div{counter-increment:i;position:relative;padding-left:52px;margin:0 0 22px}
+.ins>div::before{content:counter(i);position:absolute;left:0;top:-4px;font-family:var(--type);font-size:34px;color:var(--pencil)}
+.ins h3{margin:0 0 4px}
+.check{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:22px}
+.check .q{margin:0 0 16px}.check .q p{margin:0 0 8px;font-weight:600}
+.yn{display:flex;gap:8px}.yn button{font:inherit;font-size:16px;padding:9px 18px;border:1.5px solid var(--line);border-radius:5px;background:#fff;cursor:pointer;min-width:74px}
+.yn button.sel{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+#erg{margin-top:12px;min-height:30px}
+.prompt{background:#fff;border:1px solid var(--line);border-left:5px solid var(--kontext);border-radius:3px;padding:14px 16px;margin:6px 0 4px;font-family:"Source Serif 4",Georgia,serif;font-style:italic;font-size:17px}
+.copy{font:inherit;font-size:13px;font-family:var(--type);background:none;border:none;color:var(--muted);cursor:pointer;padding:2px 0;text-decoration:underline}
+.lvl td:first-child{white-space:nowrap}
+</style>
+</head>
+<body>
+<header class="top"><a href="./">KI als Organisationskompetenz · Werkzeuge</a><nav><a href="./#module">Module</a><a href="datenampel.html">Datenampel</a><a href="tools.html">Tool-Landkarte</a><a href="quellen.html">Quellen</a></nav></header>
+<main>
+  <p class="kick">Nachschlagen · Denken</p>
+  <h1>Die Leitfrage</h1>
+  <p class="lead hand" style="font-size:34px;margin-bottom:10px">Wo lassen wir uns Arbeit abnehmen – und wo Denken?</p>
+  <p class="lead">Keine Frage für oder gegen KI, sondern eine Entscheidung, die Organisationen bewusst treffen sollten. Nicht einmal, sondern bei jeder Aufgabe – und für jede Person.</p>
+
+  <div class="cols">
+    <div class="col c1"><h3>Abgeben</h3><p class="role">KI macht – wir prüfen</p><ul><li>Erstfassungen</li><li>Zusammenfassungen</li><li>Übersetzungen</li><li>Recherche-Vorarbeit</li></ul></div>
+    <div class="col c2"><h3>Anregen lassen</h3><p class="role">KI fragt – wir denken</p><ul><li>Gegenpositionen</li><li>blinde Flecken</li><li>Sicht der Zielgruppe</li><li>Varianten</li></ul></div>
+    <div class="col c3"><h3>Behalten</h3><p class="role">wir urteilen – wir verantworten</p><ul><li>Urteil</li><li>Haltung</li><li>Beziehung</li><li>Verantwortung</li></ul></div>
+  </div>
+  <p class="src">Eigene Darstellung (Armin Fradler, 2026)</p>
+
+  <h2>Vier Einsichten</h2>
+  <div class="ins">
+    <div><h3>Die Linie verläuft durch die Aufgaben, nicht zwischen ihnen.</h3>
+      <p>Ein Sachbericht an den Fördergeber enthält alle drei Spalten: Die Erstfassung lässt sich abgeben. Die KI kann fragen, was ein Fördergeber kritisch lesen würde. Ob die Zahlen stimmen und was ehrlich benannt wird, bleibt beim Menschen.</p></div>
+    <div><h3>Die Linie hängt davon ab, wer es tut.</h3>
+      <p>Für die erfahrene Kollegin ist der Sachbericht Arbeit, für den Berufseinsteiger ist er Lernen. Dasselbe Werkzeug wirkt je nach Nutzung gegensätzlich: Schüler:innen, denen KI Lösungen lieferte, schnitten danach ohne KI um 17 % schlechter ab. Mit derselben KI als Tutor, der Hinweise statt Lösungen gab, gab es diesen Verlust nicht (Bastani et al., PNAS 2025). Ähnlich bei Fachkräften, die eine neue Programmbibliothek lernten: Wer ganz delegierte, lernte weniger. Wer mitdachte und nachfragte, behielt den Lernerfolg (Shen &amp; Tamkin, Anthropic 2026).</p></div>
+    <div><h3>Prüfen braucht Können.</h3>
+      <p>Je besser die KI, desto größer die Versuchung, nicht mehr hinzusehen – und desto seltener übt man, was man zum Prüfen braucht. Diese „Ironie der Automatisierung“ ist seit 1983 beschrieben (Bainbridge). Heute zeigt sie sich in der Wissensarbeit: Recruiter mit der besseren KI arbeiteten nachlässiger und entschieden schlechter als mit einer schwächeren (Dell’Acqua). In einem Experiment mit über 1.300 Personen wurden falsche KI-Antworten in 80 % der Fälle übernommen (Shaw &amp; Nave, Wharton 2026).</p>
+      <p><b>Für Leitungen heißt das:</b> Wer heute Einsteiger:innen alles von der KI machen lässt, hat in fünf Jahren niemanden mehr, der prüfen kann. KI-Einsatz ist auch eine Frage der Personalentwicklung.</p></div>
+    <div><h3>Mühe, die sich schlecht anfühlt, wirkt oft am besten.</h3>
+      <p>Wer in der Erwachsenenbildung arbeitet, kennt das Prinzip der wünschenswerten Erschwernisse. Für KI zeigt es sich neu: Schon nach rund zehn Minuten KI-Hilfe gaben Menschen ohne KI früher auf (Liu et al. 2026). Gruppen, denen eine KI gezielt widersprach, entschieden am besten – und schätzten ihre eigene Leistung trotzdem am schlechtesten ein (Chiang et al. 2024). „Anregen lassen“ fühlt sich anstrengender an als „Abgeben“. Gerade das ist der Punkt.</p></div>
+  </div>
+
+  <div class="note ok"><b>Der doppelte Einsatz in der Erwachsenenbildung.</b> Die Frage stellt sich zweimal: in der eigenen Organisation – und bei den Teilnehmenden, deren Denken das eigentliche Ziel ist. Eine KI kann einem Menschen eine Aufgabe abnehmen, aber nicht das Lernen. Ohne didaktische Gestaltung steigert KI vor allem den Output, nicht das Lernen (OECD, Digital Education Outlook 2026). Erledigt ist nicht gelernt.</div>
+
+  <h2 id="check">Der Denk-Check</h2>
+  <p>Drei Fragen, bevor eine Aufgabe ganz an die KI geht:</p>
+  <div class="check">
+    <div class="q"><p>1 · Brauchen wir dieses Können, um das Ergebnis zu prüfen – heute oder in fünf Jahren?</p><div class="yn" data-q="0"><button type="button" data-v="1">ja</button><button type="button" data-v="0">nein</button></div></div>
+    <div class="q"><p>2 · Ist das Denken selbst der Zweck – Lernen, Verstehen, eine Haltung entwickeln, eine Beziehung pflegen?</p><div class="yn" data-q="1"><button type="button" data-v="1">ja</button><button type="button" data-v="0">nein</button></div></div>
+    <div class="q"><p>3 · Ist klar, wer dafür geradesteht – vor Teilnehmenden, Fördergebern, Öffentlichkeit?</p><div class="yn" data-q="2"><button type="button" data-v="1">ja</button><button type="button" data-v="0">nein</button></div></div>
+    <div id="erg" aria-live="polite"><p class="m s" style="margin:0">Beantworten Sie alle drei Fragen.</p></div>
+  </div>
+
+  <h2>Was Organisationen tun können</h2>
+  <p>Die Leitfrage beantworten Sie nicht nur im Kopf, sondern in Ihren Regeln und Werkzeugen.</p>
+  <ul>
+    <li><b>Einsteiger:innen zuerst selbst:</b> Den ersten Sachbericht, die erste Ausschreibung schreiben neue Kolleg:innen selbst – dann Sparring mit der KI. Erfahrene dürfen abgeben.</li>
+    <li><b>„Bitte prüfen“ in jeden Skill:</b> Eine Arbeitsanleitung für die KI, die mit einer Prüfliste endet, baut das Behalten in den Ablauf ein (<a href="modul.html?m=kontext">Modul Kontext</a>).</li>
+    <li><b>Einen Sparring-Skill anbieten:</b> Er fragt zuerst nach der eigenen Einschätzung und widerspricht dann. So wird Anregen zur bequemsten Option (Vorlage unten).</li>
+    <li><b>In die Leitlinie schreiben:</b> „Wer KI-Ergebnisse verwendet, muss sie beurteilen können.“ (<a href="modul.html?m=regeln">Modul Regeln</a>)</li>
+    <li><b>Didaktisch für Teilnehmende:</b> KI als Tutor mit Hinweisen statt als Lösungsmaschine einsetzen – und Prüfungsformen so gestalten, dass eigenes Denken sichtbar wird.</li>
+  </ul>
+
+  <h2 id="anregen">Anregen lassen – so geht’s</h2>
+  <p>Sechs Aufträge, die Denken herausfordern statt es abzunehmen. Ersetzen Sie die eckigen Klammern. Nur mit grünen oder gelben Inhalten (<a href="datenampel.html">Datenampel</a>).</p>
+  <div id="prompts"></div>
+
+  <div class="card tabbed"><span class="tab" style="background:var(--kontext)">Skill</span>
+    <h3 style="margin-top:0">Der Sparring-Skill</h3>
+    <p>Eine fertige Arbeitsanleitung im offenen SKILL.md-Format. Legen Sie sie in Ihr Projekt oder Ihren KI-Ordner – dann reicht der Satz „Sparring zu meinem Entwurf“.</p>
+    <button class="btn" type="button" id="skill">SKILL.md herunterladen</button>
+  </div>
+
+  <h2>Ehrlich zur Beweislage</h2>
+  <p>Die Forschung ist jung. Vieles ist vorläufig, manches nur ein Zusammenhang. Der Grundtenor ist trotzdem eindeutig: <b>Es kommt darauf an, wie KI genutzt wird – nicht ob.</b> Und: Auslagern ist menschlich. Schrift, Notizbuch und Taschenrechner sind auch Auslagerung (Risko &amp; Gilbert 2016). Schlagworte wie „KI macht dumm“ gehen über die Daten hinaus.</p>
+  <div class="tablewrap"><table class="lvl">
+    <tr><th>Stand</th><th>Studie</th><th>Kernaussage</th></tr>
+    <tr><td>begutachtet</td><td><a href="https://doi.org/10.1073/pnas.2422633122">Bastani et al., PNAS 2025</a></td><td>KI als Lösungslieferant schadet dem Lernen, als Tutor nicht. Feldexperiment, knapp 1.000 Schüler:innen.</td></tr>
+    <tr><td>begutachtet</td><td><a href="https://www.nature.com/articles/s41598-025-97652-6">Kestin, Miller et al., Sci. Reports 2025</a></td><td>Ein didaktisch gebauter KI-Tutor verdoppelte den Lernzuwachs. Ein Fach, zwei Wochen.</td></tr>
+    <tr><td>begutachtet</td><td><a href="https://doi.org/10.1145/3640543.3645199">Chiang et al., IUI 2024</a></td><td>KI als Advocatus Diaboli verbessert Gruppenentscheidungen.</td></tr>
+    <tr><td>begutachtet</td><td><a href="https://doi.org/10.1126/sciadv.adn5290">Doshi &amp; Hauser, Science Advances 2024</a></td><td>KI steigert die Kreativität einzelner, aber die Ergebnisse aller werden einander ähnlicher. (Unsere Folgerung: erst eigene Ideen, dann KI.)</td></tr>
+    <tr><td>begutachtet</td><td><a href="https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/">Lee et al., CHI 2025</a></td><td>Mehr Vertrauen in die KI, weniger kritisches Prüfen. Befragung, 319 Personen.</td></tr>
+    <tr><td>Bericht</td><td><a href="https://doi.org/10.1787/062a7394-en">OECD, Digital Education Outlook 2026</a></td><td>Erledigen ist nicht Lernen. Es kommt auf die didaktische Gestaltung an.</td></tr>
+    <tr><td>vorläufig</td><td><a href="https://arxiv.org/abs/2601.20245">Shen &amp; Tamkin, Anthropic 2026</a></td><td>Ganz delegieren schwächt das Verständnis, mitdenken erhält es. 52 Personen.</td></tr>
+    <tr><td>vorläufig</td><td><a href="https://arxiv.org/abs/2604.04721">Liu et al. 2026</a></td><td>Nach kurzer KI-Hilfe weniger Ausdauer und schlechtere Leistung ohne KI. 1.222 Personen.</td></tr>
+    <tr><td>vorläufig</td><td>Shaw &amp; Nave, Wharton 2026</td><td>Falsche KI-Antworten in 80 % übernommen („cognitive surrender“). Fehler waren absichtlich eingebaut.</td></tr>
+    <tr><td>vorläufig</td><td>Dell’Acqua, Harvard Business School</td><td>Bessere KI, nachlässigere Menschen („Falling asleep at the wheel“).</td></tr>
+    <tr><td>Zusammenhang</td><td><a href="https://doi.org/10.3390/soc15010006">Gerlich, Societies 2025</a></td><td>Häufige KI-Nutzung geht mit weniger kritischem Denken einher. Keine Ursache belegt.</td></tr>
+    <tr><td>Grundlage</td><td><a href="https://doi.org/10.1016/0005-1098(83)90046-8">Bainbridge 1983</a> · <a href="https://doi.org/10.1016/j.tics.2016.07.002">Risko &amp; Gilbert 2016</a></td><td>Ironie der Automatisierung · Auslagern als normale, oft kluge Strategie.</td></tr>
+  </table></div>
+  <p class="src">Stand 8. Oktober 2026. Orientierung, keine Rechtsberatung.</p>
+</main>
+<footer class="site"><span>Armin Fradler · <a href="https://arminfradler.at">arminfradler.at</a></span><span><a href="../../datenschutz.html">Datenschutz</a> · <a href="https://arminfradler.at/impressum">Impressum</a></span><span>Orientierung, keine Rechtsberatung</span></footer>
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* Denk-Check */
+const a=[null,null,null];
+document.querySelectorAll('.yn').forEach(g=>g.querySelectorAll('button').forEach(b=>b.onclick=()=>{a[+g.dataset.q]=+b.dataset.v;g.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));erg()}));
+function erg(){
+  if(a.includes(null))return;
+  let t;
+  if(a[2]===0)t='<b>Zuerst klären, wer verantwortet.</b> Ohne diese Klärung sollte nichts nach außen gehen – egal ob Mensch oder KI den Entwurf schreibt.';
+  else if(a[0]===1&&a[1]===1)t='<b>Behalten – oder anregen lassen.</b> Hier ist das Denken der Zweck. Erst selbst denken, dann die KI als Sparringpartner fragen.';
+  else if(a[1]===1)t='<b>Anregen lassen.</b> Das Denken ist der Zweck: Die KI fragt, widerspricht, zeigt Varianten – der Text und das Urteil bleiben bei Ihnen.';
+  else if(a[0]===1)t='<b>Abgeben – aber prüffähig bleiben.</b> Wer das Können noch aufbauen muss, macht es zuerst selbst. Erfahrene dürfen abgeben und prüfen.';
+  else t='<b>Abgeben, mit Prüfschritt.</b> KI macht, Sie prüfen. Eine kurze „Bitte prüfen“-Liste genügt.';
+  $('#erg').innerHTML=`<div class="note ok" style="margin:6px 0 0">${t}</div>`;
+}
+/* Anregen-Aufträge */
+const P=[
+  ['Gegenposition','Hier ist mein Entwurf für [Konzept / Antrag / Ausschreibung]. Nenne die drei stärksten Einwände, die [ein Fördergeber / unser Team / Teilnehmende] dagegen hätte. Schreib nichts um.'],
+  ['Blinde Flecken','Was habe ich bei diesem Vorhaben nicht bedacht? Nenne fünf Punkte, sortiert nach Risiko. Frag nach, wo dir Informationen fehlen.'],
+  ['Sicht der Zielgruppe','Lies diesen Text als [eine Teilnehmerin, die gerade Deutsch lernt / ein Geschäftsführer ohne Zeit]. Wo steigst du aus? Was verstehst du falsch?'],
+  ['Sokratisch','Ich will entscheiden, ob [Vorhaben]. Stell mir nacheinander Fragen, die mir helfen, selbst zu einer begründeten Entscheidung zu kommen. Gib keine Empfehlung, bevor ich dich darum bitte.'],
+  ['Prämortem','Stell dir vor, es ist ein Jahr später und [Vorhaben] ist gescheitert. Erzähl, warum. Dann: Welche drei Warnzeichen hätten wir früh sehen können?'],
+  ['Erst ich, dann du','Hier sind meine eigenen drei Ideen zu [Thema]. Ergänze drei, die sich deutlich davon unterscheiden – nicht bessere Versionen meiner, sondern andere Richtungen.']
+];
+$('#prompts').innerHTML=P.map((p,i)=>`<h3>${esc(p[0])}</h3><div class="prompt" id="p${i}">${esc(p[1])}</div><button class="copy" type="button" data-i="${i}">kopieren</button>`).join('');
+document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(P[+b.dataset.i][1]);b.textContent='kopiert';setTimeout(()=>b.textContent='kopieren',1500)}catch(e){b.textContent='bitte markieren und kopieren'}});
+/* Sparring-Skill */
+const SKILL=`---
+name: sparring
+description: Fordert Denken heraus, statt es abzunehmen. Verwenden, wenn jemand eine eigene Idee, ein Konzept oder einen Entwurf prüfen, schärfen oder durchdenken will – nicht, wenn ein fertiger Text gewünscht ist.
+---
+
+# Sparring
+
+## Deine Rolle
+Du bist Sparringpartner, nicht Ghostwriter. Du schreibst keine fertigen Texte. Du hilfst, besser zu denken.
+
+## So gehst du vor
+1. Liegt kein eigener Entwurf und keine eigene Einschätzung vor, frag zuerst danach. Ohne eigenen Gedanken kein Sparring.
+2. Fasse in zwei Sätzen zusammen, was du verstanden hast.
+3. Nenne die drei stärksten Einwände – sachlich, aus der Sicht von [Fördergeber / Teilnehmenden / Team].
+4. Zeige einen blinden Fleck: Was wird nicht bedacht?
+5. Stelle zwei Fragen, die zum Weiterdenken zwingen. Beantworte sie nicht selbst.
+6. Erst wenn ausdrücklich gewünscht: Varianten oder Formulierungsvorschläge.
+
+## Was du nicht tust
+- Nicht bestätigen, um zu gefallen. Wenn etwas gut ist, sag knapp, warum.
+- Nichts erfinden: keine Zahlen, Studien oder Zitate ohne Quelle.
+- Keine Entscheidung abnehmen. Schließe mit: „Ihre Entscheidung.“
+- Keine personenbezogenen Daten verarbeiten (Datenampel: rot bleibt draußen).
+
+Quelle: mitmachen.arminfradler.at/werkzeuge/ki/leitfrage.html
+`;
+$('#skill').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([SKILL],{type:'text/markdown'}));a.download='SKILL.md';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
+})();
+</script>
+</body>
+</html>
