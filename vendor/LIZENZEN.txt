@@ -1,2 +1,4 @@
 supabase-2.49.4.js – @supabase/supabase-js 2.49.4 (UMD-Build), unverändert.
 Lizenz: MIT, Copyright (c) 2020 Supabase. https://github.com/supabase/supabase-js/blob/master/LICENSE
+qrcode-1.4.4.js – qrcode-generator 1.4.4 von Kazuhiko Arase, unverändert.
+Lizenz: MIT, Copyright (c) 2009 Kazuhiko Arase. https://github.com/kazuhikoarase/qrcode-generator
