@@ -154,7 +154,7 @@ function quiz(){
   const key='quiz'+qi, cur=store.get('a.'+key);
   if(state.reveal){done(cur&&cur.i===Q.a?'Richtig!':'Diesmal nicht.',`Richtig ist: ${esc(Q.o[Q.a])}`);return}
   if(cur){done('Antwort ist drin.','Auflösung gleich vorne.');return}
-  const mail=Q.mail?`<div class="letter">Von: Förderstelle Apfelland &lt;foerderung@apfelland-service.at&gt;<br>Betreff: Nachreichung Abrechnung<br><br>… fehlt uns noch die aktualisierte Bankverbindung. Bitte bestätigen Sie diese bis Freitag über das gesicherte Portal …</div>`:'';
+  const mail=Q.mail?`<div class="letter">Von: Förderabwicklung Land Apfelland &lt;abrechnung@foerderung-apfelland.at&gt;<br>Betreff: Projekt „Deutsch im Apfelland“ (2026-114) – Endabrechnung<br><br>Sehr geehrte Frau Mag. Huber,<br><br>vielen Dank für Ihren Sachbericht zum Deutschkurs B1 vom 30. Juni. Für die Auszahlung der zweiten Tranche (12.400 €) fehlt uns noch die Bestätigung Ihrer Bankverbindung, da das Förderportal umgestellt wurde. Bitte bestätigen Sie diese bis Freitag, 12 Uhr, damit die Auszahlung noch im Oktober erfolgt.<br><br><u>Bankverbindung jetzt bestätigen</u><br><br>Mit freundlichen Grüßen<br>Mag. Thomas Berger, Förderabwicklung</div>`:'';
   main.innerHTML=`<div class="kick">Quiz · Frage ${qi+1} von ${C.quiz.length}</div><h1>${esc(Q.q)}</h1>${mail}<div class="opts">${Q.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
   main.querySelectorAll('.opt').forEach(b=>b.onclick=async()=>{await send(key,{i:+b.dataset.i});render()});
 }
