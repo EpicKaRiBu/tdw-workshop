@@ -1,0 +1,18 @@
+/* Textursystem – dasselbe Material wie auf arminfradler.at, in der Präsentation und im Video.
+   Papier (Körnung, Fasern, Ton) · Karteikarte · Rotstift (Körnung als Maske, ohne JavaScript).
+   Alles als kleine, nahtlose SVG-Kacheln direkt in dieser Datei: keine externen Verbindungen. */
+:root{
+  --tx-grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='256' height='256'><filter id='n' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.875' numOctaves='3' seed='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .32 0 0 0 0 .25 0 0 0 0 .15 0 0 0 .12 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  --tx-fiber:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512'><filter id='f' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.0625 .1875' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .26 0 0 0 .28 -.1'/></filter><rect width='100%25' height='100%25' filter='url(%23f)'/></svg>");
+  --tx-mottle:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1024' height='1024'><filter id='m' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.00390625' numOctaves='3' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55 0 0 0 0 .46 0 0 0 0 .3 0 0 0 .14 0'/></filter><rect width='100%25' height='100%25' filter='url(%23m)'/></svg>");
+  --tx-card:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='c' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .4 0 0 0 0 .34 0 0 0 0 .22 0 0 0 .07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23c)'/></svg>");
+  --tx-pencil:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><filter id='p' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='1.125' numOctaves='2' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2 1.8'/></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
+}
+
+/* Papier */
+.tx-paper{background-color:var(--paper);background-image:var(--tx-grain),var(--tx-fiber),var(--tx-mottle);background-size:256px 256px,512px 512px,1024px 1024px}
+
+/* Rotstift: Körnung als Maske – die Schrift sieht aus wie mit Buntstift auf Papier geschrieben */
+.tx-pencil{-webkit-mask-image:var(--tx-pencil);mask-image:var(--tx-pencil);-webkit-mask-size:128px 128px;mask-size:128px 128px}
+
+@media print{.tx-paper{background-image:none}.tx-pencil{-webkit-mask-image:none;mask-image:none}}
