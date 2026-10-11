@@ -85,11 +85,12 @@ function arrival(){
   done('Danke – Sie sind angekommen.','Wir starten um 14:00. Lassen Sie diese Seite offen.');
 }
 function pathChoice(inArrival){
-  const cur=store.get('a.pfad');
+  const cur=store.get('a.pfad'),rolle=store.get('a.rolle'),foerder=rolle&&C.roles[rolle.i]==='Fördergeber / öffentliche Hand';
   main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>${inArrival?'Woran möchten Sie später arbeiten?':'Welcher Pfad soll es sein?'}</h1><p class="m s">${inArrival?'40 Minuten in Kleingruppen. Sie können später noch wechseln.':'Was Sie schon erarbeitet haben, bleibt gespeichert. Sie können jederzeit zurückwechseln.'}</p>`+
+   (foerder?`<p class="hint"><b>Sie kommen von einem Fördergeber?</b> Wählen Sie den Pfad Regeln und notieren Sie zwei Sätze zu KI, die Sie in einem Sachbericht gern lesen würden, zum Beispiel im Feld „Eigene Formulierung“ bei der Frage „Wer prüft und verantwortet KI-Ergebnisse?“.</p>`:'')+
    C.paths.map((p,i)=>{const I=(window.Pfade&&Pfade.info[p.id])||{};return `<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span>${I.fuer?`<br><span class="s m">Für: ${I.fuer}</span><br><span class="s m">Sie nehmen mit: ${I.mit}</span>`:''}</button>`}).join('')+
    (inArrival?`<button class="opt" id="later" style="text-align:center;margin-bottom:10px">Noch offen – ich entscheide später</button>`:'')+
-   `<p class="hint">Für IT und Digitales: das vierte Modul <a href="werkzeuge/ki/modul.html?m=wissen" target="_blank" rel="noopener">„Wissen &amp; Assistenten“</a> gleich hier am Handy. Alle vier gibt es danach auch online.</p>`;
+   `<p class="hint">Für IT und Digitales gibt es einen vierten Lernpfad: <a href="werkzeuge/ki/modul.html?m=wissen" target="_blank" rel="noopener">„Wissen &amp; Assistenten“</a>. Sie können ihn gleich hier am Handy öffnen. Nach dem Workshop gibt es alle vier auch online.</p>`;
   main.querySelectorAll('.opt[data-i]').forEach(b=>b.onclick=async()=>{await send('pfad',{i:+b.dataset.i});render()});
   if(inArrival)$('#later').onclick=()=>{store.set('a.pfad',{later:true});render()};
 }
@@ -136,7 +137,7 @@ function work(){
 
 /* ---------- Montag + Stimmung ---------- */
 function monday(){
-  if(!answered('montag')){textQ('Mein erster Schritt – ab morgen','Mitnehmen','montag','Was tun Sie als Erstes – und wann? z. B. „Am Donnerstag in der Teamsitzung …“',render,'Auf die Wand',true);return}
+  if(!answered('montag')){textQ('Mein erster Schritt – ab morgen','Mitnehmen','montag','Was tun Sie als Erstes – und wann? z. B. „Am Donnerstag in der Teamsitzung …“',render,'An die Leinwand senden',true);return}
   if(!answered('stimmung')){choice('Und jetzt, nach diesem Nachmittag – was überwiegt?','Zum Schluss',C.moods,'stimmung',render,'<p class="m s">Dieselbe Frage wie beim Ankommen. Vorne sehen Sie gleich, ob sich etwas bewegt hat.</p>');return}
   const m=store.get('a.montag');
   main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Danke!</p></div>`+

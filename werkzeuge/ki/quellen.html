@@ -73,7 +73,7 @@ dl.gl dd{margin:4px 0 0}
 
   <h2>Sicherheit</h2>
   <ul class="q">
-    <li><a href="https://www.schneier.com/academic/archives/2026/06/evaluating-large-language-models-ability-to-automate-spear-phishing.html">Heiding, Schneier et al.: KI-gestütztes Spear-Phishing</a><span class="w">Vollautomatisch von KI geschriebene Phishing-Mails: 54 % Klickrate, allgemeine Vergleichsmails 12 %.</span></li>
+    <li><a href="https://www.schneier.com/academic/archives/2026/06/evaluating-large-language-models-ability-to-automate-spear-phishing.html">Heiding, Schneier et al.: KI-gestütztes Spear-Phishing</a><span class="w">Vollautomatisch von KI geschriebene Phishing-Mails: 54 % Klickrate, herkömmliche Phishing-Mails 12 %.</span></li>
     <li><a href="https://www.csoonline.com/article/4184455/prompt-injection-breaks-todays-ai-agents-study-warns.html">CSO Online (Juni 2026): Prompt injection breaks today’s AI agents</a><span class="w">3.168 Testläufe mit Browser-Agenten: Versteckte Anweisungen in Webseiten wirkten in 41,7–68,2 % der Fälle, direkte Angriffe in über 79 %.</span></li>
     <li><a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">S. Willison (2025): The lethal trifecta</a><span class="w">Gefährlich wird es, wenn ein Agent fremde Inhalte liest, an private Daten kommt und nach außen kommunizieren kann.</span></li>
     <li><a href="https://thenextweb.com/news/openai-agent-medicare-statistics-portal-australia">The Next Web (September 2026): OpenAI-Agent und das Medicare-Statistikportal</a><span class="w">Vom australischen Premierminister öffentlich gemacht. Umfang umstritten, Untersuchung läuft.</span></li>
@@ -125,19 +125,21 @@ dl.gl dd{margin:4px 0 0}
     <dt>Kontext</dt><dd>Alles, was die KI bei einer Aufgabe gerade sieht: Auftrag, Unterlagen, bisheriger Verlauf. Im Workshop: der Schreibtisch. Gute Ergebnisse kommen vor allem von gutem Kontext.</dd>
     <dt>Harness</dt><dd>Die Software rund um das Modell: Werkzeuge, Abläufe, Zugänge, Prüfschritte. ChatGPT, Claude, Copilot oder Codex sind solche Harnesses. Im Workshop: das Büro. Das Büro stellen die Anbieter – Akten und Regeln stellen Sie.</dd>
     <dt>Modell</dt><dd>Das eigentliche Sprachmodell (etwa GPT, Claude, Gemini, Mistral), das Texte erzeugt.</dd>
-    <dt>Agent</dt><dd>Modell plus Harness, das selbstständig mehrere Schritte erledigt: suchen, lesen, schreiben, Werkzeuge bedienen.</dd>
-    <dt>Skill</dt><dd>Eine Arbeitsanleitung für eine wiederkehrende Aufgabe, meist als Textdatei SKILL.md. Offener Standard, den mehrere Werkzeuge lesen.</dd>
+    <dt>Agent</dt><dd>Eine KI, die selbstständig mehrere Schritte nacheinander erledigt: suchen, lesen, schreiben, Werkzeuge bedienen. Technisch: Modell plus Harness.</dd>
+    <dt>Skill</dt><dd>Eine Arbeitsanleitung für eine wiederkehrende Aufgabe, meist als einfache Textdatei mit dem Namen SKILL.md (.md steht für Markdown, ein schlichtes Textformat). Es ist ein offener Standard, den mehrere KI-Werkzeuge lesen.</dd>
     <dt>KI-Ordner</dt><dd>Ein Ordner mit Anweisungen, Wissen, Vorlagen und Skills, den Ihre Organisation selbst pflegt. Funktioniert mit jedem gängigen Werkzeug und macht unabhängig vom Anbieter.</dd>
+    <dt>Kontext-Rezept</dt><dd>Für eine wiederkehrende Aufgabe schriftlich festgehalten: was die KI dafür bekommt, was Menschen entscheiden und woran Sie ein gutes Ergebnis erkennen. Entsteht im <a href="modul.html?m=kontext">Modul Kontext</a>.</dd>
     <dt>Connector</dt><dd>Ein Zugang, über den die KI auf andere Systeme zugreift – Postfach, Kalender, Laufwerk. Praktisch, aber: Die KI sieht dann alles, was die Berechtigung erlaubt.</dd>
     <dt>Halluzination</dt><dd>Eine plausibel klingende, aber falsche Angabe der KI. Gegenmittel: Quellen verlangen, „[FEHLT: …]“ statt Erfinden, menschlich prüfen.</dd>
     <dt>Prompt Injection</dt><dd>Versteckte Anweisungen in Webseiten, Mails oder Dokumenten, die eine KI umlenken sollen – etwa weiße Schrift auf weißem Grund.</dd>
     <dt>Gefährliche Dreierkombination</dt><dd>Ein Agent, der fremde Inhalte liest, an sensible Daten kommt und nach außen handeln kann. Nie alle drei ohne menschliche Freigabe (nach S. Willison: „lethal trifecta“).</dd>
     <dt>Schatten-KI</dt><dd>KI-Nutzung ohne Wissen oder Regeln der Organisation, oft mit privaten Gratis-Konten. Gibt es auch dort, wo Regeln existieren – wenn der erlaubte Weg unpraktisch ist.</dd>
     <dt>Datenampel</dt><dd>Grün in jedes Tool, Gelb nur in freigegebene, Rot nie in frei zugängliche. <a href="datenampel.html">Ausführlich</a>.</dd>
+    <dt>Dienstkonto</dt><dd>Ein Zugang, den Ihre Organisation für Sie einrichtet. Für KI heißt das: Es gilt der Vertrag Ihrer Organisation mit dem Anbieter, nicht die Bedingungen eines privaten Kontos. Das Gegenstück sind private Gratis-Konten.</dd>
     <dt>Auftragsverarbeitungsvertrag (AVV)</dt><dd>Vertrag mit einem Dienst, der personenbezogene Daten in Ihrem Auftrag verarbeitet (Art. 28 DSGVO).</dd>
     <dt>EU Data Boundary</dt><dd>Zusage von Microsoft, Daten von EU-Kunden in der EU zu speichern und zu verarbeiten – mit dokumentierten Ausnahmen.</dd>
     <dt>KI-Kompetenz (Art. 4 AI Act)</dt><dd>Organisationen, die KI einsetzen, setzen Maßnahmen für die KI-Kompetenz ihrer Leute. Ein bestimmtes Niveau ist nicht geschuldet. Festhalten ist nicht vorgeschrieben, hilft aber als Nachweis; ein internes Register genügt. <a href="nachweis.html">Vorlage</a>.</dd>
-    <dt>Kennzeichnung (Art. 50 AI Act)</dt><dd>Seit August 2026: Chatbots geben sich als KI zu erkennen, realistische KI-Bilder und Deepfakes werden gekennzeichnet.</dd>
+    <dt>Kennzeichnung (Art. 50 AI Act)</dt><dd>Seit August 2026: Chatbots geben sich als KI zu erkennen, Anbieter markieren KI-Inhalte maschinenlesbar. Wer KI nutzt, kennzeichnet realistische KI-Bilder und Deepfakes, ebenso KI-Texte zu öffentlichen Themen, außer ein Mensch hat sie geprüft und verantwortet.</dd>
     <dt>Hochrisiko (Anhang III)</dt><dd>KI für Zulassung, Bewertung von Lernenden oder Personalauswahl. Strenge Pflichten ab 2.12.2027.</dd>
     <dt>Passkey</dt><dd>Anmeldung mit einem Schlüssel auf Handy, Laptop oder USB-Stick statt Passwort. Funktioniert nur auf der echten Adresse – Phishing-Seiten gehen ins Leere.</dd>
   </dl>
