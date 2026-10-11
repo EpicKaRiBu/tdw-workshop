@@ -18,7 +18,7 @@
   <p class="s"><b>Was gespeichert wird:</b> nur Ihre anonymen Antworten und eine zufällige Kennung dieses Geräts. Keine Namen, keine Mailadressen, keine Cookies, keine Analyse-Tools.</p>
   <p class="s"><b>Wo und wie lange:</b> Supabase, Rechenzentrum Frankfurt (EU), Auftragsverarbeitung. Automatische Löschung nach vier Wochen.</p>
   <p class="s"><b>Auslieferung der Seite:</b> über GitHub Pages (GitHub Inc., USA). Dabei verarbeitet GitHub technisch notwendig Ihre IP-Adresse. Schriften und Programmteile liegen auf dieser Seite selbst – es gibt keine Verbindung zu Google oder anderen Diensten.</p>
-  <p class="s"><b>Freitexte:</b> Bitte keine Namen eingeben. Mailadressen und Telefonnummern werden automatisch entfernt. Anonyme Antworten können zum Ordnen an einen KI-Dienst gegeben werden; das Ergebnis ist gekennzeichnet.</p>
+  <p class="s"><b>Freitexte:</b> Bitte keine Namen eingeben. Mailadressen und Telefonnummern werden automatisch entfernt. Antworten werden ohne Namen an der Leinwand gezeigt.</p>
   <p class="s"><b>Ihre Rechte:</b> Auskunft, Berichtigung, Löschung, Beschwerde bei der Datenschutzbehörde. Da wir Sie nicht identifizieren können, genügt es, die Antwort hier zu ändern oder leer zu lassen.</p>
   <button class="go" onclick="document.getElementById('ds').close()">Schließen</button>
 </dialog>
@@ -42,7 +42,7 @@ $('#dsLink').onclick=e=>{e.preventDefault();$('#ds').showModal()};
 
 let sb=null,state={slide:'start'};
 try{sb=supabase.createClient(C.url,C.key)}catch(e){}
-window.TDWAPP={get sb(){return sb},store,send,toast:t=>toast(t),C,SESSION,main};
+window.TDWAPP={get sb(){return sb},store,send,toast:t=>toast(t),C,SESSION,main,choosePath:()=>{pathChoice(false);scrollTo(0,0)}};
 
 async function send(q,value){
   store.set('a.'+q,value);
@@ -85,10 +85,10 @@ function arrival(){
 }
 function pathChoice(inArrival){
   const cur=store.get('a.pfad');
-  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>Woran möchten Sie später arbeiten?</h1><p class="m s">40 Minuten in Kleingruppen. Sie können später noch wechseln.</p>`+
+  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>${inArrival?'Woran möchten Sie später arbeiten?':'Welcher Pfad soll es sein?'}</h1><p class="m s">${inArrival?'40 Minuten in Kleingruppen. Sie können später noch wechseln.':'Was Sie schon erarbeitet haben, bleibt gespeichert. Sie können jederzeit zurückwechseln.'}</p>`+
    C.paths.map((p,i)=>{const I=(window.Pfade&&Pfade.info[p.id])||{};return `<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span>${I.fuer?`<br><span class="s m">Für: ${I.fuer}</span><br><span class="s m">Sie nehmen mit: ${I.mit}</span>`:''}</button>`}).join('')+
    (inArrival?`<button class="opt" id="later" style="text-align:center;margin-bottom:10px">Noch offen – ich entscheide später</button>`:'')+
-   `<p class="hint">Das vierte Modul „Wissen &amp; Assistenten“ gibt es danach online.</p>`;
+   `<p class="hint">Für IT und Digitales: das vierte Modul <a href="werkzeuge/ki/modul.html?m=wissen" target="_blank" rel="noopener">„Wissen &amp; Assistenten“</a> gleich hier am Handy. Alle vier gibt es danach auch online.</p>`;
   main.querySelectorAll('.opt[data-i]').forEach(b=>b.onclick=async()=>{await send('pfad',{i:+b.dataset.i});render()});
   if(inArrival)$('#later').onclick=()=>{store.set('a.pfad',{later:true});render()};
 }
@@ -113,7 +113,7 @@ function quiz(){
     main.innerHTML=`<div class="kick">Quiz um den Pokal</div><h1>Antwort ist drin. Ihr Spitzname?</h1><p class="m s">Kein echter Name – erscheint nur, wenn Sie gewinnen.</p><input type="text" id="n" maxlength="24" placeholder="z. B. Datenampel-Fan"><button class="go" id="b" style="margin-top:12px">Mitspielen</button><button class="opt" id="skip" style="margin-top:10px;text-align:center">Lieber ohne Pokal</button>`;
     $('#b').onclick=async()=>{const n=$('#n').value.trim();if(!n)return;store.set('nick',n);await send('nick',{text:n});render()};
     $('#skip').onclick=()=>{store.set('nickSkip',1);render()};return}
-  if(state.reveal){done(cur&&cur.i===Q.a?'Richtig!':'Diesmal nicht.',`Richtig ist: ${esc(Q.o[Q.a])}`+(Q.src?`<br><small>Quelle: ${esc(Q.src)}</small>`:''));return}
+  if(state.reveal){done(cur?(cur.i===Q.a?'Richtig!':'Diesmal nicht.'):'Auflösung',`Richtig ist: ${esc(Q.o[Q.a])}`+(Q.src?`<br><small>Quelle: ${esc(Q.src)}</small>`:''));return}
   if(cur){done('Antwort ist drin.','Auflösung gleich vorne.');return}
   const mail=Q.mail?`<div class="letter">Von: Förderabwicklung Land Apfelland &lt;abrechnung@foerderung-apfelland.at&gt;<br>Betreff: Projekt „Deutsch im Apfelland“ (2026-114) – Endabrechnung<br><br>Sehr geehrte Frau Mag. Huber,<br><br>vielen Dank für Ihren Sachbericht zum Deutschkurs B1 vom 30. Juni. Für die Auszahlung der zweiten Tranche (12.400 €) fehlt uns noch die Bestätigung Ihrer Bankverbindung, da das Förderportal umgestellt wurde. Bitte bestätigen Sie diese bis Freitag, 12 Uhr, damit die Auszahlung noch im Oktober erfolgt.<br><br><u>Bankverbindung jetzt bestätigen</u><br><br>Mit freundlichen Grüßen<br>Mag. Thomas Berger, Förderabwicklung</div>`:'';
   main.innerHTML=`<div class="kick">Quiz · Frage ${qi+1} von ${C.quiz.length}</div><h1>${esc(Q.q)}</h1>${mail}<div class="opts">${Q.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
@@ -183,7 +183,15 @@ async function init(){
   render();
   sb.channel('s-'+SESSION).on('postgres_changes',{event:'UPDATE',schema:'public',table:'sessions',filter:'code=eq.'+SESSION},p=>{
     const prev=JSON.stringify(state);state=p.new.state||state;if(JSON.stringify(state)!==prev)render();
-  }).subscribe(st=>setLive(st==='SUBSCRIBED'));
+  }).subscribe(st=>{setLive(st==='SUBSCRIBED');if(st==='SUBSCRIBED')refresh()});
+  /* Nach dem Entsperren oder einer Funkpause den Folienstand neu holen */
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh()});
+}
+async function refresh(){
+  if(!sb)return;
+  const {data,error}=await sb.from('sessions').select('state').eq('code',SESSION).single();
+  if(error||!data)return;
+  const prev=JSON.stringify(state);state=data.state||state;if(JSON.stringify(state)!==prev)render();
 }
 init();
 })();

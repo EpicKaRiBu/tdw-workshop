@@ -87,7 +87,7 @@ const KONTEXT={
   aufgaben:['Kursausschreibungen','Programmheft-Texte','Förderanträge','Sachberichte','Newsletter','Social Media','Feedback auswerten','Anfragen von Teilnehmenden','Anmeldebestätigungen','Protokolle','Abrechnungsunterlagen','Bedarfsanalyse / neue Angebote'],
   aufwand:['unter 10 Stunden','10–50 Stunden','50–150 Stunden','über 150 Stunden'],
   bausteine:['Leitbild / Haltung','Stilregeln (Ton, Gendern, Anrede)','Gute Beispiele aus dem eigenen Haus','Vorlage / Gliederung','Vorgaben von Fördergebern','Fachbegriffe / Glossar','Beschreibung der Zielgruppe','Zahlen und Daten zum Anlass'],
-  rechnung:'Grobe Rechnung: Wenn sich ein Viertel davon einsparen ließe – wie viele Stunden wären das im Jahr? Und wofür würden Sie sie verwenden?',
+  rechnung:'Grobe Rechnung: Wenn ein Viertel davon frei würde – wie viele Stunden wären das im Jahr? Und wofür würden Sie sie verwenden?',
   koennen:'Prüfen braucht Können: Wer bei Ihnen kann diese Aufgabe auch ohne KI – und wer lernt sie gerade? Für Lernende ist dieselbe Aufgabe Übung, nicht Routine.',
   anregen:['Kritisch gegenlesen – mit den Augen des Fördergebers','Erst Fragen stellen, dann schreiben','Varianten zur Auswahl statt einer Lösung','Aus Sicht der Zielgruppe prüfen'],
   menschlich:['Was betont wird – und was nicht','Der Ton gegenüber Fördergebern','Ehrlichkeit bei Problemen','Ob Zahlen stimmen','Die Freigabe vor dem Versand','Was zur Haltung des Hauses passt'],
@@ -99,7 +99,7 @@ const MENSCHEN={
   hebel:[['Erlaubnis mit Geländer','Klare Freigabe statt Grauzone – mit Datenampel.'],['Lernzeit','Feste Zeit zum Ausprobieren, z. B. 1 Stunde pro Woche.'],['Ansprechpersonen','Eine Person pro Bereich, nicht nur die IT.'],['Ein kleiner Erfolg','Ein Anwendungsfall, der sichtbar Zeit spart.'],['Offenes Wort über die Zeit','Was mit gewonnener Zeit passiert – vorher klären.']],
   einwaende:[
     ['„Ersetzt mich das?“',['„Deine Arbeit verändert sich. Die KI nimmt dir Routine ab – Urteilen, Beraten und Entscheiden bleiben bei dir. Genau das wird wichtiger.“','„Wir entscheiden gemeinsam, wofür wir die gewonnene Zeit verwenden.“','„Ich kann dir nicht versprechen, dass sich nichts ändert. Aber ich sage dir, wie wir entscheiden: offen und mit dir.“']],
-    ['„Dafür hab ich keine Zeit.“',['„Verstehe ich. Deshalb gibt es eine feste Stunde pro Woche dafür – als Arbeitszeit.“','„Fang mit der Aufgabe an, die dich am meisten nervt. Da spart es zuerst Zeit.“']],
+    ['„Dafür hab ich keine Zeit.“',['„Verstehe ich. Deshalb gibt es eine feste Stunde pro Woche dafür – als bezahlte Zeit, bei Honorarkräften als Honorarstunde.“','„Fang mit der Aufgabe an, die dich am meisten nervt. Da spart es zuerst Zeit.“']],
     ['„Das ist doch Schummeln.“',['„Nicht, wenn du prüfst und dazu stehst. Unterschrieben wird von dir – wie bei jedem Entwurf.“','„Wir sagen offen, wo wir KI nutzen. Heimlich wäre das Problem.“']],
     ['„Und unsere Daten?“',['„Dafür gibt es die Datenampel: Rotes kommt nie in frei zugängliche Tools.“','„Wir nutzen nur freigegebene Tools mit Vertrag.“']],
     ['„Dann wird bei uns gespart.“',['„Die Kürzung kommt vom Budget, nicht von der KI. KI darf dafür nicht die Begründung werden.“','„Ich sage dir offen, was ich weiß – und was ich nicht weiß.“']]
@@ -571,7 +571,7 @@ function menschen(){
     const v=hebelVorschlag(s.g||[0,0,0,0]);s.h=s.h||v.h.slice();
     m.innerHTML=head(p,2,total,'Welche zwei Hebel ziehen Sie zuerst?')+`<div class="card" style="border-left:5px solid var(--kontext)"><p class="s" style="margin:0"><b>Unser Vorschlag:</b> ${esc(v.grund)}</p></div><p class="s m">Vorausgewählt – Sie können frei ändern.</p><p class="s" style="margin:0 0 10px">${esc(MENSCHEN.pruefHebel)}</p><div class="opts">${MENSCHEN.hebel.map((h,i)=>`<button class="opt ${s.h.includes(i)?'sel':''}" data-i="${i}"><b>${esc(h[0])}</b><br><span class="s m">${esc(h[1])}</span></button>`).join('')}</div>`+nav(true,lbl(s.h.length<2));
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.hManual=true;if(s.h.includes(i))s.h=s.h.filter(x=>x!==i);else if(s.h.length<2)s.h=s.h.concat(i);m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',s.h.includes(+x.dataset.i)));$('#nx').textContent=lbl(s.h.length<2);save(p,s)});
-    bind(s,p,menschen).onclick=()=>{s.h.forEach(i=>room('p3_hebel'+i,{i:1}));s.step=2;save(p,s);menschen()};return;
+    bind(s,p,menschen).onclick=()=>{MENSCHEN.hebel.forEach((_,i)=>room('p3_hebel'+i,{i:s.h.includes(i)?1:0}));s.step=2;save(p,s);menschen()};return;
   }
   if(s.step===2){
     s.e=s.e||{};s.eo=s.eo||{};
@@ -683,7 +683,7 @@ function result(p,s,d,back){
     ${solo?`<button ${btn} id="pr">Drucken / als PDF speichern</button>`:''}
     ${p==='kontext'?`<button ${btn} id="sk">Skill-Datei (SKILL.md) herunterladen</button>`:''}
     <button ${btn} id="bk">Zurück und ändern</button>
-    <p class="hint" style="margin-top:16px">${solo?'Ein weiteres Modul? <a href="./">Zu allen Werkzeugen</a>':`Lust auf ein weiteres Modul? Alle vier gibt es nach dem Workshop auf <b>${esc(A().C.participantUrl)}</b>.`}</p>`;
+    ${solo?'<p class="hint" style="margin-top:16px">Ein weiteres Modul? <a href="./">Zu allen Werkzeugen</a></p>':`<button ${btn} id="zw">Zweiten Pfad wählen</button><p class="hint">Ihr Ergebnis bleibt gespeichert. Über die Pfadwahl kommen Sie jederzeit zurück. Alle vier Module gibt es nach dem Workshop auch auf <b>${esc(A().C.participantUrl)}</b>.</p>`}`;
   $('#dl').onclick=()=>download(d);
   const pr=$('#pr');if(pr)pr.onclick=()=>printDoc(d);
   const zp=$('#zip');if(zp)zp.onclick=()=>{const b=makeZip(ordnerDateien(d)),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='KI-Ordner-Vorlage.zip';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
@@ -692,6 +692,10 @@ function result(p,s,d,back){
   const mo=$('#more');if(mo)mo.onclick=()=>{s.withOpt=true;s.step=2+REGELN.d.length;save(p,s);back();scrollTo(0,0)};
   const ob=$('#ort');if(ob)ob.onclick=()=>{s.withOrt=true;s.step=6;save(p,s);back();scrollTo(0,0)};
   if(solo)return;
+  const zw=$('#zw');if(zw)zw.onclick=()=>A().choosePath&&A().choosePath();
+  const DQ={regeln:'p1_done',kontext:'p2_done',menschen:'p3_done'}[p];
+  /* Fertig-Zähler an der Leinwand: zählt, sobald das Dokument einmal erzeugt ist */
+  if(DQ&&!s.sent){s.sent=true;save(p,s);room(DQ,{i:1})}
   const dj=JSON.stringify(d);
   if(s.code&&s.codeDoc&&s.codeDoc!==dj){s.code=null;save(p,s);$('#codeBox').innerHTML='<p class="hint">Ihr Dokument hat sich geändert. Bitte einen neuen Abholcode erstellen.</p>'}
   if(s.code)showCode(s.code);
@@ -700,7 +704,7 @@ function result(p,s,d,back){
     const sb=A().sb;if(!sb){A().toast('Keine Verbindung – bitte Word-Download nutzen.');return}
     const {data,error}=await sb.rpc('save_pickup',{p_session:A().SESSION,p_path:p,p_doc:d});
     if(error){A().toast('Das hat nicht geklappt – bitte Word-Download nutzen.');return}
-    s.code=data;s.codeDoc=dj;const first=!s.sent;s.sent=true;save(p,s);showCode(data);if(first)A().send(p==='regeln'?'p1_done':p==='kontext'?'p2_done':'p3_done',{i:1});
+    s.code=data;s.codeDoc=dj;save(p,s);showCode(data);
   };
   function showCode(c){$('#codeBox').innerHTML=`<div class="card" style="text-align:center"><p class="s m" style="margin:0">Ihr Abholcode</p><p style="font-family:var(--type);font-size:34px;margin:6px 0">${esc(c)}</p><p class="s" style="margin:0">abholen auf <b>${esc(A().C.participantUrl)}</b> → „Ergebnis abholen“</p></div>`}
 }
