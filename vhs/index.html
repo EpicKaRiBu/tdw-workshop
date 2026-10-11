@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KI in der Kursvorbereitung · VHS Oberwart</title>
+<meta name="robots" content="noindex">
+<link href="../fonts/fonts.css" rel="stylesheet">
+<link href="../textures.css" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--paper-d:#E9DFCB;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;
+  --green:#3F7D4E;--yellow:#D3A221;--red:#B23A2E;--kontext:#2E6B66;
+  --type:"Special Elite","Courier New",monospace;--hand:"Caveat","Segoe Print",cursive;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+body{background-image:var(--tx-grain),var(--tx-fiber),var(--tx-mottle);background-size:256px 256px,512px 512px,1024px 1024px}
+main{max-width:720px;margin:0 auto;padding:24px 16px 60px}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--type);font-weight:400;font-size:28px;line-height:1.2;margin:4px 0 10px}
+h2{font-family:var(--type);font-weight:400;font-size:21px;margin:30px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:16px 0 4px}
+p{margin:0 0 10px}
+.m{color:var(--muted)}.s{font-size:14px}
+.hand{font-family:var(--hand);color:var(--pencil);font-size:24px;line-height:1.15}
+.card{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;padding:14px 16px;margin:10px 0}
+.recipe{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.recipe span{font-family:var(--type);font-size:15px;border:1.5px solid var(--ink);border-radius:3px;padding:4px 10px 2px;background:#fff}
+.prompt{position:relative;background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px 96px 12px 14px;margin:6px 0 12px;font-family:var(--type);font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.prompt button{position:absolute;top:6px;right:6px;font:600 13px var(--sans);background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:6px 10px;cursor:pointer}
+.prompt button.ok{background:var(--green)}
+.prompt .ph{color:var(--pencil)}
+.ampel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ampel div{border-radius:4px;padding:10px 12px;color:#fff;font-size:14.5px}
+.ampel b{display:block;font-family:var(--type);font-weight:400;font-size:17px}
+.g{background:var(--green)}.y{background:var(--yellow);color:var(--ink)!important}.r{background:var(--red)}
+ol,ul{padding-left:22px;margin:6px 0 10px}li{margin-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:6px 0 10px}
+td,th{border-bottom:1px solid var(--line);padding:6px 6px;text-align:left;vertical-align:top}
+th{font-family:var(--type);font-weight:400;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+a{color:var(--kontext)}
+.src{font-size:13px;color:var(--muted);margin-top:4px}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:30px;padding-top:10px}
+@media (max-width:560px){.ampel{grid-template-columns:1fr}}
+@media print{
+  .prompt{padding-right:9px!important}
+  @page{size:A4;margin:12mm 13mm}
+  html,body{background:#fff;font-size:9.4pt}
+  main{max-width:none;padding:0}
+  .prompt button,.noprint{display:none}
+  .prompt{font-size:9pt;padding:6px 9px;margin:3px 0 7px}
+  h1{font-size:18pt}h2{font-size:13pt;margin:12px 0 5px;padding-top:6px}
+  .card{background:none;padding:7px 10px;margin:5px 0}
+  .ampel div{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:9pt;padding:6px 8px}
+  .pb{break-before:page}
+  h2,h3{break-after:avoid}.prompt,.card,tr{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<main>
+<div class="kick">VHS Oberwart · Kursleiterweiterbildung · 17.10.2026</div>
+<h1>KI in der Kursvorbereitung</h1>
+<p>Alles zum Nachlesen und Kopieren. <span class="m">Die <span style="color:var(--pencil)">roten Stellen</span> ersetzen Sie durch Ihr Fach, Ihr Niveau, Ihr Thema.</span></p>
+<p class="s"><b>Loslegen:</b> chatgpt.com geht ohne Anmeldung (dann nur ein Chat gleichzeitig). Wer ein Konto hat, nimmt sein gewohntes Werkzeug. Ein Konto mit Ihrer E-Mail-Adresse ist freiwillig; es braucht nur, wer sprechen üben oder Bilder erzeugen will.</p>
+
+<div class="card">
+<p class="hand">Wo lasse ich mir Arbeit abnehmen – und wo lasse ich mir Denken abnehmen?</p>
+<p class="s m" style="margin:0">Für Ihre Vorbereitung: Routine abgeben, Urteil behalten. Für Ihre Teilnehmenden: Erledigt ist nicht gelernt.</p>
+</div>
+
+<h2>Das Rezept</h2>
+<p>Ein guter Auftrag an die KI hat fünf Zutaten. Was fehlt, muss die KI erraten.</p>
+<div class="recipe"><span>Rolle</span><span>Ziel</span><span>Kontext</span><span>Format</span><span>Grenzen</span></div>
+<div class="prompt">Du bist erfahrene Kursleiterin für Deutsch als Zweitsprache. Erstelle für einen Abendkurs A2 (Erwachsene, 12 Personen, gemischte Herkunftssprachen) einen Lesetext von 150 Wörtern zum Thema „Arzttermin vereinbaren“, dazu 5 Verständnisfragen mit Lösungen. Einfache Hauptsätze. Ausgabe als Tabelle. Frag mich zuerst, wenn dir etwas fehlt.</div>
+<p><b>Nachschärfen statt neu anfangen:</b> „kürzer“, „noch einfacher“, „als Lückentext“, „mit Beispielen aus dem Burgenland“.<br><b>Prüfen vor Verwenden:</b> Sie verteilen es mit Ihrem Namen.<br><b>Sichern:</b> Kopieren-Symbol unter der Antwort, in Ihre Notizen oder als Mail an sich selbst. Ohne Konto ist es mit dem nächsten Chat weg.</p>
+
+<h2>Übungen zum Kopieren</h2>
+
+<h3>Ü1 · Erstes Gespräch</h3>
+<div class="prompt">Erklär mir in fünf Sätzen, wofür ich dich in meinem Kurs <span class="ph">[Fach, Niveau, Zielgruppe]</span> sinnvoll nutzen kann – und wofür besser nicht.</div>
+
+<h3>Ü2 · Ihr erstes Material</h3>
+<p class="s">Erst nur einen Satz schicken. Dann denselben Auftrag mit allen fünf Zutaten. Vergleichen. Zweimal nachschärfen. Sichern.</p>
+<div class="prompt">Mach ein <span class="ph">[Arbeitsblatt / Stundenablauf / Übungsanleitung / Infoblatt]</span> zu <span class="ph">[Thema]</span>.</div>
+<div class="prompt">Du bist erfahrene Kursleiter:in für <span class="ph">[Fach]</span>. Erstelle für meinen Kurs <span class="ph">[Niveau, Anzahl, wer sitzt da]</span> ein <span class="ph">[Material]</span> zu <span class="ph">[Thema]</span>. Ziel: <span class="ph">[was sie danach können]</span>. Dauer: <span class="ph">[Minuten]</span>. Format: <span class="ph">[Tabelle / Aufgaben mit Lösungen / Lückentext]</span>. Vermeide <span class="ph">[was nicht passt]</span>. Frag mich zuerst, wenn dir etwas fehlt.</div>
+
+<h3>Ü3 · Belegen und prüfen</h3>
+<div class="prompt">Nenne mir drei Quellen mit Autor:in, Titel und Jahr zu <span class="ph">[Thema aus meinem Fach]</span>.</div>
+<div class="prompt">Such im Netz und gib zu jeder Quelle den Link an.</div>
+<p class="s">Öffnen Sie zwei Links. Steht dort, was die KI sagt? Mit Websuche liefert die KI Belege, prüfen gehört trotzdem zum Handwerk – wie bei jeder Quelle. Erfundenes wird seltener: In einem internen Test von OpenAI sank die Quote von 12,2 % auf 4,2 % (GPT-6 Astra, September 2026, Herstellerangabe). Selten heißt nicht nie.</p>
+<div class="card">
+<b>Fünf Fragen, bevor ich ein KI-Ergebnis verwende</b>
+<ol class="s" style="margin-bottom:0">
+<li>Stimmt es fachlich? (Kann ich das beurteilen? Sonst prüft jemand, der es kann.)</li>
+<li>Passt es zu Niveau und Gruppe?</li>
+<li>Sind Namen, Zahlen und Quellen echt?</li>
+<li>Ist etwas einseitig oder klischeehaft?</li>
+<li>Würde ich es mit meinem Namen verteilen?</li>
+</ol>
+</div>
+
+<h3>Ü4a · Differenzieren</h3>
+<div class="prompt">Mach aus dieser Aufgabe drei Fassungen: leicht, mittel, schwer. Gleiches Thema, gleiche Lösungsidee. Kennzeichne, was sich jeweils ändert.
+<span class="ph">[Ihre eigene Aufgabe oder Ihr Ergebnis aus Ü2]</span></div>
+<div class="prompt">Schreib diesen Text in einfacher Sprache: kurze Sätze, ein Gedanke pro Satz, keine Fremdwörter, wichtige Wörter erklärt. Länge ungefähr gleich.
+<span class="ph">[ein eigener Text, z. B. Ihre Kursausschreibung – kein Lehrbuchtext]</span></div>
+<p class="s m">Vergleichen Sie danach: Ist eine Information verloren gegangen? Das ist der typische Fehler. Für Leichte Sprache gibt es spezialisierte Werkzeuge, etwa capito aus Graz, das ausgelassene Informationen anzeigt (laut Hersteller). Leichte Sprache braucht außerdem eine Prüfung durch Leser:innen aus der Zielgruppe.</p>
+
+<h3>Ü4b · Quiz mit Lösung</h3>
+<div class="prompt">Erstelle 10 Multiple-Choice-Fragen zu <span class="ph">[Thema]</span> für <span class="ph">[Niveau]</span>. Je vier Antworten, genau eine richtig, die falschen sollen plausibel sein. Lösungsschlüssel am Ende, mit einem Satz Begründung pro Frage.</div>
+<p class="s m">Danach selbst gegenprüfen.</p>
+
+<h3>Station A · Sprachen</h3>
+<div class="prompt">Sprich mit mir auf <span class="ph">[A2]</span> <span class="ph">[Deutsch / Englisch / …]</span> über meinen Alltag. Stell immer nur eine Frage und warte auf meine Antwort. Nach sechs Fragen gib mir drei freundliche Korrekturen und ein Lob.</div>
+<div class="prompt">Wir spielen ein Rollenspiel auf <span class="ph">[Niveau]</span>: Ich rufe in einer Arztpraxis an, um einen Termin zu vereinbaren. Du bist die Ordination. Sprich langsam und einfach. Wenn ich nicht weiterweiß, gib mir einen Tipp, aber nicht die ganze Antwort.</div>
+<div class="prompt">Übersetze diesen Satz ins <span class="ph">[Deutsche]</span> und erkläre mir in einfachen Worten zwei Wörter oder Wendungen daraus, mit je einem Beispielsatz: <span class="ph">[Satz]</span></div>
+<div class="prompt">Ich möchte die Aussprache von <span class="ph">[Wort / Satz]</span> üben. Schreib mir, wie man es betont, worauf Lernende mit <span class="ph">[Erstsprache]</span> achten sollten, und gib mir drei ähnliche Wörter zum Üben.</div>
+<p class="s m">Gesprochen geht das im Sprachmodus der App, mit Konto: Dann hört die KI Ihre Aussprache und gibt Rückmeldung.</p>
+
+<h3>Station B · Ihr Kurs-Assistent</h3>
+<p class="s">Ein Assistent ist ein Chat mit festen Anweisungen, die Sie einmal schreiben und immer wieder verwenden. Diese Vorlage kopieren Sie in die Anweisungen:</p>
+<div class="prompt">Du bist Übungspartner für den Kurs <span class="ph">[Kursname, Niveau]</span>.
+Die Teilnehmenden sind <span class="ph">[wer, Vorwissen, Sprache]</span>.
+Du erklärst in einfachen Sätzen und mit Beispielen aus dem Alltag.
+Du verrätst Lösungen nicht sofort: Erst gibst du einen Hinweis, dann einen zweiten, erst dann die Lösung.
+Du lobst konkret und korrigierst freundlich.
+Du fragst nie nach Namen, Adresse oder persönlichen Daten.
+Wenn eine Frage nicht zum Kurs passt, sag das freundlich.</div>
+<p class="s m">Warum „Lösungen nicht sofort“: In einer Studie mit rund 1.000 Schüler:innen schnitten jene mit freiem KI-Zugang beim Üben danach ohne KI 17 % schlechter ab. Ein Tutor, der nur Hinweise gibt, verhinderte das weitgehend (Bastani u. a., <a href="https://www.pnas.org/doi/10.1073/pnas.2422633122">PNAS 2025</a>).</p>
+<p class="s m">Wo Sie die Anweisungen speichern, steht unten bei den Werkzeugen. Das Prinzip bleibt: feste Anweisungen plus eigenes Material. Die Namen wechseln.</p>
+
+<h3>Station C · Material und Begleitung</h3>
+<div class="prompt">Erstelle ein Feedbackraster mit vier Kriterien für <span class="ph">[Aufgabe]</span> im Kurs <span class="ph">[Niveau]</span>. Je Kriterium drei Stufen mit einer kurzen Beschreibung. Sprache: wertschätzend, konkret.</div>
+<div class="prompt">Schlag mir drei aktivierende Methoden für den Einstieg in <span class="ph">[Thema]</span> vor, für <span class="ph">[Anzahl]</span> Erwachsene mit wenig Vorkenntnissen. Je Methode: Ablauf in drei Schritten, Dauer, Material.</div>
+<div class="prompt">Erstelle einen Lernplan für zwei Wochen zum Wiederholen zu Hause für <span class="ph">[Kurs, Niveau]</span>: jeden zweiten Tag 15 Minuten, mit abwechslungsreichen Übungen. Schreib dazu eine kurze, ermutigende Nachricht, die ich der Gruppe schicken kann.</div>
+<div class="prompt">Erstelle eine einfache, freundliche Illustration für ein Arbeitsblatt zum Thema <span class="ph">[Thema]</span>: <span class="ph">[was zu sehen sein soll]</span>. Klare Linien, wenig Details, kein Text im Bild.</div>
+<p class="s m">Bilder erzeugen geht mit Konto in ChatGPT oder Gemini. Ins Arbeitsblatt kommt der Hinweis „Bild mit KI erstellt“.</p>
+<div class="prompt">Hier ist meine Mitschrift (diktiert): <span class="ph">[Text einfügen]</span>. Fasse sie in fünf kurzen Punkten für meine Teilnehmenden zusammen, Niveau <span class="ph">[Niveau]</span>. Korrigiere dabei Fehler der Diktierfunktion.</div>
+<p class="s m">Mitschrift: am Handy die Diktierfunktion der Tastatur verwenden oder ein Sprachmemo aufnehmen. Nur eigene Notizen, keine Aufnahmen von Teilnehmenden. Gespräche aufnehmen nur mit Einverständnis aller (§ 120 StGB).</p>
+
+<h2>Kompass</h2>
+<p><b>Darf ich?</b> Gesetz und Vertrag des Tools. <b>Dürfen wir?</b> Die Regeln Ihres Hauses, hier die KI-Compliance der Burgenländischen VHS. <b>Sollen wir?</b> Die Leitfrage oben.</p>
+<p class="s"><b>Recht kurz (Stand Oktober 2026):</b> Die EU-KI-Verordnung (AI Act) verlangt von Organisationen, KI-Kompetenz zu fördern (Art. 4, seit Juli 2026 ohne bestimmtes Niveau). Kennzeichnen muss man vor allem Deepfakes und KI-Texte, die die Öffentlichkeit informieren (Art. 50, seit 2.8.2026); für Kursmaterial ist es gute Praxis. Emotionserkennung in Bildungseinrichtungen ist verboten (Art. 5, seit Februar 2025). KI, die über Zugang zu Bildung oder die Bewertung von Lernergebnissen mitentscheidet, gilt ab 2.12.2027 als Hochrisiko (Anhang III). Das kann auch Einstufungstests betreffen, etwa für die Zuteilung zu einem Sprachniveau (Einschätzung, Stand Oktober 2026). Eine KI kann nicht Urheberin sein (§ 1 UrhG), reine KI-Ergebnisse sind darum meist frei, können aber fremde Werke enthalten. Verlagsmaterial nicht hochladen.</p>
+<p class="src">Quellen: VO (EU) 2026/1744 (eur-lex.europa.eu), RTR-KI-Servicestelle (rtr.at). Orientierung, keine Rechtsberatung.</p>
+
+<h3>Die Datenampel: eine Frage vor jedem Einfügen</h3>
+<div class="ampel">
+<div class="g"><b>Grün</b>Öffentliches, niemand erkennbar. Eigene Texte, Ausschreibungen. → jedes Tool</div>
+<div class="y"><b>Gelb</b>Internes ohne Personenbezug, Budgets, Förderanträge. → nur freigegebene Tools mit Vertrag</div>
+<div class="r"><b>Rot</b>Alles, womit eine Person erkennbar wird: Listen, Anwesenheiten, Noten, Texte von Teilnehmenden, Fotos. → nie in frei zugängliche Tools</div>
+</div>
+<p class="s" style="margin-top:8px">Kann jemand eine Person erkennen? → rot. Wäre es unangenehm in der Zeitung? → gelb. Steht es so ähnlich auf der Website? → grün. Im Zweifel die strengere Farbe.<br>
+<b>Wenn rot:</b> Struktur statt Inhalt (die KI baut die Vorlage, Sie tragen ein), erfundene Beispiele, Zahlen statt Einzelfälle.</p>
+
+<h3>Dürfen wir? Die KI-Compliance Ihrer VHS</h3>
+<p class="s">Das Blatt „KI-Compliance für Kursleiter*innen“ haben Sie von den Burgenländischen Volkshochschulen bekommen. Die fünf Mindeststandards und wie sie im Alltag aussehen:</p>
+<ul class="s">
+<li><b>Transparenz:</b> Alle mit KI erstellten Texte, Bilder und Materialien kennzeichnen, zum Beispiel „Dieser Text wurde mit ChatGPT erstellt“. Teilnehmende informieren, wenn Sie KI einsetzen.</li>
+<li><b>Datenschutz:</b> keine Daten von Teilnehmenden, nichts Sensibles. Das ist die Datenampel oben. Datenschutzfreundliche oder lokale Tools bevorzugen.</li>
+<li><b>Qualitätskontrolle:</b> sachlich richtig, passend für die Zielgruppe, ethisch unbedenklich, ohne Verzerrung. Das sind die fünf Prüffragen.</li>
+<li><b>Urheberrecht:</b> Nutzungsbedingungen der Tools beachten, KI-Inhalte nicht als eigene Werke ausgeben, Verlagsmaterial nicht hochladen.</li>
+<li><b>Verboten:</b> Emotionserkennung, automatische Bewertung ohne Transparenz und menschliche Kontrolle.</li>
+</ul>
+<p class="s">Bei Unsicherheit: Rücksprache mit der Lehrgangsleitung. Bei AMS- oder Basisbildungskursen zusätzlich beim Fördergeber nachfragen.</p>
+<p class="src">Quelle: KI-Compliance für Kursleiter*innen der Burgenländischen Volkshochschulen. Ähnlich: Verband Österreichischer Volkshochschulen, „Vorgaben zur Nutzung von Künstlicher Intelligenz“, Februar 2026, <a href="https://www.vhs.or.at/sites/default/files/themen/NutzungKI_VOEV.pdf">vhs.or.at</a>.</p>
+
+<h3>Wenn Teilnehmende KI verwenden</h3>
+<ul class="s">
+<li>Am Kursbeginn sagen, was erlaubt ist und warum.</li>
+<li>Aufgaben so stellen, dass der Lernweg sichtbar bleibt: mündlich erklären, im Kurs schreiben, eigene Erfahrung einbauen.</li>
+<li>KI als Lernhilfe zeigen: erklären lassen, Übungsfragen, Gesprächspartner.</li>
+<li>Keine Vorwürfe auf Grundlage von KI-Detektoren: Sie halten Texte von Nicht-Muttersprachler:innen oft fälschlich für KI (Liang u. a., Patterns, 2023).</li>
+<li>Über Noten entscheiden Sie, nicht die KI.</li>
+</ul>
+
+<h2>Werkzeuge</h2>
+<table class="s" id="tools">
+<tr><th>Wofür</th><th>Werkzeug</th><th>Konto</th></tr>
+<tr><td>Alle Übungen</td><td>ChatGPT (chatgpt.com) oder Ihr gewohntes Werkzeug (Gemini, Copilot, Claude)</td><td>ChatGPT geht ohne, die anderen brauchen eines</td></tr>
+<tr><td>Kurs-Assistent</td><td>„Projekt“ in ChatGPT oder Claude: ein Ordner mit festen Anweisungen und eigenen Dateien. Vorlage in die Projekt-Anweisungen kopieren.</td><td>ja, gratis</td></tr>
+<tr><td>Ohne Konto</td><td>Vorlage als erste Nachricht in den Chat kopieren</td><td>nein</td></tr>
+<tr><td>Mit eigenem Material</td><td>Gemini Notebook (früher NotebookLM): beantwortet Fragen nur aus den Unterlagen, die Sie hochladen</td><td>Google-Konto</td></tr>
+<tr><td>Sprechen üben</td><td>Sprachmodus der ChatGPT-App (gratis, begrenzt)</td><td>ja</td></tr>
+<tr><td>Bild fürs Arbeitsblatt</td><td>ChatGPT oder Gemini (gratis, begrenzt); Bild kennzeichnen</td><td>ja</td></tr>
+<tr><td>Mitschrift zusammenfassen</td><td>Diktierfunktion am Handy, Text in den Chat. Lokal am eigenen Rechner transkribiert noScribe (gratis; langsam, Korrektur nötig)</td><td>nein</td></tr>
+<tr><td>Lohnt sich ein Abo?</td><td>Eher ja bei täglichem Einsatz, viel Sprechübung oder vielen Dateien im Projekt. Für gelegentliche Vorbereitung reicht der Gratis-Tarif.</td><td></td></tr>
+<tr><td>Lokale KI</td><td>Läuft ohne Internet auf dem eigenen Rechner. Eine Option für Sensibles, ersetzt aber keine rechtliche Prüfung.</td><td></td></tr>
+</table>
+<p class="s"><b>Training abschalten in ChatGPT:</b> Profilbild › Einstellungen › Datenkontrollen › „Das Modell für alle verbessern“ aus. Oder einen temporären Chat verwenden: Er wird nicht gespeichert und nicht zum Training verwendet.</p>
+<p class="src">Stand 11.10.2026, nach den Hilfe-Seiten der Anbieter und Fachmedien. Custom GPTs stellt OpenAI am 11.12.2026 ein (help.openai.com); das Prinzip „feste Anweisungen plus eigenes Material“ bleibt. Werkzeuge ändern sich schnell: vor dem Einsatz kurz nachsehen.</p>
+
+<h2>Was gerade passiert (Stand Oktober 2026)</h2>
+<ul class="s">
+<li><b>IQ 148, richtig gelesen:</b> Claude Opus 5.5 erreicht im öffentlichen Mensa-Norway-Test umgerechnet 148, im unveröffentlichten Offline-Test 130–136. Öffentliche Testaufgaben stehen im Netz und können im Training gelandet sein; menschliche IQ-Tests sind für KI nicht geeicht. Sehr leistungsfähig ist sie trotzdem. Ihren Kurs kennt sie nur, wenn Sie ihn beschreiben. (<a href="https://www.trackingai.org">TrackingAI</a>, Rohdaten bis 9.10.2026, nachgerechnet)</li>
+<li><b>Lange Aufgaben:</b> Laut Anthropic arbeitete Claude Opus 5.5 bei Testkunden über 18 Stunden an einer Aufgabe, ohne dass jemand eingreifen musste (Herstellerangabe, 22.9.2026). Aus „Frage und Antwort“ wird zunehmend „Auftrag und Ergebnis“.</li>
+<li><b>Lernen schützen, Estland:</b> 154 von 156 Oberstufenschulen nehmen am Programm „AI Leap“ teil. Die Schüler:innen bekommen eine Lern-App, die über Fragen zur Lösung führt, statt Antworten zu liefern. Die Bildungsministerin will Grenzen dort, wo KI das eigene Denken ersetzt. (<a href="https://tihupe.ee/en/3385/">AI Leap</a>, Juni und August 2026; Selbstauskünfte, Lernwirkung noch nicht ausgewertet)</li>
+<li><b>Nutzung kommt nicht von selbst:</b> Im österreichischen Schulpilot „Teachino“ (36 Schulen) nutzte rund ein Drittel das KI-Werkzeug aktiv, 40 % selten oder nie. (PH Wien, <a href="https://www.bmb.gv.at/dam/jcr:18fa5c4e-0d53-4d2d-971b-9dfe11a0ede7/ki_teachino_phwien_pilot_abschlussbericht.pdf">Abschlussbericht</a> Oktober 2025)</li>
+<li><b>Österreich:</b> Die Bundesverwaltung führt seit 20.7.2026 „GovGPT“ ein, Ziel über 180.000 Bedienstete. Die Daten bleiben im Bundesrechenzentrum und werden nicht zum Training verwendet. (Bundeskanzleramt)</li>
+<li><b>Erst Schulung, dann Zugang:</b> An der Kunstuniversität Linz gibt es die KI-Plattform erst nach zwei Stunden Grundlagenschulung. So sieht Art. 4 in der Praxis aus. (<a href="https://www.kunstuni-linz.at/fileadmin/media/KI/Richtlinie_zur_Nutzung_kuenstlicher_Intelligenz.pdf">Richtlinie</a>, in Kraft seit 1.5.2026)</li>
+<li><b>Custom GPTs enden am 11.12.2026.</b> Wer dort Anweisungen und Dateien gepflegt hat, muss umziehen. Darum: Anweisungen und Material immer auch in einer eigenen Datei aufheben.</li>
+</ul>
+
+<h2>Mein erster Schritt</h2>
+<div class="card"><p style="margin:0">Als Erstes setze ich ein: ______________________________<br><br>wann: ______________________________</p></div>
+
+<footer>
+Armin Fradler · arminfradler.at · Erstellt mit Unterstützung von KI, entschieden und geprüft von mir. Orientierung, keine Rechtsberatung.<br>
+Mehr zum Nachschlagen: <a href="../werkzeuge/ki/datenampel.html">Datenampel ausführlich</a> · <a href="../werkzeuge/ki/tools.html">Tool-Landkarte</a> · <a href="../werkzeuge/ki/nachweis.html">Teilnahmenachweis</a> · <a href="../datenschutz.html">Datenschutz</a> · <a href="Handout-KI-Kursvorbereitung_A4.pdf">als PDF</a>
+</footer>
+</main>
+<script>
+document.querySelectorAll('.prompt').forEach(function(p){
+  var b=document.createElement('button');b.type='button';b.textContent='Kopieren';
+  b.addEventListener('click',function(){
+    var t=p.innerText.replace(/\s*Kopier(en|t)\s*$/,'').trim();
+    var done=function(){b.textContent='Kopiert';b.classList.add('ok');setTimeout(function(){b.textContent='Kopieren';b.classList.remove('ok')},1500)};
+    var fail=function(){b.textContent='Bitte markieren';setTimeout(function(){b.textContent='Kopieren'},2500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){fallback(t)?done():fail()})}else{fallback(t)?done():fail()}
+  });
+  p.appendChild(b);
+});
+function fallback(t){var a=document.createElement('textarea'),ok=false;a.value=t;document.body.appendChild(a);a.select();try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok}
+</script>
+</body>
+</html>
