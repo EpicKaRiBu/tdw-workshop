@@ -183,7 +183,7 @@ const WOHIN={
        'Ein Copilot Notebook mit Ihren grünen und gelben Bausteinen anlegen und das Rezept als Anweisung an den Anfang stellen. Das geht ohne Copilot-Lizenz. Skills in SharePoint brauchen eine.'],
     g:['Die Gemini-App mit dem Workspace-Konto der Organisation nutzen und private Konten damit ablösen.',
        'Einen Drive-Ordner mit den grünen und gelben Bausteinen anlegen und in Gemini Notebook (früher NotebookLM) als Quelle hinzufügen.',
-       'Das Rezept als Gem anlegen, also als eigenen Gemini-Assistenten, mit den Bausteinen aus Drive.'],
+       'Das Rezept als Gem oder Skill anlegen, also als eigenen Gemini-Assistenten, mit den Bausteinen aus Drive. Gems werden bis März 2027 automatisch zu Skills.'],
     s:['Einen Zugang für die Organisation mit Vertrag zur Auftragsverarbeitung wählen: eine EU-Plattform oder einen Business-Tarif (siehe Tool-Landkarte). Private Konten damit ablösen.',
        'Die grünen und gelben Bausteine als kleinen Ordner pflegen und in ein Projekt Ihres Werkzeugs mit Vertrag hochladen.',
        'Ein Projekt in Ihrem Werkzeug mit Vertrag anlegen, die Bausteine hochladen und die Skill-Datei aus diesem Rezept als Anweisung hinterlegen.']
@@ -212,7 +212,7 @@ const LAGEN={
   C:{t:'Google-Workspace-Haus',s:[
     ['Die Gemini-App mit dem Workspace-Konto der Organisation nutzen. In Google Workspace for Nonprofits sind Gemini-App und Gemini Notebook kostenlos enthalten.','Google for Nonprofits'],
     ['Drive-Ordner als Quellen in Gemini Notebook einbinden (früher NotebookLM, umbenannt am 16.07.2026). Die kostenlose Nonprofit-Edition bietet keine Datenregionen. Ab welcher Edition Sie festlegen können, dass Daten in Europa gespeichert werden, zeigt der Editionsvergleich von Google.','Google Blog; Google for Nonprofits'],
-    ['Je Aufgabe ein Gem anlegen, also einen eigenen Gemini-Assistenten. Wer Gems teilen darf, entscheidet die Organisation.'],
+    ['Je Aufgabe ein Gem oder einen Skill anlegen, also einen eigenen Gemini-Assistenten. Google stellt Gems auf Skills um (Workspace bis März 2027, automatisch). Wer sie teilen darf, entscheidet die Organisation.','Gemini-Hilfe'],
     ['Eine breitere Suche über Drive erst nach dem Aufräumen der Freigaben.'],
     ['Nur mit IT, als eigene Entwicklung in einer europäischen Cloud.']]},
   D:{t:'Ohne eigene Plattform, kleiner Verein',s:[
@@ -242,7 +242,7 @@ const ORDNER={t:'Ordner zuerst, Werkzeug austauschbar',
   einsch:'Pflegen Sie Anweisungen, Wissen und Skills als Dateien in Ihrer eigenen Ablage. Das Werkzeug ist dann nur die Hülle und lässt sich wechseln. Für kleine Häuser ist das auch der einfachste Weg.',
   mit:['Was mitgeht: der Ordner selbst und Skills als SKILL.md. Dieses Format nutzen Microsoft (Skills in SharePoint), OpenAI (Nachfolger der Custom GPTs) und Anthropic.','Microsoft Learn; OpenAI Help Center'],
   ohne:['Was nicht mitgeht: Konnektoren und Suchindizes. Beim Umbau bei Mistral wurde nichts automatisch übernommen. Eigene Actions von Custom GPTs gehen beim Umzug verloren.','Mistral Docs; OpenAI Help Center'],
-  objekt:'Projekte, Notebooks und Gems sind Objekte der Plattform: Die Inhalte lassen sich mitnehmen, die Einrichtung nicht.'
+  objekt:'Projekte, Notebooks, Gems und Skills sind Objekte der Plattform: Die Inhalte lassen sich mitnehmen, die Einrichtung nicht.'
 };
 const welt=ablage=>ablage===0?'m':ablage===1?'g':'s';
 function zielstufe(ablage,vertrag){
