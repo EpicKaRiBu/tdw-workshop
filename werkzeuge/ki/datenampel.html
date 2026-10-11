@@ -30,6 +30,11 @@
 .karte .row.g{background:var(--green)}.karte .row.y{background:var(--yellow);color:#222}.karte .row.r{background:var(--red)}
 .karte .q{border-top:1px dashed #bbb;padding-top:2mm;font-size:13px}
 .karte .f{font-size:9.5px;color:#777;margin-top:auto}
+.q3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0 10px}
+.q3>div{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px 16px}
+.q3 b{display:block;font-family:var(--type);font-weight:400;font-size:22px;margin-bottom:4px}
+.q3 p{margin:0;font-size:16px}
+@media (max-width:720px){.q3{grid-template-columns:1fr}}
 @media print{
   body.nurKarte main>*:not(#kartenBox){display:none!important}
   body.nurKarte #kartenBox>*:not(.karte){display:none!important}
@@ -72,13 +77,14 @@
   </ol>
   <p class="m s">Im Zweifel gilt die strengere Farbe.</p>
 
-  <h2>Die sechs Fallen</h2>
+  <h2>Die sieben Fallen</h2>
   <div class="note"><b>1 · „Ohne Namen“ heißt nicht anonym.</b> „Feedback Kurs Mittwoch, 8 Personen“ – in einer kleinen Gruppe ist jede Person erkennbar. Auch Daten, bei denen Namen durch Kürzel ersetzt wurden, bleiben personenbezogen, solange sich die Zuordnung herstellen lässt (EDSA-Leitlinien 01/2025 zur Pseudonymisierung).</div>
   <div class="note"><b>2 · Screenshots und Fotos.</b> Im Hintergrund stehen Namen in der Seitenleiste, Mailadressen, Gesichter. Vor dem Hochladen zuschneiden.</div>
   <div class="note"><b>3 · Mailverläufe.</b> Signaturen und zitierte frühere Mails enthalten mehr Personen als die eine Frage, um die es geht.</div>
   <div class="note"><b>4 · Aufnahmen und Transkripte.</b> Besprechungen aufzeichnen und zusammenfassen lassen braucht die Zustimmung aller. Beratungsgespräche sind immer rot.</div>
   <div class="note"><b>5 · Erzählende Freitexte.</b> „Die Teilnehmerin mit den drei Kindern aus dem Abendkurs“ – Geschichten machen Menschen erkennbar, auch ohne Namen.</div>
   <div class="note"><b>6 · Zugriff statt Einfügen.</b> Wenn eine KI selbst auf Postfach oder Laufwerk zugreift (Connectors, Agenten), entscheidet nicht mehr das Einfügen, sondern die Berechtigung. Vorher aufräumen, wer was sehen darf – sonst findet die KI, was niemand finden sollte.</div>
+  <div class="note"><b>7 · Kein Personenbezug heißt nicht grün.</b> Förderanträge, Budgets und Kalkulationen nennen niemanden, sind aber Geschäftsgeheimnisse. Sie gehören nicht in frei zugängliche Tools, höchstens in freigegebene. Die <a href="https://www.vhs.or.at/sites/default/files/themen/NutzungKI_VOEV.pdf">KI-Vorgaben des Verbands Österreichischer Volkshochschulen</a> (Februar 2026) nennen Förderanträge und Budgets ausdrücklich.</div>
 
   <h2>Und wenn es rot ist?</h2>
   <p>Oft lässt sich die Aufgabe trotzdem mit KI lösen – nur anders:</p>
@@ -89,6 +95,18 @@
     <li><b>Platzhalter</b> wie [Teilnehmerin A] helfen – machen Daten aber nicht automatisch anonym. Prüfen Sie, ob der Rest eine Person verrät.</li>
     <li><b>Freigegebenes Tool:</b> Wenn Ihr Haus ein Werkzeug mit Vertrag für genau diesen Zweck freigegeben hat, gelten dessen Regeln.</li>
   </ul>
+
+  <h2 id="drei-fragen">Drei Fragen auseinanderhalten</h2>
+  <p>„Ist das erlaubt?“ meint oft drei verschiedene Fragen. Wer sie trennt, entscheidet schneller und besser.</p>
+  <div class="q3">
+    <div><b>Darf ich?</b><p>Gesetz und Vertrag. DSGVO und AI Act ziehen die äußere Grenze. Ob Gelbes oder Rotes in ein Werkzeug darf, hängt am <b style="display:inline;font:inherit;font-weight:600">Vertrag des Tools</b>, nicht an seinem Namen: Auftragsverarbeitung, kein Training mit Ihren Daten, bekannter Speicherort. Dasselbe Modell kann im privaten Gratis-Konto tabu und im Dienstkonto erlaubt sein.</p></div>
+    <div><b>Dürfen wir?</b><p>Ihre Hausregel: was Ihr Haus wofür freigibt. Sie darf strenger sein als das Gesetz, zum Beispiel: „Feedback werten wir nur mit Wissen der Kursleitung aus.“</p></div>
+    <div><b>Sollen wir?</b><p>Die <a href="leitfrage.html">Leitfrage</a>: Auch wenn alles erlaubt ist, entscheiden Sie, was Sie abgeben, wo Sie sich anregen lassen und was Sie behalten.</p></div>
+  </div>
+  <p class="hand" style="font-size:24px;margin:6px 0 18px">Das Gesetz sagt, was wir dürfen. Die Haltung sagt, was wir wollen.</p>
+  <div class="note"><b>Beispiel Copilot Chat mit Dienstkonto.</b> Wer mit dem Arbeitskonto angemeldet ist, arbeitet unter Microsofts Auftragsverarbeitungsvertrag; Eingaben und Antworten werden nicht zum Training verwendet. Verarbeitet wird innerhalb der EU-Datengrenze („EU Data Boundary“), also in der EU, nicht an einem bestimmten Standort. Ausnahmen laut Microsoft: die Websuche (Bing) und die Claude-Modelle in Copilot. Ob diese laufen, regeln Admin-Schalter; bei EU-Mandanten, die nach dem 25.3.2026 angelegt wurden, ist der Schalter für Word, Excel und PowerPoint ab Werk an. Bei Lastspitzen kann Microsoft Anfragen auch außerhalb Europas rechnen lassen („Flex Routing“); diese Einstellung kann Ihre IT ändern. Damit ist Copilot Chat mit Dienstkonto ein typisches Werkzeug für <span class="amp y">gelb</span>. Für <span class="amp r">rot</span> braucht es zusätzlich eine Rechtsgrundlage, die Freigabe Ihres Hauses für genau diesen Zweck und bei sensiblen Daten eine Folgenabschätzung.</div>
+  <div class="note"><b>Verboten, heikel oder nur nicht klug?</b> Verboten ist seit 2.2.2025 zum Beispiel, Emotionen am Arbeitsplatz oder in Bildungseinrichtungen per KI zu erkennen (Art. 5 Abs. 1 lit. f AI Act). Hochrisiko werden ab 2.12.2027 unter anderem Zulassung, Bewertung von Lernergebnissen und Personalauswahl (Anhang III); dort nichts ohne Fachberatung. Sehr vieles andere ist erlaubt und trotzdem nicht klug, etwa persönliche Rückmeldungen an Teilnehmende ganz der KI zu überlassen. Das entscheidet die dritte Frage.</div>
+  <p class="src">Quellen: <a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/enterprise-data-protection">Microsoft Learn, Enterprise data protection</a> (aktualisiert 18.8.2026) · <a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-flex-routing">Microsoft Learn, Flex routing</a> (abgerufen 10.10.2026) · AI Act in der Fassung der VO (EU) 2026/1744. Herstellerangaben, im eigenen Mandanten prüfen.</p>
 
   <h2>Üben: Welche Farbe?</h2>
   <div class="quiz">

@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Use Cases · KI als Organisationskompetenz</title>
+<meta name="description" content="Wofür Bildungsorganisationen KI heute sinnvoll einsetzen: zwölf Fälle zum Anfangen und weitere nach Bereich – mit Datenampel, Leitfrage, erstem Schritt, Prüfpunkt und Quellen.">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../../textures.css" rel="stylesheet">
+<link href="../site.css" rel="stylesheet">
+<style>
+.narrow{max-width:860px}
+.toc{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:16px;margin:4px 0 0}
+/* Leitfrage-Spalten: dieselbe Typografie wie auf leitfrage.html */
+.s-ab{font-family:var(--type)}
+.s-an{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--kontext)}
+.s-be{font-family:var(--hand);color:var(--pencil);font-size:1.3em;line-height:1;font-weight:600}
+/* Reife-Anzeige: drei Striche */
+.rf{white-space:nowrap}
+.rf i{display:inline-block;width:26px;height:9px;margin-right:7px;vertical-align:1px;background:linear-gradient(90deg,var(--ink) 0 var(--w),var(--line) var(--w));-webkit-mask:repeating-linear-gradient(90deg,#000 0 7px,transparent 7px 9.5px);mask:repeating-linear-gradient(90deg,#000 0 7px,transparent 7px 9.5px)}
+.rf.r3 i{--w:26px}.rf.r2 i{--w:17px}.rf.r1 i{--w:7px}
+/* Lesehilfe */
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:16px;margin:16px 0 14px}
+.legend>div{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;padding:16px 18px 12px;font-size:16px}
+.legend h3{font-family:var(--type);font-weight:400;font-size:19px;margin:0 0 4px}
+.legend p{margin:0 0 8px;color:var(--muted);font-size:15px}
+.legend ul{list-style:none;padding:0;margin:0 0 8px}
+.legend li{margin:0 0 7px}
+/* Filter */
+.filter{background:var(--paper-d);border:1px solid var(--line);border-radius:4px;padding:14px 16px 6px;margin:24px 0 0}
+.filter .ft{font-family:var(--type);font-size:15px;margin:0 0 8px}
+.filter fieldset{border:none;padding:0;margin:0 0 6px;min-width:0}
+.filter legend{font-family:var(--type);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0;margin:0 0 4px}
+.filter label{display:inline-block;position:relative;margin:0 4px 6px 0;font-weight:400;cursor:pointer}
+.filter input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.filter label span{display:inline-flex;align-items:center;gap:6px;padding:5px 13px;border:1.5px solid var(--line);border-radius:20px;background:#fff;font-size:15px}
+.filter input:checked+span{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.filter input:focus-visible+span{outline:2px solid var(--pencil);outline-offset:2px}
+.filter #treffer{margin:0 0 8px;min-height:1px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%}
+.dot.g{background:var(--green)}.dot.y{background:var(--yellow)}.dot.r{background:var(--red)}
+/* Die zwölf Karten */
+.ucs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:20px;margin:22px 0 0}
+.uc{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;padding:18px 22px 14px}
+.uc:target{box-shadow:0 0 0 3px var(--pencil)}
+.uc h3{display:flex;gap:12px;align-items:baseline;font-family:var(--type);font-weight:400;font-size:23px;line-height:1.2;margin:0 0 12px}
+.uc .nr{font-size:32px;line-height:1;color:var(--pencil);min-width:1.1em}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;font-size:16px;margin:0 0 4px;padding:0 0 12px;border-bottom:1px dashed var(--line)}
+.meta dt,.det dt{font-family:var(--type);font-weight:400;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0;padding-top:3px}
+.meta dd{margin:0}
+.det dt{margin-top:10px}
+.det dd{margin:2px 0 0;font-size:16.5px}
+.det .bl{font-size:15.5px}
+.nein ul{margin-bottom:10px}
+/* Alle Fälle nach Bereich */
+.area h3{font-family:var(--type);font-weight:400;font-size:22px;margin:34px 0 4px}
+.oben{font-size:15px;color:var(--muted);margin:0 0 10px}
+details.fall{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;margin:0 0 10px}
+details.fall summary{cursor:pointer;padding:12px 16px;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+details.fall summary::-webkit-details-marker{display:none}
+details.fall summary::before{content:"+";font-family:var(--type);color:var(--pencil);width:14px;flex:none}
+details.fall[open] summary::before{content:"–"}
+details.fall summary>b{font-weight:600;flex:1 1 230px}
+.tags{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;font-size:14.5px}
+details.fall .in{padding:0 18px 14px 42px;margin:-6px 0 0}
+/* Kästen */
+.drei dt{font-family:var(--type);font-weight:400;font-size:21px;margin-top:12px}
+.drei dd{margin:2px 0 0}
+.q li{margin-bottom:12px}
+.q .w{display:block;font-size:15px;color:var(--muted)}
+.mark{font-family:var(--type);font-size:12px;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--muted);border-radius:3px;padding:0 5px;color:var(--muted);white-space:nowrap}
+@media (max-width:600px){
+  .uc{padding:16px 16px 12px}
+  .uc h3{font-size:21px}
+  details.fall .in{padding:0 14px 12px 16px}
+  details.fall summary{padding:12px 14px}
+  .tablewrap .rt{min-width:0}
+  .rt,.rt tbody,.rt tr,.rt td{display:block}
+  .rt tr:first-child{display:none}
+  .rt tr{border-bottom:1px solid var(--line);padding:10px 0 8px}
+  .rt td{border:none;padding:2px 14px}
+  .rt td:first-child{font-weight:600}
+  .rt td:nth-child(2),.rt td:nth-child(3){display:inline-block;padding-right:0}
+}
+@media print{
+  .filter,.toc{display:none!important}
+  [data-ampel][hidden],.area[hidden]{display:block!important}
+  .ucs{display:block}.uc{margin:0 0 10pt;break-inside:avoid}
+  details.fall{break-inside:avoid}
+  details.fall summary::before{content:""}
+  details.fall::details-content{content-visibility:visible;display:block}
+  .amp,.dot,.rf i,.card .tab{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .q a[href^="http"]::after{content:" " attr(href);font-size:8pt;color:#555;word-break:break-all}
+}
+</style>
+</head>
+<body>
+<header class="top"><a href="./">KI als Organisationskompetenz · Werkzeuge</a><nav><a href="./#module">Module</a><a href="use-cases.html">Use Cases</a><a href="datenampel.html">Datenampel</a><a href="tools.html">Tool-Landkarte</a><a href="quellen.html">Quellen</a></nav></header>
+<main class="wide">
+  <p class="kick">Nachschlagen · Praxis</p>
+  <h1>Use Cases</h1>
+  <span class="stand">Stand 11. Oktober 2026</span>
+  <div class="narrow">
+    <p class="lead">Wofür Bildungsorganisationen KI heute sinnvoll einsetzen: zwölf Fälle zum Anfangen und weitere nach Bereich.</p>
+    <p>Ein Use Case ist hier eine Aufgabe, die in Ihrem Haus regelmäßig wiederkommt und bei der KI mitarbeiten kann. Jeder Eintrag zeigt, welche Daten dafür nötig sind, wer was tut und wie gut das heute im Alltag funktioniert. Dazu kommen ein erster Schritt und der Punkt, den Sie vor der Verwendung prüfen. Mit Kontext ist KI sehr gut – den Kontext liefern die Menschen, und die Prüfung bleibt bei der Organisation.</p>
+    <nav class="toc" aria-label="Auf dieser Seite"><a href="#zwoelf">Zwölf zum Anfangen</a><a href="#bereiche">Alle Fälle nach Bereich</a><a href="#ausblick">Routinen und Agenten</a><a href="#foerdergeber">Fördergeber</a><a href="#fragen">Drei Fragen</a><a href="#quellen">Quellen</a></nav>
+  </div>
+
+  <h2 id="lesen">So lesen Sie die Einträge</h2>
+  <div class="legend">
+    <div><h3>Ampel</h3><p>Welche Daten braucht der Fall?</p>
+      <ul><li><span class="amp g">Grün</span> öffentlich</li><li><span class="amp y">Gelb</span> intern, ohne Personenbezug</li><li><span class="amp r">Rot</span> Personen und Sensibles</li></ul>
+      <a href="datenampel.html">Zur Datenampel</a></div>
+    <div><h3>Spalte der Leitfrage</h3><p>Wer tut was?</p>
+      <ul><li><span class="s-ab">Abgeben</span> – KI macht, wir prüfen</li><li><span class="s-an">Anregen lassen</span> – KI fragt, wir denken</li><li><span class="s-be">Behalten</span> – wir urteilen, wir verantworten</li></ul>
+      <a href="leitfrage.html">Zur Leitfrage</a></div>
+    <div><h3>Reife heute</h3><p>Wie gut klappt das im Alltag? Einschätzung, Stand Oktober 2026.</p>
+      <ul><li><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span> – gute Ergebnisse, wenig Prüfaufwand</li><li><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span> – starke Entwürfe; Zahlen, Vollständigkeit und Fakten gegen die Quelle prüfen</li><li><span class="rf r1"><i aria-hidden="true"></i>Pilot, eher Ausblick</span> – für den Alltag noch zu früh</li></ul></div>
+  </div>
+  <p class="s narrow">Dazu bei jedem Fall: <b>Womit anfangen</b> – der erste Schritt. <b>Prüfpunkt</b> – was Sie vor der Verwendung prüfen. Wo sinnvoll: <b>Wo es kippt</b> und ein <b>Beleg</b> mit Quelle.</p>
+
+  <div class="filter noprint narrow" id="filter" hidden>
+    <p class="ft">Fälle filtern <span class="xs m">– wirkt auf die zwölf Karten und auf alle Fälle nach Bereich</span></p>
+    <fieldset><legend>Ampel</legend>
+      <label><input type="radio" name="fa" value="" checked><span>alle</span></label>
+      <label><input type="radio" name="fa" value="g"><span><i class="dot g"></i>Grün</span></label>
+      <label><input type="radio" name="fa" value="y"><span><i class="dot y"></i>Gelb</span></label>
+      <label><input type="radio" name="fa" value="r"><span><i class="dot r"></i>Rot</span></label>
+    </fieldset>
+    <fieldset><legend>Spalte</legend>
+      <label><input type="radio" name="fs" value="" checked><span>alle</span></label>
+      <label><input type="radio" name="fs" value="abgeben"><span>Abgeben</span></label>
+      <label><input type="radio" name="fs" value="anregen"><span>Anregen lassen</span></label>
+      <label><input type="radio" name="fs" value="behalten"><span>Behalten</span></label>
+    </fieldset>
+    <p id="treffer" class="s m" aria-live="polite"></p>
+  </div>
+
+  <!-- ============ Zwölf zum Anfangen (kanonische Fassung, gleich wie Mappenblatt) ============ -->
+  <h2 id="zwoelf">Zwölf zum Anfangen</h2>
+  <p class="narrow">Zwölf Fälle, mit denen ein Haus jeder Größe morgen beginnen kann. Dieselbe Liste steht auf dem Mappenblatt aus dem Workshop. Die Reife ist eine Einschätzung, Stand Oktober 2026.</p>
+
+  <div class="ucs">
+    <article class="uc" id="uc-1" data-ampel="g r" data-spalte="abgeben">
+      <h3><span class="nr">1</span>Anfragen beantworten</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp g">Grün</span> · Einzelfall mit Namen: <span class="amp r">Rot</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Die zehn häufigsten Fragen sammeln, Antwortbausteine entwerfen lassen, selbst freigeben.</dd>
+        <dt>Prüfpunkt</dt><dd>Förderauskünfte aktuell? Gesendet wird von Menschen.</dd>
+        <dt>Wo es kippt</dt><dd>Wenn Bausteine nicht gepflegt werden oder Antworten ohne Freigabe hinausgehen. Einzelanfragen mit Namen nur in Werkzeugen mit Vertrag.</dd>
+        <dt>Nächste Stufe</dt><dd class="bl">Ein Chatbot auf der Website, siehe <a href="#chatbot">Kursberatungs-Chatbot</a>.</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-2" data-ampel="g" data-spalte="abgeben">
+      <h3><span class="nr">2</span>Kursausschreibung aus Stichworten</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp g">Grün</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Zwei gelungene Ausschreibungen und eine Seite Stilregeln als Beispiel mitgeben.</dd>
+        <dt>Prüfpunkt</dt><dd>Termine, Preise, Förderhinweis.</dd>
+        <dt>Wo es kippt</dt><dd>Ohne Stilregeln klingen alle Texte gleich. Fehlen Angaben, ergänzt die KI sie plausibel – darum alle Pflichtangaben mitgeben: Zielgruppe, Lernziele, Voraussetzungen, Termine, Preis, Storno, Förderhinweis, Barrierefreiheit.</dd>
+        <dt>Beleg</dt><dd class="bl">Der Deutsche Volkshochschul-Verband nennt zielgruppengerechte Ausschreibungstexte als Einsatzfeld (<a href="#q-dvv">DVV, 19.8.2026</a>). Auch Kursverwaltungen bringen erste Funktionen mit: Der KuferSQL-KI-Assistent formuliert und übersetzt Kurstexte (<a href="#q-kufer">Herstellerangabe Kufer, 16.2.2026</a>).</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-3" data-ampel="g" data-spalte="abgeben">
+      <h3><span class="nr">3</span>Ein Kurs, viele Kanäle</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp g">Grün</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Aus der freigegebenen Ausschreibung: Newsletter, Social-Media-Post, Kurztext fürs Programmheft.</dd>
+        <dt>Prüfpunkt</dt><dd>Nichts übertrieben? KI-Bilder kennzeichnen.</dd>
+        <dt>Wo es kippt</dt><dd>Ohne Hausstil werden Texte gleichförmig. Realistische KI-Bilder von Menschen berühren Persönlichkeitsrechte und sind zu kennzeichnen (Art. 50 AI Act).</dd>
+        <dt>Beleg</dt><dd class="bl">Marketing ist das Feld, in dem Mitarbeitende von Ö-Cert-Einrichtungen KI am häufigsten nutzen: 59 % der KI-Nutzenden (<a href="#q-oecert">Universität Graz, 16.2.2026</a>).</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-4" data-ampel="y" data-spalte="abgeben">
+      <h3><span class="nr">4</span>Protokoll aus Stichworten</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp y">Gelb</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Stichworte ohne Namen und die eigene Protokollvorlage geben. Keine Aufnahmen.</dd>
+        <dt>Prüfpunkt</dt><dd>Beschlüsse und Zuständigkeiten stimmen?</dd>
+        <dt>Wo es kippt</dt><dd>Personalthemen machen ein Protokoll rot. Sitzungen aufzunehmen braucht das Einverständnis aller (§ 120 StGB) und, wo es einen Betriebsrat gibt, dessen Einbindung. Lokale Transkription, etwa mit dem Open-Source-Programm <a href="#q-noscribe">noScribe</a>, löst die Cloud-Frage, nicht die Frage der Einwilligung.</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-5" data-ampel="y" data-spalte="abgeben behalten">
+      <h3><span class="nr">5</span>Sachbericht aus Rohmaterial</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp y">Gelb</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span>, Zahlen <span class="s-be">behalten</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Vorlage des Fördergebers, Vorjahresbericht und Stichworte geben. Zahlen selbst eintragen.</dd>
+        <dt>Prüfpunkt</dt><dd>Jede Zahl gegen Antrag und Abrechnung.</dd>
+        <dt>Wo es kippt</dt><dd>Wenn Zahlen aus dem Vorjahr stehen bleiben oder Erfolge glatter klingen, als sie waren. Das Land Steiermark sieht eine Rückerstattung bei „wesentlich unrichtigen oder unvollständigen Angaben“ vor (<a href="#q-land">Richtlinie LLL, Fassung 2022, § 15</a>). Einzelfälle von Teilnehmenden sind rot.</dd>
+        <dt>Beleg</dt><dd class="bl">Fördergeber gleichen ab: Die ESF+-Sonderrichtlinie sieht den „Vergleich zwischen Förderungsansuchen und Berichten“ vor (<a href="#q-esf">ESF+/JTF-Sonderrichtlinie</a>). Beim AMS Wien ist der Zwischenbericht „wesentliche Grundlage“ für eine Wiederbeauftragung (<a href="#q-amswien">Allgemeine Bestimmungen, 11.2025</a>).</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-6" data-ampel="y" data-spalte="anregen">
+      <h3><span class="nr">6</span>Antrag mit Gutachter:innen-Blick gegenlesen</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp y">Gelb</span></dd>
+        <dt>Spalte</dt><dd><span class="s-an">Anregen lassen</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Eigenen Entwurf und das veröffentlichte Bewertungsraster geben: „Lies das so kritisch wie die Jury.“</dd>
+        <dt>Prüfpunkt</dt><dd>Simulierte Punkte sagen nichts über die echte Jury.</dd>
+        <dt>Wo es kippt</dt><dd>Ohne ausdrücklich kritische Rolle fällt das Urteil zu freundlich aus. Wer nur noch fürs Raster schreibt, verliert das eigene Vorhaben aus dem Blick.</dd>
+        <dt>Beleg</dt><dd class="bl">Raster sind teils mit Punkten veröffentlicht, etwa im ESF+-Call IDEA 207: „Die Planindikatoren für das Vorhaben werden als realistisch eingestuft?“ – 10 Punkte (<a href="#q-idea">BMBWF, 2024</a>). Weil Sie selbst schreiben und die KI nur gegenliest, bleibt der Antrag Ihr eigener Text.</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-7" data-ampel="y" data-spalte="abgeben behalten">
+      <h3><span class="nr">7</span>Feedback auswerten, auch über Jahre</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp y">Gelb</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span> (Ordnen), <span class="s-be">Behalten</span> (Deuten)</dd>
+        <dt>Reife heute</dt><dd><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Freitexte ohne Namen, eigenes Kategorienschema vorgeben, mehrere Jahrgänge vergleichen.</dd>
+        <dt>Prüfpunkt</dt><dd>Stichprobe selbst nachprüfen. Keine Bewertung einzelner Kursleitungen.</dd>
+        <dt>Wo es kippt</dt><dd>Wechseln Fragebogen oder Skala zwischen den Jahren, vorher die Vergleichbarkeit klären. Auswertungen je Kursleitung grenzen an Leistungsbewertung (AI Act Anhang III Nr. 4 lit. b; §§ 96, 96a ArbVG).</dd>
+        <dt>Beleg</dt><dd class="bl">In einer Studie mit rund 1.400 offenen Antworten codierten Spitzenmodelle nach vorgegebenem Schema so gut wie oder besser als geschulte studentische Hilfskräfte. Empfohlen wird, rund 200 Fälle gegenzuprüfen (<a href="#q-hudde">Hudde, Taflinger, Juni 2026, Preprint</a>).</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-8" data-ampel="g" data-spalte="anregen">
+      <h3><span class="nr">8</span>Bedarf und Programmlücken</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp g">Grün</span></dd>
+        <dt>Spalte</dt><dd><span class="s-an">Anregen lassen</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Öffentliche Tabellen (<a href="#q-amsstmk">AMS</a>, <a href="#q-aes">Statistik Austria</a>) und das eigene Programm hochladen statt frei suchen zu lassen.</dd>
+        <dt>Prüfpunkt</dt><dd>Jede Zahl gegen die Quelle.</dd>
+        <dt>Wo es kippt</dt><dd>Ohne hochgeladene Tabellen sucht die KI im Netz und findet auch ältere Stände. Vergleichsangebote brauchen einen sauberen Export, sonst entstehen Scheinlücken. Die Deutung braucht Ortskenntnis.</dd>
+        <dt>Beleg</dt><dd class="bl">Der Volkshochschulverband Baden-Württemberg nutzt eine KI-Assistenz für die Programmplanung, seit 25.9.2026 in Version 2.0 mit Auswertungen zu Wochentagen, Auslastung und Altersgruppen; laut Dienstleister rund 25.000 Kurse. Eine unabhängige Wirkungsmessung gibt es noch nicht (<a href="#q-vhsbw">VHS-Verband Baden-Württemberg, 25.9.2026</a>).</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-9" data-ampel="y" data-spalte="abgeben">
+      <h3><span class="nr">9</span>Einstiegsmappe für Honorarkräfte</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp y">Gelb</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Hausregeln, Dokumentationspflichten und KI-Regeln zu einem PDF verdichten. Geht ohne Lizenz.</dd>
+        <dt>Prüfpunkt</dt><dd>Aktuell halten. Das Erstgespräch bleibt persönlich.</dd>
+        <dt>Wo es kippt</dt><dd>Wenn alte Fassungen im Umlauf bleiben. Honorarkräfte arbeiten oft mit eigenen Geräten und Konten – die Mappe sagt klar, was dort erlaubt ist: nur Grünes.</dd>
+        <dt>Beleg</dt><dd class="bl">Dokumentation zählt: Beim AMS Wien führen Abweichungen zwischen dokumentierten und von Trainer:innen unterschriebenen Stunden zu einer Preisminderung von bis zu 5 % der abgerechneten Gesamtkosten (<a href="#q-amswien">Allgemeine Bestimmungen, 11.2025</a>; für die Steiermark als Vergleich).</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-10" data-ampel="g" data-spalte="abgeben">
+      <h3><span class="nr">10</span>Einfache Sprache und Erstsprachen</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp g">Grün</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Ein Infoblatt in Einfache Sprache oder eine Erstsprache übertragen, Rückübersetzung zur Kontrolle.</dd>
+        <dt>Prüfpunkt</dt><dd>Wichtige Texte von Sprachkundigen oder der Zielgruppe lesen lassen.</dd>
+        <dt>Wo es kippt</dt><dd>Beim Vereinfachen kann Inhalt wegfallen – mit dem Original abgleichen. Förder- und Rechtsbegriffe besonders genau lesen, AGB nur als Begleittext vereinfachen. Leichte Sprache folgt festen Regeln und braucht Prüfleser:innen aus der Zielgruppe.</dd>
+        <dt>Beleg</dt><dd class="bl">capito aus Graz bietet mit capito.ai ein Werkzeug für Leichte und Einfache Sprache, das laut Hersteller ausgelassene oder hinzugefügte Informationen anzeigt; es übersetzt auch, etwa ins Kroatische, Slowenische und Ungarische. Preise laut Anbieter, Stand Oktober 2026: 2 Seiten im Monat kostenlos, Starter 29,99 € pro Monat für 8 Seiten, exkl. USt. (<a href="#q-capito">Herstellerangaben capito</a>).</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-11" data-ampel="y r" data-spalte="anregen">
+      <h3><span class="nr">11</span>Vorstandsvorlage mit Gegenargumenten</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp y">Gelb</span> · Personalthemen: <span class="amp r">Rot</span></dd>
+        <dt>Spalte</dt><dd><span class="s-an">Anregen lassen</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Drei Optionen mit Kosten, Risiken und dem stärksten Gegenargument entwerfen lassen.</dd>
+        <dt>Prüfpunkt</dt><dd>Zahlen kommen aus dem Haus. Entschieden wird im Gremium.</dd>
+        <dt>Wo es kippt</dt><dd>Eine glatte Vorlage wirkt objektiver, als sie ist. Wer nur die Verdichtung liest, entscheidet ohne die Originale. Ehrenamtliche Vorstände nutzen oft private Konten – dorthin nur Grünes.</dd>
+        <dt>Beispiel (erfunden)</dt><dd class="bl">Das Bildungswerk Apfelland fragt sich, ob es eine Online-Schiene aufbauen soll. Die KI legt drei Optionen nebeneinander – ausbauen, bei Präsenz bleiben, mischen –, jeweils mit dem stärksten Einwand. Die Zahlen trägt die Geschäftsführung ein, der Vorstand entscheidet.</dd>
+      </dl>
+    </article>
+
+    <article class="uc" id="uc-12" data-ampel="g" data-spalte="abgeben">
+      <h3><span class="nr">12</span>KI-Inventar und Schulungsnachweis</h3>
+      <dl class="meta">
+        <dt>Ampel</dt><dd><span class="amp g">Grün</span></dd>
+        <dt>Spalte</dt><dd><span class="s-ab">Abgeben</span></dd>
+        <dt>Reife heute</dt><dd><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></dd>
+      </dl>
+      <dl class="det">
+        <dt>Womit anfangen</dt><dd>Liste: welche Tools, wofür, welche Datenfarbe, welcher Vertrag. Den heutigen Nachmittag als Schulung eintragen.</dd>
+        <dt>Prüfpunkt</dt><dd>Auch privat genutzte Tools erfassen, ohne Vorwurf.</dd>
+        <dt>Rechtlich</dt><dd class="bl">Art. 4 AI Act verlangt Maßnahmen zur KI-Kompetenz für das Personal und für Personen, die im Auftrag der Organisation KI nutzen – nach verbreiteter Auslegung auch Honorarkräfte (<a href="#q-aiact">AI Act</a>). Vorlage: <a href="nachweis.html">Schulungsnachweis</a>.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="card tabbed nein narrow" id="nein" style="margin-top:46px"><span class="tab" style="background:var(--pencil)">Spalte Behalten</span>
+    <h3 style="margin-top:0;font-family:var(--type);font-weight:400;font-size:24px">Wo wir Nein sagen</h3>
+    <p>Hier bleibt die Arbeit beim Menschen – weil es um Entscheidungen über Menschen geht.</p>
+    <ul>
+      <li>Bewerbungen von KI reihen lassen</li>
+      <li>Beratungsgespräche mitschneiden</li>
+      <li>Lernergebnisse oder Einstufungen automatisch bewerten</li>
+      <li>Emotionen erkennen</li>
+    </ul>
+    <p class="s" style="margin:0"><b>Warum, kurz:</b> Personalauswahl und Bewertung von Lernergebnissen sind ab 2.12.2027 Hochrisiko (AI Act, Anhang III); automatisierte Einzelentscheidungen (Art. 22 DSGVO); Tonaufnahmen ohne Einverständnis (§ 120 StGB); Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen ist seit 2.2.2025 verboten (Art. 5 Abs. 1 lit. f AI Act).</p>
+  </div>
+
+  <!-- ============ Alle Fälle nach Bereich ============ -->
+  <div class="narrow">
+  <h2 id="bereiche">Alle Fälle nach Bereich</h2>
+  <p>Weitere Fälle, kürzer gefasst – ein Klick öffnet den Eintrag. Die zwölf Fälle von oben sind dort verlinkt, wo sie thematisch hingehören.</p>
+
+  <section class="area" aria-labelledby="b-programm">
+    <h3 id="b-programm">Programm und Angebot</h3>
+    <p class="oben">Oben: <a href="#uc-8">Nr. 8 Bedarf und Programmlücken</a> · <a href="#uc-2">Nr. 2 Kursausschreibung aus Stichworten</a></p>
+    <details class="fall" data-ampel="y" data-spalte="anregen">
+      <summary><b>Absage- und Auslastungsmuster erkennen</b><span class="tags"><span class="amp y">Gelb</span><span class="s-an">Anregen lassen</span><span class="rf r1"><i aria-hidden="true"></i>Pilot, eher Ausblick</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Aus Buchungsdaten ohne Namen Muster finden: Themen, Wochentage, Preise, Formate, Ankündigungsfristen und Absagen.</dd>
+        <dt>Womit anfangen</dt><dd>Export ohne Namen über mehrere Jahre. Mit Code-Ausführung rechnen lassen: Die KI schreibt dafür ein kleines Programm, statt im Text zu rechnen.</dd>
+        <dt>Wo es kippt</dt><dd>Kleine Fallzahlen erzeugen Scheinmuster, und ein Zusammenhang ist noch keine Ursache. Mit Statistikwissen im Haus: gut mit Prüfschritt. Vorhersagen für einzelne Teilnehmende: Nein (Art. 22 DSGVO).</dd>
+        <dt>Beleg</dt><dd class="bl">Die KI-Assistenz des VHS-Verbands Baden-Württemberg beantwortet auch Auslastungsfragen (<a href="#q-vhsbw">25.9.2026</a>).</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="anregen">
+      <summary><b>Neue Kursformate aus dem besten eigenen Kurs</b><span class="tags"><span class="amp y">Gelb</span><span class="s-an">Anregen lassen</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>„Warum funktioniert unser bester Kurs?“ Aufbau, Dramaturgie und Erfolgsmerkmale herausarbeiten und daraus eine Vorlage für neue Themen ableiten.</dd>
+        <dt>Womit anfangen</dt><dd>Kursbeschreibung, Ablaufplan, Zusammenfassung des Feedbacks und Auslastung geben.</dd>
+        <dt>Wo es kippt</dt><dd>Erfolg hängt oft an der Person, nicht am Aufbau. Fremde Kursmaterialien sind urheberrechtlich geschützt.</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="abgeben behalten">
+      <summary><b>Programmheft vor dem Druck prüfen</b><span class="tags"><span class="amp y">Gelb</span><span><span class="s-ab">Abgeben</span> (Prüfen), <span class="s-be">Behalten</span> (Entscheiden)</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Widersprüchliche Termine, fehlende Pflichtangaben, uneinheitliche Preise, fehlende Förderhinweise und Logos finden.</dd>
+        <dt>Womit anfangen</dt><dd>Programmdatei und eine Checkliste der Pflichtangaben geben. Strukturierte Felder wie Termine und Preise lieber in der Tabelle prüfen.</dd>
+        <dt>Prüfpunkt</dt><dd>Die KI findet viel; Vollständigkeit sichert erst die eigene Checkliste. Ersetzt kein Korrektorat.</dd>
+        <dt>Beleg</dt><dd class="bl">Ö-Cert verlangt Angebotstransparenz (<a href="#q-oecertgv">Ö-Cert-Grundvoraussetzungen</a>). Das Land Steiermark verlangt den Publizitätshinweis mit Ressortlogo und seine Dokumentation im Tätigkeitsbericht (<a href="#q-land">Richtlinie LLL, Fassung 2022</a>).</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section class="area" aria-labelledby="b-foerderung">
+    <h3 id="b-foerderung">Förderung und Berichte</h3>
+    <p class="oben">Oben: <a href="#uc-5">Nr. 5 Sachbericht aus Rohmaterial</a> · <a href="#uc-6">Nr. 6 Antrag mit Gutachter:innen-Blick gegenlesen</a></p>
+    <details class="fall" data-ampel="g" data-spalte="abgeben behalten">
+      <summary><b>Förderaufrufe sichten und Passung prüfen</b><span class="tags"><span class="amp g">Grün</span><span><span class="s-ab">Abgeben</span> (Vorsortieren), <span class="s-be">Behalten</span> (Entscheiden)</span><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Einen Förderaufruf (Call) gegen das eigene Profil prüfen: Zielgruppe, förderbare Kosten, Fristen, Eigenmittel, Partnerpflichten, Bewertungskriterien. Ergebnis: eine kurze Einschätzung mit Ausschlussgründen.</dd>
+        <dt>Womit anfangen</dt><dd>Organisationsprofil, Referenzprojekte und Budgetrahmen einmal hinterlegen, dann jeden Call als Datei dazugeben.</dd>
+        <dt>Wo es kippt</dt><dd>Calls selbst im Netz finden zu lassen ist noch Pilot. Besser die Newsletter der Fördergeber abonnieren und die KI nur prüfen lassen. Ausschlussgründe selbst gegenlesen.</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="anregen behalten">
+      <summary><b>Antragsentwurf aus eigenen Bausteinen</b><span class="tags"><span class="amp y">Gelb</span><span><span class="s-an">Anregen lassen</span>, Projektlogik <span class="s-be">behalten</span></span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Antragsteile aus hauseigenen Textbausteinen und Projektnotizen im Format des Calls vorformulieren.</dd>
+        <dt>Womit anfangen</dt><dd>Leitbild, Projektidee, Referenzprojekte, Kalkulation, Call-Text und Bewertungskriterien als Kontext geben.</dd>
+        <dt>Wo es kippt</dt><dd>Ohne eigenen Kontext werden Anträge allgemein und einander ähnlich. Erasmus+ verlangt Originalinhalte und prüft alle Anträge automatisch auf Ähnlichkeit (<a href="#q-erasmus">Programmleitfaden 2026</a>). Projektlogik und Kalkulation bleiben Arbeit des Hauses.</dd>
+        <dt>Beleg</dt><dd class="bl">Die FFG erlaubt generative KI bei Förderanträgen ohne Offenlegungspflicht; die Verantwortung liegt bei den Antragstellenden (<a href="#q-ffg">FFG, Stand Mai 2025</a>).</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="abgeben">
+      <summary><b>Belegliste vorprüfen</b><span class="tags"><span class="amp y">Gelb</span><span><span class="s-ab">Abgeben</span> (Vorprüfung)</span><span class="rf r1"><i aria-hidden="true"></i>Pilot, eher Ausblick</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Belegaufstellung auf Vollständigkeit, Kostenkategorien, Doppelungen, Fristen und Publizitätsnachweise prüfen.</dd>
+        <dt>Womit anfangen</dt><dd>Belegliste als Tabelle ohne Personaldaten, dazu Kostenplan und Merkblatt des Fördergebers.</dd>
+        <dt>Wo es kippt</dt><dd>Strukturierte Listen gehen schon gut mit Prüfschritt; Belege aus Scans brauchen noch viel Handarbeit. Personalkosten je Person sind rot.</dd>
+        <dt>Beleg</dt><dd class="bl">Das AMS Wien prüft Drittbelege stichprobenartig und erweitert die Stichprobe bei Korrekturbedarf (<a href="#q-amswien">Allgemeine Bestimmungen, 11.2025</a>).</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="abgeben">
+      <summary><b>Förderkalender aus Verträgen</b><span class="tags"><span class="amp y">Gelb</span><span class="s-ab">Abgeben</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Aus Verträgen und Bescheiden Fristen und Auflagen herausziehen: Berichte, Publizität, Änderungsmeldungen, Aufbewahrung.</dd>
+        <dt>Womit anfangen</dt><dd>Vertrag hochladen und eine Tabelle verlangen: Frist, Auflage, Fundstelle.</dd>
+        <dt>Prüfpunkt</dt><dd>Jede Frist an der Fundstelle im Original nachlesen, besonders in langen Anhängen.</dd>
+        <dt>Beleg</dt><dd class="bl">Eine vom AMS beauftragte Studie nennt das automatische Überwachen von Ablauf- und Archivierungsfristen als Einsatzfeld, mit Blick auf Unternehmen (<a href="#q-joanneum">JOANNEUM RESEARCH / Universität Graz, Dezember 2025</a>).</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section class="area" aria-labelledby="b-qualitaet">
+    <h3 id="b-qualitaet">Qualität</h3>
+    <p class="oben">Oben: <a href="#uc-7">Nr. 7 Feedback auswerten, auch über Jahre</a></p>
+    <details class="fall" data-ampel="y r" data-spalte="abgeben behalten">
+      <summary><b>Ö-Cert- und QM-Nachweise zusammenstellen</b><span class="tags"><span><span class="amp y">Gelb</span> · einzelne Personen: <span class="amp r">Rot</span></span><span><span class="s-ab">Abgeben</span> (Struktur), <span class="s-be">Behalten</span> (Qualitätsverständnis)</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Leitbild, AGB, Qualifikationsnachweise und Prozessbeschreibungen den Kriterien zuordnen; Lücken und veraltete Dokumente markieren.</dd>
+        <dt>Womit anfangen</dt><dd>Kriterienkatalog und die Liste der eigenen Dokumente geben. Ergebnis als Tabelle: Kriterium, Nachweis, Stand.</dd>
+        <dt>Prüfpunkt</dt><dd>Jeder genannte Nachweis muss in der Ablage wirklich existieren. Gelebte Qualität zählt mehr als Papier.</dd>
+        <dt>Beleg</dt><dd class="bl">Laut Ausschreibung der Impulsförderung QMS 2026–2028 ist es Ziel des Landes Steiermark, „künftig nur mehr zertifizierte Einrichtungen zu fördern“ (<a href="#q-impuls">Land Steiermark, A6</a>).</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="anregen">
+      <summary><b>Audit und Re-Testierung vorbereiten</b><span class="tags"><span class="amp y">Gelb</span><span class="s-an">Anregen lassen</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Selbstbewertung gegen die Kriterien, ein geübtes Audit-Gespräch, Belegliste je Kriterium.</dd>
+        <dt>Womit anfangen</dt><dd>Kriterien und eigene Selbstbewertung geben: „Stell mir die Fragen, die im Audit kommen könnten.“</dd>
+        <dt>Wo es kippt</dt><dd>Die konkrete Praxis Ihrer Auditstelle kennt die KI nicht. Die Übung ersetzt kein Audit.</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="abgeben">
+      <summary><b>Handbuch-Assistent</b><span class="tags"><span class="amp y">Gelb</span><span><span class="s-ab">Abgeben</span> (Nachschlagen)</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>QM-Handbuch, Prozessbeschreibungen, Vorlagen und Förderauflagen hinterlegen. Die KI antwortet mit Fundstelle, etwa auf „Wie läuft eine Stornierung bei AMS-Teilnehmenden?“</dd>
+        <dt>Womit anfangen</dt><dd>Ein Projekt – einen Arbeitsbereich mit eigenen Dateien – mit den aktuellen Fassungen anlegen, alte Fassungen herausnehmen. Mehr im <a href="modul.html?m=wissen">Modul Wissen &amp; Assistenten</a>.</dd>
+        <dt>Wo es kippt</dt><dd>Veraltete Dokumente gibt die KI mit derselben Sicherheit wieder wie aktuelle; Widersprüche zwischen Dokumenten fallen nicht von selbst auf. Pflege ist der Hauptaufwand: Eine Person ist dafür zuständig.</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section class="area" aria-labelledby="b-teilnehmende">
+    <h3 id="b-teilnehmende">Teilnehmende und Zugang</h3>
+    <p class="oben">Oben: <a href="#uc-1">Nr. 1 Anfragen beantworten</a> · <a href="#uc-10">Nr. 10 Einfache Sprache und Erstsprachen</a></p>
+    <details class="fall" id="chatbot" data-ampel="g r" data-spalte="abgeben">
+      <summary><b>Kursberatungs-Chatbot auf der Website</b><span class="tags"><span><span class="amp g">Grün</span> · Eingaben: <span class="amp r">Rot</span> möglich</span><span><span class="s-ab">Abgeben</span> (Erstinformation)</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Ein Chatbot beantwortet Fragen zu Kursen, Terminen und Förderungen und übergibt an Menschen.</dd>
+        <dt>Womit anfangen</dt><dd>Eher etwas für größere Häuser mit Programmdatenbank, meist mit Dienstleister. Laufende Pflege einplanen.</dd>
+        <dt>Wo es kippt</dt><dd>Ohne Pflege veralten Auskünfte. Seit 2.8.2026 muss erkennbar sein, dass man mit einer KI schreibt (Art. 50 Abs. 1 AI Act, formal eine Pflicht der Anbieter).</dd>
+        <dt>Beleg</dt><dd class="bl">BFI Salzburg setzt einen Chatbot im Kundenservice ein: laut Bericht über 350 Chats pro Monat, 40 % davon abends, nachts oder am Wochenende (<a href="#q-bfi">Tips, 22.5.2026, als Anzeige gekennzeichnet</a>).</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="g" data-spalte="abgeben behalten">
+      <summary><b>Barrierefreie Dokumente und Webinhalte</b><span class="tags"><span class="amp g">Grün</span><span><span class="s-ab">Abgeben</span>, Kontrolle <span class="s-be">behalten</span></span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Alternativtexte (Bildbeschreibungen für Screenreader), Prüfung von Struktur und Lesbarkeit, Untertitel.</dd>
+        <dt>Womit anfangen</dt><dd>Bilder der Website hochladen und Alternativtexte vorschlagen lassen.</dd>
+        <dt>Wo es kippt</dt><dd>Eine vollständige Barrierefreiheitsprüfung lässt sich nicht automatisieren.</dd>
+        <dt>Rechtlich</dt><dd class="bl">Das Barrierefreiheitsgesetz gilt seit 28.6.2025 unter anderem für Dienstleistungen im elektronischen Geschäftsverkehr (§ 2 Abs. 2 Z 6 BaFG). Kleinstunternehmen – unter 10 Beschäftigte und höchstens 2 Mio. € Umsatz oder Bilanzsumme – sind bei Dienstleistungen ausgenommen (§ 3 Z 19, § 6 Abs. 1). Ob eine Online-Kursbuchung darunter fällt, ist im Einzelfall zu prüfen (<a href="#q-bafg">RIS, Fassung 11.10.2026</a>).</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="g" data-spalte="anregen">
+      <summary><b>Bildungsberatung vorbereiten, ohne Personendaten</b><span class="tags"><span class="amp g">Grün</span><span class="s-an">Anregen lassen</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Für typische Anliegen wie Wiedereinstieg oder Pflichtschulabschluss Übersichten über Angebote und Förderwege erstellen. Im Gespräch selbst keine KI.</dd>
+        <dt>Womit anfangen</dt><dd>Aktuelle Förderrichtlinien und Angebotslisten als Dateien mitgeben – Förderbedingungen ändern sich, das Modell kennt nur ältere Stände.</dd>
+        <dt>Wo es kippt</dt><dd>Sobald ein Einzelfall mit Namen oder Lebensumständen hineinkommt, ist es rot. Beratungsgespräche mitschneiden: <a href="#nein">Nein</a>.</dd>
+        <dt>Beleg</dt><dd class="bl">Der AMS-Berufsinfomat arbeitet „auf Basis von ChatGPT“ nur mit öffentlichen Daten, ohne Kundendaten (<a href="#q-ams">AMS, 3.1.2024</a>).</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section class="area" aria-labelledby="b-team">
+    <h3 id="b-team">Trainer:innen und Team</h3>
+    <p class="oben">Oben: <a href="#uc-9">Nr. 9 Einstiegsmappe für Honorarkräfte</a> · Bewerbungen reihen: <a href="#nein">Wo wir Nein sagen</a></p>
+    <details class="fall" data-ampel="r" data-spalte="abgeben">
+      <summary><b>Einsatz- und Raumplanung</b><span class="tags"><span class="amp r">Rot</span><span><span class="s-ab">Abgeben</span> (Entwurf)</span><span class="rf r1"><i aria-hidden="true"></i>Pilot, eher Ausblick</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Stundenpläne nach Verfügbarkeiten, Räumen und Mindestzahl an Teilnehmenden.</dd>
+        <dt>Womit anfangen</dt><dd>Für viele gleichzeitige Vorgaben ist Planungssoftware gebaut. Ein Sprachmodell hilft eher, die Regeln aufzuschreiben, als den Plan zu rechnen.</dd>
+        <dt>Wo es kippt</dt><dd>Werden Aufgaben nach Verhalten oder persönlichen Merkmalen verteilt, ist das Hochrisiko (AI Act Anhang III Nr. 4 lit. b); reine Verfügbarkeitsplanung dürfte nicht darunter fallen (Einschätzung). Wo es einen Betriebsrat gibt: einbinden.</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="anregen">
+      <summary><b>Wissen sichern, wenn langjährige Kursleitungen gehen</b><span class="tags"><span class="amp y">Gelb</span><span class="s-an">Anregen lassen</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Ein strukturiertes Gespräch, mit Einverständnis, in ein Methodendokument überführen.</dd>
+        <dt>Womit anfangen</dt><dd>Leitfragen vorschlagen lassen, das Gespräch selbst führen, die Notizen verdichten lassen.</dd>
+        <dt>Wo es kippt</dt><dd>Aufnahmen nur mit ausdrücklicher Einwilligung (§ 120 StGB); lokal transkribiert etwa <a href="#q-noscribe">noScribe</a>, Nachkorrigieren gehört dazu. Keine Bewertung der Person, Rechte an Materialien klären.</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="g" data-spalte="abgeben">
+      <summary><b>Stellen- und Honorarausschreibungen</b><span class="tags"><span class="amp g">Grün</span><span class="s-ab">Abgeben</span><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Ausschreibungen für Trainer:innen und Mitarbeitende formulieren.</dd>
+        <dt>Prüfpunkt</dt><dd>Bei Arbeitsplätzen geschlechtsneutral ausschreiben und das Mindestentgelt mit Hinweis auf die Bereitschaft zur Überzahlung angeben (§ 9 Abs. 1 und 2 GlBG). Für Honorarverträge gilt § 9 dem Wortlaut nach nicht (Einschätzung).</dd>
+        <dt>Wo es kippt</dt><dd>Stellenanzeigen per KI gezielt an bestimmte Personen ausspielen ist Hochrisiko (AI Act Anhang III Nr. 4 lit. a). Bewerbungen reihen: <a href="#nein">Nein</a>.</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="abgeben behalten">
+      <summary><b>Einarbeitung neuer Mitarbeitender</b><span class="tags"><span class="amp y">Gelb</span><span><span class="s-ab">Abgeben</span> (Aufbereitung), <span class="s-be">Behalten</span> (Begleitung)</span><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Einarbeitungsplan, Glossar der Förder- und QM-Begriffe (AMS, ESF, Ö-Cert) und Lernfragen.</dd>
+        <dt>Womit anfangen</dt><dd>Handbuch und Abläufe geben, Glossar und einen Plan für die ersten Wochen entwerfen lassen.</dd>
+        <dt>Wo es kippt</dt><dd>Wenn Einarbeitung zum Selbststudium wird. Den ersten Bericht schreiben Neue selbst, dann folgt Sparring mit der KI (<a href="leitfrage.html">Leitfrage</a>).</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section class="area" aria-labelledby="b-marketing">
+    <h3 id="b-marketing">Marketing</h3>
+    <p class="oben">Oben: <a href="#uc-3">Nr. 3 Ein Kurs, viele Kanäle</a> · <a href="#uc-2">Nr. 2 Kursausschreibung aus Stichworten</a></p>
+    <details class="fall" data-ampel="g" data-spalte="anregen">
+      <summary><b>Sichtbar in KI-Suchen</b><span class="tags"><span class="amp g">Grün</span><span class="s-an">Anregen lassen</span><span class="rf r1"><i aria-hidden="true"></i>Pilot, eher Ausblick</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Prüfen, wie KI-Assistenten auf typische Fragen antworten, etwa „Deutschkurs A2 Graz am Abend“, und die eigene Website klar gliedern.</dd>
+        <dt>Wo es kippt</dt><dd>Antworten schwanken je nach Abfrage und Assistent; verlässlich messen lässt sich das noch nicht.</dd>
+        <dt>Beleg</dt><dd class="bl">Der DVV schreibt: Wer in KI-Antworten nicht „mitgedacht“ wird, „läuft Gefahr, schlicht unsichtbar zu werden“ (<a href="#q-dvv">DVV, 19.8.2026</a>).</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="anregen">
+      <summary><b>Zielgruppen-Personas aus eigenen Daten</b><span class="tags"><span class="amp y">Gelb</span><span class="s-an">Anregen lassen</span><span class="rf r1"><i aria-hidden="true"></i>Pilot, eher Ausblick</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Aus anonymisierten Daten und Interviews Personas entwickeln – beispielhafte Figuren für eine Zielgruppe – und Texte daran testen.</dd>
+        <dt>Wo es kippt</dt><dd>Simulierte Zielgruppen klingen plausibel, ersetzen aber keine Befragung, und Stereotype schleichen sich leicht ein. Der DVV empfiehlt Personas auf Grundlage von Interviews (<a href="#q-dvv">19.8.2026</a>).</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section class="area" aria-labelledby="b-verwaltung">
+    <h3 id="b-verwaltung">Verwaltung</h3>
+    <p class="oben">Oben: <a href="#uc-4">Nr. 4 Protokoll aus Stichworten</a></p>
+    <details class="fall" data-ampel="y" data-spalte="anregen">
+      <summary><b>Kalkulation und Tabellenarbeit</b><span class="tags"><span class="amp y">Gelb</span><span class="s-an">Anregen lassen</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Kalkulationsvorlagen erklären (Honorare, Raum, Deckungsbeitrag, Mindestzahl an Teilnehmenden), Formeln bauen, Varianten rechnen.</dd>
+        <dt>Womit anfangen</dt><dd>Eigene Kostensätze vorgeben. Gerechnet wird in der Tabelle oder mit Code-Ausführung, nicht im Chat-Text.</dd>
+        <dt>Beleg</dt><dd class="bl">Kostenkalkulation ist für mehr als die Hälfte der Befragten eine Aufgabe, aber nur 7 % nutzen dafür KI – die größte Lücke im Aufgabenspektrum (<a href="#q-oecert">Universität Graz, 16.2.2026</a>).</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="g y" data-spalte="abgeben">
+      <summary><b>Vorlagen und Formulare bereinigen</b><span class="tags"><span><span class="amp g">Grün</span> · intern: <span class="amp y">Gelb</span></span><span class="s-ab">Abgeben</span><span class="rf r3"><i aria-hidden="true"></i>läuft robust</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Vorlagen vereinheitlichen, Pflichtangaben ergänzen, verständlicher formulieren.</dd>
+        <dt>Prüfpunkt</dt><dd>Sind alle Pflichtangaben noch drin?</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section class="area" aria-labelledby="b-leitung">
+    <h3 id="b-leitung">Leitung und Organisation</h3>
+    <p class="oben">Oben: <a href="#uc-11">Nr. 11 Vorstandsvorlage mit Gegenargumenten</a> · <a href="#uc-12">Nr. 12 KI-Inventar und Schulungsnachweis</a></p>
+    <details class="fall" data-ampel="g" data-spalte="anregen behalten">
+      <summary><b>Interne KI-Regeln entwerfen</b><span class="tags"><span class="amp g">Grün</span><span><span class="s-an">Anregen lassen</span>, Beschluss <span class="s-be">behalten</span></span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Einen Entwurf für die eigene KI-Leitlinie erstellen.</dd>
+        <dt>Womit anfangen</dt><dd>Vorhandene Vorlagen nutzen: die <a href="#q-voev">KI-Vorgaben des Verbands Österreichischer Volkshochschulen</a> (Februar 2026), die Muster-Richtlinie des <a href="#q-dvv">DVV</a> (19.8.2026) oder das <a href="modul.html?m=regeln">Modul Regeln &amp; Verantwortung</a>.</dd>
+        <dt>Wo es kippt</dt><dd>Die Anpassung an die eigenen Werkzeuge und die Datenampel bleibt Arbeit. Wo es einen Betriebsrat gibt: einbinden.</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="anregen">
+      <summary><b>Szenarien bei Förderänderungen</b><span class="tags"><span class="amp y">Gelb</span><span class="s-an">Anregen lassen</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Durchspielen, was eine Kürzung der Landesförderung, der Wegfall einer Maßnahme oder die Vorfinanzierung bei ESF-Projekten bedeuten.</dd>
+        <dt>Womit anfangen</dt><dd>Zahlen aus der Buchhaltung, gerechnet wird in der Tabelle. Die KI ordnet Folgen und Optionen.</dd>
+      </dl>
+    </details>
+    <details class="fall" data-ampel="y" data-spalte="anregen">
+      <summary><b>Strategie-Sparring</b><span class="tags"><span class="amp y">Gelb</span><span class="s-an">Anregen lassen</span><span class="rf r2"><i aria-hidden="true"></i>gut mit Prüfschritt</span></span></summary>
+      <dl class="det in">
+        <dt>Was</dt><dd>Leitbild oder Jahresplanung kritisch befragen lassen, etwa gegen die LLL-Strategie des Landes.</dd>
+        <dt>Womit anfangen</dt><dd>Die kritische Rolle ausdrücklich verlangen: „Widersprich mir, wo es schwach ist.“ Sonst fällt die Antwort zu freundlich aus. Vorlage: der Sparring-Skill auf der <a href="leitfrage.html#anregen">Leitfrage-Seite</a>.</dd>
+      </dl>
+    </details>
+  </section>
+
+  <!-- ============ Ausblick ============ -->
+  <h2 id="ausblick">Ausblick: Routinen und Agenten</h2>
+  <p>Eine <b>Routine</b> ist ein Auftrag, der zu festen Zeiten von selbst läuft. Ein <b>Agent</b> ist eine KI, die dabei mehrere Schritte selbstständig erledigt – etwa suchen, lesen und eine Liste schreiben. Für Bildungshäuser ist das heute vor allem Ausblick (Einschätzung, Stand Oktober 2026).</p>
+  <div class="tablewrap"><table class="rt">
+    <tr><th>Routine</th><th>Takt</th><th>Ampel</th><th>Reife heute</th></tr>
+    <tr><td>Neue Förderaufrufe finden und vorsortieren</td><td>wöchentlich</td><td><span class="amp g">Grün</span></td><td>Pilot – der risikoärmste Einstieg: Das Ergebnis ist eine Liste, keine Handlung.</td></tr>
+    <tr><td>Programmdaten abgleichen: Website, Weiterbildungsnavi, Programmheft</td><td>monatlich</td><td><span class="amp g">Grün</span></td><td>Pilot – braucht Datenzugang.</td></tr>
+    <tr><td>Fristen-Erinnerung mit Berichtsgerüst</td><td>laufend</td><td><span class="amp y">Gelb</span></td><td>Gut mit Prüfschritt – der Kalender erinnert, die KI baut nur das Gerüst.</td></tr>
+    <tr><td>Neue Feedback-Antworten codieren</td><td>wöchentlich</td><td><span class="amp y">Gelb</span></td><td>Pilot – nur, wenn Namen vorher entfernt sind.</td></tr>
+    <tr><td>Posteingang vorsortieren</td><td>täglich</td><td><span class="amp r">Rot</span></td><td>Pilot – Personendaten, eher Ausblick.</td></tr>
+  </table></div>
+  <div class="note"><b>Die Regel für jede Routine:</b> Handlungen nach außen – Versand, Meldung an Fördergeber, Löschen – nie ohne menschliche Freigabe. Die KI bereitet vor, ein Mensch gibt frei.<br><span class="s">Greift eine KI selbst auf Postfach oder Laufwerk zu, entscheidet die Berechtigung, nicht mehr das Einfügen (<a href="datenampel.html">Datenampel</a>, Falle 6).</span></div>
+
+  <!-- ============ Fördergeber ============ -->
+  <h2 id="foerdergeber">Fördergeber und KI-gestützte Berichte</h2>
+  <div class="card tabbed"><span class="tab" style="background:var(--regeln)">Stand 11.10.2026</span>
+    <h3 style="margin-top:0">Was belegt ist</h3>
+    <ul>
+      <li><b>FFG:</b> erlaubt generative KI bei Förderanträgen ausdrücklich, ohne Offenlegungspflicht. Verantwortung und Risiko liegen bei den Antragstellenden (<a href="#q-ffg">Stand Mai 2025</a>).</li>
+      <li><b>Erasmus+:</b> verlangt Originalinhalte. Alle Anträge werden automatisch auf Doppelfinanzierung und Plagiatsrisiken geprüft; bei Ähnlichkeit entsteht ein „Bericht über kritische Ähnlichkeiten“ (<a href="#q-erasmus">Programmleitfaden 2026</a>).</li>
+      <li><b>AMS und Land Steiermark:</b> Eine veröffentlichte Position zu KI in Förderberichten wurde nicht gefunden (Stand 11.10.2026). Belegt sind verpflichtende Berichtsvorlagen und Regeln für den Fall unrichtiger Angaben (<a href="#q-amswien">AMS Wien</a>, <a href="#q-land">Land Steiermark</a>).</li>
+    </ul>
+    <h3>Einschätzung</h3>
+    <p>Der wahrscheinliche Maßstab ist <b>Inhalt vor Herkunft</b>: Ein Bericht muss richtig, vollständig und passend zum Antrag sein. Womit er geschrieben wurde, ist zweitrangig – das entspräche der Linie der FFG. Eigene Sprache und eigener Kontext machen Berichte zudem unterscheidbar.</p>
+    <p class="s m" style="margin:0">Im Zweifel klärt ein kurzes Gespräch mit der zuständigen Förderstelle mehr als jede Vermutung.</p>
+  </div>
+
+  <!-- ============ Drei Fragen ============ -->
+  <h2 id="fragen">Drei Fragen auseinanderhalten</h2>
+  <div class="card tabbed"><span class="tab" style="background:var(--kontext)">Darf · Dürfen · Sollen</span>
+    <dl class="drei">
+      <dt style="margin-top:0">Darf ich?</dt><dd>Gesetz (DSGVO, AI Act) plus Vertrag des Tools: Welche Daten (Ampel) in welches Werkzeug (Vertrag, kein Training, Speicherort)?</dd>
+      <dt>Dürfen wir?</dt><dd>Ihre Hausregel. Sie darf strenger sein als das Gesetz.</dd>
+      <dt>Sollen wir?</dt><dd>Die Leitfrage: abgeben, anregen lassen oder behalten?</dd>
+    </dl>
+    <p style="margin-top:16px">Ob Gelb erlaubt ist, hängt am Vertrag des Tools – Dienstkonto mit Auftragsverarbeitung, kein Training mit Ihren Daten, Speicherort in der EU – und nicht am Modell allein. Mehr dazu in der <a href="tools.html">Tool-Landkarte</a>.</p>
+    <p class="hand" style="font-size:27px">„Das Gesetz sagt, was wir dürfen. Die Haltung sagt, was wir wollen.“</p>
+    <p class="s" style="margin:0"><a href="datenampel.html#drei-fragen">Die drei Fragen auf der Datenampel-Seite</a></p>
+  </div>
+
+  <!-- ============ Quellen ============ -->
+  <h2 id="quellen">Quellen</h2>
+  <p class="s">Abgerufen am 10. und 11. Oktober 2026. Herstellerangaben und Anzeigen sind gekennzeichnet; ihre Zahlen wurden nicht unabhängig geprüft. Weitere Quellen des Workshops unter <a href="quellen.html">Quellen &amp; Begriffe</a>.</p>
+
+  <h3>Studien und Daten</h3>
+  <ul class="q">
+    <li id="q-oecert"><a href="https://oe-cert.at/media/Tipps/Forschungsbericht_KI_EB_final.pdf">Künstliche Intelligenz in der Erwachsenenbildung – Befragung in Ö-Cert-Einrichtungen</a><span class="w">Gruber, Schmieder, Universität Graz · 16.2.2026 · 301 Befragte</span></li>
+    <li id="q-hudde"><a href="https://epflicht.ulb.uni-bonn.de/download/pdf/818782">A Golden Era for Open-Ended Questions?</a><span class="w">Hudde, Taflinger, ECONtribute Discussion Paper 416 · Juni 2026 · Preprint, Daten aus den USA</span></li>
+    <li id="q-joanneum"><a href="https://online.uni-graz.at/kfu_online/wbfppubcb.cbExecuteDownload?pDocStoreNr=6E4350596B4F436531793531672B412F696C387934773D3D">KI in der organisationsinternen Aus- und Weiterbildung, Endbericht</a><span class="w">JOANNEUM RESEARCH / Universität Graz im Auftrag des AMS · Dezember 2025 · Fokus Unternehmen</span></li>
+    <li id="q-amsstmk"><a href="https://www.ams.at/regionen/steiermark/news/2026/08/steirischer-arbeitsmarkt-juli-2026">Der steirische Arbeitsmarkt: Halbjahresbilanz und Juli 2026</a><span class="w">AMS Steiermark · August 2026 · Beispiel für öffentliche Daten</span></li>
+    <li id="q-aes"><a href="https://www.statistik.at/statistiken/bevoelkerung-und-soziales/bildung/weiterbildungsaktivitaeten-der-bevoelkerung">Erwachsenenbildungserhebung (AES) 2022/23</a><span class="w">Statistik Austria · ohne Auswertung nach Bundesländern</span></li>
+  </ul>
+
+  <h3>Fördergeber, Qualität und Recht</h3>
+  <ul class="q">
+    <li id="q-ffg"><a href="https://www.ffg.at/zur-verwendung-von-generativer-ai-bei-der-erstellung-von-foerderantraegen">Zur Verwendung von generativer AI bei der Erstellung von Förderanträgen</a><span class="w">FFG · Stand Mai 2025</span></li>
+    <li id="q-erasmus"><a href="https://erasmusplus.oead.at/fileadmin/Dokumente/erasmusplus.at/Allgemein/Dokumentencentre/Programmleitfaden/programme-guide-2026_de_Version1.pdf">Erasmus+ Programmleitfaden 2026 (deutsch)</a><span class="w">Europäische Kommission, bereitgestellt vom OeAD · 2026 · Abschnitt „Originalinhalte und Urheberschaft“</span></li>
+    <li id="q-amswien"><a href="https://www.ams.at/content/dam/download/partner/wien/900_allgemeine_bestimmungen_vers1125.pdf">Allgemeine Bestimmungen, Version 11.2025</a><span class="w">AMS Wien · November 2025 · für die Steiermark als Vergleich</span></li>
+    <li id="q-land"><a href="https://www.verwaltung.steiermark.at/cms/dokumente/12956885_180669618/e32d7464/RL%20Projektf%C3%B6rderungen%20Bereich%20LLL%202%202022.docx.pdf">Richtlinie Projektförderungen Erwachsenenbildung und LLL</a><span class="w">Land Steiermark, A6 · Fassung 2022 · aktuelle Fassung beim Förderungsmanagement prüfen</span></li>
+    <li id="q-impuls"><a href="https://www.verwaltung.steiermark.at/cms/dokumente/12999904_183530200/6fbd96cc/F%C3%B6rdercall_Impulsf%C3%B6rderung%20zur%20Qualit%C3%A4tsentwicklung%20der%20Steirischen%20Erwachsenenbildung%202026.pdf">Ausschreibung Impulsförderung für Qualitätsmanagementsysteme 2026–2028</a><span class="w">Land Steiermark, A6 · 2026</span></li>
+    <li id="q-esf"><a href="https://www.esf.at/wp-content/uploads/2023/03/ESFplus_JTF_Sonderrichtlinie_ueberarb_im-BMF.pdf">Sonderrichtlinie ESF+ und JTF, überarbeitete Fassung</a><span class="w">ESF Österreich · abgerufen Oktober 2026</span></li>
+    <li id="q-idea"><a href="https://www.esf.at/wp-content/uploads/2024/08/Call_IDEA_207_BMBWF01-2.pdf">ESF+ Call IDEA 207, Bewertungsraster</a><span class="w">BMBWF · 2024 · Beispiel aus der Basisbildung</span></li>
+    <li id="q-oecertgv"><a href="https://oe-cert.at/media/oe-cert-grundvoraussetzungen.pdf">Ö-Cert-Grundvoraussetzungen</a><span class="w">Ö-Cert · abgerufen Oktober 2026</span></li>
+    <li id="q-aiact"><a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj">Verordnung (EU) 2024/1689 (AI Act)</a><span class="w">Europäische Union · 2024, geändert durch VO (EU) 2026/1744 · Art. 4, 5, 50, Anhang III</span></li>
+    <li id="q-bafg"><a href="https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&amp;Gesetzesnummer=20012316">Barrierefreiheitsgesetz (BaFG)</a><span class="w">Rechtsinformationssystem des Bundes · Fassung 11.10.2026</span></li>
+    <li id="q-ris"><a href="https://www.ris.bka.gv.at">§ 120 StGB, §§ 96, 96a ArbVG, § 9 GlBG; DSGVO Art. 22, 28</a><span class="w">Rechtsinformationssystem des Bundes · abgerufen Oktober 2026</span></li>
+  </ul>
+
+  <h3>Praxisbeispiele und Anbieter</h3>
+  <ul class="q">
+    <li id="q-vhsbw"><a href="https://www.vhs-bw.de/ki-assistenz-fuer-die-programmplanung-version-2-0/">KI-Assistenz für die Programmplanung – Version 2.0</a><span class="w">Volkshochschulverband Baden-Württemberg · 25.9.2026 · Zahl der Kurse von der <a href="https://www.gfg-id.de/projekte/vhs-ki-assistenz-programmplanung-volkshochschulen.html">Projektseite des Dienstleisters</a> <span class="mark">Anbieterangabe</span></span></li>
+    <li id="q-dvv"><a href="https://www.volkshochschule.de/themen/digitale-bildung/handlungsempfehlungen-kuenstliche-intelligenz-ki.php">Handlungsempfehlungen für den Einsatz von KI an Volkshochschulen</a><span class="w">Deutscher Volkshochschul-Verband · aktualisiert 19.8.2026 · mit Muster-Richtlinie</span></li>
+    <li id="q-voev"><a href="https://www.vhs.or.at/sites/default/files/themen/NutzungKI_VOEV.pdf">KI-Vorgaben des Verbands Österreichischer Volkshochschulen</a><span class="w">VÖV · Februar 2026</span></li>
+    <li id="q-ams"><a href="https://www.ams.at/regionen/osterreichweit/news/2024/01/kuenstliche-intelligenz-unterstuetzt-bei-berufsinformation">Künstliche Intelligenz unterstützt bei der Berufsinformation</a><span class="w">AMS, Presseaussendung · 3.1.2024</span></li>
+    <li id="q-bfi"><a href="https://www.tips.at/nachrichten/linz/wirtschaft-politik/723687-mehr-zeit-fuer-persoenliche-beratung-bfi-salzburg-setzt-auf-linzer-ki-im-kundenserivce">BFI Salzburg setzt auf Linzer KI im Kundenservice</a><span class="w">Tips · 22.5.2026 · <span class="mark">Anzeige</span> Zahlen nicht unabhängig geprüft</span></li>
+    <li id="q-capito"><a href="https://www.capito.eu/digital/">capito.ai – KI-Tool für Leichte Sprache</a> · <a href="https://www.capito.eu/preise/">Preise und Pakete</a><span class="w">capito, Graz · abgerufen 11.10.2026 · <span class="mark">Herstellerangabe</span> Preise exkl. USt., 1 Seite = 1.800 Zeichen</span></li>
+    <li id="q-kufer"><a href="https://www.kufer.de/aktuelles/ki-von-kufer-digitale-unterstuetzung-die-mitdenkt">KI von Kufer – Digitale Unterstützung, die mitdenkt</a><span class="w">Kufer Software · 16.2.2026 · <span class="mark">Herstellerangabe</span> Verbreitung in Österreich nicht geprüft</span></li>
+    <li id="q-noscribe"><a href="https://noscribe.de/de/">noScribe – lokale Transkription</a><span class="w">Open-Source-Projekt (GPL-3.0) · abgerufen Oktober 2026 · <span class="mark">Projektangabe</span></span></li>
+  </ul>
+
+  <p class="src" style="margin-top:30px">Stand: 11. Oktober 2026 · Orientierung, keine Rechtsberatung · Die Beispiele aus dem Bildungswerk Apfelland sind erfunden.</p>
+  </div>
+</main>
+<footer class="site"><span>Armin Fradler · <a href="https://arminfradler.at">arminfradler.at</a></span><span><a href="../../datenschutz.html">Datenschutz</a> · <a href="https://arminfradler.at/impressum">Impressum</a></span><span>Orientierung, keine Rechtsberatung</span></footer>
+<script>
+(()=>{
+  /* Filter nach Ampel und Spalte. Ohne JavaScript bleibt alles sichtbar. */
+  const f=document.getElementById('filter');
+  const items=[...document.querySelectorAll('[data-ampel]')];
+  const areas=[...document.querySelectorAll('.area')];
+  const out=document.getElementById('treffer');
+  f.hidden=false;
+  f.addEventListener('change',()=>{
+    const a=f.querySelector('input[name=fa]:checked').value, s=f.querySelector('input[name=fs]:checked').value;
+    let n=0;
+    items.forEach(el=>{
+      const ok=(!a||el.dataset.ampel.split(' ').includes(a))&&(!s||el.dataset.spalte.split(' ').includes(s));
+      el.hidden=!ok; if(ok)n++;
+    });
+    areas.forEach(g=>{g.hidden=!g.querySelector('[data-ampel]:not([hidden])')});
+    out.textContent=(a||s)?n+' von '+items.length+' Fällen passen.':'';
+  });
+  /* Sprungziel in einem zugeklappten Eintrag öffnen */
+  const openHash=()=>{const t=location.hash&&document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t&&t.tagName==='DETAILS')t.open=true};
+  addEventListener('hashchange',openHash);openHash();
+  /* Beim Drucken alle Einträge aufklappen */
+  addEventListener('beforeprint',()=>document.querySelectorAll('details.fall:not([open])').forEach(d=>{d.open=true;d.dataset.p='1'}));
+  addEventListener('afterprint',()=>document.querySelectorAll('details.fall[data-p]').forEach(d=>{d.open=false;delete d.dataset.p}));
+})();
+</script>
+</body>
+</html>

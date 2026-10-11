@@ -87,8 +87,10 @@ function pathChoice(inArrival){
   const cur=store.get('a.pfad');
   main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>Woran möchten Sie später arbeiten?</h1><p class="m s">40 Minuten in Kleingruppen. Sie können später noch wechseln.</p>`+
    C.paths.map((p,i)=>{const I=(window.Pfade&&Pfade.info[p.id])||{};return `<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span>${I.fuer?`<br><span class="s m">Für: ${I.fuer}</span><br><span class="s m">Sie nehmen mit: ${I.mit}</span>`:''}</button>`}).join('')+
+   (inArrival?`<button class="opt" id="later" style="text-align:center;margin-bottom:10px">Noch offen – ich entscheide später</button>`:'')+
    `<p class="hint">Das vierte Modul „Wissen &amp; Assistenten“ gibt es danach online.</p>`;
-  main.querySelectorAll('.opt').forEach(b=>b.onclick=async()=>{await send('pfad',{i:+b.dataset.i});render()});
+  main.querySelectorAll('.opt[data-i]').forEach(b=>b.onclick=async()=>{await send('pfad',{i:+b.dataset.i});render()});
+  if(inArrival)$('#later').onclick=()=>{store.set('a.pfad',{later:true});render()};
 }
 
 /* ---------- Use-Case-Landkarte ---------- */
@@ -96,20 +98,21 @@ function usecases(){
   const cur=store.get('a.uc'), v=cur?cur.v.slice():C.usecases.map(()=>null);
   main.innerHTML=`<div class="kick">Use-Case-Landkarte</div><h1>Wo lohnt sich KI bei Ihnen?</h1>`+
     C.usecases.map((u,j)=>`<div class="uc"><p>${u}</p><div class="tri" data-j="${j}">${['lohnt sich','kritisch','kein Thema'].map((l,k)=>`<button data-v="${k}" class="${v[j]===k?'sel':''}">${l}</button>`).join('')}</div></div>`).join('')+
-    `<button class="go" id="b" ${v.includes(null)?'disabled':''}>Absenden</button>`;
+    `<p class="hint">Sie müssen nicht alle Zeilen beantworten.</p><button class="go" id="b">Absenden</button>`;
   main.querySelectorAll('.tri').forEach(t=>t.querySelectorAll('button').forEach(b=>b.onclick=()=>{
-    v[+t.dataset.j]=+b.dataset.v;t.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));$('#b').disabled=v.includes(null)}));
+    v[+t.dataset.j]=+b.dataset.v;t.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b))}));
   $('#b').onclick=async()=>{await send('uc',{v});done('Danke!','Die Landkarte entsteht gerade vorne.')};
 }
 
 /* ---------- Quiz ---------- */
 function quiz(){
   const qi=state.qi??0, Q=C.quiz[qi];
-  if(!store.get('nick')){
-    main.innerHTML=`<div class="kick">Quiz um den Pokal</div><h1>Ihr Spitzname</h1><p class="m s">Kein echter Name – erscheint nur, wenn Sie gewinnen.</p><input type="text" id="n" maxlength="24" placeholder="z. B. Datenampel-Fan"><button class="go" id="b" style="margin-top:12px">Los</button>`;
-    $('#b').onclick=async()=>{const n=$('#n').value.trim();if(!n)return;store.set('nick',n);await send('nick',{text:n});render()};return}
   if(!Q){lookUp();return}
   const key='quiz'+qi, cur=store.get('a.'+key);
+  if(cur&&!state.reveal&&!store.get('nick')&&!store.get('nickSkip')){
+    main.innerHTML=`<div class="kick">Quiz um den Pokal</div><h1>Antwort ist drin. Ihr Spitzname?</h1><p class="m s">Kein echter Name – erscheint nur, wenn Sie gewinnen.</p><input type="text" id="n" maxlength="24" placeholder="z. B. Datenampel-Fan"><button class="go" id="b" style="margin-top:12px">Mitspielen</button><button class="opt" id="skip" style="margin-top:10px;text-align:center">Lieber ohne Pokal</button>`;
+    $('#b').onclick=async()=>{const n=$('#n').value.trim();if(!n)return;store.set('nick',n);await send('nick',{text:n});render()};
+    $('#skip').onclick=()=>{store.set('nickSkip',1);render()};return}
   if(state.reveal){done(cur&&cur.i===Q.a?'Richtig!':'Diesmal nicht.',`Richtig ist: ${esc(Q.o[Q.a])}`);return}
   if(cur){done('Antwort ist drin.','Auflösung gleich vorne.');return}
   const mail=Q.mail?`<div class="letter">Von: Förderabwicklung Land Apfelland &lt;abrechnung@foerderung-apfelland.at&gt;<br>Betreff: Projekt „Deutsch im Apfelland“ (2026-114) – Endabrechnung<br><br>Sehr geehrte Frau Mag. Huber,<br><br>vielen Dank für Ihren Sachbericht zum Deutschkurs B1 vom 30. Juni. Für die Auszahlung der zweiten Tranche (12.400 €) fehlt uns noch die Bestätigung Ihrer Bankverbindung, da das Förderportal umgestellt wurde. Bitte bestätigen Sie diese bis Freitag, 12 Uhr, damit die Auszahlung noch im Oktober erfolgt.<br><br><u>Bankverbindung jetzt bestätigen</u><br><br>Mit freundlichen Grüßen<br>Mag. Thomas Berger, Förderabwicklung</div>`:'';
@@ -120,13 +123,13 @@ function quiz(){
 /* ---------- Pfade ---------- */
 function paths(){
   const cur=store.get('a.pfad');
-  if(!cur){pathChoice(false);return}
+  if(!cur||cur.i==null){pathChoice(false);return}
   const p=C.paths[cur.i];
   main.innerHTML=`<div class="kick">Ihr Lernpfad</div><div class="path" data-tab="${p.zone}" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p>Gehen Sie in die <b>${p.zone}</b>. Gern mit Kolleg:innen aus Ihrem Haus.</p><button class="opt" id="w" style="text-align:center">Pfad wechseln</button>`;
   $('#w').onclick=()=>pathChoice(false);
 }
 function work(){
-  const cur=store.get('a.pfad');if(!cur){pathChoice(false);return}
+  const cur=store.get('a.pfad');if(!cur||cur.i==null){pathChoice(false);return}
   window.Pfade.render(C.paths[cur.i].id);
 }
 
@@ -138,6 +141,21 @@ function monday(){
   main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Danke!</p></div>`+
    (m&&m.text?`<div class="card"><p class="s m" style="margin:0 0 6px">Ihr Schritt:</p><p style="margin:0">${esc(m.text)}</p></div><a class="go" style="text-align:center;text-decoration:none" href="mailto:?subject=${encodeURIComponent('Mein erster Schritt nach dem Workshop')}&body=${encodeURIComponent(m.text+'\n\nAus dem Workshop „KI als Organisationskompetenz“, Tag der Weiterbildung 2026')}">Als Erinnerung an mich mailen</a><p class="hint">Geht über Ihr eigenes Mailprogramm. Wir speichern keine Adresse.</p>`:'');
 }
+/* ---------- Synthese: zurück zum eigenen Ergebnis ---------- */
+function synth(){
+  const cur=store.get('a.pfad');
+  if(!cur||cur.i==null){lookUp();return}
+  main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Schauen Sie nach vorne.</p><p class="m s">Vorne sehen Sie gerade, was die Gruppen entschieden haben.</p></div><button class="opt" id="mine" style="text-align:center">Mein Ergebnis und Abholcode</button>`;
+  $('#mine').onclick=()=>work();
+}
+
+/* ---------- Zugabe: eine Frage an Armin ---------- */
+function zugabe(){
+  const after=()=>(!answered('montag')||!answered('stimmung'))?monday():done('Danke!','Ein paar Fragen greift Armin gleich auf.');
+  if(answered('frage'))return after();
+  textQ('Ihre Frage an Armin','Zugabe · anonym','frage','Geht das bei uns? z. B. „Dürfen wir Feedback-Bögen mit Copilot auswerten?“',after,'Absenden',true);
+}
+
 function end(){main.innerHTML=`<div class="kick">Danke!</div><h1>Alles zum Nachlesen</h1><div class="card"><p style="margin:0">Alle vier Module, Datenampel, Tool-Landkarte, Team-Starter-Kit und Quellen:</p><p style="font-family:var(--type);font-size:20px;margin:10px 0 0">${C.participantUrl}</p></div><a class="go" style="display:block;text-align:center;text-decoration:none" href="werkzeuge/ki/">Zu den Werkzeugen</a><a class="opt" style="display:block;text-align:center;text-decoration:none;margin-top:10px" href="abholen.html">Ergebnis mit Abholcode abholen</a><p class="hand">Gute Heimfahrt!</p>`}
 
 /* ---------- Router ---------- */
@@ -151,7 +169,9 @@ function render(){
   if(s==='quiz')return quiz();
   if(s==='paths')return paths();
   if(s==='control')return work();
+  if(s==='synth')return synth();
   if(s==='monday')return monday();
+  if(s==='zugabe')return zugabe();
   if(s==='end')return end();
   lookUp();
 }
