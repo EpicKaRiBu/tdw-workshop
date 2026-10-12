@@ -107,6 +107,7 @@ function usecases(){
 }
 
 /* ---------- Quiz ---------- */
+function qLabel(qi){const ord=C.quizKern||C.quiz.map((_,i)=>i), pos=ord.indexOf(qi);return pos<0?'Zusatzfrage':`Frage ${pos+1} von ${ord.length}`}
 function quiz(){
   const qi=state.qi??0, Q=C.quiz[qi];
   if(!Q){lookUp();return}
@@ -118,7 +119,7 @@ function quiz(){
   if(state.reveal){done(cur?(cur.i===Q.a?'Richtig!':'Diesmal nicht.'):'Auflösung',`Richtig ist: ${esc(Q.o[Q.a])}`+(Q.src?`<br><small>Quelle: ${esc(Q.src)}</small>`:''));return}
   if(cur){done('Antwort ist drin.','Auflösung gleich vorne.');return}
   const mail=Q.mail?`<div class="letter">Von: Förderabwicklung Land Apfelland &lt;abrechnung@foerderung-apfelland.at&gt;<br>Betreff: Projekt „Deutsch im Apfelland“ (2026-114) – Endabrechnung<br><br>Sehr geehrte Frau Mag. Huber,<br><br>vielen Dank für Ihren Sachbericht zum Deutschkurs B1 vom 30. Juni. Für die Auszahlung der zweiten Tranche (12.400 €) fehlt uns noch die Bestätigung Ihrer Bankverbindung, da das Förderportal umgestellt wurde. Bitte bestätigen Sie diese bis Freitag, 12 Uhr, damit die Auszahlung noch im Oktober erfolgt.<br><br><u>Bankverbindung jetzt bestätigen</u><br><br>Mit freundlichen Grüßen<br>Mag. Thomas Berger, Förderabwicklung</div>`:'';
-  main.innerHTML=`<div class="kick">Quiz · Frage ${qi+1} von ${C.quiz.length}</div><h1>${esc(Q.q)}</h1>${mail}<div class="opts">${Q.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
+  main.innerHTML=`<div class="kick">Quiz · ${qLabel(qi)}</div><h1>${esc(Q.q)}</h1>${mail}<div class="opts">${Q.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div>`;
   main.querySelectorAll('.opt').forEach(b=>b.onclick=async()=>{await send(key,{i:+b.dataset.i});render()});
 }
 
