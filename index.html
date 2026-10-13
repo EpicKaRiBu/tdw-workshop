@@ -32,8 +32,13 @@
 const C=window.TDW, $=s=>document.querySelector(s), main=$('#main');
 const params=new URLSearchParams(location.search);
 /* Außerhalb des Workshops führt die Startseite zu den Werkzeugen (am Workshoptag erst ab C.openFrom). Proben und Test: ?s=TEST oder ?s=1910 */
-const now=new Date(),hm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-if(!params.has('s')&&(now.toLocaleDateString('sv')!==C.date||hm<(C.openFrom||'00:00'))){location.replace('werkzeuge/ki/');return}
+/* Uhrzeit immer in Wiener Zeit, auch wenn das Handy anders eingestellt ist */
+const wien=(()=>{try{return new Date().toLocaleString('sv',{timeZone:'Europe/Vienna'})}catch(e){const d=new Date();return d.toLocaleDateString('sv')+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}})();
+const heute=wien.slice(0,10)===C.date,hm=wien.slice(11,16);
+const mitgemacht=(()=>{try{return !!localStorage.getItem('tdw.'+C.session+'.pid')}catch(e){return false}})();
+/* Am Workshoptag vor C.openFrom: Warteseite, die sich selbst neu lädt (früh gescannte Mappen-QR-Codes bleiben so nicht bei den Werkzeugen hängen) */
+if(!params.has('s')&&heute&&hm<(C.openFrom||'00:00')){$('#liveT').textContent='gleich';main.innerHTML=`<div class="kick">Workshop um 14:00</div><h1>Ab ${C.openFrom} geht es hier los.</h1><p>Lassen Sie diese Seite einfach offen. Sie startet von selbst.</p><a class="opt" href="werkzeuge/ki/" style="display:block;text-align:center;text-decoration:none">Bis dahin: Werkzeuge ansehen</a>`;setTimeout(()=>location.reload(),60000);return}
+if(!params.has('s')&&(!heute||(hm>=(C.openUntil||'24:00')&&!mitgemacht))){location.replace('werkzeuge/ki/');return}
 const SESSION=(params.get('s')||C.session).toUpperCase()==='TEST'?'TEST':C.session;
 const store={get(k){try{return JSON.parse(localStorage.getItem('tdw.'+SESSION+'.'+k))}catch(e){return mem[k]}},set(k,v){mem[k]=v;try{localStorage.setItem('tdw.'+SESSION+'.'+k,JSON.stringify(v))}catch(e){}}};
 const mem={};
@@ -46,14 +51,24 @@ let sb=null,state={slide:'start'};
 try{sb=supabase.createClient(C.url,C.key)}catch(e){}
 window.TDWAPP={get sb(){return sb},store,send,toast:t=>toast(t),C,SESSION,main,choosePath:()=>{pathChoice(false);scrollTo(0,0)}};
 
+/* Senden mit Nachschicken: Bricht die Verbindung kurz ab, bleibt die Antwort gespeichert und geht nach, sobald das Netz wieder da ist */
+const pend=()=>store.get('pending')||{},tries={};
+async function trySend(q,value){if(!sb)return false;try{const {error}=await sb.rpc('submit_response',{p_session:SESSION,p_question:q,p_participant:pid,p_value:value});if(error)console.warn(error);return !error}catch(e){return false}}
+function unpend(q){const p=pend();if(q in p){delete p[q];store.set('pending',p)}}
 async function send(q,value){
   store.set('a.'+q,value);
   if(!sb)return;
-  const {error}=await sb.rpc('submit_response',{p_session:SESSION,p_question:q,p_participant:pid,p_value:value});
-  if(error){console.warn(error);toast('Konnte nicht senden – bitte nochmal versuchen.')}
+  if(await trySend(q,value)){unpend(q);return}
+  const p=pend();p[q]=value;store.set('pending',p);showPending();
 }
+let flushing=false;
+async function flush(){if(flushing)return;flushing=true;try{const p=pend();for(const q of Object.keys(p)){if(await trySend(q,p[q]))unpend(q);else if((tries[q]=(tries[q]||0)+1)>30)unpend(q)}}finally{flushing=false;showPending()}}
+setInterval(flush,8000);addEventListener('online',flush);
 function toast(t){const d=document.createElement('p');d.className='hint';d.style.color='var(--pencil)';d.textContent=t;main.prepend(d);setTimeout(()=>d.remove(),4000)}
-function setLive(on){$('#live').classList.toggle('off',!on);$('#liveT').textContent=on?'live':'offline'}
+let liveOn=false;
+function setLive(on){liveOn=on;$('#live').classList.toggle('off',!on);$('#liveT').textContent=on?'live':'offline';if(on)showPending()}
+/* Wartet noch eine Antwort aufs Netz, steht das oben in der Kopfzeile (die wird nie neu gezeichnet) */
+function showPending(){const n=Object.keys(pend()).length;if(n){$('#live').classList.add('off');$('#liveT').textContent='Antwort wird nachgeschickt …'}else{$('#live').classList.toggle('off',!liveOn);$('#liveT').textContent=liveOn?'live':'offline'}}
 
 /* ---------- Bausteine ---------- */
 function choice(title,kick,opts,key,next,extra=''){
@@ -63,10 +78,14 @@ function choice(title,kick,opts,key,next,extra=''){
 }
 function textQ(title,kick,key,ph,next,btn='Absenden',skip=false){
   const cur=store.get('a.'+key);
-  main.innerHTML=`<div class="kick">${kick}</div><h1>${title}</h1><textarea id="t" maxlength="280" placeholder="${ph}">${cur?esc(cur.text):''}</textarea><p class="hint">Bitte keine Namen. Anonym.</p><button class="go" id="b">${btn}</button>${skip?'<button class="opt" id="skip" style="margin-top:10px;text-align:center">Überspringen</button>':''}`;
-  $('#b').onclick=async()=>{const t=$('#t').value.trim();if(!t)return;await send(key,{text:t});next()};
-  if(skip)$('#skip').onclick=()=>{store.set('a.'+key,{skipped:true});next()};
+  main.innerHTML=`<div class="kick">${kick}</div><h1>${title}</h1><textarea id="t" data-k="${key}" maxlength="280" placeholder="${ph}">${cur?esc(cur.text):''}</textarea><p class="hint">Bitte keine Namen. Anonym.</p><button class="go" id="b">${btn}</button>${skip?'<button class="opt" id="skip" style="margin-top:10px;text-align:center">Überspringen</button>':''}`;
+  $('#b').onclick=async()=>{const t=$('#t').value.trim();if(!t)return;await send(key,{text:t});if(deferred){deferred=false;render()}else next()};
+  if(skip)$('#skip').onclick=()=>{store.set('a.'+key,{skipped:true});if(deferred){deferred=false;render()}else next()};
 }
+/* Wer gerade einen Text tippt, verliert ihn nicht, wenn vorne weitergeklickt wird: Neu gezeichnet wird erst nach dem Absenden */
+let deferred=false;
+const busy=()=>{const a=document.activeElement,t=$('#t');return !!t&&t.value.trim().length>0&&(a===t||t.value.trim()!==((store.get('a.'+t.dataset.k)||{}).text||''))};
+function rerender(){if(busy()){if(!deferred){deferred=true;const b=document.createElement('p');b.className='hint';b.style.color='var(--pencil)';b.innerHTML='Vorne geht es schon weiter. Schicken Sie Ihren Text noch ab. <a href="#" id="drop">Verwerfen</a>';main.prepend(b);$('#drop').onclick=e=>{e.preventDefault();deferred=false;render()}}return}deferred=false;render()}
 function done(msg,sub=''){main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">${msg}</p><p class="m s">${sub}</p></div>`}
 function lookUp(){done('Schauen Sie nach vorne.','Hier geht es weiter, sobald Ihre Mitarbeit gefragt ist.')}
 
@@ -139,7 +158,7 @@ function work(){
 
 /* ---------- Montag + Stimmung ---------- */
 function monday(){
-  if(!answered('montag')){textQ('Mein erster Schritt – ab morgen','Mitnehmen','montag','Was tun Sie als Erstes – und wann? z. B. „Am Donnerstag in der Teamsitzung …“',render,'An die Leinwand senden',true);return}
+  if(!answered('montag')){textQ('Mein erster Schritt – ab morgen','Mitnehmen','montag','Was tun Sie als Erstes – und wann? z. B. „Am Donnerstag in der Teamsitzung …“',render,'An die Leinwand senden',true);$('#t').maxLength=140;return}
   if(!answered('stimmung')){choice('Und jetzt, nach diesem Nachmittag – was überwiegt?','Zum Schluss',C.moods,'stimmung',render,'<p class="m s">Dieselbe Frage wie beim Ankommen. Vorne sehen Sie gleich, ob sich etwas bewegt hat.</p>');return}
   const m=store.get('a.montag');
   main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Danke!</p></div>`+
@@ -149,18 +168,21 @@ function monday(){
 function synth(){
   const cur=store.get('a.pfad');
   if(!cur||cur.i==null){lookUp();return}
-  main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Schauen Sie nach vorne.</p><p class="m s">Vorne sehen Sie gerade, was die Gruppen entschieden haben.</p></div><button class="opt" id="mine" style="text-align:center">Mein Ergebnis und Abholcode</button>`;
-  $('#mine').onclick=()=>work();
+  main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Schauen Sie nach vorne.</p><p class="m s">Vorne sehen Sie gerade, was die Gruppen entschieden haben.</p></div>`+(mineButtons()||'<button class="opt" data-p="" style="text-align:center">Mein Ergebnis und Abholcode</button>');
+  bindMine();
 }
+/* Alle begonnenen Pfade bleiben erreichbar, auch nach einem zweiten Pfad */
+function mineButtons(){const P=C.paths.filter(p=>(store.get('pfad.'+p.id)||{}).step>=0);return P.length?P.map(p=>`<button class="opt" data-p="${p.id}" style="text-align:center">Mein Ergebnis: ${p.name}</button>`).join(''):''}
+function bindMine(){main.querySelectorAll('button[data-p]').forEach(b=>b.onclick=()=>{b.dataset.p?window.Pfade.render(b.dataset.p):work();scrollTo(0,0)})}
 
 /* ---------- Zugabe: eine Frage an Armin ---------- */
 function zugabe(){
-  const after=()=>(!answered('montag')||!answered('stimmung'))?monday():done('Danke!','Ein paar Fragen greift Armin gleich auf.');
+  const after=()=>done('Danke!','Ein paar Fragen greift Armin gleich auf.');
   if(answered('frage'))return after();
   textQ('Ihre Frage an Armin','Zugabe · anonym','frage','Geht das bei uns? z. B. „Dürfen wir Feedback-Bögen mit Copilot auswerten?“',after,'Absenden',true);
 }
 
-function end(){main.innerHTML=`<div class="kick">Danke!</div><h1>Alles zum Nachlesen</h1><div class="card"><p style="margin:0">Alle vier Module, Datenampel, Tool-Landkarte, Team-Starter-Kit und Quellen:</p><p style="font-family:var(--type);font-size:20px;margin:10px 0 0">${C.participantUrl}</p></div><a class="go" style="display:block;text-align:center;text-decoration:none" href="werkzeuge/ki/">Zu den Werkzeugen</a><a class="opt" style="display:block;text-align:center;text-decoration:none;margin-top:10px" href="abholen.html">Ergebnis mit Abholcode abholen</a><p class="hand">Gute Heimfahrt!</p>`}
+function end(){main.innerHTML=`<div class="kick">Danke!</div><h1>Alles zum Nachlesen</h1><div class="card"><p style="margin:0">Alle vier Module, Datenampel, Tool-Landkarte, Team-Starter-Kit und Quellen:</p><p style="font-family:var(--type);font-size:20px;margin:10px 0 0">${C.participantUrl}</p></div><a class="go" style="display:block;text-align:center;text-decoration:none" href="werkzeuge/ki/">Zu den Werkzeugen</a><a class="opt" style="display:block;text-align:center;text-decoration:none;margin-top:10px" href="abholen.html">Ergebnis mit Abholcode abholen</a>${mineButtons()?'<p class="s m" style="margin:18px 0 6px">Ihr Ergebnis von heute, auf diesem Handy gespeichert:</p>'+mineButtons():''}<p class="hand">Gute Heimfahrt!</p>`;bindMine()}
 
 /* ---------- Router ---------- */
 function render(){
@@ -186,7 +208,7 @@ async function init(){
   if(error){setLive(false)}else{state=data.state||state;setLive(true)}
   render();
   sb.channel('s-'+SESSION).on('postgres_changes',{event:'UPDATE',schema:'public',table:'sessions',filter:'code=eq.'+SESSION},p=>{
-    const prev=JSON.stringify(state);state=p.new.state||state;if(JSON.stringify(state)!==prev)render();
+    const prev=JSON.stringify(state);state=p.new.state||state;if(JSON.stringify(state)!==prev)rerender();
   }).subscribe(st=>{setLive(st==='SUBSCRIBED');if(st==='SUBSCRIBED')refresh()});
   /* Nach dem Entsperren oder einer Funkpause den Folienstand neu holen */
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh()});
@@ -195,7 +217,7 @@ async function refresh(){
   if(!sb)return;
   const {data,error}=await sb.from('sessions').select('state').eq('code',SESSION).single();
   if(error||!data)return;
-  const prev=JSON.stringify(state);state=data.state||state;if(JSON.stringify(state)!==prev)render();
+  const prev=JSON.stringify(state);state=data.state||state;if(JSON.stringify(state)!==prev)rerender();
 }
 init();
 })();

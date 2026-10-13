@@ -24,7 +24,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .go:disabled{opacity:.4}
 textarea{width:100%;min-height:110px;font:inherit;font-size:18px;padding:14px;border:1.5px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);resize:vertical}
 .hint{font-size:14px;color:var(--muted);margin:6px 0 12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px;margin-bottom:14px;overflow-wrap:anywhere}
 .prog{display:flex;gap:6px;margin-bottom:16px}.prog span{flex:1;height:5px;background:var(--line);border-radius:3px}.prog span.on{background:var(--ink)}
 .uc{margin-bottom:14px}.uc p{margin:0 0 6px;font-weight:600}
 .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}

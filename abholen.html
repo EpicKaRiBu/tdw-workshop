@@ -31,7 +31,7 @@ button.light{background:var(--card);color:var(--ink);border:1.5px solid var(--li
   <input id="c" maxlength="14" placeholder="CODE-000" autocomplete="off"><br><button id="go">Abholen</button><p id="msg"></p></div>
   <div id="out" style="display:none">
     <div class="card" id="doc"></div>
-    <div class="noprint"><button id="dl">Als Word herunterladen</button><button class="light" onclick="print()">Drucken / als PDF speichern</button></div>
+    <div class="noprint"><button id="dl">Als Word herunterladen</button><button id="sk" style="display:none">Skill-Datei (SKILL.md) herunterladen</button><button class="light" onclick="print()">Drucken / als PDF speichern</button></div>
   </div>
   <p class="noprint" style="font-size:14px;color:var(--muted);margin-top:40px">Dokumente werden anonym gespeichert und nach vier Wochen automatisch gelöscht.</p>
 </main>
@@ -59,6 +59,7 @@ async function get(code){
   const {data,error}=await sb.rpc('get_pickup',{p_code:code.trim().toUpperCase()});
   if(error||!data){$('#msg').textContent='Kein Ergebnis zu diesem Code gefunden. Bitte prüfen Sie die Schreibweise.';$('#msg').className='err';return}
   cur=data.doc;$('#doc').innerHTML=render(cur);$('#out').style.display='block';$('#msg').textContent='';
+  $('#sk').style.display=(cur.kind==='kontext'&&window.Pfade&&Pfade.skillMd)?'':'none';
 }
 $('#go').onclick=()=>get($('#c').value);
 $('#c').onkeydown=e=>{if(e.key==='Enter')get($('#c').value)};
@@ -66,6 +67,7 @@ $('#dl').onclick=()=>{
   const h=`<html><head><meta charset="utf-8"><style>body{font-family:Calibri,Arial,sans-serif;font-size:11pt;line-height:1.4}h2{font-size:16pt}h3{font-size:12pt}small{color:#666}</style></head><body>${render(cur)}</body></html>`;
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+h],{type:'application/msword'}));a.download=(cur.title||'Ergebnis').replace(/[^\wäöüÄÖÜß -]/g,'').slice(0,60)+'.doc';a.click();
 };
+$('#sk').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([Pfade.skillMd(cur)],{type:'text/markdown'}));a.download='SKILL.md';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
 const q=new URLSearchParams(location.search).get('code');if(q){$('#c').value=q;get(q)}
 })();
 </script>
