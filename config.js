@@ -4,6 +4,7 @@ window.TDW = {
   key: 'sb_publishable_C4iTUIUu-CJA4WdyHxjAVw_VAL-cp2F',
   session: '1910',
   date: '2026-10-19',          // nur an diesem Tag zeigt die Startseite die Mitmach-App, sonst die Werkzeuge
+  openFrom: '13:30',           // und erst ab dieser Uhrzeit (Mappen liegen schon morgens auf allen Sesseln)
   participantUrl: 'mitmachen.arminfradler.at',
   quizKern: [0, 2, 3, 4],     // Reihenfolge der Quizfragen in der Kernfassung (Frage 2 ist Reserve)
   quiz: [

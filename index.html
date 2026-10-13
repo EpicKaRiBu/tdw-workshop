@@ -31,8 +31,9 @@
 (()=>{
 const C=window.TDW, $=s=>document.querySelector(s), main=$('#main');
 const params=new URLSearchParams(location.search);
-/* Außerhalb des Workshoptags führt die Startseite zu den Werkzeugen. Proben und Test: ?s=TEST oder ?s=1910 */
-if(!params.has('s')&&new Date().toLocaleDateString('sv')!==C.date){location.replace('werkzeuge/ki/');return}
+/* Außerhalb des Workshops führt die Startseite zu den Werkzeugen (am Workshoptag erst ab C.openFrom). Proben und Test: ?s=TEST oder ?s=1910 */
+const now=new Date(),hm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+if(!params.has('s')&&(now.toLocaleDateString('sv')!==C.date||hm<(C.openFrom||'00:00'))){location.replace('werkzeuge/ki/');return}
 const SESSION=(params.get('s')||C.session).toUpperCase()==='TEST'?'TEST':C.session;
 const store={get(k){try{return JSON.parse(localStorage.getItem('tdw.'+SESSION+'.'+k))}catch(e){return mem[k]}},set(k,v){mem[k]=v;try{localStorage.setItem('tdw.'+SESSION+'.'+k,JSON.stringify(v))}catch(e){}}};
 const mem={};
