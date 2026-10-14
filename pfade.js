@@ -45,7 +45,7 @@ const REGELN={
          ['Freigabe durch die Leitung','Höchste Kontrolle, kann zum Engpass werden.']]},
     {k:'kurse',t:'Was gilt für KI in Ihren Kursen?',fall:'Eine Trainerin merkt: Die Hausaufgaben im Deutschkurs sind plötzlich fehlerfrei. Ein Teilnehmer fragt, ob er für den Abschlusstest übersetzen lassen darf.',
       pruef:'Wissen Ihre Trainer:innen – auch die auf Honorarbasis –, was sie Teilnehmenden zu KI sagen sollen? Und mit welchen Konten arbeiten sie selbst mit Daten von Teilnehmenden?',
-      warum:'Erledigt ist nicht gelernt: KI, die Lösungen liefert, kann Lernen verhindern – als Tutor eingesetzt kann sie es fördern (Bastani et al., PNAS 2025). Viele Trainer:innen arbeiten auf Honorarbasis mit eigenen Geräten und Konten; eine Leitlinie erreicht sie nur, wenn sie ausdrücklich für sie gilt. Und Teilnehmende sollen nicht gedrängt werden, private KI-Konten mit eigenen Daten anzulegen.',
+      warum:'Erledigt ist nicht gelernt: KI, die Lösungen liefert, kann Lernen verhindern – als Tutor eingesetzt kann sie es fördern (Bastani et al., PNAS 2025). Viele Trainer:innen arbeiten auf Honorarbasis mit eigenen Geräten und Konten; eine Leitlinie erreicht sie nur, wenn sie ausdrücklich für sie gilt. Und Teilnehmende sollen nicht gedrängt werden, private KI-Konten mit eigenen Daten anzulegen. KI-Detektoren sind kein Beweis: Sie irren oft, besonders bei Menschen, die nicht in ihrer Erstsprache schreiben (Liang et al., Patterns 2023). Besser nachfragen und den Lernweg zeigen lassen.',
       o:[['Ohne KI, wo Lernen das Ziel ist','Übungen und Prüfungen, die eigenes Können zeigen sollen, ohne KI. In anderen Phasen nach Ansage der Trainerin.'],
          ['Offen – mit Offenlegen und Reflexion','Teilnehmende dürfen KI nutzen, sagen wofür und reflektieren, was sie selbst gelernt haben. Prüfungen zeigen eigenes Können.'],
          ['Trainer:innen entscheiden je Kurs','Auf Basis gemeinsamer Grundsätze des Hauses, die alle Trainer:innen kennen.']]},
@@ -57,7 +57,7 @@ const REGELN={
   ],
   opt:[
     {k:'kennz',pruef:'Würde es Ihre Teilnehmenden stören, wenn sie es wüssten? Wenn ja: kennzeichnen – auch ohne Pflicht.',t:'Kennzeichnen wir KI nach außen?',fall:'Für Social Media entsteht ein KI-Bild „zufriedener Teilnehmender“.',
-      warum:'Seit August 2026 (Art. 50 AI Act): Chatbots müssen sich als KI zu erkennen geben, die Anbieter markieren KI-Inhalte maschinenlesbar. Sie selbst kennzeichnen realistische KI-Bilder und Deepfakes, ebenso KI-Texte zu öffentlichen Themen. Texte, die ein Mensch geprüft und verantwortet hat, fallen in der Regel nicht darunter.',
+      warum:'Seit August 2026 (Art. 50 AI Act): Chatbots müssen sich als KI zu erkennen geben. Die Anbieter markieren KI-Inhalte maschinenlesbar, bei Tools, die es schon vorher gab (ChatGPT, Copilot, Gemini …), ab 2.12.2026. Sie selbst kennzeichnen realistische KI-Bilder und Deepfakes, ebenso KI-Texte zu öffentlichen Themen. Texte, die ein Mensch geprüft und verantwortet hat, fallen in der Regel nicht darunter.',
       o:[['Immer','Alles, was KI erstellt hat und nach außen geht.'],['Nur wo es Pflicht ist','Chatbots, realistische KI-Bilder, Deepfakes (täuschend echte Fälschungen) und ungeprüfte KI-Texte zu öffentlichen Themen (Art. 50). Sonst nichts.'],['Alle KI-Bilder und Chatbots, geprüfte Texte nicht','Auch Bilder, die nicht echt wirken, werden gekennzeichnet. Texte, die ein Mensch geprüft und verantwortet hat, gelten als eigene.']]},
     {k:'agenten',pruef:'Welche Ihrer Systeme dürfen heute schon selbst Mails versenden oder Daten ändern – und wer im Haus weiß das?',t:'Was darf KI selbstständig erledigen (sogenannte Agenten)?',fall:'Ein Assistent soll Anfragen aus dem Postfach selbstständig beantworten.',
       warum:'Versteckte Anweisungen in Mails oder Webseiten können Agenten umlenken. Gefährlich wird es, wenn ein Agent zugleich fremde Inhalte liest, auf sensible Daten zugreift und nach außen handeln kann.',
@@ -71,7 +71,7 @@ const CLAUSE={
   daten:['Wir folgen der Datenampel: Öffentliches (grün) darf in jedes Tool. Internes ohne Personenbezug (gelb) nur in freigegebene Tools. Personenbezogene und sensible Daten (rot) – etwa von Teilnehmenden, Gesundheits-, AMS- oder Personaldaten – kommen nie in private oder Gratis-Konten, auch nicht in bezahlte Privatkonten. Sonst nur nach Datenschutz-Prüfung durch unser Haus. Namen wegzulassen macht Daten nicht anonym.',
          'In KI-Tools kommen nur öffentliche Inhalte. Interne und personenbezogene Daten bleiben draußen.',
          'Interne Inhalte dürfen nach sorgfältiger Anonymisierung in KI-Tools. Personenbezogene und sensible Daten kommen nie in KI-Tools. Im Zweifel gilt ein Inhalt als personenbezogen.'],
-  verantwortung:['Wer KI nutzt, prüft das Ergebnis auf Richtigkeit, Vollständigkeit und Ton – und verantwortet es wie eine eigene Arbeit.',
+  verantwortung:['Wer KI nutzt, prüft das Ergebnis auf Richtigkeit, Vollständigkeit, Ton und Klischees – und verantwortet es wie eine eigene Arbeit.',
          'Wer KI nutzt, prüft das Ergebnis. Alles, was nach außen geht (Berichte, Öffentlichkeitsarbeit, Schreiben an Fördergeber), liest zusätzlich eine zweite Person.',
          'KI-gestützte Berichte und Texte für die Öffentlichkeit gibt die Leitung frei.'],
   kurse:['Wo es um eigenes Lernen und Prüfen geht, arbeiten Teilnehmende ohne KI. In anderen Phasen ist KI erlaubt, wenn die Trainerin oder der Trainer es vorsieht und erklärt.',
@@ -102,7 +102,7 @@ const MENSCHEN={
     ['„Dafür hab ich keine Zeit.“',['„Verstehe ich. Deshalb gibt es eine feste Stunde pro Woche dafür – als bezahlte Zeit, bei Honorarkräften als Honorarstunde.“','„Fang mit der Aufgabe an, die dich am meisten nervt. Da spart es zuerst Zeit.“']],
     ['„Das ist doch Schummeln.“',['„Nicht, wenn du prüfst und dazu stehst. Unterschrieben wird von dir – wie bei jedem Entwurf.“','„Wir sagen offen, wo wir KI nutzen. Heimlich wäre das Problem.“']],
     ['„Und unsere Daten?“',['„Dafür gibt es die Datenampel: Rotes kommt nie in private oder Gratis-Konten.“','„Wir nutzen nur freigegebene Tools mit Vertrag.“']],
-    ['„Dann wird bei uns gespart.“',['„Die Kürzung kommt vom Budget, nicht von der KI. KI darf dafür nicht die Begründung werden.“','„Ich sage dir offen, was ich weiß – und was ich nicht weiß.“']]
+    ['„Dann wird bei uns gespart.“',['„Ob gespart wird, entscheidet nicht die KI, sondern wir. Und KI darf dafür nicht die Begründung werden.“','„Ich sage dir offen, was ich weiß – und was ich nicht weiß.“']]
   ],
   team:'Dazu zählen auch Trainer:innen auf Honorarbasis und Ehrenamtliche.',
   pruefHebel:'Frage zum Besprechen: Was würde die skeptischste Person in Ihrem Team zu diesen zwei Hebeln sagen? Wenn Ihnen keine Antwort einfällt, fragen Sie sie.',
@@ -336,12 +336,12 @@ function regelnDoc(s,all){
     if(s.nt&&s.nt[d.k])c+=' '+s.nt[d.k];
     return {t:d.t,c,gap:pruef?(['geregelt','teilweise geregelt','fehlt'][(s.hat||{})[d.k]]||'noch nicht abgeglichen'):null};
   });
-  const extra=['Diese Leitlinie gilt auch für Trainer:innen und Mitarbeitende auf Honorarbasis. Sie erhalten sie mit dem Vertrag. Niemand wird gedrängt, private KI-Konten für die Arbeit oder für Teilnehmende anzulegen.','Was bisher ohne Regeln mit KI gemacht wurde, bleibt ohne Folgen. Wurden dabei rote Daten eingegeben, melden Mitarbeitende das ohne Sanktion, damit wir prüfen können, ob etwas zu tun ist.','Wer KI-Ergebnisse verwendet, muss sie fachlich beurteilen können. Neue Kolleg:innen erarbeiten zentrale Aufgaben zuerst selbst und nutzen KI dann als Sparringpartner.','Wir halten fest, wer an welcher KI-Schulung oder Lernzeit teilgenommen hat. Vorgeschrieben ist das nicht, es hilft aber als Nachweis zu Art. 4 AI Act.','Wir überprüfen diese Leitlinie alle sechs Monate – die Technik ändert sich schnell.'];
+  const extra=['Diese Leitlinie gilt auch für Trainer:innen und Mitarbeitende auf Honorarbasis sowie für Ehrenamtliche, auch im Vorstand. Honorarkräfte erhalten sie mit dem Vertrag. Niemand wird gedrängt, private KI-Konten für die Arbeit oder für Teilnehmende anzulegen.','Was bisher ohne Regeln mit KI gemacht wurde, bleibt ohne Folgen. Wurden dabei rote Daten eingegeben, melden Mitarbeitende das ohne Sanktion. Wir prüfen sofort, ob eine Meldung an die Datenschutzbehörde nötig ist (Frist 72 Stunden, Art. 33 DSGVO), und halten jeden Fall fest.','Offen mit KI zu arbeiten ist erwünscht. Wir bewerten das Ergebnis, nicht das Werkzeug.','Wer KI-Ergebnisse verwendet, muss sie fachlich beurteilen können. Neue Kolleg:innen erarbeiten zentrale Aufgaben zuerst selbst und nutzen KI dann als Sparringpartner.','Fremde geschützte Werke (Lehrbücher, gekaufte Materialien) und Fotos von Menschen geben wir nur in KI-Tools, wenn Lizenz oder Einwilligung es erlauben.','Wir halten fest, wer an welcher KI-Schulung oder Lernzeit teilgenommen hat. Vorgeschrieben ist das nicht, es hilft aber als Nachweis zu Art. 4 AI Act.','Wir überprüfen diese Leitlinie alle sechs Monate – die Technik ändert sich schnell.'];
   const offen=all.filter(d=>s.ch[d.k]==null).map(d=>'Entscheiden: '+d.t+(s.nt&&s.nt[d.k]?' (Notiz: '+s.nt[d.k]+')':''));
   if(s.mode==null)offen.push('Klären, ob es bei Ihnen schon KI-Regeln gibt – dann diesen Entwurf daneben legen.');
   if(ort.br===0)offen.push('Betriebsrat einbinden (Mitbestimmung bei Systemen, die Daten von Beschäftigten verarbeiten, ArbVG §§ 96, 96a – fachlich prüfen lassen).');
   if(ort.sens===0)offen.push('Für sensible Zielgruppen prüfen, ob zusätzliche Regeln nötig sind (z. B. Beratung, AMS-Daten).');
-  offen.push('Zuständigkeit für Freigabeliste und Fragen festlegen.','Mit dem Team besprechen, bevor die Leitlinie gilt.');
+  offen.push('Ansprechperson für KI-Fragen und die Freigabeliste festlegen, mit Zeit dafür. Einen eigenen KI-Beauftragten verlangt das Gesetz nicht.','Mit dem Team besprechen, dann beschließen: wer, ab wann.');
   return {kind:'regeln',title:pruef?'Prüfbericht unserer KI-Leitlinie':'Entwurf: Unsere KI-Leitlinie',items,extra,offen};
 }
 
@@ -659,12 +659,12 @@ function nachHtml(p,s,solo){
   const P=(t,b)=>`<p class="s" style="margin:0 0 6px"><b>${esc(t)}${/[?:]$/.test(t)?'':':'}</b> ${esc(b)}</p>`;
   const ul=`<ul class="s" style="margin:0 0 6px;padding-left:20px">${NACH.gegen.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
   const zur=`<p class="s m" style="margin:0">Was Ihnen auffällt, arbeiten Sie über „Zurück und ändern“ ein.</p>`;
-  const gegen=solo?'Zeigen Sie das Dokument einer Kollegin oder einem Kollegen, bevor es gilt. Drei Fragen:':'Zeigen Sie Ihr Dokument der Gruppe hinter Ihnen – nur, was Sie zeigen mögen. '+NACH.gegenOder+' Drei Fragen:';
+  const gegen=solo?'Zeigen Sie das Dokument einer Kollegin oder einem Kollegen, bevor es gilt. Drei Fragen:':'Lesen Sie Ihr Dokument der Gruppe hinter Ihnen vor, nur was Sie zeigen mögen. Ihr Handy bleibt bei Ihnen. '+NACH.gegenOder+' Allein? Dann lesen Sie es selbst noch einmal mit den Augen Ihrer skeptischsten Kollegin. Drei Fragen:';
   const kopf=(t,min)=>`<p style="margin:0 0 6px"><b>${t}</b>${solo?'':' · Minute '+min}</p>`;
   let probe,mehr;
   if(p==='menschen'){
     /* Menschen: Einwand-Probe in der eigenen Gruppe statt Gegenprobe durch Fremde */
-    probe=kopf(NACH.einwand[0],'23–30')+`<p class="s" style="margin:0 0 6px">${esc(solo?'Mit einer Kollegin oder einem Kollegen:':NACH.einwandWo)} ${esc(NACH.einwand[1])}</p>`+zur;
+    probe=kopf(NACH.einwand[0],'23–30')+`<p class="s" style="margin:0 0 6px">${esc(solo?'Mit einer Kollegin oder einem Kollegen:':NACH.einwandWo)} ${esc(NACH.einwand[1])}${solo?'':' Allein? Sprechen Sie Ihre Antworten einmal halblaut, so wie in der nächsten Teamsitzung.'}</p>`+zur;
     mehr=N.map(x=>P(x[0],x[1])).join('')+`<p class="s" style="margin:0 0 6px"><b>Gegenprobe${solo?'':', wenn Sie mögen'}:</b> ${esc(gegen)}</p>`+ul;
   }else{
     probe=kopf('Gegenprobe','23–30')+`<p class="s" style="margin:0 0 6px">${esc(gegen)}</p>`+ul+zur;

@@ -106,7 +106,7 @@ function arrival(){
 }
 function pathChoice(inArrival){
   const cur=store.get('a.pfad'),rolle=store.get('a.rolle'),foerder=rolle&&C.roles[rolle.i]==='Fördergeber / öffentliche Hand';
-  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>${inArrival?'Woran möchten Sie später arbeiten?':'Welcher Pfad soll es sein?'}</h1><p class="m s">${inArrival?'40 Minuten in Kleingruppen. Sie können später noch wechseln.':'Was Sie schon erarbeitet haben, bleibt gespeichert. Sie können jederzeit zurückwechseln.'}</p>`+
+  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>${inArrival?'Woran möchten Sie später arbeiten?':'Welcher Pfad soll es sein?'}</h1><p class="m s">${inArrival?'Ab etwa 14:45 arbeiten Sie 40 Minuten zu zweit oder zu dritt an Ihrem eigenen Haus, gleich da, wo Sie sitzen. Wechseln geht jederzeit.':'Was Sie schon erarbeitet haben, bleibt gespeichert. Sie können jederzeit zurückwechseln.'}</p>`+
    (foerder?`<p class="hint"><b>Sie kommen von einem Fördergeber?</b> Wählen Sie den Pfad Regeln und notieren Sie zwei Sätze zu KI, die Sie in einem Sachbericht gern lesen würden, zum Beispiel im Feld „Eigene Formulierung“ bei der Frage „Wer prüft und verantwortet KI-Ergebnisse?“.</p>`:'')+
    C.paths.map((p,i)=>{const I=(window.Pfade&&Pfade.info[p.id])||{};return `<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span>${I.fuer?`<br><span class="s m">Für: ${I.fuer}</span><br><span class="s m">Sie nehmen mit: ${I.mit}</span>`:''}</button>`}).join('')+
    (inArrival?`<button class="opt" id="later" style="text-align:center;margin-bottom:10px">Noch offen – ich entscheide später</button>`:'')+
@@ -148,7 +148,7 @@ function paths(){
   const cur=store.get('a.pfad');
   if(!cur||cur.i==null){pathChoice(false);return}
   const p=C.paths[cur.i];
-  main.innerHTML=`<div class="kick">Ihr Lernpfad</div><div class="path" data-tab="${p.zone}" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p>Gehen Sie in die <b>${p.zone}</b>. Gern mit Kolleg:innen aus Ihrem Haus.</p><button class="opt" id="w" style="text-align:center">Pfad wechseln</button>`;
+  main.innerHTML=`<div class="kick">Ihr Lernpfad</div><div class="path" data-tab="Lernpfad" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p>Arbeiten Sie gleich da, wo Sie sitzen, gern mit Kolleg:innen aus Ihrem Haus. Allein? Tun Sie sich mit der Nachbarin zusammen.</p><button class="opt" id="w" style="text-align:center">Pfad wechseln</button>`;
   $('#w').onclick=()=>pathChoice(false);
 }
 function work(){
@@ -158,7 +158,7 @@ function work(){
 
 /* ---------- Montag + Stimmung ---------- */
 function monday(){
-  if(!answered('montag')){textQ('Mein erster Schritt – ab morgen','Mitnehmen','montag','Was tun Sie als Erstes – und wann? z. B. „Am Donnerstag in der Teamsitzung …“',render,'An die Leinwand senden',true);$('#t').maxLength=140;return}
+  if(!answered('montag')){textQ('Mein erster Schritt','Mitnehmen','montag','Was tun Sie als Erstes – und wann? z. B. „Am Donnerstag in der Teamsitzung …“',render,'An die Leinwand senden',true);$('#t').maxLength=140;return}
   if(!answered('stimmung')){choice('Und jetzt, nach diesem Nachmittag – was überwiegt?','Zum Schluss',C.moods,'stimmung',render,'<p class="m s">Dieselbe Frage wie beim Ankommen. Vorne sehen Sie gleich, ob sich etwas bewegt hat.</p>');return}
   const m=store.get('a.montag');
   main.innerHTML=`<div class="done"><div class="check">✓</div><p class="hand">Danke!</p></div>`+
