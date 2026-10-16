@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Die ersten vier Wochen · VHS Oberwart</title>
+<meta name="robots" content="noindex">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../../textures.css" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;--green:#3F7D4E;
+  --regeln:#2F4B7C;--kontext:#2E6B66;--wissen:#B07A22;--menschen:#8C3B5A;
+  --type:"Special Elite","Courier New",monospace;--hand:"Caveat","Segoe Print",cursive;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+body{background-image:var(--tx-grain),var(--tx-fiber),var(--tx-mottle);background-size:256px 256px,512px 512px,1024px 1024px}
+main{max-width:720px;margin:0 auto;padding:14px 16px 60px}
+.top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;font-size:15px;margin-bottom:18px}
+a{color:var(--kontext);overflow-wrap:anywhere}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--type);font-weight:400;font-size:28px;line-height:1.2;margin:4px 0 10px}
+p{margin:0 0 10px}
+.m{color:var(--muted)}.s{font-size:14px}
+.hand{font-family:var(--hand);color:var(--pencil);font-size:26px;line-height:1.15}
+.card{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin:10px 0}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:30px;padding-top:10px}
+/* Seite */
+.start .hand{margin:0 0 6px}
+.satz{font-size:18px;line-height:2.1}
+.satz .l{font:inherit;color:var(--ink);background:transparent;border:none;border-bottom:1.5px solid var(--ink);border-radius:0;padding:0 4px;width:16em;max-width:100%}
+.satz .l.k{width:7em}
+.satz .l:focus{outline:none;background:#fff}
+.woche{position:relative;display:grid;grid-template-columns:44px 1fr;gap:0 12px;border-top:1px solid var(--line);padding:14px 0 10px}
+.woche input{appearance:none;-webkit-appearance:none;width:34px;height:34px;border:2px solid var(--ink);border-radius:4px;background:#fff;margin:4px 0 0;cursor:pointer;display:grid;place-content:center}
+.woche input::after{content:"";width:16px;height:9px;border-left:3px solid var(--green);border-bottom:3px solid var(--green);transform:rotate(-45deg) translate(1px,-2px);opacity:0}
+.woche input:checked::after{opacity:1}
+.woche input:focus-visible{outline:3px solid var(--kontext);outline-offset:2px}
+.wk{font-family:var(--type);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.woche h2{font-family:var(--type);font-weight:400;font-size:20px;margin:0 0 4px}
+.woche p{margin:0 0 6px}
+.klein{font-size:14px;color:var(--muted)}
+.notiz{display:block;font-size:14px;color:var(--muted);margin-top:4px}
+.notiz textarea{display:block;width:100%;min-height:2.6em;margin-top:3px;font:15px/1.4 var(--sans);color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:4px;padding:6px 8px;resize:vertical}
+.linie,.am{display:none}
+.woche{--c:var(--ink)}
+.ende{border-left:5px solid var(--kontext)}
+@media print{
+  @page{size:A4;margin:11mm 14mm 9mm}
+  html,body{background:#fff;font-size:9.8pt;line-height:1.36}
+  main{max-width:none;padding:0}
+  .noprint{display:none!important}
+  .kick{font-size:7.5pt}
+  h1{font-size:18pt;margin:0 0 3px}
+  p{margin:0 0 4px}
+  .s,.klein{font-size:8.8pt}
+  .hand{font-size:17pt}
+  .card{background:none;padding:6px 10px;margin:5px 0}
+  .satz{font-size:10.5pt;line-height:2}
+  .woche{grid-template-columns:30px 1fr;padding:7px 0 4px;break-inside:avoid}
+  .woche input{width:22px;height:22px;border-width:1.5px;margin-top:2px}
+  .woche input::after{display:none}
+  .woche h2{font-size:12.5pt;margin:0 0 2px}
+  .wk{font-size:7.5pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .notiz{font-size:8.5pt;margin-top:2px}
+  .notiz textarea{display:none}
+  .am{display:inline;color:var(--muted)}
+  .linie{display:block;border-bottom:1px solid var(--muted);height:17pt}
+  .ende{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  footer{font-size:7.5pt;margin-top:6px;padding-top:4px}
+}
+</style>
+</head>
+<body>
+<main>
+<nav class="top noprint"><a href="../index.html">← Zur Workshop-Seite</a><span><a href="index.html">Alle Ressourcen</a> · <a href="Die-ersten-vier-Wochen_A4.pdf">als PDF (1 Seite)</a></span></nav>
+
+<div class="kick">VHS Oberwart · Zum Weitermachen · Im Kurs einsetzen</div>
+<h1>Die ersten vier Wochen</h1>
+<p>Vier kleine Aufgaben, je 10 bis 20 Minuten, eine pro Woche. Sie bauen auf dem Satz auf, den Sie im Workshop gesagt haben. Abhaken, aufschreiben, weitermachen.</p>
+
+<div class="card start">
+<p class="hand">Klein anfangen ist der Plan, nicht die Notlösung.</p>
+<p class="satz">Mein erster Schritt ist <input class="l" data-k="schritt" aria-label="Mein erster Schritt"> am <input class="l k" data-k="wann" aria-label="Datum">.</p>
+</div>
+
+<section class="woche" style="--c:var(--menschen)">
+<input type="checkbox" id="w1" aria-label="Woche 1 erledigt">
+<div>
+<div class="wk">Woche 1 · rund 15 Minuten <span class="am">· erledigt am ________</span></div>
+<h2>Den ersten Schritt machen</h2>
+<p>Setzen Sie Ihren Satz um. Nehmen Sie dafür den Werkstatt-Auftrag aus dem Handout oder eine Prompt-Karte für Ihr Fach. Prüfen Sie das Ergebnis mit den fünf Fragen aus dem Handout und sichern Sie es in Ihren Notizen.</p>
+<p class="klein">Wenn die Zeit knapp ist: Lassen Sie sich von der KI fünf Fragen zu Ihrem Kurs stellen (Ü1, „Interview“).</p>
+<label class="notiz">Was ich mir aufschreibe: <textarea data-k="n1" rows="2"></textarea></label><div class="linie"></div><div class="linie"></div>
+</div>
+</section>
+
+<section class="woche" style="--c:var(--wissen)">
+<input type="checkbox" id="w2" aria-label="Woche 2 erledigt">
+<div>
+<div class="wk">Woche 2 · rund 20 Minuten <span class="am">· erledigt am ________</span></div>
+<h2>Ein Material für die nächste Stunde</h2>
+<p>Erstellen Sie ein Material, das Sie wirklich verwenden: mit allen fünf Zutaten des Rezepts, zweimal nachgeschärft, gekennzeichnet wie im Handout. Setzen Sie es im Kurs ein und achten Sie darauf, wie es ankommt.</p>
+<p class="klein">Ideen dafür: das Material-Menü. Wenn die Zeit knapp ist: eine bestehende Aufgabe in drei Schwierigkeitsstufen umbauen lassen (Ü4a).</p>
+<label class="notiz">Was ich mir aufschreibe: <textarea data-k="n2" rows="2"></textarea></label><div class="linie"></div><div class="linie"></div>
+</div>
+</section>
+
+<section class="woche" style="--c:var(--kontext)">
+<input type="checkbox" id="w3" aria-label="Woche 3 erledigt">
+<div>
+<div class="wk">Woche 3 · rund 10 Minuten <span class="am">· erledigt am ________</span></div>
+<h2>Die eigene Sammlung anlegen</h2>
+<p>Legen Sie eine Notiz oder Datei „Meine Prompts“ an. Drei Aufträge hinein, die gut funktioniert haben, mit Ihren Angaben statt der Klammern. Bei der Gelegenheit kurz nachsehen, ob das Training in Ihrem Konto ausgeschaltet ist (Weg im Handout bei den Werkzeugen).</p>
+<p class="klein">Wenn die Zeit knapp ist: nur den einen Auftrag sichern, der Ihnen am meisten Zeit gespart hat.</p>
+<label class="notiz">Was ich mir aufschreibe: <textarea data-k="n3" rows="2"></textarea></label><div class="linie"></div><div class="linie"></div>
+</div>
+</section>
+
+<section class="woche" style="--c:var(--regeln)">
+<input type="checkbox" id="w4" aria-label="Woche 4 erledigt">
+<div>
+<div class="wk">Woche 4 · 15 bis 20 Minuten <span class="am">· erledigt am ________</span></div>
+<h2>Eine Sache neu ausprobieren</h2>
+<p>Probieren Sie etwas aus, das Sie im Workshop nur gesehen haben: sprechen statt tippen, ein Bild oder eine Vokabelkarte, ein Lernspiel aus einem Satz oder Ihren eigenen Kurs-Assistenten. Zeigen Sie das Ergebnis einer Kollegin oder einem Kollegen.</p>
+<p class="klein">Wenn die Zeit knapp ist: einen Auftrag einmal gesprochen statt getippt geben.</p>
+<label class="notiz">Was ich mir aufschreibe: <textarea data-k="n4" rows="2"></textarea></label><div class="linie"></div><div class="linie"></div>
+</div>
+</section>
+
+<div class="card ende s">
+<b>Nach vier Wochen ein Blick zurück:</b> Wo hat mir die KI Arbeit abgenommen? Wo habe ich das Urteil bewusst behalten? Was mache ich weiter, was lasse ich? <span class="m">Eine Woche ausgelassen? Dann einfach in der nächsten weitermachen. Es zählt, was Sie regelmäßig tun, nicht wie viel.</span>
+</div>
+<p class="s m noprint">Häkchen und Notizen auf dieser Seite bleiben nur in Ihrem Browser auf diesem Gerät. Hier bitte nur Ihre eigenen Gedanken, keine Angaben zu Teilnehmenden.</p>
+
+<footer>Armin Fradler · KI in der Kursvorbereitung · VHS Oberwart, 17.10.2026 · Mit KI erstellt, von mir geprüft.</footer>
+</main>
+<script>
+(function(){
+  var K='vhs-erste-wochen-';
+  function get(k){try{return localStorage.getItem(K+k)}catch(e){return null}}
+  function set(k,v){try{localStorage.setItem(K+k,v)}catch(e){}}
+  document.querySelectorAll('.woche input').forEach(function(c){
+    c.checked=get(c.id)==='1';
+    c.addEventListener('change',function(){set(c.id,c.checked?'1':'0')});
+  });
+  document.querySelectorAll('textarea[data-k],input[data-k]').forEach(function(t){
+    var v=get(t.dataset.k);if(v)t.value=v;
+    t.addEventListener('input',function(){set(t.dataset.k,t.value)});
+  });
+})();
+</script>
+</body>
+</html>

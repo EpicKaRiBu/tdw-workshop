@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Material-Menü · VHS Oberwart</title>
+<meta name="robots" content="noindex">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../../textures.css" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;--green:#3F7D4E;
+  --regeln:#2F4B7C;--kontext:#2E6B66;--wissen:#B07A22;--menschen:#8C3B5A;
+  --type:"Special Elite","Courier New",monospace;--hand:"Caveat","Segoe Print",cursive;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+body{background-image:var(--tx-grain),var(--tx-fiber),var(--tx-mottle);background-size:256px 256px,512px 512px,1024px 1024px}
+main{max-width:720px;margin:0 auto;padding:14px 16px 60px}
+.top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;font-size:15px;margin-bottom:18px}
+a{color:var(--kontext);overflow-wrap:anywhere}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--type);font-weight:400;font-size:28px;line-height:1.2;margin:4px 0 10px}
+h2{font-family:var(--type);font-weight:400;font-size:21px;margin:30px 0 10px}
+p{margin:0 0 10px}
+.m{color:var(--muted)}.s{font-size:14px}
+.card{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin:10px 0}
+.prompt{position:relative;background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px 96px 10px 12px;margin:6px 0 8px;font-family:var(--type);font-size:14px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.prompt button{position:absolute;top:6px;right:6px;font:600 13px var(--sans);background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:6px 10px;cursor:pointer}
+.prompt button.ok{background:var(--green)}
+.ph{color:var(--pencil)}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:30px;padding-top:10px}
+/* Menü */
+.grp{--c:var(--ink)}
+.grp>h2{border-left:7px solid var(--c);padding:2px 0 2px 10px;margin:34px 0 8px}
+.grp>h2 small{display:block;font-family:var(--sans);font-size:13px;color:var(--c);letter-spacing:.06em;text-transform:uppercase}
+.mk{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-top:3px solid var(--c);border-radius:4px;padding:10px 14px 8px;margin:0 0 12px}
+.mk h3{font-family:var(--type);font-weight:400;font-size:18px;margin:0 0 6px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.tag{font:600 12px var(--sans);border:1px solid var(--muted);color:var(--muted);border-radius:20px;padding:0 8px;white-space:nowrap}
+.mk p{font-size:15px;margin:0 0 4px}
+.mk .tip{border-left:3px solid var(--pencil);padding-left:8px;margin-top:6px}
+.mk .ref{font-size:13px;color:var(--muted)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted);margin:4px 0 0}
+.wahlhilfe{background:#fff;border:1px solid var(--line);border-left:5px solid var(--pencil);border-radius:4px;padding:8px 12px;margin:14px 0 0;font-size:15px}
+.wahlhilfe ul{list-style:none;padding:0;margin:4px 0 0}
+.wahlhilfe li{margin:0 0 3px}
+.mk,.grp{scroll-margin-top:10px}
+.steps{font-size:14.5px;margin:6px 0 8px;padding:8px 12px;background:#fff;border:1px solid var(--line);border-radius:4px}
+@media (max-width:480px){.prompt{padding:42px 12px 10px}}
+@media print{
+  @page{size:A4;margin:9mm 11mm 8mm}
+  html,body{background:#fff;font-size:8pt;line-height:1.28}
+  main{max-width:none;padding:0}
+  .noprint,.prompt button{display:none!important}
+  .kick{font-size:6.8pt}
+  h1{font-size:14.5pt;margin:0 0 2px}
+  p{margin:0 0 3px}
+  .intro{display:grid;grid-template-columns:1.25fr 1fr;gap:0 5mm;align-items:start}
+  .card{background:none;padding:3px 7px;margin:2px 0}
+  .s,.leg{font-size:7.4pt}
+  .grp,.grp>h2,.mk{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .grp>h2{font-size:10.5pt;margin:5px 0 3px;padding:0 0 0 6px;border-left-width:5px;break-after:avoid}
+  .grp>h2 small{display:inline;font-size:6.6pt;margin-left:6px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:2.4mm 4mm}
+  .mk{background:none;padding:3px 6px 3px;margin:0;break-inside:avoid;border-top-width:2px}
+  .mk h3{font-size:9.6pt;margin:0 0 1px;gap:2px 6px}
+  .tag{font-size:6.4pt;padding:0 5px}
+  .mk p{font-size:8pt;margin:0 0 1px}
+  .mk .tip{margin-top:2px;padding-left:5px;border-left-width:2px}
+  .mk .ref{font-size:7pt}
+  .prompt,.steps{font-size:7.55pt;line-height:1.28;padding:2px 5px;margin:1px 0 2px}
+  .p2{break-before:page}
+  footer{font-size:6.8pt;margin-top:4px;padding-top:2px}
+}
+</style>
+</head>
+<body>
+<main>
+<nav class="top noprint"><a href="../index.html">← Zur Workshop-Seite</a><span><a href="index.html">Alle Ressourcen</a> · <a href="Material-Menue_A4.pdf">als PDF (2 Seiten)</a></span></nav>
+
+<div class="kick">VHS Oberwart · Zum Weitermachen · Was soll es werden?</div>
+<h1>Das Material-Menü</h1>
+<div class="intro">
+<div>
+<p><b>Was Sie mit KI selbst bauen können – suchen Sie sich aus, was zu Ihrem Kurs passt.</b> Pro Format: wofür, womit, ein Auftrag zum Anfangen und ein Tipp aus der Praxis. Was wir im Workshop nur gezeigt haben (Sprechen, Aussprache, Übersetzung, Bilder, Lernspiel, Transkription, Zusammenfassung, Podcast), probieren Sie hier in Ruhe aus.</p>
+</div>
+<div class="card s">
+<b>Kennzeichnung der Werkzeuge</b> (wie im Handout, Stand Oktober 2026):
+<div class="leg"><span><span class="tag">ohne Konto</span> chatgpt.com ohne Anmeldung</span><span><span class="tag">Konto, gratis</span> kostenloses Konto nötig</span><span><span class="tag">begrenzt</span> gratis, mit Tageskontingent</span></div>
+<p style="margin:4px 0 0">Für gelegentliche Vorbereitung reicht der Gratis-Tarif. Datenampel: nur Grünes eingeben. <b>Als fertige Datei:</b> „Gib mir das als Word-Datei“ oder „als PDF zum Herunterladen“ (mit Konto, gratis begrenzt).</p>
+</div>
+</div>
+
+<div class="wahlhilfe noprint">
+<b>Schnell wählen</b> <span class="m s">(ohne Vermerk: ohne Konto)</span>
+<ul>
+<li><b>Sprachen, DaZ:</b> <a href="#dialog">Dialog</a> · <a href="#lueckentext">Lückentext</a> · <a href="#rollenspiel">Rollenspiel</a> <span class="m s">(Konto)</span> · <a href="#bildschrift">Vokabelkarte</a> <span class="m s">(Konto)</span></li>
+<li><b>Basisbildung:</b> <a href="#stufen">drei Stufen</a> · <a href="#einfach">einfache Sprache</a> · <a href="#lernkarten">Lernkarten</a></li>
+<li><b>EDV:</b> <a href="#uebungsdaten">Übungsdaten</a> · <a href="#quiz">Quiz</a> · <a href="#lernspiel">Lernspiel</a> <span class="m s">(Konto)</span> · <a href="#assistent">Kurs-Assistent</a> <span class="m s">(Konto)</span></li>
+<li><b>Gesundheit, Bewegung:</b> <a href="#uebungsfolge">Übungsfolge</a> · <a href="#infoblatt">Infoblatt</a> · <a href="#stundenablauf">Stundenablauf</a></li>
+<li><b>Kreatives, Musik:</b> <a href="#raster">Feedback-Raster</a> · <a href="#stundenablauf">Stundenablauf</a> · <a href="#bild">Bildmaterial</a> <span class="m s">(Konto)</span> · Übeplan und Impulse: <a href="prompt-karten.html">Prompt-Karten</a></li>
+<li><b>Nur 10 Minuten?</b> Etwa <a href="#stufen">drei Stufen</a> oder ein <a href="#quiz">Quiz</a> aus einer eigenen Aufgabe. Drei Einstiege nach Zeit: <a href="index.html#wie">Startseite</a>.</li>
+</ul>
+</div>
+
+<section id="ueben" class="grp" style="--c:var(--wissen)">
+<h2>Üben und wiederholen <small>6 Formate</small></h2>
+<div class="cards">
+<div class="mk" id="stufen"><h3>Arbeitsblatt in drei Stufen <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> eine Aufgabe für eine gemischte Gruppe. <b>Womit:</b> ChatGPT oder Ihr gewohntes Werkzeug.</p>
+<div class="prompt">Mach aus dieser Aufgabe drei Fassungen: leicht, mittel, schwer. Gleiches Thema, gleiche Lösungsidee. Kennzeichne, was sich ändert: <span class="ph">[Ihre Aufgabe]</span></div>
+<p class="tip"><b>Tipp:</b> Starten Sie mit einer eigenen, bewährten Aufgabe. Dann passt das Niveau. <span class="ref">Handout Ü4a</span></p></div>
+
+<div class="mk" id="lueckentext"><h3>Lückentext <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Wortschatz, Fachbegriffe, Grammatik festigen. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Mach aus diesem Text einen Lückentext mit <span class="ph">[10]</span> Lücken bei <span class="ph">[Verben im Perfekt / Fachbegriffen]</span>. Wörter zum Einsetzen darunter, Lösung am Ende: <span class="ph">[Text]</span></div>
+<p class="tip"><b>Tipp:</b> Sagen Sie genau, wo die Lücken hinsollen. Lücken bei Füllwörtern üben nichts.</p></div>
+
+<div class="mk" id="quiz"><h3>Quiz, Multiple Choice <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Wiederholen, Einstieg, Selbstkontrolle. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Erstelle 10 Multiple-Choice-Fragen zu <span class="ph">[Thema]</span> für <span class="ph">[Niveau]</span>. Je vier Antworten, genau eine richtig. Alle Antwortmöglichkeiten etwa gleich lang, die richtige nicht immer die längste, Position zufällig. Lösungsschlüssel am Ende.</div>
+<p class="tip"><b>Tipp:</b> KI-Modelle machen die richtige Antwort oft zur längsten und setzen sie gern an dieselbe Stelle. Darum den Satz zu Länge und Position immer mitschicken und selbst gegenprüfen. <span class="ref">Handout Ü4b</span></p></div>
+
+<div class="mk" id="lernkarten"><h3>Lernkarten <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Vokabeln, Begriffe, Fachwissen zum Selbstlernen. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Erstelle 20 Lernkarten zu <span class="ph">[Thema]</span> für <span class="ph">[Niveau]</span>: vorne der Begriff, hinten eine Erklärung in einem Satz mit Beispiel. Als Tabelle mit zwei Spalten.</div>
+<p class="tip"><b>Tipp:</b> Tabelle ausdrucken, ausschneiden, in der Mitte falten: fertig sind die Karten.</p></div>
+
+<div class="mk" id="uebungsdaten"><h3>Übungsdaten <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> realistische Daten für Excel, Word oder Rechnen, ganz ohne echte Personen. <b>Womit:</b> ChatGPT; als fertige Datei mit Konto, begrenzt.</p>
+<div class="prompt">Erstelle ein erfundenes <span class="ph">[Kassabuch eines Musikvereins]</span> mit 30 Zeilen und fünf Excel-Aufgaben mit Lösung in deutscher Formelschreibweise.</div>
+<p class="tip"><b>Tipp:</b> „Erfunden“ ausdrücklich dazuschreiben und jede Formel einmal selbst nachrechnen. <span class="ref">Handout, Ideen EDV</span></p></div>
+
+<div class="mk" id="lernspiel"><h3>Lernspiel fürs Handy <span class="tag">Konto, gratis</span></h3>
+<p><b>Wofür:</b> spielerisch wiederholen, auch zu Hause. <b>Womit:</b> Gemini Canvas (im Browser) oder Claude; Teilen per Link.</p>
+<div class="prompt">Baue eine interaktive Lernseite <span class="ph">[Titel]</span>: drei Stationen (Wörter zuordnen, Lückentext, Quiz), Punktestand, sofortige Rückmeldung, alles auf Deutsch, am Handy gut bedienbar.</div>
+<p class="tip"><b>Tipp:</b> Selbst durchklicken, bevor Sie den Link teilen. Für das Quiz darin den Satz zu Länge und Position mitschicken.</p></div>
+</div>
+</section>
+
+<section id="sprechen" class="grp" style="--c:var(--menschen)">
+<h2>Sprechen, hören, Sprachen <small>4 Formate</small></h2>
+<div class="cards">
+<div class="mk" id="rollenspiel"><h3>Rollenspiel, Sprechübung <span class="tag">Konto, begrenzt</span></h3>
+<p><b>Wofür:</b> Alltagsgespräche üben, ohne Publikum. <b>Womit:</b> Sprachmodus der ChatGPT-App.</p>
+<div class="prompt">Wir spielen ein Rollenspiel auf <span class="ph">[Niveau]</span>: Ich <span class="ph">[Situation]</span>. Du bist <span class="ph">[Rolle]</span>. Sprich langsam und einfach. Stell immer nur eine Frage.</div>
+<p class="tip"><b>Tipp:</b> Nach sechs Wechseln drei freundliche Korrekturen und ein Lob verlangen. <span class="ref">Handout Werkzeug A</span></p></div>
+
+<div class="mk" id="aussprache"><h3>Aussprache-Training <span class="tag">Konto, begrenzt</span></h3>
+<p><b>Wofür:</b> einzelne Wörter und Sätze üben. <b>Womit:</b> Sprachmodus der ChatGPT-App.</p>
+<div class="prompt">Sprich bitte langsam. Ich spreche dir Wörter zu <span class="ph">[Thema]</span> vor. Sag mir jeweils, was gut war und was ich anders betonen soll, und sprich das Wort dann noch einmal deutlich vor.</div>
+<p class="tip"><b>Tipp:</b> „Langsamer, bitte“ geht auch mitten im Gespräch. Die Rückmeldung ist eine Übungshilfe; das letzte Wort hat Ihr Ohr.</p></div>
+
+<div class="mk" id="dialog"><h3>Dialog oder Hörtext <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Hörverstehen, Vorlage fürs Rollenspiel. <b>Womit:</b> ChatGPT, dann selbst einsprechen.</p>
+<div class="prompt">Schreib einen Dialog für <span class="ph">[Niveau]</span> in der Situation <span class="ph">[Situation]</span>, 8 bis 10 Zeilen, erfundene Namen, natürliche Sprache mit österreichischen Wendungen.</div>
+<p class="tip"><b>Tipp:</b> Zu zweit mit einer Kollegin oder einem Kollegen als Sprachmemo einsprechen. <span class="ref">Prompt-Karte S2</span></p></div>
+
+<div class="mk" id="uebersetzung"><h3>Übersetzung <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Infoblätter in Erstsprachen, schwierige Wörter erklären. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Übersetze dieses Infoblatt ins <span class="ph">[Ungarische]</span>. Einfache Sprache, wichtige Begriffe zusätzlich auf Deutsch in Klammern: <span class="ph">[Text]</span></div>
+<p class="tip"><b>Tipp:</b> Von jemandem gegenlesen lassen, der die Sprache kann; Zahlen und Termine besonders. <span class="ref">Handout Werkzeug A</span></p></div>
+</div>
+</section>
+
+<section id="texte" class="grp p2" style="--c:var(--kontext)">
+<h2>Texte und Bilder <small>4 Formate</small></h2>
+<div class="cards">
+<div class="mk" id="einfach"><h3>Text in einfacher Sprache <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Ausschreibung, Infoblatt, Anleitung zugänglich machen. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Schreib diesen Text in einfacher Sprache: kurze Sätze, ein Gedanke pro Satz, wichtige Wörter erklärt. Liste danach in einer Tabelle auf, was du weggelassen oder vereinfacht hast: <span class="ph">[Text]</span></div>
+<p class="tip"><b>Tipp:</b> Die Liste zeigt, was verloren ging. Fristen, Beträge und Rechte müssen bleiben. <span class="ref">Handout Ü4a</span></p></div>
+
+<div class="mk" id="bild"><h3>Bildmaterial <span class="tag">Konto, begrenzt</span></h3>
+<p><b>Wofür:</b> Illustration fürs Arbeitsblatt, Bild als Sprechanlass. <b>Womit:</b> ChatGPT oder Gemini.</p>
+<div class="prompt">Erstelle eine einfache, freundliche Illustration für ein Arbeitsblatt zum Thema <span class="ph">[Thema]</span>: <span class="ph">[was zu sehen sein soll]</span>. Klare Linien, wenig Details.</div>
+<p class="tip"><b>Tipp:</b> Eine Szene mit mehreren Personen wird zum Sprechanlass („Was passiert hier?“). Ins Arbeitsblatt kommt „Bild mit KI erstellt“; nicht „im Stil von“ lebenden Künstler:innen.</p></div>
+
+<div class="mk" id="bildschrift"><h3>Bild mit Schrift <span class="tag">Konto, begrenzt</span></h3>
+<p><b>Wofür:</b> Vokabelkarte, Plakat, Aushang. <b>Womit:</b> Gemini oder ChatGPT.</p>
+<div class="prompt">Vokabelkarte: „<span class="ph">die Waschmaschine</span>“, Artikel in Blau, darunter die Mehrzahl, eine einfache freundliche Zeichnung und der Satz „<span class="ph">Die Waschmaschine ist im Keller.</span>“</div>
+<p class="tip"><b>Tipp:</b> Jeden Buchstaben prüfen, besonders Umlaute und ß. <span class="ref">Handout, Kurz gezeigt</span></p></div>
+
+<div class="mk" id="infoblatt"><h3>Infoblatt, Ankündigung <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Kursinfo, Erinnerung, Aushang. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Erstelle ein Infoblatt für <span class="ph">[Anlass]</span>: was, wann, wo, was mitbringen. Eine halbe Seite, Sie-Form, freundlich. Platzhalter statt Namen.</div>
+<p class="tip"><b>Tipp:</b> Namen und Termine setzen Sie selbst ein. <span class="ref">Prompt-Karten A1, A2, G4</span></p></div>
+</div>
+</section>
+
+<section id="planen" class="grp" style="--c:var(--regeln)">
+<h2>Planen und begleiten <small>4 Formate</small></h2>
+<div class="cards">
+<div class="mk" id="stundenablauf"><h3>Stundenablauf <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> eine Einheit in Phasen planen. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Ich plane eine Einheit für <span class="ph">[Kurs, Niveau, Gruppe, Dauer]</span>. Ziel: <span class="ph">[Ziel]</span>. Schlag mir einen Ablauf in Phasen mit Zeit, Methode und Material vor. Frag mich zuerst, wenn dir etwas fehlt.</div>
+<p class="tip"><b>Tipp:</b> Zeiten selbst zusammenzählen; Pläne sind gern zu voll. <span class="ref">Handout, Werkstatt</span></p></div>
+
+<div class="mk" id="uebungsfolge"><h3>Übungsfolge, Bewegungsprogramm <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Stundenbild, Aufwärmen, Übungen für zu Hause. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Stell mir für <span class="ph">[Kurs, Zielgruppe]</span> eine Übungsfolge von <span class="ph">[30]</span> Minuten zusammen: je Übung eine leichtere und eine schwierigere Variante und ein Vorsichtshinweis. Kennzeichne, wo du unsicher bist.</div>
+<p class="tip"><b>Tipp:</b> Jede Übung fachlich prüfen. <span class="ref">Prompt-Karten G1 bis G3</span></p></div>
+
+<div class="mk" id="raster"><h3>Feedback-Fragen, Raster <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> Rückmeldung der Gruppe, Kriterien für Aufgaben. <b>Womit:</b> ChatGPT.</p>
+<div class="prompt">Erstelle ein Feedbackraster mit vier Kriterien für <span class="ph">[Aufgabe]</span> im Kurs <span class="ph">[Niveau]</span>. Je Kriterium drei Stufen mit einer kurzen Beschreibung. Sprache: wertschätzend, konkret.</div>
+<p class="tip"><b>Tipp:</b> Über Noten entscheiden Sie, nicht die KI. <span class="ref">Handout Werkzeug C, Prompt-Karte A4</span></p></div>
+
+<div class="mk" id="assistent"><h3>Kurs-Assistent <span class="tag">Konto, gratis</span></h3>
+<p><b>Wofür:</b> ein Übungspartner, der erklärt statt löst. <b>Womit:</b> Projekt in ChatGPT oder Claude.</p>
+<div class="prompt">Du bist Übungspartner für den Kurs <span class="ph">[Kursname, Niveau]</span>. Du verrätst Lösungen nicht sofort: Erst gibst du einen Hinweis, dann einen zweiten …</div>
+<p class="tip"><b>Tipp:</b> Vorher mit Testfragen prüfen. Vollständige Vorlage und Testfragen: <span class="ref">Anleitung „Kurs-Assistent bauen“</span></p></div>
+</div>
+</section>
+
+<section id="eigenes" class="grp" style="--c:var(--ink)">
+<h2>Aus eigenem Material <small>3 Formate</small></h2>
+<div class="cards">
+<div class="mk" id="transkription"><h3>Transkription <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> eigene Sprachnotiz oder Diktat in Text verwandeln. <b>Womit:</b> Diktierfunktion der Handytastatur oder Sprachmemo, dann ChatGPT. Lokal am eigenen Rechner: noScribe (gratis; langsam, Korrektur nötig).</p>
+<div class="prompt">Hier ist meine Mitschrift (diktiert): <span class="ph">[Text]</span>. Korrigiere Fehler der Diktierfunktion und gliedere sie in Absätze. Ändere nichts am Inhalt.</div>
+<p class="tip"><b>Tipp:</b> Nur eigene Notizen. Keine Aufnahmen von Teilnehmenden (Datenampel: rot).</p></div>
+
+<div class="mk" id="zusammenfassung"><h3>Zusammenfassung <span class="tag">ohne Konto</span></h3>
+<p><b>Wofür:</b> eigenes Skript oder eigenen Text kurz machen. <b>Womit:</b> ChatGPT; für viele Unterlagen Gemini Notebook (Google-Konto), das nur aus Ihren Unterlagen antwortet.</p>
+<div class="prompt">Fasse mein Skript in fünf kurzen Punkten für <span class="ph">[Niveau]</span> zusammen. Dazu drei Fragen, mit denen die Gruppe prüfen kann, ob sie es verstanden hat: <span class="ph">[Text]</span></div>
+<p class="tip"><b>Tipp:</b> Neben das Original legen: Fehlt ein Kernpunkt, ist einer dazuerfunden?</p></div>
+
+<div class="mk" id="podcast"><h3>Podcast aus eigenem Skript <span class="tag">Google-Konto</span></h3>
+<p><b>Wofür:</b> Hörfassung zum Wiederholen. <b>Womit:</b> Gemini Notebook (früher NotebookLM).</p>
+<div class="steps">Eigenes Skript ohne Namen hochladen › „Audio-Übersicht“ wählen › Sprache Deutsch.</div>
+<p class="tip"><b>Tipp:</b> Das dauert ein paar Minuten. Selbst ganz anhören, bevor Sie es weitergeben.</p></div>
+</div>
+</section>
+
+<p class="s m" style="margin-top:8px">Mehr Aufträge pro Fach: <b>Prompt-Karten nach Fach</b>. Prüfen vor Verwenden: die fünf Fragen aus dem Handout. Werkzeuge ändern sich schnell: vor dem Einsatz kurz nachsehen.</p>
+
+<footer>Armin Fradler · KI in der Kursvorbereitung · VHS Oberwart, 17.10.2026 · Mit KI erstellt, von mir geprüft.</footer>
+</main>
+<script>
+document.querySelectorAll('.prompt').forEach(function(p){
+  var b=document.createElement('button');b.type='button';b.textContent='Kopieren';
+  b.addEventListener('click',function(){
+    var t=p.innerText.replace(/\s*Kopier(en|t)\s*$/,'').trim();
+    var done=function(){b.textContent='Kopiert';b.classList.add('ok');setTimeout(function(){b.textContent='Kopieren';b.classList.remove('ok')},1500)};
+    var fail=function(){b.textContent='Bitte markieren';setTimeout(function(){b.textContent='Kopieren'},2500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){fallback(t)?done():fail()})}else{fallback(t)?done():fail()}
+  });
+  p.appendChild(b);
+});
+function fallback(t){var a=document.createElement('textarea'),ok=false;a.value=t;document.body.appendChild(a);a.select();try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok}
+</script>
+</body>
+</html>

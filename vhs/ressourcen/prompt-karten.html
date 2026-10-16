@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prompt-Karten nach Fach · VHS Oberwart</title>
+<meta name="robots" content="noindex">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../../textures.css" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;--green:#3F7D4E;
+  --regeln:#2F4B7C;--kontext:#2E6B66;--wissen:#B07A22;--menschen:#8C3B5A;
+  --type:"Special Elite","Courier New",monospace;--hand:"Caveat","Segoe Print",cursive;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+body{background-image:var(--tx-grain),var(--tx-fiber),var(--tx-mottle);background-size:256px 256px,512px 512px,1024px 1024px}
+main{max-width:720px;margin:0 auto;padding:14px 16px 60px}
+.top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;font-size:15px;margin-bottom:18px}
+a{color:var(--kontext);overflow-wrap:anywhere}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--type);font-weight:400;font-size:28px;line-height:1.2;margin:4px 0 10px}
+h2{font-family:var(--type);font-weight:400;font-size:21px;margin:30px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:16px 0 4px}
+p{margin:0 0 10px}
+.m{color:var(--muted)}.s{font-size:14px}
+.card{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin:10px 0}
+.recipe{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.recipe span{font-family:var(--type);font-size:15px;border:1.5px solid var(--ink);border-radius:3px;padding:4px 10px 2px;background:#fff}
+.prompt{position:relative;background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px 96px 12px 14px;margin:6px 0 12px;font-family:var(--type);font-size:14.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.prompt button{position:absolute;top:6px;right:6px;font:600 13px var(--sans);background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:6px 10px;cursor:pointer}
+.prompt button.ok{background:var(--green)}
+.ph{color:var(--pencil)}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:30px;padding-top:10px}
+/* Fachbereiche */
+.fach{--c:var(--ink)}
+.fach h2{border-top:none;border-left:7px solid var(--c);padding:2px 0 2px 10px;margin-top:34px}
+.fach h2 small{display:block;font-family:var(--sans);font-size:13px;color:var(--c);letter-spacing:.06em;text-transform:uppercase}
+.pk h3{margin-top:12px}
+.pk h3 b{font-family:var(--type);font-weight:400;color:var(--c);margin-right:4px}
+.also{font-size:14px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px}
+.tipp{border-left:4px solid var(--pencil)}
+@media (max-width:480px){.prompt{padding:42px 12px 12px}}
+@media print{
+  @page{size:A4;margin:10mm 12mm 10mm}
+  html,body{background:#fff;font-size:8.3pt;line-height:1.32}
+  main{max-width:none;padding:0}
+  .noprint,.prompt button{display:none!important}
+  .kick{font-size:7pt}
+  h1{font-size:15pt;margin:0 0 3px}
+  p{margin:0 0 4px}
+  .s{font-size:7.8pt}
+  .intro{display:grid;grid-template-columns:1fr 1fr;gap:0 6mm;align-items:start}
+  .card{background:none;padding:4px 8px;margin:3px 0}
+  .recipe{margin:2px 0 3px;gap:3px}.recipe span{font-size:7.5pt;padding:1px 5px 0;border-width:1px}
+  .fach h2{font-size:11.5pt;margin:6px 0 3px;padding:0 0 0 7px;border-left-width:5px;break-after:avoid}
+  .fach h2 small{font-size:6.8pt;display:inline;margin-left:6px}
+  .fach,.fach h2{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 5mm}
+  .pk{break-inside:avoid}
+  .pk h3{font-size:8.5pt;margin:3px 0 1px}
+  .prompt{font-size:7.6pt;line-height:1.32;padding:3px 6px;margin:1px 0 3px}
+  .also{font-size:7.6pt;margin:2px 0 0;padding-left:6px}
+  .p2{break-before:page}
+  footer{font-size:7pt;margin-top:5px;padding-top:3px}
+}
+</style>
+</head>
+<body>
+<main>
+<nav class="top noprint"><a href="../index.html">← Zur Workshop-Seite</a><span><a href="index.html">Alle Ressourcen</a> · <a href="Prompt-Karten-nach-Fach_A4.pdf">als PDF (2 Seiten)</a></span></nav>
+
+<div class="kick">VHS Oberwart · Zum Weitermachen · Bauen</div>
+<h1>Prompt-Karten nach Fach</h1>
+<div class="intro">
+<div>
+<p>Aufträge zum Kopieren, die das Handout ergänzen. Die <span class="ph">roten Stellen in [eckigen Klammern]</span> ersetzen Sie samt Klammern durch Ihre Angaben. Jeder Auftrag folgt dem Rezept aus dem Workshop:</p>
+<div class="recipe"><span>Rolle</span><span>Ziel</span><span>Kontext</span><span>Format</span><span>Grenzen</span></div>
+</div>
+<div class="card s">
+<b>So geht es weiter:</b> nachschärfen („kürzer“, „noch einfacher“), mit den fünf Prüffragen aus dem Handout prüfen, kennzeichnen wie dort beschrieben, sichern. Immer mit erfundenen Beispielen, nie mit personenbezogenen Daten von Teilnehmenden. Datenampel: nur Grünes eingeben. Bei Unsicherheit: Lehrgangsleitung.
+</div>
+</div>
+
+<section class="fach" style="--c:var(--menschen)">
+<h2>Sprachen und DaZ <small>4 Karten</small></h2>
+<div class="grid">
+<div class="pk"><h3><b>S1</b> Wortschatz zum Alltagsthema</h3>
+<div class="prompt">Du bist erfahrene Kursleiter:in für Deutsch als Zweitsprache in Österreich. Stelle für meinen Kurs <span class="ph">[Niveau, z. B. A2, Erwachsene]</span> 15 Wörter und Wendungen zum Thema <span class="ph">[z. B. Wohnung mieten]</span> zusammen, die man im Alltag wirklich braucht. Je Eintrag: Artikel, Mehrzahl, ein kurzer Beispielsatz. Österreichisches Deutsch. Ausgabe als Tabelle. Frag mich zuerst, wenn dir etwas fehlt.</div></div>
+<div class="pk"><h3><b>S2</b> Dialog, Lücken, Rollenkarten</h3>
+<div class="prompt">Du bist erfahrene Kursleiter:in für <span class="ph">[Deutsch / Englisch / …]</span>. Schreib für <span class="ph">[Niveau]</span> einen Dialog mit 8 bis 10 Zeilen in der Situation <span class="ph">[z. B. am Gemeindeamt den Meldezettel abgeben]</span>. Erfundene Namen. Dann dieselbe Fassung mit 6 Lücken und den Redemitteln darunter. Zum Schluss zwei Rollenkarten (A und B) für ein freies Rollenspiel.</div></div>
+<div class="pk"><h3><b>S3</b> Grammatik in kleinen Schritten</h3>
+<div class="prompt">Du bist erfahrene Kursleiter:in für <span class="ph">[Sprache]</span>. Erkläre <span class="ph">[Grammatikthema, z. B. Perfekt mit „sein“ oder „haben“]</span> für Erwachsene auf <span class="ph">[Niveau]</span> mit Erstsprache <span class="ph">[z. B. Ungarisch]</span>: höchstens fünf kurze Sätze, eine Merkregel, acht Beispielsätze aus dem Alltag. Danach acht Übungssätze, die Lösungen getrennt am Ende. Fachwörter nur mit Erklärung.</div></div>
+<div class="pk"><h3><b>S4</b> Übung im Prüfungsformat</h3>
+<div class="prompt">Du bist erfahrene Prüfungstrainer:in. Erstelle eine Übung, die dem Format <span class="ph">[z. B. „Lesen, Teil 1, B1“]</span> nachempfunden ist, zum Thema <span class="ph">[Thema]</span>. Erfinde alle Texte selbst, verwende keine Originalaufgaben. Bei Auswahlantworten: alle Antwortmöglichkeiten etwa gleich lang, die richtige nicht immer die längste, Position zufällig. Lösung mit einem Satz Begründung je Aufgabe.</div></div>
+</div>
+<p class="also"><b>Schon im Handout:</b> Text in drei Niveaus, Fehler markieren statt korrigieren, Gesprächspartner, Rollenspiel in der Ordination, Aussprache (Werkzeug A). <b>Prüfen:</b> Das Niveau rutscht gern nach oben; österreichische Wörter (Jänner, e-card) gezielt verlangen.</p>
+</section>
+
+<section class="fach" style="--c:var(--wissen)">
+<h2>Basisbildung <small>4 Karten</small></h2>
+<div class="grid">
+<div class="pk"><h3><b>B1</b> Lesetext in drei Stufen</h3>
+<div class="prompt">Du bist erfahrene Basisbildner:in. Schreib einen Text zum Thema <span class="ph">[z. B. einen Termin beim Amt verschieben]</span> in drei Stufen: Stufe 1 fünf Sätze mit höchstens sechs Wörtern, Stufe 2 acht einfache Sätze, Stufe 3 zwölf Sätze. Gleicher Inhalt. Je Stufe drei Fragen zum Ankreuzen; alle Antworten etwa gleich lang, die richtige an wechselnder Stelle. Themen für Erwachsene, keine Kindersprache.</div></div>
+<div class="pk"><h3><b>B2</b> Ein Alltagsdokument lesen</h3>
+<div class="prompt">Du bist erfahrene Basisbildner:in. Erstelle eine erfundene, vereinfachte <span class="ph">[Handyrechnung / Terminbestätigung / Hausordnung]</span> einer Fantasiefirma mit erfundenen Angaben. Dazu sechs Fragen für Lernende auf <span class="ph">[Niveau]</span>: Wie viel? Bis wann? Was muss ich tun? Lösungen getrennt am Ende. Frag mich zuerst, wenn dir etwas fehlt.</div></div>
+<div class="pk"><h3><b>B3</b> Formular üben</h3>
+<div class="prompt">Du bist erfahrene Basisbildner:in. Erstelle ein einfaches, erfundenes Formular <span class="ph">[z. B. Anmeldung in der Bücherei]</span> mit acht Feldern und eine Übungsperson mit erfundenen Angaben aus einem Fantasieort. Dazu Wortkarten zu den Feldbegriffen (z. B. Geburtsdatum, Unterschrift) mit je einer einfachen Erklärung. Große Schrift, kurze Zeilen.</div></div>
+<div class="pk"><h3><b>B4</b> Wörter-Bingo</h3>
+<div class="prompt">Du bist erfahrene Basisbildner:in. Mach aus diesen zehn Wörtern ein Bingo zum Ausdrucken für <span class="ph">[Anzahl]</span> Erwachsene auf <span class="ph">[Niveau]</span>: Karten mit je neun Feldern, jede Karte anders, dazu eine Liste mit kurzen Erklärungen zum Vorlesen. Wörter: <span class="ph">[Wörter einfügen]</span></div></div>
+</div>
+<p class="also"><b>Schon im Handout:</b> Brief in einfacher Sprache mit Liste des Weggelassenen, Rechengeschichten, Mathe-Tutor, Rückmeldung nach Raster. <b>Prüfen:</b> Beträge und Fristen nachrechnen, Lesestufen einmal laut lesen.</p>
+</section>
+
+<section class="fach" style="--c:var(--regeln)">
+<h2>EDV <small>3 Karten</small></h2>
+<div class="grid">
+<div class="pk"><h3><b>E1</b> Anleitung in Schritten</h3>
+<div class="prompt">Du bist EDV-Trainer:in für Einsteiger:innen <span class="ph">[z. B. 60 plus]</span>. Schreib eine Anleitung: <span class="ph">[z. B. ein Foto vom Handy per E-Mail schicken, Android]</span>. Höchstens acht Schritte, ein Schritt pro Zeile, jeder beginnt mit einem Verb. Markiere Stellen, an denen Menünamen je nach Gerät oder Version abweichen können. Danach drei Kontrollfragen.</div></div>
+<div class="pk"><h3><b>E2</b> Begriffe mit Alltagsvergleich</h3>
+<div class="prompt">Du bist EDV-Trainer:in. Erkläre diese Begriffe für Erwachsene ohne Vorkenntnisse: <span class="ph">[z. B. Browser, Cloud, Download, Update, WLAN]</span>. Je Begriff ein Satz und ein Vergleich aus dem Alltag, keine weiteren Fachwörter. Als Tabelle zum Ausdrucken.</div></div>
+<div class="pk"><h3><b>E3</b> Übungstext zum Formatieren</h3>
+<div class="prompt">Du bist EDV-Trainer:in für <span class="ph">[Word / LibreOffice Writer]</span>, Niveau <span class="ph">[Einstieg]</span>. Schreib einen erfundenen, unformatierten Text von rund 200 Wörtern: <span class="ph">[z. B. Einladung zum Herbstfest eines Fantasievereins]</span>. Dazu sechs Formatierungsaufgaben, steigend schwierig (Überschrift, Aufzählung, Tabelle …), zu jeder eine kurze Lösungsbeschreibung. Frag mich zuerst, wenn dir etwas fehlt.</div></div>
+</div>
+<p class="also"><b>Schon im Handout:</b> Fehlermeldung erklären lassen, erfundenes Kassabuch mit Excel-Aufgaben, Phishing-Detektivspiel. <b>Prüfen:</b> Jeden Schritt einmal am eigenen Gerät nachklicken.</p>
+</section>
+
+<section class="fach p2" style="--c:var(--kontext)">
+<h2>Gesundheit und Bewegung <small>4 Karten</small></h2>
+<div class="grid">
+<div class="pk"><h3><b>G1</b> Aufwärmspiele ohne Material</h3>
+<div class="prompt">Du bist erfahrene Trainer:in für <span class="ph">[z. B. Rückenfit 50+]</span>. Schlag mir fünf Aufwärmspiele für den Stundenbeginn vor, ohne Material, für <span class="ph">[Anzahl]</span> Personen in einem <span class="ph">[Turnsaal / Pfarrsaal]</span>. Je Spiel: Ablauf in drei Sätzen, Dauer, eine leichtere Variante. Kennzeichne, wo du unsicher bist.</div></div>
+<div class="pk"><h3><b>G2</b> Ansage zum Vorsprechen</h3>
+<div class="prompt">Du bist erfahrene Trainer:in für <span class="ph">[Kursart]</span>. Schreib eine Ansage zum Vorsprechen für diese Übung: <span class="ph">[Übung kurz beschreiben]</span>. Ausgangsstellung, Bewegung, Atmung, zwei typische Fehler, auf die ich achten sollte. Kurze Sätze, Sie-Form, ruhiges Tempo. Kennzeichne, wo du unsicher bist.</div></div>
+<div class="pk"><h3><b>G3</b> Bogen über ein Semester</h3>
+<div class="prompt">Du bist erfahrene Trainer:in. Plane einen Bogen über <span class="ph">[10]</span> Einheiten für <span class="ph">[Kurs, Zielgruppe]</span>: je Einheit ein Schwerpunkt und ein Ziel, langsam steigend, mit zwei Wiederholungseinheiten. Nur Überschriften, keine fertigen Stunden. Als Tabelle. Frag mich zuerst, wenn dir etwas fehlt.</div></div>
+<div class="pk"><h3><b>G4</b> Infoblatt für die erste Stunde</h3>
+<div class="prompt">Du bist erfahrene Trainer:in. Erstelle ein Infoblatt für die erste Stunde meines Kurses <span class="ph">[Kurs, Ort, Uhrzeit]</span>: was mitbringen, welche Kleidung, wie die Stunde abläuft, und der Satz „Wenn etwas nicht guttut, sprechen Sie mich bitte an.“ Keine medizinischen Ratschläge. Eine halbe Seite, Sie-Form, freundlich.</div></div>
+</div>
+<p class="also"><b>Schon im Handout:</b> Stundenbild 60 Minuten mit Varianten, Fantasiereise, Übungen für zu Hause. <b>Prüfen:</b> Jede Übung fachlich prüfen. Gesundheitsfragen von Teilnehmenden gehören zu Fachleuten, nicht in die KI.</p>
+</section>
+
+<section class="fach" id="kreativ" style="--c:var(--menschen)">
+<h2>Kreatives und Musik <small>3 Karten</small></h2>
+<div class="grid">
+<div class="pk"><h3><b>K1</b> Übeplan für vier Wochen</h3>
+<div class="prompt">Du bist erfahrene Musikpädagog:in. Erstelle einen Übeplan für vier Wochen für <span class="ph">[Instrument, z. B. Ukulele]</span>, Niveau <span class="ph">[Anfänger:innen]</span>, 15 Minuten pro Tag: Aufwärmen, ein neuer Baustein pro Woche, ein Liedziel am Ende. Akkordnamen genügen, keine Griffbilder. Als Tabelle. Frag mich zuerst, wenn dir etwas fehlt.</div></div>
+<div class="pk"><h3><b>K2</b> Zwölf kreative Impulse</h3>
+<div class="prompt">Du bist erfahrene Kursleiter:in für <span class="ph">[Malen / Schreiben / Fotografie]</span>. Schlag mir zwölf Impulse zum Thema <span class="ph">[z. B. Herbst im Südburgenland]</span> für Erwachsene vor: vier leicht, vier mittel, vier herausfordernd. Je Impuls ein Satz und eine Frage zum Weiterdenken. Keine Vorgaben „im Stil von“ lebenden Künstler:innen.</div></div>
+<div class="pk"><h3><b>K3</b> Werkstattkarte zu einer Technik</h3>
+<div class="prompt">Du bist erfahrene Kursleiter:in für <span class="ph">[Fach]</span>. Erstelle eine Werkstattkarte zur Technik <span class="ph">[z. B. Monotypie]</span> für Anfänger:innen: Materialliste mit Mengen für <span class="ph">[Anzahl]</span> Personen, sechs Schritte, drei typische Fehler und wie man sie behebt, ein Sicherheitshinweis. Kennzeichne, wo du unsicher bist.</div></div>
+</div>
+<p class="also"><b>Schon im Handout:</b> Rückmeldung auf ein eigenes Bild, Belichtungs-Lernspiel, Kochkurs mit Allergenen. <b>Prüfen:</b> Griffbilder und Noten selbst ergänzen, Mengen und Sicherheitshinweise fachlich prüfen.</p>
+</section>
+
+<section class="fach" style="--c:var(--wissen)">
+<h2>Für alle: Organisation und Kommunikation <small>4 Karten</small></h2>
+<div class="grid">
+<div class="pk"><h3><b>A1</b> Kursausschreibung</h3>
+<div class="prompt">Du bist erfahrene Programmplaner:in einer Volkshochschule. Schreib eine Kursausschreibung für <span class="ph">[Kurs, Zielgruppe, Termine, Ort]</span>. Höchstens 80 Wörter, der Nutzen zuerst, Sie-Form, keine Übertreibungen. Drei Varianten: sachlich, herzlich, kurz für soziale Medien.</div></div>
+<div class="pk"><h3><b>A2</b> Nachricht an die Gruppe</h3>
+<div class="prompt">Du bist erfahrene Kursleiter:in. Formuliere eine kurze, freundliche Nachricht an meine Kursgruppe: <span class="ph">[Anlass, z. B. Kurs am … entfällt, Ersatztermin …]</span>. Sie-Form, höchstens sechs Sätze. Dazu eine zweite Fassung in einfacher Sprache. Platzhalter statt Namen, die setze ich selbst ein.</div></div>
+<div class="pk"><h3><b>A3</b> Die ersten 20 Minuten</h3>
+<div class="prompt">Du bist erfahrene Erwachsenenbildner:in. Plane die ersten 20 Minuten meines neuen Kurses <span class="ph">[Kurs, Gruppe]</span>: Begrüßung, ein Kennenlernen, das niemanden bloßstellt, Erwartungen klären, Ablauf vorstellen. Als Tabelle mit Zeit, Methode, Material. Frag mich zuerst, wenn dir etwas fehlt.</div></div>
+<div class="pk"><h3><b>A4</b> Rückmeldung in der Kursmitte</h3>
+<div class="prompt">Du bist erfahrene Erwachsenenbildner:in. Erstelle einen kurzen, anonymen Rückmeldebogen für die Mitte meines Kurses <span class="ph">[Kurs, Niveau]</span>: fünf Fragen, davon zwei offen, einfache Sprache, keine Fragen nach Namen oder persönlichen Angaben. Dazu drei Sätze, wie ich die Ergebnisse mit der Gruppe bespreche.</div></div>
+</div>
+<p class="also"><b>Schon im Handout:</b> Feedbackraster, Einstiegsmethoden, Lernplan mit Nachricht an die Gruppe, Mitschrift zusammenfassen. <b>Prüfen:</b> Ton und Termine selbst gegenlesen, bevor etwas hinausgeht.</p>
+</section>
+
+<div class="card tipp s"><b>Tipp für jedes Quiz:</b> Bei Multiple Choice machen KI-Modelle die richtige Antwort oft zur längsten und setzen sie gern an dieselbe Stelle. Schreiben Sie darum dazu: „Alle Antwortmöglichkeiten etwa gleich lang, die richtige nicht immer die längste, Position zufällig.“ Ein Quiz-Auftrag mit Lösungsschlüssel steht im Handout (Ü4b).</div>
+
+<footer>Armin Fradler · KI in der Kursvorbereitung · VHS Oberwart, 17.10.2026 · Mit KI erstellt, von mir geprüft.</footer>
+</main>
+<script>
+document.querySelectorAll('.prompt').forEach(function(p){
+  var b=document.createElement('button');b.type='button';b.textContent='Kopieren';
+  b.addEventListener('click',function(){
+    var t=p.innerText.replace(/\s*Kopier(en|t)\s*$/,'').trim();
+    var done=function(){b.textContent='Kopiert';b.classList.add('ok');setTimeout(function(){b.textContent='Kopieren';b.classList.remove('ok')},1500)};
+    var fail=function(){b.textContent='Bitte markieren';setTimeout(function(){b.textContent='Kopieren'},2500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){fallback(t)?done():fail()})}else{fallback(t)?done():fail()}
+  });
+  p.appendChild(b);
+});
+function fallback(t){var a=document.createElement('textarea'),ok=false;a.value=t;document.body.appendChild(a);a.select();try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok}
+</script>
+</body>
+</html>

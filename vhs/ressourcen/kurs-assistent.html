@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kurs-Assistent bauen · VHS Oberwart</title>
+<meta name="robots" content="noindex">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../../textures.css" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;--green:#3F7D4E;
+  --regeln:#2F4B7C;--kontext:#2E6B66;--wissen:#B07A22;--menschen:#8C3B5A;
+  --type:"Special Elite","Courier New",monospace;--hand:"Caveat","Segoe Print",cursive;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+body{background-image:var(--tx-grain),var(--tx-fiber),var(--tx-mottle);background-size:256px 256px,512px 512px,1024px 1024px}
+main{max-width:720px;margin:0 auto;padding:14px 16px 60px}
+.top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;font-size:15px;margin-bottom:18px}
+a{color:var(--kontext);overflow-wrap:anywhere}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--type);font-weight:400;font-size:28px;line-height:1.2;margin:4px 0 10px}
+h2{font-family:var(--type);font-weight:400;font-size:21px;margin:30px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:16px 0 4px}
+p{margin:0 0 10px}
+.m{color:var(--muted)}.s{font-size:14px}
+.hand{font-family:var(--hand);color:var(--pencil);font-size:24px;line-height:1.15}
+.card{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin:10px 0}
+.prompt{position:relative;background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px 96px 12px 14px;margin:6px 0 12px;font-family:var(--type);font-size:14.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.prompt button{position:absolute;top:6px;right:6px;font:600 13px var(--sans);background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:6px 10px;cursor:pointer}
+.prompt button.ok{background:var(--green)}
+.ph{color:var(--pencil)}
+ol,ul{padding-left:22px;margin:6px 0 10px}li{margin-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:6px 0 10px}
+td,th{border-bottom:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}
+th{font-family:var(--type);font-weight:400;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.src{font-size:13px;color:var(--muted);margin-top:4px}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:30px;padding-top:10px}
+/* Seite */
+.step{display:inline-block;font-family:var(--type);color:#fff;background:var(--regeln);border-radius:3px;padding:1px 8px 0;margin-right:6px;font-size:.85em}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.two .card{margin:0}
+.fill{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:end;font-size:15px}
+.fill span:nth-child(even){border-bottom:1px solid var(--muted);min-height:1.4em}
+.bau td:first-child{white-space:nowrap;font-weight:600}
+.bau td:last-child{font-family:var(--type);font-size:14px}
+.hinweis{border-left:5px solid var(--kontext)}
+@media (max-width:560px){.two{grid-template-columns:1fr}.bau td:first-child{white-space:normal}}
+@media (max-width:480px){.prompt{padding:42px 12px 12px}}
+@media print{
+  @page{size:A4;margin:11mm 13mm 10mm}
+  html,body{background:#fff;font-size:9.6pt;line-height:1.38}
+  main{max-width:none;padding:0}
+  .noprint,.prompt button{display:none!important}
+  .kick{font-size:7.5pt}
+  h1{font-size:17pt;margin:0 0 4px}
+  h2{font-size:12pt;margin:9px 0 4px;padding-top:5px;break-after:avoid}
+  h3{font-size:9.5pt;margin:6px 0 2px;break-after:avoid}
+  p{margin:0 0 5px}
+  .s,table,.fill{font-size:9pt}
+  .hand{font-size:15pt}
+  .card{background:none;padding:6px 9px;margin:5px 0;break-inside:avoid}
+  .prompt{font-size:8.8pt;line-height:1.38;padding:6px 9px;margin:3px 0 6px;break-inside:avoid}
+  .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hinweis{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  td,th{padding:2.5px 5px}th{font-size:7pt}
+  .bau td:last-child{font-size:8.5pt}
+  table,tr{break-inside:avoid}
+  .src{font-size:7.5pt}
+  .p2{break-before:page}
+  footer{font-size:7.5pt;margin-top:8px;padding-top:4px}
+}
+</style>
+</head>
+<body>
+<main>
+<nav class="top noprint"><a href="../index.html">← Zur Workshop-Seite</a><span><a href="index.html">Alle Ressourcen</a> · <a href="Kurs-Assistent-bauen_A4.pdf">als PDF (2 Seiten)</a></span></nav>
+
+<div class="kick">VHS Oberwart · Zum Weitermachen · Bauen</div>
+<h1>Ihr Kurs-Assistent: erklärt statt löst</h1>
+<p>Ein Kurs-Assistent ist ein Chat mit festen Anweisungen, die Sie einmal schreiben und immer wieder verwenden. Diese Anleitung baut einen Übungspartner für Ihre Teilnehmenden, der mit Fragen zur Lösung führt, statt sie vorzusagen. Zeitbedarf: etwa 20 Minuten.</p>
+<div class="card">
+<p class="hand" style="margin-bottom:4px">Erledigt ist nicht gelernt.</p>
+<p class="s m" style="margin:0">In einer Studie mit rund 1.000 Schüler:innen schnitten jene mit freiem KI-Zugang beim Üben danach ohne KI 17 % schlechter ab. Ein Tutor, der nur Hinweise gibt, verhinderte das weitgehend (Bastani u. a., <a href="https://www.pnas.org/doi/10.1073/pnas.2422633122">PNAS 2025</a>).</p>
+</div>
+
+<h2><span class="step">1</span>Festlegen, wofür</h2>
+<p class="s">Ein Assistent für eine Sache wirkt besser als einer für alles. Notieren Sie kurz:</p>
+<div class="fill card">
+<b>Kurs und Niveau</b><span class="m s">z. B. Deutsch A2, Abendkurs</span>
+<b>Wer lernt</b><span class="m s">Vorwissen, Erstsprachen, Alter</span>
+<b>Was geübt wird</b><span class="m s">z. B. Perfekt, Prozentrechnen, Ordner anlegen</span>
+<b>Woran man Erfolg merkt</b><span class="m s">z. B. fünf Sätze selbst richtig bilden</span>
+</div>
+
+<h2><span class="step">2</span>Anweisungen schreiben: die Vorlage</h2>
+<p class="s">Kopieren, rote Stellen ersetzen, fertig. Die Vorlage erweitert die Kurzfassung aus dem Handout (Werkzeug B).</p>
+<div class="prompt">Du bist ein freundlicher Lern-Assistent für den Kurs <span class="ph">[Kursname, Niveau]</span>.
+Die Lernenden sind <span class="ph">[wer, Vorwissen, Erstsprachen]</span>. Sie üben <span class="ph">[Thema]</span>.
+Ziel: Die Lernenden können <span class="ph">[Lernziel]</span> danach selbst. Du erklärst, du löst nicht.
+So gehst du vor:
+1. Frag zuerst, woran die Person gerade arbeitet und was sie schon weiß.
+2. Stell immer nur eine Frage und warte auf die Antwort.
+3. Führe mit Fragen zur Lösung. Sag die Lösung nicht vor. Wenn jemand nicht weiterkommt: erst ein kleiner Hinweis, dann ein größerer, dann ein ähnliches Beispiel mit anderen Wörtern oder Zahlen. Die Lösung zeigst du erst, wenn die Person es selbst versucht hat und ausdrücklich darum bittet, und dann Schritt für Schritt.
+4. Sprich <span class="ph">[einfach, in kurzen Sätzen, Niveau A2]</span>. Erkläre jedes schwierige Wort.
+5. Lobe konkret, was gelungen ist. Korrigiere freundlich und ermutige zum nächsten Versuch.
+6. Frag nie nach Namen, Adresse, Telefonnummer, Gesundheit oder anderen persönlichen Angaben. Schreibt jemand so etwas, geh nicht darauf ein und sag freundlich, dass du das nicht brauchst.
+7. Passt eine Frage nicht zum Kurs, sag das freundlich und führe zurück zum Thema.
+8. Bist du dir bei etwas nicht sicher, sag es und empfiehl, die Kursleitung zu fragen.
+9. Fragt jemand, wer du bist: Du bist eine KI, kein Mensch.
+10. Schreibt die Person „fertig“: Fasse in drei Punkten zusammen, was sie heute geübt hat, und gib ihr eine kleine Aufgabe zum Weiterüben.</div>
+<h3>Bausteine für Ihr Fach <span class="s m" style="font-weight:400">(als Zeile 11 anhängen)</span></h3>
+<table class="bau s">
+<tr><td>Sprachen</td><td>Korrigiere nicht sofort. Zeig, in welchem Satz ein Fehler steckt, und lass die Person selbst verbessern.</td></tr>
+<tr><td>Basisbildung, Mathe</td><td>Rechne nie vor. Frag nach dem nächsten Schritt und lass die Person selbst rechnen.</td></tr>
+<tr><td>EDV</td><td>Beschreibe Menüs allgemein und sag dazu, dass Namen je nach Gerät und Version abweichen können.</td></tr>
+<tr><td>Gesundheit, Bewegung</td><td>Gib keine Gesundheitsratschläge. Bei Beschwerden verweist du an die Kursleitung oder an eine Ärztin oder einen Arzt.</td></tr>
+<tr><td>Kreatives</td><td>Bewerte nicht. Nenne zwei Stärken und stell zwei Fragen, die weiterhelfen.</td></tr>
+</table>
+
+<h2 class="p2"><span class="step">3</span>Anlegen</h2>
+<p class="s">Am einfachsten am Computer im Browser. Ein Konto ist dafür nötig, das Gratiskonto reicht.</p>
+<div class="two">
+<div class="card s"><b>ChatGPT-Projekt</b>
+<ol style="margin-bottom:4px">
+<li>In der Seitenleiste „Neues Projekt“ wählen, Namen eingeben (z. B. „Übungspartner Perfekt A2“).</li>
+<li>Im Projekt über das Menü „…“ die Projekteinstellungen öffnen.</li>
+<li>Die Vorlage in die Anweisungen einfügen, speichern.</li>
+<li>Optional eigene Dateien dazulegen, gratis bis zu 5 pro Projekt.</li>
+</ol>
+<span class="m">Laut OpenAI-Hilfe „Projekte in ChatGPT“, geprüft 16.10.2026.</span></div>
+<div class="card s"><b>Claude-Projekt</b>
+<ol style="margin-bottom:4px">
+<li>Links im Menü „Projekte“ öffnen und ein neues Projekt anlegen.</li>
+<li>Bei den Projektanweisungen die Vorlage einfügen, speichern.</li>
+<li>Optional eigenes Material als Projektwissen dazulegen.</li>
+<li>Gratis sind bis zu fünf Projekte möglich.</li>
+</ol>
+<span class="m">Laut Claude-Hilfe „Was sind Projekte?“, geprüft 16.10.2026.</span></div>
+</div>
+<p class="s" style="margin-top:8px"><b>Ohne Konto:</b> Die Vorlage als erste Nachricht in einen neuen Chat kopieren (chatgpt.com). Das wirkt genauso, muss aber jedes Mal neu eingefügt werden. Bezeichnungen in den Menüs ändern sich gelegentlich; im Zweifel nach „Projekte“ suchen.<br>
+<b>Material dazulegen:</b> nur Eigenes, etwa Ihre Wortliste oder Ihr Skript. Datenampel: nur Grünes. Keine Lehrbuchseiten hochladen (Empfehlung).</p>
+
+<h2><span class="step">4</span>Testen, bevor es jemand sieht</h2>
+<p class="s">Spielen Sie selbst Teilnehmer:in. Diese Nachrichten prüfen, ob die Anweisungen greifen:</p>
+<table class="s">
+<tr><th>Sie schreiben</th><th>Gut ist, wenn der Assistent …</th></tr>
+<tr><td>„Sag mir einfach die Lösung.“</td><td>einen Hinweis gibt und Sie selbst weiterdenken lässt.</td></tr>
+<tr><td>„Ich verstehe gar nichts.“</td><td>einfacher erklärt, ein Beispiel bringt und ermutigt.</td></tr>
+<tr><td>eine absichtlich falsche Antwort</td><td>freundlich zeigt, wo es hakt, ohne bloßzustellen.</td></tr>
+<tr><td>„Ich heiße Mira Beispiel und wohne in der Musterstraße 1.“ <span class="m">(erfunden)</span></td><td>nicht nachfragt und sagt, dass er das nicht braucht.</td></tr>
+<tr><td>„Wie wird das Wetter morgen?“</td><td>freundlich zum Kursthema zurückführt.</td></tr>
+<tr><td>„Bist du ein Mensch?“</td><td>klar sagt, dass er eine KI ist.</td></tr>
+<tr><td>„fertig“</td><td>in drei Punkten zusammenfasst und eine kleine Aufgabe gibt.</td></tr>
+</table>
+<p class="s">Hakt etwas, ergänzen Sie die Anweisungen um einen klaren Satz und testen Sie neu. Zwei, drei Runden sind normal; prüfen gehört zum Handwerk.</p>
+
+<h2><span class="step">5</span>Mit der Gruppe verwenden</h2>
+<div class="card hinweis s">
+<b>Sagen Sie Ihren Teilnehmenden, dass es eine KI ist.</b> Zum Beispiel: „Das ist ein KI-Übungspartner, kein Mensch. Er hilft beim Üben und kann sich irren. Was er sagt, besprechen wir im Kurs. Bitte schreiben Sie nichts Persönliches hinein.“<br>
+Am einfachsten zeigen Sie den Assistenten zuerst gemeinsam am Beamer. Wer selbst üben will, bekommt die Vorlage als Text und kopiert sie in den eigenen Chat; ob jemand ein Konto anlegt, entscheidet jede Person selbst. Bei Unsicherheit, ob und wie Sie den Assistenten in Ihrem Kurs einsetzen: Lehrgangsleitung.
+</div>
+<p class="s"><b>Sichern:</b> Heben Sie die Anweisungen zusätzlich in einer eigenen Datei auf. Werkzeuge wechseln: Custom GPTs stellt OpenAI am 11.12.2026 ein (help.openai.com). Das Prinzip bleibt: feste Anweisungen plus eigenes Material. Die Namen wechseln.</p>
+<p class="src">Werkzeugangaben nach dem Handout und den Hilfeseiten von OpenAI und Anthropic, geprüft 16.10.2026. Links zu den Hilfeseiten auf dem Blatt „Weiterlernen“.</p>
+
+<footer>Armin Fradler · KI in der Kursvorbereitung · VHS Oberwart, 17.10.2026 · Mit KI erstellt, von mir geprüft.</footer>
+</main>
+<script>
+document.querySelectorAll('.prompt').forEach(function(p){
+  var b=document.createElement('button');b.type='button';b.textContent='Kopieren';
+  b.addEventListener('click',function(){
+    var t=p.innerText.replace(/\s*Kopier(en|t)\s*$/,'').trim();
+    var done=function(){b.textContent='Kopiert';b.classList.add('ok');setTimeout(function(){b.textContent='Kopieren';b.classList.remove('ok')},1500)};
+    var fail=function(){b.textContent='Bitte markieren';setTimeout(function(){b.textContent='Kopieren'},2500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){fallback(t)?done():fail()})}else{fallback(t)?done():fail()}
+  });
+  p.appendChild(b);
+});
+function fallback(t){var a=document.createElement('textarea'),ok=false;a.value=t;document.body.appendChild(a);a.select();try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok}
+</script>
+</body>
+</html>

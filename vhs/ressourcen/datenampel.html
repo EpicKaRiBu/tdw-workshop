@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Datenampel und Prüffragen · VHS Oberwart</title>
+<meta name="robots" content="noindex">
+<link href="../../fonts/fonts.css" rel="stylesheet">
+<link href="../../textures.css" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;--green:#3F7D4E;
+  --regeln:#2F4B7C;--kontext:#2E6B66;--wissen:#B07A22;--menschen:#8C3B5A;
+  --type:"Special Elite","Courier New",monospace;--hand:"Caveat","Segoe Print",cursive;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+body{background-image:var(--tx-grain),var(--tx-fiber),var(--tx-mottle);background-size:256px 256px,512px 512px,1024px 1024px}
+main{max-width:720px;margin:0 auto;padding:14px 16px 60px}
+.top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;font-size:15px;margin-bottom:18px}
+a{color:var(--kontext);overflow-wrap:anywhere}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--type);font-weight:400;font-size:28px;line-height:1.2;margin:4px 0 10px}
+h2{font-family:var(--type);font-weight:400;font-size:21px;margin:30px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:17px;margin:16px 0 4px}
+p{margin:0 0 10px}
+.m{color:var(--muted)}.s{font-size:14px}
+.hand{font-family:var(--hand);color:var(--pencil);font-size:24px;line-height:1.15}
+.card{background:var(--card);background-image:var(--tx-card);background-size:160px 160px;border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin:10px 0}
+.prompt{position:relative;background:#fff;border:1px solid var(--line);border-radius:4px;padding:12px 96px 12px 14px;margin:6px 0 12px;font-family:var(--type);font-size:14.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.prompt button{position:absolute;top:6px;right:6px;font:600 13px var(--sans);background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:6px 10px;cursor:pointer}
+.prompt button.ok{background:var(--green)}
+.ph{color:var(--pencil)}
+ol,ul{padding-left:22px;margin:6px 0 10px}li{margin-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:6px 0 10px}
+td,th{border-bottom:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}
+th{font-family:var(--type);font-weight:400;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.src{font-size:13px;color:var(--muted);margin-top:4px}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:30px;padding-top:10px}
+/* Seite */
+.ampel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0 10px}
+.ampel div{border-radius:4px;padding:10px 12px;color:#fff;font-size:15px;line-height:1.35}
+.ampel b{display:block;font-family:var(--type);font-weight:400;font-size:19px;margin-bottom:2px}
+.ampel .g{background:#3F7D4E}.ampel .y{background:#B8860B}.ampel .r{background:#A93226}
+.rot{font-family:var(--hand);color:var(--pencil);font-size:26px;line-height:1.15;margin:6px 0}
+.tag{display:inline-block;font-family:var(--type);font-size:12px;letter-spacing:.05em;text-transform:uppercase;border-radius:3px;padding:1px 6px 0;color:#fff;margin-right:4px;vertical-align:1px}
+.tag.ge{background:var(--regeln)}.tag.vhs{background:var(--kontext)}.tag.em{background:var(--wissen)}
+.hinweis{border-left:5px solid var(--kontext)}
+@media (max-width:560px){.ampel{grid-template-columns:1fr}}
+@media print{
+  @page{size:A4;margin:11mm 13mm 10mm}
+  html,body{background:#fff;font-size:9.6pt;line-height:1.38}
+  main{max-width:none;padding:0}
+  .noprint,.prompt button{display:none!important}
+  .kick{font-size:7.5pt}
+  h1{font-size:17pt;margin:0 0 4px}
+  h2{font-size:12pt;margin:9px 0 4px;padding-top:5px;break-after:avoid}
+  h3{font-size:9.5pt;margin:6px 0 2px;break-after:avoid}
+  p{margin:0 0 5px}
+  .s,table,.fill{font-size:9pt}
+  .hand{font-size:15pt}
+  .card{background:none;padding:6px 9px;margin:5px 0;break-inside:avoid}
+  .prompt{font-size:8.8pt;line-height:1.38;padding:6px 9px;margin:3px 0 6px;break-inside:avoid}
+  .step{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .hinweis{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  td,th{padding:2.5px 5px}th{font-size:7pt}
+  .bau td:last-child{font-size:8.5pt}
+  table,tr{break-inside:avoid}
+  .src{font-size:7.5pt}
+  .p2{break-before:page}
+  footer{font-size:7.5pt;margin-top:8px;padding-top:4px}
+  .ampel div,.tag{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .ampel div{font-size:9pt;padding:6px 8px}.ampel b{font-size:11.5pt}
+  .ampel{break-inside:avoid}
+  .rot{font-size:15pt}
+  .hinweis{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<main>
+<nav class="top noprint"><a href="../index.html">← Zur Workshop-Seite</a><span><a href="index.html">Alle Ressourcen</a> · <a href="Datenampel-und-Prueffragen_A4.pdf">als PDF (1 Seite)</a></span></nav>
+
+<div class="kick">VHS Oberwart · Zum Weitermachen · Für alle gleich</div>
+<h1>Datenampel und Prüffragen</h1>
+<p>Zwei Blicke, die Sie in Sekunden schaffen: <b>vor</b> dem Einfügen in eine KI die Ampel, <b>nach</b> dem Ergebnis die fünf Prüffragen.</p>
+
+<h2>Vor dem Einfügen: Welche Farbe hat das?</h2>
+<div class="ampel">
+<div class="g"><b>Grün</b>Niemand erkennbar, nichts Persönliches: eigenes Material, Ausgedachtes, Fehlersätze ohne Namen. → einfügen, Training aus</div>
+<div class="y"><b>Gelb</b>Persönliches steckt drin: ein Aufsatz mit Namen, Wohnort, Arbeit, Familie. → erst entschärfen: Namen und Details raus, nur Ausschnitte. Erkennt man niemanden mehr: grün.</div>
+<div class="r"><b>Rot</b>Erkennbar oder sensibel: Listen, Noten, Fotos und Aufnahmen von Personen. Texte über Gesundheit, Herkunft, Flucht oder Glauben einer bestimmten Person, auch ohne Namen (VHS-Regel). → nicht eingeben</div>
+</div>
+<p class="rot">Beschreiben Sie die Situation, nicht die Person.</p>
+<p><b>Drei Fragen vor dem Einfügen:</b> Steht ein Name drin? Würde jemand aus der Gruppe die Person an Details, Geschichte oder Foto erkennen? Geht es um Gesundheit, Herkunft, Familie oder Glauben? Dreimal nein: grün. Sonst entschärfen oder weglassen. Im Zweifel die strengere Farbe.</p>
+
+<h3>So geht es</h3>
+<table>
+<tr><th>Statt</th><th>Besser</th></tr>
+<tr><td>einen ganzen Aufsatz kopieren</td><td>zehn Fehlersätze aus verschiedenen Texten abtippen: „Analysiere die Fehlermuster dieser Sätze, A2.“</td></tr>
+<tr><td>„Frau K. hat Bandscheibenprobleme …“</td><td>den Bedarf beschreiben: „Rückenkurs mit Varianten bei Bandscheibenproblemen und in der Schwangerschaft.“</td></tr>
+<tr><td>einen echten Lebenslauf eingeben</td><td>eine Vorlage mit erfundenen Daten bauen lassen. Teilnehmende, die ihren eigenen Lebenslauf eingeben, entscheiden selbst.</td></tr>
+<tr><td>ein Foto mit Personen</td><td>zuschneiden, bis niemand mehr zu sehen ist</td></tr>
+</table>
+<p class="s"><b>Ist doch etwas Rotes hineingeraten:</b> Chat löschen, vorher kurz notieren, was wann in welches Tool ging, und gleich der Lehrgangsleitung Bescheid geben. Kein Drama: Die VHS prüft, ob ein Risiko besteht, und meldet nur dann, möglichst binnen 72 Stunden (Art. 33 DSGVO). <b>Auch im Abo gilt die Ampel:</b> Privatkonten (auch bezahlte) haben keinen Vertrag zur Auftragsverarbeitung.</p>
+
+<div class="card hinweis s">
+<p style="margin:0"><span class="tag ge">Gesetz</span> Was wirklich niemandem zugeordnet werden kann, auch nicht über Inhalt oder Zusammenhang, ist kein personenbezogenes Datum (DSGVO, Erwägungsgrund 26). Nur den Namen löschen reicht oft nicht. Gesundheit, ethnische Herkunft und religiöse Überzeugung sind besonders geschützt (Art. 9 DSGVO).<br>
+<span class="tag vhs">Ihre VHS</span> Strenger: keine personenbezogenen Daten von Teilnehmenden, keine sensiblen Informationen, datenschutzfreundliche oder lokale Tools bevorzugen. Bei Unsicherheit: Lehrgangsleitung.</p>
+</div>
+
+<h2>Nach dem Ergebnis: fünf Prüffragen</h2>
+<ol>
+<li>Stimmt es fachlich? (Kann ich das beurteilen? Sonst prüft jemand, der es kann.)</li>
+<li>Passt es zu Niveau und Gruppe?</li>
+<li>Sind Namen, Zahlen und Quellen echt? (Zwei Links öffnen.)</li>
+<li>Ist etwas einseitig oder klischeehaft? (Tauschprobe: Würde es bei einem anderen Namen oder Geschlecht gleich lauten?)</li>
+<li>Würde ich es mit meinem Namen verteilen?</li>
+</ol>
+<p class="s m">Training ausschalten: ChatGPT › Einstellungen › Datenkontrollen › „Das Modell für alle verbessern“ aus. Claude › Einstellungen › Datenschutz › Schalter zur Modellverbesserung aus. Gespeichert wird beim Anbieter trotzdem.</p>
+<footer>Armin Fradler · KI in der Kursvorbereitung · VHS Oberwart, 17.10.2026 · Mit KI erstellt, von mir geprüft. Orientierung, keine Rechtsberatung.</footer>
+</main>
+<script>
+document.querySelectorAll('.prompt').forEach(function(p){
+  var b=document.createElement('button');b.type='button';b.textContent='Kopieren';
+  b.addEventListener('click',function(){
+    var t=p.innerText.replace(/\s*Kopier(en|t)\s*$/,'').trim();
+    var done=function(){b.textContent='Kopiert';b.classList.add('ok');setTimeout(function(){b.textContent='Kopieren';b.classList.remove('ok')},1500)};
+    var fail=function(){b.textContent='Bitte markieren';setTimeout(function(){b.textContent='Kopieren'},2500)};
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(done,function(){fallback(t)?done():fail()})}else{fallback(t)?done():fail()}
+  });
+  p.appendChild(b);
+});
+function fallback(t){var a=document.createElement('textarea'),ok=false;a.value=t;document.body.appendChild(a);a.select();try{ok=document.execCommand('copy')}catch(e){}a.remove();return ok}
+</script>
+</body>
+</html>
