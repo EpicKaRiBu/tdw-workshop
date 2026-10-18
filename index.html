@@ -107,15 +107,15 @@ function arrival(){
   if(k>=0){const [key,t,o]=arrivalSteps[k];choice(t,'Willkommen · '+(k+1)+' von 6',o,key,render,prog(k)+(k===0?'<p class="hint">Für die Arbeitsgruppe 2 im Franziskussaal. In einer anderen Arbeitsgruppe? <a href="werkzeuge/ki/">Hier geht es zu den Werkzeugen.</a></p>':''));return}
   if(!answered('pfad')){pathChoice(true);return}
   if(!answered('vormittag')){textQ('Was ist Ihnen vom Vormittag geblieben?','Willkommen · 6 von 6','vormittag','Ein Gedanke, ein Satz, eine Frage …',render,'Absenden',true);return}
-  done('Danke – Sie sind angekommen.','Wir starten um 14:00. Lassen Sie diese Seite offen.');
+  done('Danke – Sie sind angekommen.','Lassen Sie diese Seite offen. Sie geht von selbst weiter, sobald vorne Ihre Mitarbeit gefragt ist.');
 }
 function pathChoice(inArrival){
   const cur=store.get('a.pfad'),rolle=store.get('a.rolle'),foerder=rolle&&C.roles[rolle.i]==='Fördergeber / öffentliche Hand';
-  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>${inArrival?'Woran möchten Sie später arbeiten?':'Welcher Pfad soll es sein?'}</h1><p class="m s">${inArrival?'Ab etwa 14:45 arbeiten Sie 40 Minuten zu zweit oder zu dritt an Ihrem eigenen Haus, zusammen mit anderen, die dasselbe Thema gewählt haben. Wechseln geht jederzeit.':'Was Sie schon erarbeitet haben, bleibt gespeichert. Sie können jederzeit zurückwechseln.'}</p>`+
-   (foerder?`<p class="hint"><b>Sie kommen von einem Fördergeber?</b> Wählen Sie den Pfad Regeln und notieren Sie zwei Sätze zu KI, die Sie in einem Sachbericht gern lesen würden, zum Beispiel im Feld „Eigene Formulierung“ bei der Frage „Wer prüft und verantwortet KI-Ergebnisse?“.</p>`:'')+
+  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>${inArrival?'Woran möchten Sie später arbeiten?':'Welcher Pfad soll es sein?'}</h1><p class="m s">${inArrival?'Ab etwa 14:45 arbeiten Sie rund 40 Minuten an Ihrem eigenen Haus, zusammen mit anderen, die dasselbe Thema gewählt haben. Wechseln geht jederzeit.':'Wechseln geht jederzeit. Was Sie erarbeiten, bleibt gespeichert.'}</p>`+
+   (foerder?`<p class="hint"><b>Sie kommen von einem Fördergeber?</b> Wählen Sie den Pfad Regeln und notieren Sie zwei Sätze zu KI, die Sie in einem Sachbericht gern lesen würden, zum Beispiel im Feld „Eigene Formulierung“ bei der Frage „Wer prüft und verantwortet KI-Ergebnisse?“. Die übrigen Fragen dürfen Sie offen lassen. Nach dem Dokument lesen Sie die zwei Sätze gern einer Gruppe nebenan vor.</p>`:'')+
    C.paths.map((p,i)=>{const I=(window.Pfade&&Pfade.info[p.id])||{};return `<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span>${I.fuer?`<br><span class="s m">Für: ${I.fuer}</span><br><span class="s m">Sie nehmen mit: ${I.mit}</span>`:''}</button>`}).join('')+
    (inArrival?`<button class="opt" id="later" style="text-align:center;margin-bottom:10px">Noch offen – ich entscheide später</button>`:'')+
-   `<p class="hint">Für IT und Digitales gibt es einen vierten Lernpfad: <a href="werkzeuge/ki/modul.html?m=wissen" target="_blank" rel="noopener">„Wissen &amp; Assistenten“</a>. Sie können ihn gleich hier am Handy öffnen. Nach dem Workshop gibt es alle vier auch online.</p>`;
+   `<p class="hint">Für IT und Digitales gibt es einen vierten Lernpfad: <a href="werkzeuge/ki/modul.html?m=wissen" target="_blank" rel="noopener">„Wissen &amp; Assistenten“</a>. Sie können ihn ab der Arbeitsphase (gegen 14:45) hier am Handy öffnen. Nach dem Workshop gibt es alle vier auch online.</p>`;
   main.querySelectorAll('.opt[data-i]').forEach(b=>b.onclick=async()=>{await send('pfad',{i:+b.dataset.i});render()});
   if(inArrival)$('#later').onclick=()=>{store.set('a.pfad',{later:true});render()};
 }
@@ -153,7 +153,7 @@ function paths(){
   const cur=store.get('a.pfad');
   if(!cur||cur.i==null){pathChoice(false);return}
   const p=C.paths[cur.i];
-  main.innerHTML=`<div class="kick">Ihr Lernpfad</div><div class="path" data-tab="Lernpfad" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p>Arbeiten Sie zu zweit oder zu dritt, gern mit Kolleg:innen aus Ihrem Haus. Allein? Suchen Sie sich ein Gegenüber mit demselben Pfad.</p><button class="opt" id="w" style="text-align:center">Pfad wechseln</button>`;
+  main.innerHTML=`<div class="kick">Ihr Lernpfad</div><div class="path" data-tab="Lernpfad" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p>Setzen Sie sich zu Ihrem Thema: Regeln links, Kontext Mitte, Menschen rechts. Aus einem Haus? Arbeiten Sie gemeinsam, eine Person tippt. Allein da? Suchen Sie sich dort ein Gegenüber aus einem anderen Haus. Jede:r arbeitet am eigenen Handy für das eigene Haus.</p><button class="opt" id="w" style="text-align:center">Pfad wechseln</button>`;
   $('#w').onclick=()=>pathChoice(false);
 }
 function work(){
@@ -196,7 +196,7 @@ function render(){
   if(s==='morning')return answered('vormittag')?lookUp():textQ('Was ist Ihnen vom Vormittag geblieben?','Brücke zum Vormittag','vormittag','Ein Gedanke, ein Satz …',lookUp);
   if(s==='mirror')return arrivalSteps.some(([k])=>!answered(k))?arrival():lookUp();
   if(s==='usecases')return answered('uc')?done('Danke!','Die Landkarte entsteht gerade vorne.'):usecases();
-  if(s==='context')return answered('kontext')?done('Danke!','Gleich sehen Sie das Ergebnis live.'):choice('Was geben wir der KI als Nächstes?','Live · Sie steuern',C.context,'kontext',()=>done('Danke!','Gleich sehen Sie das Ergebnis live.'));
+  if(s==='context')return answered('kontext')?done('Danke!','Das Ergebnis sehen Sie vorne.'):choice('Morgen fängt eine neue Kollegin an. Ihre erste Aufgabe: ein Sachbericht. Was legen Sie ihr als Erstes auf den Tisch?','Kontext · Sie wählen',C.context,'kontext',()=>done('Danke!','Das Ergebnis sehen Sie vorne.'));
   if(s==='quiz')return quiz();
   if(s==='paths')return paths();
   if(s==='control')return work();

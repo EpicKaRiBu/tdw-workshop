@@ -13,19 +13,19 @@ const $=s=>document.querySelector(s);
 
 /* ---------------- Steckbriefe der Module ---------------- */
 const INFO={
-  regeln:{titel:'Regeln & Verantwortung',tun:'Sie treffen fünf Grundsatzentscheidungen für Ihr Haus – zu Tools, Daten, Prüfung, KI in Kursen und heiklen Einsätzen. Jede an einem echten Fall, mit Abwägung.',fuer:'Leitung, Geschäftsführung, wer Regeln verantwortet',mit:'Einen Leitlinien-Entwurf für Ihr Haus – oder, wenn Sie schon eine Leitlinie haben, eine Lückenliste.',dauer:'etwa 20 Minuten bis zum Dokument, danach Gegenprobe'},
+  regeln:{titel:'Regeln & Verantwortung',tun:'Sie treffen fünf Grundsatzentscheidungen für Ihr Haus – zu Tools, Daten, Prüfung, KI in Kursen und heiklen Einsätzen. Jede an einem typischen Fall, mit Abwägung.',fuer:'Leitung, Geschäftsführung, wer Regeln verantwortet',mit:'Einen Leitlinien-Entwurf für Ihr Haus – oder, wenn Sie schon eine Leitlinie haben, einen Prüfbericht mit den Lücken.',dauer:'etwa 20 Minuten bis zum Dokument, danach Gegenprobe'},
   kontext:{titel:'Delegieren mit Kontext',tun:'Sie nehmen eine Aufgabe, die bei Ihnen regelmäßig wiederkommt, und legen fest: Welche Unterlagen braucht die KI, damit das Ergebnis gut wird – und was entscheiden weiterhin Menschen?',fuer:'Bildungsmanagement, Programmplanung, Marketing, Verwaltung, Trainer:innen',mit:'Ein „Kontext-Rezept“ fürs Team: welche Unterlagen die KI für eine Aufgabe bekommt und was Menschen entscheiden. Dazu eine fertige Anleitungsdatei für die KI („Skill“).',dauer:'etwa 20 Minuten bis zum Dokument, danach Gegenprobe'},
   wissen:{titel:'Wissen & Assistenten',tun:'Sie klären, wo Ihr Haus steht und welche Stufe als Nächstes passt. Dann sichten Sie, welches Wissen eine KI braucht, was draußen bleibt und wer es pflegt, und planen daraus Ihren ersten KI-Ordner.',fuer:'Digitalverantwortliche, Qualitätsmanagement, Leitung größerer Häuser',mit:'Einen Bauplan mit Ihrer nächsten Stufe und eine fertige Ordner-Vorlage (ZIP) mit Anweisungen, Pflegeplan und ersten Skills. Beides laden Sie am Ende direkt herunter, einen Abholcode gibt es in diesem Pfad nicht.',dauer:'30–40 Minuten'},
-  menschen:{titel:'Menschen mitnehmen',tun:'Sie schätzen Ihr Team ein, wählen die zwei Hebel, die bei Ihnen am meisten bewirken, und finden Antworten auf typische Einwände.',fuer:'Leitung, Personalverantwortliche, Teamleitungen, Betriebsrat',mit:'Einen 30-Tage-Plan und Antworten auf Einwände für Ihr Team.',dauer:'etwa 20 Minuten bis zum Plan, danach Einwand-Probe'}
+  menschen:{titel:'Menschen mitnehmen',tun:'Sie schätzen Ihr Team ein, wählen zwei Maßnahmen („Hebel“), die bei Ihnen am meisten bewirken, legen Antworten auf typische Einwände fest und klären, wem gewonnene Zeit gehört.',fuer:'Leitung, Personalverantwortliche, Teamleitungen, Betriebsrat',mit:'Einen 30-Tage-Plan und Antworten auf Einwände für Ihr Team.',dauer:'etwa 20 Minuten bis zum Plan, danach Einwand-Probe'}
 };
 
 /* ---------------- Inhalte ---------------- */
 const REGELN={
-  start:{q:'Hat Ihre Organisation schon KI-Regeln?',o:['Nein – wir starten neu','Ja – wir prüfen sie']},
+  start:{q:'Hat Ihr Haus schon schriftliche KI-Regeln?',o:['Nein – wir starten neu','Ja – wir prüfen sie']},
   standort:[
-    {k:'suite',q:'Womit arbeiten Sie?',o:['Microsoft 365','Google Workspace','Weder noch']},
+    {k:'suite',q:'Womit arbeitet Ihr Haus im Büro?',o:['Microsoft 365','Google Workspace','Weder noch']},
     {k:'br',q:'Gibt es einen Betriebsrat?',o:['Ja','Nein']},
-    {k:'sens',q:'Arbeiten Sie mit sensiblen Gruppen (z. B. AMS, Basisbildung, Beratung)?',o:['Ja','Nein']}
+    {k:'sens',q:'Arbeitet Ihr Haus mit sensiblen Zielgruppen (z. B. AMS-Kurse, Basisbildung, Beratung)?',o:['Ja','Nein']}
   ],
   d:[
     {k:'tools',pruef:'Wenn morgen jemand ein neues Tool vorschlägt: Wer entscheidet – und in wie vielen Tagen? Eine Freigabe, die drei Monate dauert, führt dazu, dass wieder heimlich mit privaten Konten gearbeitet wird („Schatten-KI“).',t:'Welche Tools dürfen genutzt werden?',fall:'Eine Kollegin nutzt privat ChatGPT für Kursausschreibungen und Kalkulationen. Gut gemeint – aber niemand weiß davon.',
@@ -33,7 +33,7 @@ const REGELN={
       o:[['Jedes Tool','Maximale Freiheit, aber keine Kontrolle über Daten und Verträge.'],
          ['Eine Freigabeliste','Ausgewählte Tools mit Vertrag. Neue Tools werden kurz geprüft.'],
          ['Nur ein Firmentool','Einfach und sicher, aber manchmal nicht das beste Werkzeug.']]},
-    {k:'daten',pruef:'Nennen Sie ein Dokument aus Ihrem Alltag, bei dem Ihre Gruppe über die Farbe uneinig ist. Genau dort braucht Ihre Regel ein Beispiel.',t:'Welche Daten dürfen in welches Tool?',fall:'Jemand will die Anwesenheitsliste eines AMS-Kurses sortieren lassen – mit Namen und SV-Nummern.',
+    {k:'daten',pruef:'Nennen Sie ein Dokument aus Ihrem Alltag, bei dem Sie bei der Ampelfarbe unsicher sind. Genau dafür braucht Ihre Regel ein Beispiel. Tragen Sie es unten ein.',t:'Welche Daten dürfen in welches Tool?',fall:'Jemand will die Anwesenheitsliste eines AMS-Kurses sortieren lassen – mit Namen und SV-Nummern.',
       warum:'Personenbezogene Daten brauchen eine Rechtsgrundlage und einen Vertrag mit dem Anbieter. Gesundheitsdaten sind besonders geschützt (Art. 9 DSGVO). Auch wenn Namen durch Kürzel ersetzt sind (pseudonymisiert), bleiben Daten für Ihr Haus personenbezogen (EDSA-Leitlinien 01/2025). Und wenn sich jemand nicht an die Regel hält? Klare Regeln, Schulung und ein erlaubtes Werkzeug zählen, wenn die Behörde über ein Bußgeld entscheidet (Art. 83 Abs. 2 DSGVO). Gegenüber Betroffenen bleibt Ihr Haus aber verantwortlich: Der Hinweis, jemand habe die Anweisung missachtet, entlastet allein nicht (EuGH C-741/21, 11.4.2024).',
       o:[['Datenampel','Öffentliches (grün) in jedes Tool, Internes ohne Personenbezug (gelb) nur in freigegebene Tools, Personendaten und Sensibles (rot) nie in private oder Gratis-Konten.'],
          ['Nur Grünes','Am sichersten, aber KI hilft dann bei internen Texten nicht.'],
@@ -61,7 +61,7 @@ const REGELN={
       o:[['Immer','Alles, was KI erstellt hat und nach außen geht.'],['Nur wo es Pflicht ist','Chatbots, täuschend echte KI-Bilder, -Videos und -Stimmen (Deepfakes) und ungeprüfte KI-Texte, die über Themen von öffentlichem Interesse informieren (Art. 50). Sonst nichts.'],['Alle KI-Bilder und Chatbots, geprüfte Texte nicht','Auch Bilder, die nicht echt wirken, werden gekennzeichnet. Texte, die ein Mensch geprüft und verantwortet hat, gelten als eigene.']]},
     {k:'agenten',pruef:'Welche Ihrer Systeme dürfen heute schon selbst Mails versenden oder Daten ändern – und wer im Haus weiß das?',t:'Was darf KI selbstständig erledigen (sogenannte Agenten)?',fall:'Ein Assistent soll Anfragen aus dem Postfach selbstständig beantworten.',
       warum:'Versteckte Anweisungen in Mails oder Webseiten können Agenten umlenken. Gefährlich wird es, wenn ein Agent zugleich fremde Inhalte liest, auf sensible Daten zugreift und nach außen handeln kann.',
-      o:[['Nichts ohne Freigabe','Agenten bereiten nur vor. Was nach außen geht oder Daten ändert, gibt ein Mensch frei.'],['Lesen und vorbereiten','Agenten lesen und bereiten selbst vor. Nach außen nur mit Freigabe, und nie alles drei zugleich: fremde Inhalte lesen, an sensible Daten kommen, nach außen handeln.'],['Feste Abläufe nach Freigabe der Leitung','Einzelne, geprüfte Abläufe dürfen laufen.']]}
+      o:[['Nichts ohne Freigabe','Agenten bereiten nur vor. Was nach außen geht oder Daten ändert, gibt ein Mensch frei.'],['Lesen und vorbereiten','Agenten lesen und bereiten selbst vor. Nach außen nur mit Freigabe, und nie alle drei zugleich: fremde Inhalte lesen, an sensible Daten kommen, nach außen handeln.'],['Feste Abläufe nach Freigabe der Leitung','Einzelne, geprüfte Abläufe dürfen laufen.']]}
   ]
 };
 const CLAUSE={
@@ -81,7 +81,7 @@ const CLAUSE={
          'Bei Entscheidungen über Menschen darf KI höchstens zuarbeiten. Entscheidung und Begründung trifft ein Mensch und dokumentiert sie.',
          'Einsätze mit Bezug zu Personalauswahl, Kursplatzvergabe oder Bewertung [prüft die Leitung] vorab im Einzelfall. Schon heute gilt: Über Menschen entscheidet nicht die Maschine allein (Art. 22 DSGVO). Ab Dezember 2027 gelten dafür die Hochrisiko-Pflichten des AI Act.'],
   kennz:['Was KI erstellt hat und nach außen geht, kennzeichnen wir. Das ist eine Hausregel, sie geht über die gesetzliche Pflicht (Art. 50 AI Act) hinaus. Reine Rechtschreibkorrektur zählt nicht dazu.','Wir kennzeichnen, wo es Pflicht ist (Art. 50 AI Act): Chatbots geben sich als KI zu erkennen. Täuschend echte KI-Bilder, -Videos und -Stimmen (Deepfakes) legen wir offen, auch bei erfundenen Personen. Ebenso KI-Texte, die die Öffentlichkeit über Themen von öffentlichem Interesse informieren, wenn kein Mensch sie inhaltlich geprüft hat und verantwortet. Texte in Kursunterlagen und Ausschreibungen kennzeichnen wir nicht.','Chatbots und KI-Bilder kennzeichnen wir. Texte, die ein Mensch geprüft und verantwortet hat, gelten als eigene Texte.'],
-  agenten:['KI-Agenten bereiten vor. Was nach außen geht oder Daten verändert, gibt ein Mensch frei.','Agenten dürfen lesen und vorbereiten. Ohne Freigabe durch einen Menschen darf ein Agent nie alles drei zugleich: fremde Inhalte verarbeiten, auf sensible Daten zugreifen und nach außen handeln.','Einzelne, von der Leitung geprüfte feste Abläufe (Routinen) dürfen selbstständig laufen. Alles andere braucht eine Freigabe.']
+  agenten:['KI-Agenten bereiten vor. Was nach außen geht oder Daten verändert, gibt ein Mensch frei.','Agenten dürfen lesen und vorbereiten. Ohne Freigabe durch einen Menschen darf ein Agent nie alle drei zugleich: fremde Inhalte verarbeiten, auf sensible Daten zugreifen und nach außen handeln.','Einzelne, von der Leitung geprüfte feste Abläufe (Routinen) dürfen selbstständig laufen. Alles andere braucht eine Freigabe.']
 };
 const KONTEXT={
   aufgaben:['Kursausschreibungen','Programmheft-Texte','Förderanträge','Sachberichte','Newsletter','Social Media','Feedback auswerten','Anfragen von Teilnehmenden','Anmeldebestätigungen','Protokolle','Lernmaterial anpassen','Bedarfsanalyse / neue Angebote'],
@@ -105,17 +105,20 @@ const MENSCHEN={
     ['„Dann wird bei uns gespart.“',['„Ob gespart wird, entscheidet nicht die KI, sondern wir. Und KI darf dafür nicht die Begründung werden.“','„Ich sage dir offen, was ich weiß – und was ich nicht weiß.“']]
   ],
   team:'Dazu zählen auch Trainer:innen auf Honorarbasis und Ehrenamtliche.',
-  pruefHebel:'Frage zum Besprechen: Was würde die skeptischste Person in Ihrem Team zu diesen zwei Hebeln sagen? Wenn Ihnen keine Antwort einfällt, fragen Sie sie.',
+  pruefHebel:'Frage zum Besprechen: Was würde die skeptischste Person in Ihrem Team zu diesen zwei Hebeln sagen? Wenn Ihnen keine Antwort einfällt, fragen Sie diese Person nach dem Workshop.',
   zeit:[['Dem Team','Für Entlastung und weniger Überstunden.'],['Den Teilnehmenden','Für mehr Beratung und Begleitung.'],['Neuen Vorhaben','Für Angebote, die bisher liegen blieben.'],['Dem Auffangen von Kürzungen','Wenn gespart werden muss, füllt die Zeit Lücken – und das sagen wir offen.'],['Noch offen','Das klären wir im Team.']]
 };
-/* Nach dem Dokument: Gegenprobe und „Wenn noch Zeit ist“ (Handy und Pfadkarte) */
+/* Nach dem Dokument: allein Gegenprobe und „Wenn noch Zeit ist“, im Workshop alles nach Wahl (Handy und Pfadkarte) */
 const NACH={
   rollen:'Wenn Sie zu mehreren sind, können Sie Rollen verteilen: Eine Person tippt, eine widerspricht („Was würde die skeptischste Person bei uns sagen?“), eine streicht und korrigiert, eine achtet auf die Zeit.',
-  takt:'Ziel: bis Minute 22 (die Zeit steht an der Leinwand) das Dokument erstellen. Danach Gegenprobe: Jemand anderer liest es. Dann „Wenn noch Zeit ist“.',
-  taktMenschen:'Ziel: bis Minute 22 (die Zeit steht an der Leinwand) den Plan erstellen. Danach Einwand-Probe: Sie üben die Antworten im Rollenspiel. Dann „Wenn noch Zeit ist“.',
+  takt:'Ziel: bis Minute 22 (die Uhr steht an der Leinwand) das Dokument erstellen. Danach ganz nach Wahl: einer Gruppe nebenan vorlesen, vertiefen oder einen zweiten Lernpfad beginnen.',
+  taktMenschen:'Ziel: bis Minute 22 (die Uhr steht an der Leinwand) den Plan erstellen. Danach ganz nach Wahl: Einwände üben, vertiefen oder einen zweiten Lernpfad beginnen.',
   gegen:['Was fehlt?','Was würde bei Ihnen nicht gehen?','Was ist zu streng – oder zu lasch?'],
   gegenOder:'Oder jemand aus Ihrer Gruppe versetzt sich in eine andere Person, z. B. eine Trainerin auf Honorarbasis, und liest das Dokument aus deren Sicht.',
-  /* Pfad Menschen: Minute 23–30 Einwand-Probe in der eigenen Gruppe (Teaminterna bleiben in der Gruppe) */
+  /* Workshop: nach dem Dokument ist alles freiwillig (vorlesen, vertiefen, zweiter Pfad) */
+  vorlesen:'Lesen Sie Ihr Dokument einer Gruppe nebenan vor, gern aus einem anderen Haus, nur was Sie zeigen mögen. Ihr Handy bleibt bei Ihnen. Allein? Lesen Sie es noch einmal mit den Augen Ihrer skeptischsten Kollegin. Drei Fragen dazu:',
+  einwandWorkshop:'Mit den Menschen, mit denen Sie gerade arbeiten.',
+  /* Pfad Menschen: Einwand-Probe in der eigenen Gruppe (Teaminterna bleiben in der Gruppe) */
   einwand:['Einwand-Probe','Eine Person spielt die skeptischste Kollegin und bringt einen Einwand. Die andere antwortet mit der Antwort aus Ihrem Plan. Nach zwei Minuten tauschen Sie die Rollen.'],
   einwandWo:'Üben Sie in Ihrer eigenen Gruppe. Was Ihr Team betrifft, bleibt so bei Ihnen.',
   /* Pfad Regeln: dieselben zwei Zusatzfragen wie auf der Pfadkarte (REGELN.opt) */
@@ -264,7 +267,7 @@ function hebelVorschlag(g){
   const top=g.indexOf(max);
   return [
     {h:[2,3],grund:'Viele sind begeistert: Machen Sie sie zu Ansprechpersonen und zeigen Sie einen sichtbaren Erfolg.'},
-    {h:[0,2],grund:'Viele nutzen KI heimlich: Zuerst ein legaler Weg (Erlaubnis mit Geländer), dann Ansprechpersonen.'},
+    {h:[0,2],grund:'Viele nutzen KI heimlich: Zuerst ein erlaubter Weg (Erlaubnis mit Geländer), dann Ansprechpersonen.'},
     {h:[4,3],grund:'Viele sind skeptisch: Offen über die gewonnene Zeit reden und einen kleinen, ehrlichen Erfolg zeigen.'},
     {h:[1,3],grund:'Viele sind überfordert: Zuerst Lernzeit schaffen, dann ein kleiner Erfolg, der Mut macht.'}
   ][top];
@@ -286,13 +289,13 @@ function optList(opts,sel){return `<div class="opts">${opts.map((o,i)=>`<button 
 const OFFEN='Noch offen lassen, weiter';
 const lbl=(open,label='Weiter')=>open?OFFEN:label;
 function nav(back=true,nextLabel='Weiter',disabled=false){return `<button class="go" id="nx" ${disabled?'disabled':''}>${nextLabel}</button>${back?'<button class="opt" id="bk" style="text-align:center;margin-top:10px">Zurück</button>':''}`}
-function note(ph,val){return `<textarea id="nt" maxlength="280" placeholder="${esc(ph)}" style="min-height:70px">${esc(val||'')}</textarea><p class="hint">Optional: eigene Ergänzung der Gruppe.</p>`}
+function note(ph,val){return `<textarea id="nt" maxlength="280" placeholder="${esc(ph)}" style="min-height:70px">${esc(val||'')}</textarea><p class="hint">Optional. Was Sie hier schreiben, steht so in Ihrem Dokument.</p>`}
 function bind(state,p,render){const bk=$('#bk');if(bk)bk.onclick=()=>{state.step=Math.max(-1,state.step-1);save(p,state);render()};return $('#nx')}
 function intro(p,s,render){
   const I=INFO[p],m=A().main;
   m.innerHTML=`<div class="kick" style="color:${color(p)}">${A().standalone?'Modul':'Lernpfad'}</div><h1>${I.titel}</h1>
-    <div class="card"><p style="margin:0 0 10px"><b>Was Sie tun:</b> ${I.tun}</p><p style="margin:0 0 10px"><b>Für wen:</b> ${I.fuer}</p><p style="margin:0 0 10px"><b>Was Sie mitnehmen:</b> ${I.mit}</p><p class="s m" style="margin:0">Dauer: ${I.dauer} · ${A().standalone?'Allein oder im Team. Am besten zu zweit oder dritt: Eine Person tippt, alle reden mit.':'Allein, zu zweit oder in einer kleinen Gruppe. '+NACH.rollen+' '+(p==='menschen'?NACH.taktMenschen:NACH.takt)}</p></div>
-    <p class="hint">${A().standalone?'Alles bleibt auf diesem Gerät. Es wird nichts gesendet.':'Ihre Angaben zur Organisation bleiben auf diesem Gerät, außer Sie erstellen am Ende einen Abholcode.'}</p>`+nav(false,'Los geht’s');
+    <div class="card"><p style="margin:0 0 10px"><b>Was Sie tun:</b> ${I.tun}</p><p style="margin:0 0 10px"><b>Für wen:</b> ${I.fuer}</p><p style="margin:0 0 10px"><b>Was Sie mitnehmen:</b> ${I.mit}</p><p class="s m" style="margin:0">Dauer: ${A().standalone?I.dauer:I.dauer.replace(/, danach .*$/,'')} · ${A().standalone?'Allein oder im Team. Am besten zu zweit oder dritt: Eine Person tippt, alle reden mit.':'Sie arbeiten für Ihr eigenes Haus. Aus einem Haus: gemeinsam an einem Handy. Allein da: am eigenen Handy, mit einem Gegenüber aus einem anderen Haus. '+NACH.rollen+' '+(p==='menschen'?NACH.taktMenschen:NACH.takt)}</p></div>
+    <p class="hint">${A().standalone?'Alles bleibt auf diesem Gerät. Es wird nichts gesendet.':'Ihre Angaben zur Organisation bleiben auf diesem Gerät. Ihre Entscheidungen erscheinen ohne Namen vorne im Bild des Raums. Das fertige Dokument verlässt das Handy nur, wenn Sie einen Abholcode erstellen.'}</p>`+nav(false,'Los geht’s');
   $('#nx').onclick=()=>{s.step=0;save(p,s);render()};
 }
 
@@ -303,13 +306,13 @@ function regeln(){
   const all=REGELN.d.concat(s.withOpt?REGELN.opt:[]);
   const total=2+all.length;
   if(s.step===0){
-    m.innerHTML=head(p,1,total,REGELN.start.q)+`<p class="m s">Es gibt keine richtige Lösung – nur begründete Entscheidungen für Ihr Haus.</p>`+optList(REGELN.start.o.map(x=>[x,'']),s.mode)+nav(true,lbl(s.mode==null));
+    m.innerHTML=head(p,1,total,REGELN.start.q)+`<p class="m s">Danach legen Sie in fünf Fragen fest, was bei Ihnen gelten soll. Es gibt keine richtige Lösung, nur begründete Entscheidungen. Nur mündliche Absprachen? Dann wählen Sie „Nein“.</p>`+optList(REGELN.start.o.map(x=>[x,'']),s.mode)+nav(true,lbl(s.mode==null));
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{s.mode=+b.dataset.i;save(p,s);m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',x===b));$('#nx').textContent='Weiter'});
     bind(s,p,regeln).onclick=()=>{s.step=1;save(p,s);regeln()};return;
   }
   if(s.step===1){
     s.ort=s.ort||{};
-    m.innerHTML=head(p,2,total,'Kurz zu Ihrem Haus')+`<p class="hint">${A().standalone?'Ihre Antworten bleiben nur auf diesem Gerät.':'Ihre Antworten bleiben auf diesem Gerät, außer Sie erstellen am Ende einen Abholcode.'} Sie helfen, den Entwurf an Ihr Haus anzupassen.</p>`+REGELN.standort.map(q=>`<div class="uc"><p>${q.q}</p><div class="tri" data-k="${q.k}" style="grid-template-columns:repeat(${q.o.length},1fr)">${q.o.map((o,i)=>`<button data-v="${i}" class="${s.ort[q.k]===i?'sel':''}">${o}</button>`).join('')}</div></div>`).join('')+nav();
+    m.innerHTML=head(p,2,total,'Kurz zu Ihrem Haus')+`<p class="hint">${A().standalone?'Ihre Antworten bleiben nur auf diesem Gerät.':'Ihre Antworten bleiben auf diesem Gerät, außer Sie erstellen am Ende einen Abholcode.'} Die Antworten helfen, den Entwurf an Ihr Haus anzupassen.</p>`+REGELN.standort.map(q=>`<div class="uc"><p>${q.q}</p><div class="tri" data-k="${q.k}" style="grid-template-columns:repeat(${q.o.length},1fr)">${q.o.map((o,i)=>`<button data-v="${i}" class="${s.ort[q.k]===i?'sel':''}">${o}</button>`).join('')}</div></div>`).join('')+nav();
     m.querySelectorAll('.tri').forEach(t=>t.querySelectorAll('button').forEach(b=>b.onclick=()=>{s.ort[t.dataset.k]=+b.dataset.v;t.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));save(p,s)}));
     bind(s,p,regeln).onclick=()=>{s.step=2;save(p,s);regeln()};return;
   }
@@ -319,7 +322,7 @@ function regeln(){
     const pruef=s.mode===1,L=di===all.length-1?'Entwurf erstellen':'Weiter';
     m.innerHTML=head(p,s.step+1,total,d.t)+caseBox(d.fall)+warum(d.warum)+
       (pruef?`<p class="s" style="margin:14px 0 6px"><b>Regelt Ihre Leitlinie das schon?</b></p><div class="tri" id="hat">${['ja','teilweise','nein'].map((x,i)=>`<button data-v="${i}" class="${(s.hat||{})[d.k]===i?'sel':''}">${x}</button>`).join('')}</div><p class="s" style="margin:14px 0 0"><b>Wie sollte es geregelt sein?</b></p>`:'')+
-      optList(d.o,s.ch[d.k])+(d.pruef?`<p class="s" style="margin:10px 0 0"><b>Wenn Sie uneinig sind – zum Besprechen:</b> ${esc(d.pruef)}</p>`:'')+note('Eigene Formulierung oder Bedingung …',s.nt[d.k])+
+      optList(d.o,s.ch[d.k])+(d.pruef?`<p class="s" style="margin:10px 0 0"><b>Zum Besprechen:</b> ${esc(d.pruef)}</p>`:'')+note('Eigene Formulierung oder Bedingung …',s.nt[d.k])+
       nav(true,lbl(s.ch[d.k]==null,L));
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{s.ch[d.k]=+b.dataset.i;save(p,s);room('p1_'+d.k,{i:s.ch[d.k]});m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',x===b));$('#nx').textContent=L});
     if(pruef)$('#hat').querySelectorAll('button').forEach(b=>b.onclick=()=>{s.hat=s.hat||{};s.hat[d.k]=+b.dataset.v;$('#hat').querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));save(p,s)});
@@ -358,11 +361,11 @@ function kontext(){
       <p class="s" style="margin:8px 0 2px"><b>Das bekommt die KI</b></p><ul class="s" style="margin:0 0 6px;padding-left:20px">${li(B.kontext)}</ul>
       <p class="s" style="margin:8px 0 2px"><b>Das entscheiden Menschen</b></p><ul class="s" style="margin:0 0 6px;padding-left:20px">${li(B.menschlich)}</ul>
       <p class="s" style="margin:8px 0 2px"><b>Woran wir ein gutes Ergebnis erkennen</b></p><ul class="s" style="margin:0;padding-left:20px">${li(B.qualitaet)}</ul></div>
-      <p class="s">Geben Sie so ein Rezept einer KI mit dem Satz „Mach daraus einen Skill“, wird daraus eine feste Arbeitsanleitung für die KI (ein „Skill“)${A().standalone?'':', wie vorne in der Live-Vorführung'}.</p>`+nav(true,'Jetzt unsere Aufgabe');
+      <p class="s">Geben Sie so ein Rezept einer KI mit dem Satz „Mach daraus einen Skill“, wird daraus eine feste Arbeitsanleitung für die KI (ein „Skill“)${A().standalone?'':''}.</p>`+nav(true,'Jetzt unsere Aufgabe');
     bind(s,p,kontext).onclick=()=>{s.step=1;save(p,s);kontext()};return;
   }
   if(s.step===1){
-    m.innerHTML=head(p,2,total,'Welche Aufgabe nehmen Sie sich vor?')+`<p class="m s">Eine, die bei Ihnen regelmäßig wiederkommt.</p><div class="opts">${KONTEXT.aufgaben.map(a=>`<button class="opt ${s.aufgabe===a?'sel':''}" data-a="${esc(a)}">${esc(a)}</button>`).join('')}</div><input type="text" id="own" maxlength="60" placeholder="… oder eigene Aufgabe" value="${esc(KONTEXT.aufgaben.includes(s.aufgabe)?'':s.aufgabe||'')}">${A().standalone?'':'<p class="hint" style="margin-top:6px">Eine eigene Aufgabe erscheint ohne Namen vorne auf der Leinwand.</p>'}<p class="s" style="margin:16px 0 6px"><b>Wie viel Zeit kostet sie Ihr Haus im Jahr?</b></p><div class="tri" id="auf" style="grid-template-columns:1fr 1fr">${KONTEXT.aufwand.map((x,i)=>`<button data-v="${i}" class="${s.aufwand===i?'sel':''}">${x}</button>`).join('')}</div><p class="hint" style="margin-top:10px">${esc(KONTEXT.rechnung)}</p><p class="hint" id="fehlt" style="color:var(--pencil)" ${s.aufgabe?'hidden':''}>Es fehlt noch die Aufgabe: Bitte oben eine antippen oder eine eigene eintragen. Ohne Aufgabe entsteht kein Rezept.</p>`+nav(true,'Weiter',!s.aufgabe);
+    m.innerHTML=head(p,2,total,'Welche Aufgabe nehmen Sie sich vor?')+`<p class="m s">Eine, die bei Ihnen regelmäßig wiederkommt.</p><div class="opts">${KONTEXT.aufgaben.map(a=>`<button class="opt ${s.aufgabe===a?'sel':''}" data-a="${esc(a)}">${esc(a)}</button>`).join('')}</div><input type="text" id="own" maxlength="60" placeholder="… oder eigene Aufgabe" value="${esc(KONTEXT.aufgaben.includes(s.aufgabe)?'':s.aufgabe||'')}">${A().standalone?'':'<p class="hint" style="margin-top:6px">Ihre Aufgabe erscheint vorne auf der Leinwand, ohne Ihren Namen. Bitte keine Namen eintragen.</p>'}<p class="s" style="margin:16px 0 6px"><b>Wie viele Stunden kostet diese Aufgabe Ihr Haus im Jahr, alle Personen zusammen?</b></p><div class="tri" id="auf" style="grid-template-columns:1fr 1fr">${KONTEXT.aufwand.map((x,i)=>`<button data-v="${i}" class="${s.aufwand===i?'sel':''}">${x}</button>`).join('')}</div><p class="hint" style="margin-top:10px">${esc(KONTEXT.rechnung)}</p><p class="hint" id="fehlt" style="color:var(--pencil)" ${s.aufgabe?'hidden':''}>Es fehlt noch die Aufgabe: Bitte oben eine antippen oder eine eigene eintragen. Ohne Aufgabe entsteht kein Rezept.</p>`+nav(true,'Weiter',!s.aufgabe);
     const ok=()=>{$('#nx').disabled=!s.aufgabe;$('#fehlt').hidden=!!s.aufgabe};
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{s.aufgabe=b.dataset.a;$('#own').value='';m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',x===b));save(p,s);ok()});
     $('#own').oninput=e=>{const v=e.target.value.trim();if(v){s.aufgabe=v;m.querySelectorAll('.opts .opt').forEach(x=>x.classList.remove('sel'))}else if(!KONTEXT.aufgaben.includes(s.aufgabe))s.aufgabe='';ok();save(p,s)};
@@ -371,10 +374,10 @@ function kontext(){
   }
   if(s.step===2){
     s.bs=s.bs||{};
-    m.innerHTML=head(p,3,total,'Was braucht die KI, um das gut zu machen?')+`<p class="m s">Tippen Sie an, welche Unterlagen die KI braucht, und geben Sie jeder eine Farbe der Datenampel: grün = öffentlich, gelb = intern ohne Personenbezug, rot = Personen und Sensibles.</p>`+
+    m.innerHTML=head(p,3,total,'Was braucht die KI, um das gut zu machen?')+`<p class="m s">Gehen Sie die Liste durch. Braucht die KI diese Unterlage? Dann tippen Sie ihre Ampelfarbe an: grün = öffentlich, gelb = intern ohne Personenbezug, rot = Personen und Sensibles. Sonst bleibt „nicht nötig“ stehen.</p>`+
       KONTEXT.bausteine.map((b,j)=>`<div class="uc"><p>${esc(b)}</p><div class="tri amp" data-j="${j}" style="grid-template-columns:repeat(4,1fr)">${['nicht nötig','grün','gelb','rot'].map((l,k)=>`<button data-v="${k}" data-a="${'ngyr'[k]}" class="${(s.bs[j]??0)===k?'sel':''}">${l}</button>`).join('')}</div></div>`).join('')+
-      `<div class="uc"><p>Weiterer Baustein</p><input type="text" id="bsOwn" maxlength="80" placeholder="Optional, z. B. Preisliste" value="${esc(s.bsOwn||'')}" style="margin-bottom:6px"><div class="tri amp" id="bsOwnA">${['grün','gelb','rot'].map((l,k)=>`<button data-v="${k+1}" data-a="${'gyr'[k]}" class="${s.bsOwnA===k+1?'sel':''}">${l}</button>`).join('')}</div></div>`+
-      `<p class="hint">Rot heißt: bleibt draußen – oder nur in einem Tool mit Vertrag und nach Prüfung.</p>`+nav();
+      `<div class="uc"><p>Weitere Unterlage</p><input type="text" id="bsOwn" maxlength="80" placeholder="Optional, z. B. Preisliste" value="${esc(s.bsOwn||'')}" style="margin-bottom:6px"><div class="tri amp" id="bsOwnA">${['grün','gelb','rot'].map((l,k)=>`<button data-v="${k+1}" data-a="${'gyr'[k]}" class="${s.bsOwnA===k+1?'sel':''}">${l}</button>`).join('')}</div></div>`+
+      `<p class="hint">Rot heißt: Die Unterlage steht im Rezept unter „Bleibt draußen“. Rote Daten kommen nur nach Datenschutz-Prüfung in ein Tool mit Vertrag.</p>`+nav();
     m.querySelectorAll('.tri[data-j]').forEach(t=>t.querySelectorAll('button').forEach(b=>b.onclick=()=>{s.bs[t.dataset.j]=+b.dataset.v;t.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));save(p,s)}));
     $('#bsOwn').oninput=e=>{s.bsOwn=e.target.value.trim();save(p,s)};
     $('#bsOwnA').querySelectorAll('button').forEach(b=>b.onclick=()=>{s.bsOwnA=+b.dataset.v;$('#bsOwnA').querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));save(p,s)});
@@ -383,8 +386,8 @@ function kontext(){
   if(s.step===3){
     s.mh=s.mh||[];
     s.an=s.an||[];
-    m.innerHTML=head(p,4,total,'Wo ziehen Sie die Linie?')+`<p class="m s">Wie in der Leitfrage: abgeben (die KI macht, Sie prüfen), anregen lassen (die KI fragt, Sie denken), behalten (Sie urteilen und verantworten). Was entscheiden bei dieser Aufgabe Menschen? Mehrere Antworten möglich.</p><div class="opts" id="mh">${KONTEXT.menschlich.map((x,i)=>`<button class="opt ${s.mh.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+note('Weiteres, das bei Ihnen Menschen entscheiden …',s.mhNote)+
-      `<div class="card" style="border-left:5px solid var(--pencil);margin-top:14px"><p class="s" style="margin:0">${esc(KONTEXT.koennen)}</p></div><p class="s" style="margin:18px 0 6px"><b>Und wo soll die KI Sie anregen, statt selbst zu schreiben? Mehrere Antworten möglich.</b></p><div class="opts" id="an">${KONTEXT.anregen.map((x,i)=>`<button class="opt ${s.an.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+nav();
+    m.innerHTML=head(p,4,total,'Wo ziehen Sie die Linie?')+`<p class="m s">Wie in der Leitfrage: abgeben (die KI macht, Sie prüfen), anregen lassen (die KI fragt, Sie denken), behalten (Sie urteilen und verantworten). Zwei Fragen. Erstens, behalten: Was entscheiden bei dieser Aufgabe weiterhin Menschen? Mehrere Antworten möglich.</p><div class="opts" id="mh">${KONTEXT.menschlich.map((x,i)=>`<button class="opt ${s.mh.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+note('Weiteres, das bei Ihnen Menschen entscheiden …',s.mhNote)+
+      `<div class="card" style="border-left:5px solid var(--pencil);margin-top:14px"><p class="s" style="margin:0">${esc(KONTEXT.koennen)}</p></div><p class="s" style="margin:18px 0 6px"><b>Zweitens, anregen lassen: Wo soll die KI Sie anregen, statt selbst zu schreiben? Mehrere Antworten möglich.</b></p><div class="opts" id="an">${KONTEXT.anregen.map((x,i)=>`<button class="opt ${s.an.includes(i)?'sel':''}" data-i="${i}">${esc(x)}</button>`).join('')}</div>`+nav();
     m.querySelectorAll('#mh .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.mh=s.mh.includes(i)?s.mh.filter(x=>x!==i):s.mh.concat(i);b.classList.toggle('sel');save(p,s)});
     m.querySelectorAll('#an .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.an=s.an.includes(i)?s.an.filter(x=>x!==i):s.an.concat(i);b.classList.toggle('sel');save(p,s)});
     $('#nt').oninput=e=>{s.mhNote=e.target.value.trim();save(p,s)};
@@ -398,7 +401,7 @@ function kontext(){
   }
   if(s.step===5){
     const L=s.withOrt?'Weiter':'Rezept erstellen';
-    m.innerHTML=head(p,6,total,'Wer prüft, bevor es verwendet wird?')+optList(KONTEXT.pruefer.map(x=>[x,'']),s.pr)+`<div class="card"><p class="s" style="margin:0"><b>Gleich danach kommt die Gegenprobe:</b> ${A().standalone?'Jemand anderer liest Ihr Rezept. Würde es bei dieser Person funktionieren?':'Eine andere Gruppe liest Ihr Rezept. Würde es bei denen funktionieren?'}</p></div>`+nav(true,lbl(s.pr==null,L));
+    m.innerHTML=head(p,6,total,'Wer prüft, bevor es verwendet wird?')+optList(KONTEXT.pruefer.map(x=>[x,'']),s.pr)+`<div class="card"><p class="s" style="margin:0"><b>${A().standalone?'Gleich danach kommt die Gegenprobe:':'Tipp:'}</b> ${A().standalone?'Jemand anderer liest Ihr Rezept. Würde es bei dieser Person funktionieren?':'Danach können Sie Ihr Rezept einer Gruppe nebenan vorlesen: Würde es bei denen funktionieren?'}</p></div>`+nav(true,lbl(s.pr==null,L));
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{s.pr=+b.dataset.i;m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',x===b));save(p,s);$('#nx').textContent=L});
     bind(s,p,kontext).onclick=()=>{s.step=6;save(p,s);kontext()};return;
   }
@@ -468,7 +471,7 @@ function wissen(){
     const qi=x=>x?` <span class="m" style="font-size:13px">(Quelle: ${esc(x)}, ${ABRUF})</span>`:'';
     m.innerHTML=head(p,2,total,'Welche Stufe nehmen Sie sich vor?')+
       `<p class="m s">Fünf Stufen, vom Dienstkonto bis zur eigenen Infrastruktur. Die meisten kleinen Häuser brauchen auf absehbare Zeit nur die ersten drei. Stufen und Startschritte sind eine Einschätzung, Stand Oktober 2026.</p>`+
-      `<div class="card" style="border-left:5px solid var(--wissen)"><p class="s" style="margin:0 0 6px"><b>Ihre Ausgangslage:</b> ${lg?esc(lg.t):'noch offen. Wenn Sie im ersten Schritt wählen, womit Sie arbeiten, sehen Sie hier Ihren Start.'}</p><p class="s" style="margin:0"><b>Unser Vorschlag:</b> Stufe ${V.z}, ${esc(STUFEN[V.z][0])}. ${esc(V.grund)}</p></div>`+
+      `<div class="card" style="border-left:5px solid var(--wissen)"><p class="s" style="margin:0 0 6px"><b>Ihre Ausgangslage:</b> ${lg?esc(lg.t):'noch offen. Wenn Sie im ersten Schritt wählen, womit Sie arbeiten, sehen Sie hier Ihren Start.'}</p><p class="s" style="margin:0"><b>Vorschlag für Ihr Haus:</b> Stufe ${V.z}, ${esc(STUFEN[V.z][0])}. ${esc(V.grund)}</p></div>`+
       `<div class="opts">${[0,1,2].map(i=>`<button class="opt ${s.zs===i?'sel':''}" data-i="${i}"><b>Stufe ${i} · ${esc(STUFEN[i][0])}</b><br><span class="s m">${esc(STUFEN[i][1])}</span>${lg?`<br><span class="s"><b>Ihr Start:</b> ${esc(lg.s[i][0])}</span>${q(lg.s[i][1])}`:''}</button>`).join('')}</div>`+
       `<div class="card"><p class="s" style="margin:0 0 6px"><b>Später, mit IT</b></p>${[3,4].map(i=>`<p class="s" style="margin:0 0 6px"><b>Stufe ${i} · ${esc(STUFEN[i][0])}:</b> ${esc(STUFEN[i][1])}${lg?` <i>Bei Ihnen:</i> ${esc(lg.s[i][0])}${qi(lg.s[i][1])}`:''}</p>`).join('')}</div>`+
       `<details class="card"><summary style="cursor:pointer;font-weight:600">Was, wenn wir schon … haben?</summary>${SCHON.map(x=>`<p class="s" style="margin:12px 0 0"><b>${esc(x[0])}</b><br>${esc(x[1])}${q(x[2])}</p>`).join('')}</details>`+
@@ -571,7 +574,7 @@ function menschen(){
   if(s.step===0){
     s.g=s.g||[0,0,0,0];
     const bt='min-height:44px;text-align:center;padding:0;flex:none';
-    m.innerHTML=head(p,1,total,'Wie sieht Ihr Team aus?')+`<p class="m s">Wie viele Personen in Ihrem Team sind begeistert, nutzen KI heimlich, sind skeptisch oder überfordert? Nur Zahlen, keine Namen. Grob geschätzt reicht, daraus entsteht gleich ein Vorschlag.</p><p class="hint" style="margin-top:-6px">${esc(MENSCHEN.team)} Zahl antippen zum Eintippen.</p>`+
+    m.innerHTML=head(p,1,total,'Wie sieht Ihr Team aus?')+`<p class="m s">Denken Sie an das Team, für das Sie den Plan machen, zum Beispiel Ihr ganzes Haus oder Ihren Bereich. Wie viele Personen sind dort begeistert, nutzen KI heimlich, sind skeptisch oder überfordert? Zählen Sie jede Person nur einmal, dort, wo sie am ehesten steht. Grob geschätzt reicht. Nur Zahlen, keine Namen. Daraus entsteht gleich ein Vorschlag.</p><p class="hint" style="margin-top:-6px">${esc(MENSCHEN.team)} Zahl antippen zum Eintippen.</p>`+
       MENSCHEN.gruppen.map((g,i)=>`<div class="uc" style="display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px"><p style="margin:0">${g}</p><div style="display:flex;align-items:center;gap:6px"><button class="opt" data-i="${i}" data-d="-1" style="width:42px;${bt}" aria-label="${g}: eins weniger">–</button><input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" id="g${i}" data-i="${i}" value="${s.g[i]}" aria-label="${g}: Anzahl" style="width:58px;padding:8px 2px;text-align:center;font-family:var(--type);font-size:22px"><button class="opt" data-i="${i}" data-d="1" style="width:42px;${bt}" aria-label="${g}: eins mehr">+</button><button class="opt" data-i="${i}" data-d="10" style="width:50px;${bt};font-size:16px" aria-label="${g}: zehn mehr">+10</button></div></div>`).join('')+nav();
     m.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.g[i]=Math.min(9999,Math.max(0,s.g[i]+(+b.dataset.d)));$('#g'+i).value=s.g[i];save(p,s)});
     m.querySelectorAll('input[id^="g"]').forEach(x=>{const i=+x.dataset.i;
@@ -582,20 +585,20 @@ function menschen(){
   }
   if(s.step===1){
     const v=hebelVorschlag(s.g||[0,0,0,0]);s.h=s.h||v.h.slice();
-    m.innerHTML=head(p,2,total,'Mit welchen zwei Maßnahmen („Hebeln“) beginnen Sie?')+`<div class="card" style="border-left:5px solid var(--kontext)"><p class="s" style="margin:0"><b>Unser Vorschlag:</b> ${esc(v.grund)}</p></div><p class="s m">Zwei sind vorausgewählt. Zum Tauschen erst einen abwählen, dann einen anderen antippen.</p><p class="s" style="margin:0 0 10px">${esc(MENSCHEN.pruefHebel)}</p><div class="opts">${MENSCHEN.hebel.map((h,i)=>`<button class="opt ${s.h.includes(i)?'sel':''}" data-i="${i}"><b>${esc(h[0])}</b><br><span class="s m">${esc(h[1])}</span></button>`).join('')}</div>`+nav(true,lbl(s.h.length<2));
+    m.innerHTML=head(p,2,total,'Mit welchen zwei Maßnahmen („Hebeln“) beginnen Sie?')+`<div class="card" style="border-left:5px solid var(--kontext)"><p class="s" style="margin:0"><b>Vorschlag für Ihr Team:</b> ${esc(v.grund)}</p></div><p class="s m">Zwei sind vorausgewählt. Zum Tauschen erst einen abwählen, dann einen anderen antippen.</p><p class="s" style="margin:0 0 10px">${esc(MENSCHEN.pruefHebel)}</p><div class="opts">${MENSCHEN.hebel.map((h,i)=>`<button class="opt ${s.h.includes(i)?'sel':''}" data-i="${i}"><b>${esc(h[0])}</b><br><span class="s m">${esc(h[1])}</span></button>`).join('')}</div>`+nav(true,lbl(s.h.length<2));
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;s.hManual=true;if(s.h.includes(i))s.h=s.h.filter(x=>x!==i);else if(s.h.length<2)s.h=s.h.concat(i);else{A().toast&&A().toast('Höchstens zwei. Erst einen abwählen.');return}m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',s.h.includes(+x.dataset.i)));$('#nx').textContent=lbl(s.h.length<2);save(p,s)});
     bind(s,p,menschen).onclick=()=>{MENSCHEN.hebel.forEach((_,i)=>room('p3_hebel'+i,{i:s.h.includes(i)?1:0}));s.step=2;save(p,s);menschen()};return;
   }
   if(s.step===2){
     s.e=s.e||{};s.eo=s.eo||{};
-    m.innerHTML=head(p,3,total,'Was antworten Sie, wenn jemand sagt …')+`<p class="m s">Wählen Sie eine Antwort – oder schreiben Sie Ihre eigene. Ihre eigene Sprache wirkt im Team am besten.</p>`+
-      MENSCHEN.einwaende.map((e,i)=>`<div class="card"><p style="font-family:var(--type);margin:0 0 8px">${esc(e[0])}</p><div class="opts" data-i="${i}" style="margin:0 0 8px">${e[1].map((a,j)=>`<button class="opt ${s.e[i]===j&&!s.eo[i]?'sel':''}" data-j="${j}" style="font-size:16px">${esc(a)}</button>`).join('')}</div><input type="text" class="eo" data-i="${i}" maxlength="200" placeholder="… oder unsere eigene Antwort" value="${esc(s.eo[i]||'')}"></div>`).join('')+nav();
+    m.innerHTML=head(p,3,total,'Was antworten Sie, wenn jemand aus Ihrem Team sagt …')+`<p class="m s">Je Einwand eine Antwort antippen oder eine eigene schreiben. Die Vorschläge stehen in der Du-Form. Ihre eigene Sprache wirkt im Team am besten. Was offen bleibt, steht im Plan als „selbst formulieren“.</p>`+
+      MENSCHEN.einwaende.map((e,i)=>`<div class="card"><p style="font-family:var(--type);margin:0 0 8px">${esc(e[0])}</p><div class="opts" data-i="${i}" style="margin:0 0 8px">${e[1].map((a,j)=>`<button class="opt ${s.e[i]===j&&!s.eo[i]?'sel':''}" data-j="${j}" style="font-size:16px">${esc(a)}</button>`).join('')}</div><input type="text" class="eo" data-i="${i}" maxlength="200" placeholder="… oder Ihre eigene Antwort" value="${esc(s.eo[i]||'')}"></div>`).join('')+nav();
     m.querySelectorAll('.card .opts').forEach(o=>o.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{s.e[o.dataset.i]=+b.dataset.j;o.querySelectorAll('.opt').forEach(x=>x.classList.toggle('sel',x===b));save(p,s)}));
     m.querySelectorAll('.eo').forEach(x=>x.oninput=()=>{s.eo[x.dataset.i]=x.value.trim();save(p,s)});
     bind(s,p,menschen).onclick=()=>{m.querySelectorAll('.eo').forEach(x=>{s.eo[x.dataset.i]=x.value.trim()});s.step=3;save(p,s);menschen()};return;
   }
   if(s.step===3){
-    m.innerHTML=head(p,4,total,'Wem gehört die gewonnene Zeit?')+`<p class="m s">Wenn KI Arbeit abnimmt, wird Zeit frei. Wofür, fragt sich jedes Team, auch wenn es keiner ausspricht. Klären Sie das besser vorher.</p>`+optList(MENSCHEN.zeit,s.z)+nav(true,lbl(s.z==null,'Plan erstellen'));
+    m.innerHTML=head(p,4,total,'Wem gehört die gewonnene Zeit?')+`<p class="m s">Wenn KI Arbeit abnimmt, wird Zeit frei. Ihr Team fragt sich, wofür, auch wenn es niemand ausspricht. Klären Sie das vorher. Wählen Sie, was bei Ihnen Vorrang hat.</p>`+optList(MENSCHEN.zeit,s.z)+nav(true,lbl(s.z==null,'Plan erstellen'));
     m.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{s.z=+b.dataset.i;m.querySelectorAll('.opts .opt').forEach(x=>x.classList.toggle('sel',x===b));save(p,s);room('p3_zeit',{i:s.z});$('#nx').textContent='Plan erstellen'});
     bind(s,p,menschen).onclick=()=>{s.step=4;save(p,s);menschen()};return;
   }
@@ -672,35 +675,45 @@ function nachHtml(p,s,solo){
   const P=(t,b)=>`<p class="s" style="margin:0 0 6px"><b>${esc(t)}${/[?:]$/.test(t)?'':':'}</b> ${esc(b)}</p>`;
   const ul=`<ul class="s" style="margin:0 0 6px;padding-left:20px">${NACH.gegen.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
   const zur=`<p class="s m" style="margin:0">Was Ihnen auffällt, arbeiten Sie über „Zurück und ändern“ ein.</p>`;
-  const gegen=solo?'Zeigen Sie das Dokument einer Kollegin oder einem Kollegen, bevor es gilt. Drei Fragen:':'Lesen Sie Ihr Dokument der Gruppe hinter Ihnen vor, nur was Sie zeigen mögen. Ihr Handy bleibt bei Ihnen. '+NACH.gegenOder+' Allein? Dann lesen Sie es selbst noch einmal mit den Augen Ihrer skeptischsten Kollegin. Drei Fragen:';
-  const kopf=(t,min)=>`<p style="margin:0 0 6px"><b>${t}</b>${solo?'':' · Minute '+min}</p>`;
+  /* gegen, kopf, probe: nur noch allein (modul.html); der Workshop zeigt unten einen Kasten „nach Wahl“ */
+  const gegen='Zeigen Sie das Dokument einer Kollegin oder einem Kollegen, bevor es gilt. Drei Fragen:';
+  const kopf=t=>`<p style="margin:0 0 6px"><b>${t}</b></p>`;
   let probe,mehr;
   if(p==='menschen'){
     /* Menschen: Einwand-Probe in der eigenen Gruppe statt Gegenprobe durch Fremde */
-    probe=kopf(NACH.einwand[0],'23–30')+`<p class="s" style="margin:0 0 6px">${esc(solo?'Mit einer Kollegin oder einem Kollegen:':NACH.einwandWo)} ${esc(NACH.einwand[1])}${solo?'':' Allein? Sprechen Sie Ihre Antworten einmal halblaut, so wie in der nächsten Teamsitzung.'}</p>`+zur;
-    mehr=N.map(x=>P(x[0],x[1])).join('')+`<p class="s" style="margin:0 0 6px"><b>Gegenprobe${solo?'':', wenn Sie mögen'}:</b> ${esc(gegen)}</p>`+ul;
+    probe=kopf(NACH.einwand[0])+`<p class="s" style="margin:0 0 6px">Mit einer Kollegin oder einem Kollegen: ${esc(NACH.einwand[1])}</p>`+zur;
+    mehr=N.map(x=>P(x[0],x[1])).join('')+`<p class="s" style="margin:0 0 6px"><b>Gegenprobe:</b> ${esc(gegen)}</p>`+ul;
   }else{
-    probe=kopf('Gegenprobe','23–30')+`<p class="s" style="margin:0 0 6px">${esc(gegen)}</p>`+ul+zur;
+    probe=kopf('Gegenprobe')+`<p class="s" style="margin:0 0 6px">${esc(gegen)}</p>`+ul+zur;
     mehr=(p==='regeln'?`<p class="s" style="margin:0 0 6px">Zwei Zusatzfragen für Ihren Entwurf:</p>`:'')+N.map(x=>P(x[0],x[1])).join('');
     if(p==='kontext')mehr=`<p class="s" style="margin:0 0 6px"><b>${esc(WOHIN.frage)}</b> ${esc(WOHIN.intro)}</p>`+(s.withOrt?`<p class="s m" style="margin:0 0 8px">Die Antwort steht jetzt in Ihrem Rezept.</p>`:`<button class="opt" id="ort" style="text-align:center;margin:2px 0 10px">Drei Fragen beantworten</button>`)+mehr;
     if(p==='regeln')mehr+=(s.withOpt?`<p class="s m" style="margin:0 0 8px">Beide Zusatzfragen stehen jetzt in Ihrem Entwurf.</p>`:`<button class="opt" id="more" style="text-align:center;margin:2px 0 10px">Zusatzfragen beantworten</button>`)+
       `<p class="s" style="margin:0 0 6px"><b>Frage zum Besprechen:</b> ${esc(NACH.regelnPruef)}</p>`;
   }
   const W=NACH.weiter;
+  if(!solo){
+    /* Workshop: ein Kasten, drei freiwillige Möglichkeiten, keine Minutenvorgaben */
+    const opt=(t,body)=>`<div style="margin:0 0 12px"><p style="margin:0 0 4px"><b>${t}</b></p>${body}</div>`;
+    const erst=p==='menschen'
+      ?opt('Einwände üben',`<p class="s" style="margin:0 0 6px">${esc(NACH.einwandWorkshop+' '+NACH.einwand[1]+' Allein? Sprechen Sie Ihre Antworten einmal halblaut, so wie in der nächsten Teamsitzung.')}</p>`+zur)
+      :opt('Einer Gruppe nebenan vorlesen',`<p class="s" style="margin:0 0 6px">${esc(NACH.vorlesen)}</p>`+ul+zur);
+    const vert=p==='menschen'?N.map(x=>P(x[0],x[1])).join(''):mehr;
+    return `<div class="card" style="border-left:5px solid var(--pencil)"><p style="margin:0 0 10px"><b>Wie geht es weiter?</b> Ganz nach Wahl, in Ihrem Tempo:</p>${erst}${opt('Vertiefen',vert)}${opt('Zweiter Lernpfad',`<p class="s m" style="margin:0">Erst den Abholcode erstellen, dann unten „Zweiten Pfad wählen“. Wer IT oder Digitales verantwortet: <a href="${esc(wissenLink())}" target="_blank" rel="noopener">${esc(W[1])}</a>.</p>`)}</div>`;
+  }
   return `<div class="card" style="border-left:5px solid var(--pencil)">${probe}</div>
-    <div class="card">${kopf(solo?'Vertiefen':'Wenn noch Zeit ist','30–38')}${mehr}${solo?`<p class="s m" style="margin:0">Für IT und Digitales gibt es das Modul <a href="${esc(wissenLink())}">„Wissen“</a>.</p>`:`<p class="s m" style="margin:0">${esc(W[0])} <a href="${esc(wissenLink())}" target="_blank" rel="noopener">${esc(W[1])}</a>.</p>`}</div>`;
+    <div class="card">${kopf('Vertiefen')}${mehr}<p class="s m" style="margin:0">Für IT und Digitales gibt es das Modul <a href="${esc(wissenLink())}">„Wissen“</a>.</p></div>`;
 }
 function result(p,s,d,back){
   const m=A().main,solo=!!A().standalone,btn='class="opt" style="text-align:center;margin-top:10px"';
   m.innerHTML=`<div class="kick" style="color:${color(p)}">Ihr Ergebnis</div><div class="card" style="font-size:16px">${docHtml(d)}</div>
-    ${solo?'':`<button class="go" id="code">Abholcode erstellen</button><p class="hint">Mit dem Code holen Sie das Dokument später am Laptop ab. Gespeichert wird nur das Dokument, ohne Namen, und nach vier Wochen gelöscht. Erstellen Sie ihn gleich. Ändert sich das Dokument in der Gegenprobe, erstellen Sie hier einfach einen neuen.</p><div id="codeBox"></div>`}
+    ${solo?'':`<button class="go" id="code">Abholcode erstellen</button><p class="hint">Mit dem Code holen Sie das Dokument später am Laptop ab. Gespeichert wird nur das Dokument, ohne Namen, und nach vier Wochen gelöscht. Erstellen Sie ihn gleich. Ändern Sie danach noch etwas, erstellen Sie hier einfach einen neuen.</p><div id="codeBox"></div>`}
     ${nachHtml(p,s,solo)}
     ${p==='wissen'?'<button class="go" id="zip">Ordner-Vorlage herunterladen (ZIP)</button><p class="hint">Entpacken, in Ihre Ablage legen, Platzhalter in [eckigen Klammern] ausfüllen.</p>':''}
     <button ${solo&&p!=='wissen'?'class="go"':btn} id="dl">Als Word herunterladen</button>
     <button ${btn} id="pr">Drucken / als PDF speichern</button>
     ${p==='kontext'?`<button ${btn} id="sk">Skill-Datei (SKILL.md) herunterladen</button>`:''}
     <button ${btn} id="bk">Zurück und ändern</button>
-    ${solo?'<p class="hint" style="margin-top:16px">Ein weiteres Modul? <a href="./">Zu allen Werkzeugen</a></p>':`<button ${btn} id="zw">Zweiten Pfad wählen</button><p class="hint">Erst den Abholcode erstellen, dann den zweiten Pfad beginnen. Ihr Ergebnis bleibt gespeichert. Über die Pfadwahl kommen Sie jederzeit zurück. Alle vier Lernpfade gibt es nach dem Workshop auch auf <b>${esc(A().C.participantUrl)}</b>.</p>`}`;
+    ${solo?'<p class="hint" style="margin-top:16px">Ein weiteres Modul? <a href="./">Zu allen Werkzeugen</a></p>':`<button ${btn} id="zw">Zweiten Pfad wählen</button><p class="hint">Erst den Abholcode erstellen, dann den zweiten Pfad beginnen, am selben Platz. Ihr Ergebnis bleibt gespeichert: Über „Zweiten Pfad wählen“ und dann den ersten Pfad kommen Sie jederzeit zurück. Alle vier Lernpfade gibt es nach dem Workshop auch auf <b>${esc(A().C.participantUrl)}</b>.</p>`}`;
   $('#dl').onclick=()=>download(d);
   const pr=$('#pr');if(pr)pr.onclick=()=>printDoc(d);
   const zp=$('#zip');if(zp)zp.onclick=()=>{const b=makeZip(ordnerDateien(d)),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='KI-Ordner-Vorlage.zip';document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),500);setTimeout(()=>URL.revokeObjectURL(a.href),60000)};
