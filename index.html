@@ -17,7 +17,7 @@
   <h1 style="font-size:22px">Datenschutz in Kürze</h1>
   <p class="s"><b>Verantwortlich:</b> Armin Fradler, Oberwart (info@arminfradler.at).</p>
   <p class="s"><b>Was gespeichert wird:</b> Ihre anonymen Antworten (auch Freitexte), eine zufällige Kennung dieses Geräts und, wenn Sie am Ende einen Abholcode erstellen, Ihr fertiges Dokument. Keine Namen, keine Mailadressen, keine Cookies, keine Analyse-Tools.</p>
-  <p class="s"><b>Wo und wie lange:</b> Supabase, Rechenzentrum Frankfurt (EU), Auftragsverarbeitung. Beim Senden verarbeitet Supabase technisch notwendig Ihre IP-Adresse. Automatische Löschung nach vier Wochen.</p>
+  <p class="s"><b>Wo und wie lange:</b> Supabase (Supabase Inc., USA), Rechenzentrum Frankfurt (EU), Auftragsverarbeitung. Beim Senden verarbeitet Supabase technisch notwendig Ihre IP-Adresse. Automatische Löschung nach vier Wochen.</p>
   <p class="s"><b>Auslieferung der Seite:</b> über GitHub Pages (GitHub Inc., USA). Dabei verarbeitet GitHub technisch notwendig Ihre IP-Adresse. Schriften und Programmteile liegen auf dieser Seite selbst – es gibt keine Verbindung zu Google oder anderen Diensten.</p>
   <p class="s"><b>Freitexte:</b> Bitte keine Namen eingeben. Mailadressen und Telefonnummern werden automatisch entfernt. Antworten werden ohne Namen an der Leinwand gezeigt.</p>
   <p class="s"><b>Ihre Rechte:</b> Auskunft, Berichtigung, Löschung, Beschwerde bei der Datenschutzbehörde. Da wir Sie nicht identifizieren können, ändern Sie eine Abstimmung einfach hier. Soll ein Freitext oder ein Dokument mit Abholcode gelöscht werden, schreiben Sie an info@arminfradler.at, mit dem Wortlaut oder dem Abholcode.</p>
@@ -27,6 +27,7 @@
 <script src="config.js"></script>
 <script src="vendor/supabase-2.49.4.js"></script>
 <script src="pfade.js"></script>
+<script src="docx.js"></script>
 <script>
 (()=>{
 const C=window.TDW, $=s=>document.querySelector(s), main=$('#main');
@@ -110,7 +111,7 @@ function arrival(){
 }
 function pathChoice(inArrival){
   const cur=store.get('a.pfad'),rolle=store.get('a.rolle'),foerder=rolle&&C.roles[rolle.i]==='Fördergeber / öffentliche Hand';
-  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>${inArrival?'Woran möchten Sie später arbeiten?':'Welcher Pfad soll es sein?'}</h1><p class="m s">${inArrival?'Ab etwa 14:45 arbeiten Sie 40 Minuten zu zweit oder zu dritt an Ihrem eigenen Haus, gleich da, wo Sie sitzen. Wechseln geht jederzeit.':'Was Sie schon erarbeitet haben, bleibt gespeichert. Sie können jederzeit zurückwechseln.'}</p>`+
+  main.innerHTML=`<div class="kick">${inArrival?'Willkommen · 5 von 6':'Ihr Lernpfad'}</div><h1>${inArrival?'Woran möchten Sie später arbeiten?':'Welcher Pfad soll es sein?'}</h1><p class="m s">${inArrival?'Ab etwa 14:45 arbeiten Sie 40 Minuten zu zweit oder zu dritt an Ihrem eigenen Haus, zusammen mit anderen, die dasselbe Thema gewählt haben. Wechseln geht jederzeit.':'Was Sie schon erarbeitet haben, bleibt gespeichert. Sie können jederzeit zurückwechseln.'}</p>`+
    (foerder?`<p class="hint"><b>Sie kommen von einem Fördergeber?</b> Wählen Sie den Pfad Regeln und notieren Sie zwei Sätze zu KI, die Sie in einem Sachbericht gern lesen würden, zum Beispiel im Feld „Eigene Formulierung“ bei der Frage „Wer prüft und verantwortet KI-Ergebnisse?“.</p>`:'')+
    C.paths.map((p,i)=>{const I=(window.Pfade&&Pfade.info[p.id])||{};return `<button class="opt ${cur&&cur.i===i?'sel':''}" data-i="${i}" style="margin-bottom:10px"><b style="color:${p.color};font-family:var(--type);font-weight:400;font-size:20px">${p.name}</b><br><span class="s">${p.text}</span>${I.fuer?`<br><span class="s m">Für: ${I.fuer}</span><br><span class="s m">Sie nehmen mit: ${I.mit}</span>`:''}</button>`}).join('')+
    (inArrival?`<button class="opt" id="later" style="text-align:center;margin-bottom:10px">Noch offen – ich entscheide später</button>`:'')+
@@ -152,7 +153,7 @@ function paths(){
   const cur=store.get('a.pfad');
   if(!cur||cur.i==null){pathChoice(false);return}
   const p=C.paths[cur.i];
-  main.innerHTML=`<div class="kick">Ihr Lernpfad</div><div class="path" data-tab="Lernpfad" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p>Arbeiten Sie gleich da, wo Sie sitzen, gern mit Kolleg:innen aus Ihrem Haus. Allein? Tun Sie sich mit der Nachbarin zusammen.</p><button class="opt" id="w" style="text-align:center">Pfad wechseln</button>`;
+  main.innerHTML=`<div class="kick">Ihr Lernpfad</div><div class="path" data-tab="Lernpfad" style="background:${p.color}"><h2>${p.name}</h2><p style="margin:0">${p.text}</p></div><p>Arbeiten Sie zu zweit oder zu dritt, gern mit Kolleg:innen aus Ihrem Haus. Allein? Suchen Sie sich ein Gegenüber mit demselben Pfad.</p><button class="opt" id="w" style="text-align:center">Pfad wechseln</button>`;
   $('#w').onclick=()=>pathChoice(false);
 }
 function work(){

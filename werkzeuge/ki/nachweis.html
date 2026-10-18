@@ -67,6 +67,7 @@
   <p class="m s">Seit der Änderungsverordnung (EU) 2026/1744, dem sogenannten „Digital Omnibus“ (in Kraft seit 27.7.2026), verlangt Art. 4 AI Act, Maßnahmen zur KI-Kompetenz zu setzen. Ein bestimmtes Niveau oder Zertifikat ist nicht vorgeschrieben, eine Dokumentationspflicht steht nicht im Text. Festhalten ist trotzdem sinnvoll: Damit zeigen Sie, dass Sie Ihre Leute befähigt haben. <a href="quellen.html">Quellen</a> · Orientierung, keine Rechtsberatung.</p>
 </main>
 <footer class="site"><span>Armin Fradler · <a href="https://arminfradler.at">arminfradler.at</a></span><span><a href="../../datenschutz.html">Datenschutz</a> · <a href="https://arminfradler.at/impressum">Impressum</a></span><span>Orientierung, keine Rechtsberatung</span></footer>
+<script src="../../docx.js"></script>
 <script>
 (()=>{
 const $=id=>document.getElementById(id);
@@ -101,6 +102,8 @@ function render(){
 document.querySelectorAll('#presets button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#presets button').forEach(x=>x.classList.toggle('sel',x===b));apply(b.dataset.p)});
 document.querySelectorAll('input,textarea').forEach(e=>e.addEventListener('input',render));
 $('word').onclick=()=>{
+  /* Echtes .docx (öffnet auch am Handy); altes HTML-.doc darunter nur als Rückfall */
+  if(window.DocxExport){try{const a=document.createElement('a');a.href=URL.createObjectURL(DocxExport.fromHtml('Nachweis einer Maßnahme zur KI-Kompetenz',$('blatt').innerHTML));a.download='KI-Schulungsnachweis.docx';document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),500);setTimeout(()=>URL.revokeObjectURL(a.href),60000);return}catch(e){}}
   const html=`<html><head><meta charset="utf-8"><style>body{font-family:Calibri,Arial,sans-serif;font-size:11pt}td{padding:6px;border-bottom:1px solid #ccc;vertical-align:top}</style></head><body>${$('blatt').innerHTML}</body></html>`;
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+html],{type:'application/msword'}));a.download='KI-Schulungsnachweis.doc';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
 };
