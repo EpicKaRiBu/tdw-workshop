@@ -34,8 +34,9 @@ function toast(t){const d=document.createElement('p');d.className='hint';d.style
 window.TDWAPP={sb:null,store,send:async()=>{},toast,C,SESSION:'WEB',main,standalone:true};
 if(!ids.includes(id)){location.replace('./');return}
 /* Am Workshoptag: Wer per QR auf der Pfadkarte hier landet, soll in die Mitmach-App (dort zählt die Gruppe im Bild des Raums) */
-{const n=new Date(),hm=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
- if(id!=='wissen'&&n.toLocaleDateString('sv')===C.date&&hm>=(C.openFrom||'00:00')&&hm<(C.openUntil||'24:00'))main.insertAdjacentHTML('beforebegin','<p class="card" style="border-left:5px solid var(--pencil)">Sind Sie gerade im Workshop? Dann bitte hier entlang, dort zählt Ihre Gruppe im Bild des Raums: <a href="../../?s='+encodeURIComponent(C.session)+'">zur Mitmach-Seite</a></p>')}
+{let w;try{w=new Date().toLocaleString('sv',{timeZone:'Europe/Vienna'})}catch(e){const n=new Date();w=n.toLocaleDateString('sv')+' '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')}
+ const hm=w.slice(11,16);
+ if(id!=='wissen'&&w.slice(0,10)===C.date&&hm>=(C.openFrom||'00:00')&&hm<(C.openUntil||'24:00'))main.insertAdjacentHTML('beforebegin','<p class="card" style="border-left:5px solid var(--pencil)">Sind Sie gerade im Workshop? Dann bitte hier entlang, dort zählt Ihre Gruppe im Bild des Raums: <a href="../../?s='+encodeURIComponent(C.session)+'">zur Mitmach-Seite</a></p>')}
 document.title=Pfade.info[id].titel+' · KI als Organisationskompetenz';
 document.getElementById('reset').onclick=()=>{if(confirm('Dieses Modul von vorn beginnen? Ihre bisherigen Eingaben auf diesem Gerät werden gelöscht.')){store.set('pfad.'+id,{step:-1});try{localStorage.removeItem('tdw.web.pfad.'+id)}catch(e){}Pfade.render(id);scrollTo(0,0)}};
 /* Bei einem neuen Schritt nach oben scrollen (nicht bei Hinweisen oder Auswahl im selben Schritt) */

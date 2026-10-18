@@ -16,11 +16,11 @@
 <dialog id="ds">
   <h1 style="font-size:22px">Datenschutz in Kürze</h1>
   <p class="s"><b>Verantwortlich:</b> Armin Fradler, Oberwart (info@arminfradler.at).</p>
-  <p class="s"><b>Was gespeichert wird:</b> nur Ihre anonymen Antworten und eine zufällige Kennung dieses Geräts. Keine Namen, keine Mailadressen, keine Cookies, keine Analyse-Tools.</p>
-  <p class="s"><b>Wo und wie lange:</b> Supabase, Rechenzentrum Frankfurt (EU), Auftragsverarbeitung. Automatische Löschung nach vier Wochen.</p>
+  <p class="s"><b>Was gespeichert wird:</b> Ihre anonymen Antworten (auch Freitexte), eine zufällige Kennung dieses Geräts und, wenn Sie am Ende einen Abholcode erstellen, Ihr fertiges Dokument. Keine Namen, keine Mailadressen, keine Cookies, keine Analyse-Tools.</p>
+  <p class="s"><b>Wo und wie lange:</b> Supabase, Rechenzentrum Frankfurt (EU), Auftragsverarbeitung. Beim Senden verarbeitet Supabase technisch notwendig Ihre IP-Adresse. Automatische Löschung nach vier Wochen.</p>
   <p class="s"><b>Auslieferung der Seite:</b> über GitHub Pages (GitHub Inc., USA). Dabei verarbeitet GitHub technisch notwendig Ihre IP-Adresse. Schriften und Programmteile liegen auf dieser Seite selbst – es gibt keine Verbindung zu Google oder anderen Diensten.</p>
   <p class="s"><b>Freitexte:</b> Bitte keine Namen eingeben. Mailadressen und Telefonnummern werden automatisch entfernt. Antworten werden ohne Namen an der Leinwand gezeigt.</p>
-  <p class="s"><b>Ihre Rechte:</b> Auskunft, Berichtigung, Löschung, Beschwerde bei der Datenschutzbehörde. Da wir Sie nicht identifizieren können, genügt es, die Antwort hier zu ändern oder leer zu lassen.</p>
+  <p class="s"><b>Ihre Rechte:</b> Auskunft, Berichtigung, Löschung, Beschwerde bei der Datenschutzbehörde. Da wir Sie nicht identifizieren können, ändern Sie eine Abstimmung einfach hier. Soll ein Freitext oder ein Dokument mit Abholcode gelöscht werden, schreiben Sie an info@arminfradler.at, mit dem Wortlaut oder dem Abholcode.</p>
   <button class="go" onclick="document.getElementById('ds').close()">Schließen</button>
 </dialog>
 
@@ -37,8 +37,12 @@ const wien=(()=>{try{return new Date().toLocaleString('sv',{timeZone:'Europe/Vie
 const heute=wien.slice(0,10)===C.date,hm=wien.slice(11,16);
 const mitgemacht=(()=>{try{return !!localStorage.getItem('tdw.'+C.session+'.pid')}catch(e){return false}})();
 /* Am Workshoptag vor C.openFrom: Warteseite, die sich selbst neu lädt (früh gescannte Mappen-QR-Codes bleiben so nicht bei den Werkzeugen hängen) */
-if(!params.has('s')&&heute&&hm<(C.openFrom||'00:00')){$('#liveT').textContent='gleich';main.innerHTML=`<div class="kick">Workshop um 14:00</div><h1>Ab ${C.openFrom} geht es hier los.</h1><p>Lassen Sie diese Seite einfach offen. Sie startet von selbst.</p><a class="opt" href="werkzeuge/ki/" style="display:block;text-align:center;text-decoration:none">Bis dahin: Werkzeuge ansehen</a>`;setTimeout(()=>location.reload(),60000);return}
-if(!params.has('s')&&(!heute||(hm>=(C.openUntil||'24:00')&&!mitgemacht))){location.replace('werkzeuge/ki/');return}
+if(!params.has('s')&&heute&&hm<(C.openFrom||'00:00')){$('#liveT').textContent='gleich';main.innerHTML=`<div class="kick">Arbeitsgruppe 2 · Franziskussaal · 14:00</div><h1>Ab ${C.openFrom} geht es hier los.</h1><p>Diese Seite gehört zur Arbeitsgruppe „KI als Organisationskompetenz“. Lassen Sie sie einfach offen. Sie startet von selbst.</p><a class="opt" href="werkzeuge/ki/" style="display:block;text-align:center;text-decoration:none">In einer anderen Arbeitsgruppe oder bis dahin: Werkzeuge ansehen</a>`;setTimeout(()=>location.reload(),60000);return}
+/* Nach dem Workshop (ab C.openUntil und an allen Tagen danach): Wer einen Lernpfad begonnen hat, sieht sein auf dem Handy gespeichertes Ergebnis, ohne Server. Alle anderen kommen zu den Werkzeugen */
+const nachher=wien.slice(0,10)>C.date||(heute&&hm>=(C.openUntil||'24:00'));
+const mitPfad=(()=>{try{return Object.keys(localStorage).some(k=>k.startsWith('tdw.'+C.session+'.pfad.'))}catch(e){return false}})();
+const nurErgebnis=!params.has('s')&&nachher&&mitgemacht&&mitPfad;
+if(!params.has('s')&&(!heute||nachher)&&!nurErgebnis){location.replace('werkzeuge/ki/');return}
 const SESSION=(params.get('s')||C.session).toUpperCase()==='TEST'?'TEST':C.session;
 const store={get(k){try{return JSON.parse(localStorage.getItem('tdw.'+SESSION+'.'+k))}catch(e){return mem[k]}},set(k,v){mem[k]=v;try{localStorage.setItem('tdw.'+SESSION+'.'+k,JSON.stringify(v))}catch(e){}}};
 const mem={};
@@ -48,8 +52,8 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 $('#dsLink').onclick=e=>{e.preventDefault();$('#ds').showModal()};
 
 let sb=null,state={slide:'start'};
-try{sb=supabase.createClient(C.url,C.key)}catch(e){}
-window.TDWAPP={get sb(){return sb},store,send,toast:t=>toast(t),C,SESSION,main,choosePath:()=>{pathChoice(false);scrollTo(0,0)}};
+if(!nurErgebnis)try{sb=supabase.createClient(C.url,C.key)}catch(e){}
+window.TDWAPP={get sb(){return sb},store,send,toast:t=>toast(t),C,SESSION,main,nachher:nurErgebnis,choosePath:()=>{pathChoice(false);scrollTo(0,0)}};
 
 /* Senden mit Nachschicken: Bricht die Verbindung kurz ab, bleibt die Antwort gespeichert und geht nach, sobald das Netz wieder da ist */
 const pend=()=>store.get('pending')||{},tries={};
@@ -62,7 +66,7 @@ async function send(q,value){
   const p=pend();p[q]=value;store.set('pending',p);showPending();
 }
 let flushing=false;
-async function flush(){if(flushing)return;flushing=true;try{const p=pend();for(const q of Object.keys(p)){if(await trySend(q,p[q]))unpend(q);else if((tries[q]=(tries[q]||0)+1)>30)unpend(q)}}finally{flushing=false;showPending()}}
+async function flush(){if(flushing)return;flushing=true;try{const p=pend();for(const q of Object.keys(p)){if(await trySend(q,p[q]))unpend(q);else if((tries[q]=(tries[q]||0)+1)>300)unpend(q)}}finally{flushing=false;showPending()}}
 setInterval(flush,8000);addEventListener('online',flush);
 function toast(t){const d=document.createElement('p');d.className='hint';d.style.color='var(--pencil)';d.textContent=t;main.prepend(d);setTimeout(()=>d.remove(),4000)}
 let liveOn=false;
@@ -99,7 +103,7 @@ const arrivalSteps=[
 function arrival(){
   const k=arrivalSteps.findIndex(([key])=>!answered(key));
   const prog=n=>`<div class="prog">${[0,1,2,3,4,5].map(j=>`<span class="${j<n?'on':''}"></span>`).join('')}</div>`;
-  if(k>=0){const [key,t,o]=arrivalSteps[k];choice(t,'Willkommen · '+(k+1)+' von 6',o,key,render,prog(k));return}
+  if(k>=0){const [key,t,o]=arrivalSteps[k];choice(t,'Willkommen · '+(k+1)+' von 6',o,key,render,prog(k)+(k===0?'<p class="hint">Für die Arbeitsgruppe 2 im Franziskussaal. In einer anderen Arbeitsgruppe? <a href="werkzeuge/ki/">Hier geht es zu den Werkzeugen.</a></p>':''));return}
   if(!answered('pfad')){pathChoice(true);return}
   if(!answered('vormittag')){textQ('Was ist Ihnen vom Vormittag geblieben?','Willkommen · 6 von 6','vormittag','Ein Gedanke, ein Satz, eine Frage …',render,'Absenden',true);return}
   done('Danke – Sie sind angekommen.','Wir starten um 14:00. Lassen Sie diese Seite offen.');
@@ -119,7 +123,7 @@ function pathChoice(inArrival){
 function usecases(){
   const cur=store.get('a.uc'), v=cur?cur.v.slice():C.usecases.map(()=>null);
   main.innerHTML=`<div class="kick">Use-Case-Landkarte</div><h1>Wo lohnt sich KI bei Ihnen?</h1>`+
-    C.usecases.map((u,j)=>`<div class="uc"><p>${u}</p><div class="tri" data-j="${j}">${['lohnt sich','kritisch','kein Thema'].map((l,k)=>`<button data-v="${k}" class="${v[j]===k?'sel':''}">${l}</button>`).join('')}</div></div>`).join('')+
+    C.usecases.map((u,j)=>`<div class="uc"><p>${u}</p><div class="tri" data-j="${j}">${['lohnt sich','heikel','betrifft uns nicht'].map((l,k)=>`<button data-v="${k}" class="${v[j]===k?'sel':''}">${l}</button>`).join('')}</div></div>`).join('')+
     `<p class="hint">Sie müssen nicht alle Zeilen beantworten.</p><button class="go" id="b">Absenden</button>`;
   main.querySelectorAll('.tri').forEach(t=>t.querySelectorAll('button').forEach(b=>b.onclick=()=>{
     v[+t.dataset.j]=+b.dataset.v;t.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b))}));
@@ -182,7 +186,7 @@ function zugabe(){
   textQ('Ihre Frage an Armin','Zugabe · anonym','frage','Geht das bei uns? z. B. „Dürfen wir Feedback-Bögen mit Copilot auswerten?“',after,'Absenden',true);
 }
 
-function end(){main.innerHTML=`<div class="kick">Danke!</div><h1>Alles zum Nachlesen</h1><div class="card"><p style="margin:0">Alle vier Module, Datenampel, Tool-Landkarte, Team-Starter-Kit und Quellen:</p><p style="font-family:var(--type);font-size:20px;margin:10px 0 0">${C.participantUrl}</p></div><a class="go" style="display:block;text-align:center;text-decoration:none" href="werkzeuge/ki/">Zu den Werkzeugen</a><a class="opt" style="display:block;text-align:center;text-decoration:none;margin-top:10px" href="abholen.html">Ergebnis mit Abholcode abholen</a>${mineButtons()?'<p class="s m" style="margin:18px 0 6px">Ihr Ergebnis von heute, auf diesem Handy gespeichert:</p>'+mineButtons():''}<p class="hand">Gute Heimfahrt!</p>`;bindMine()}
+function end(){main.innerHTML=`<div class="kick">Danke!</div><h1>Alles zum Nachlesen</h1><div class="card"><p style="margin:0">Alle vier Lernpfade, Datenampel, Tool-Landkarte, Team-Starter-Kit und Quellen:</p><p style="font-family:var(--type);font-size:20px;margin:10px 0 0">${C.participantUrl}</p></div><a class="go" style="display:block;text-align:center;text-decoration:none" href="werkzeuge/ki/">Zu den Werkzeugen</a><a class="opt" style="display:block;text-align:center;text-decoration:none;margin-top:10px" href="abholen.html">Ergebnis mit Abholcode abholen</a>${mineButtons()?'<p class="s m" style="margin:18px 0 6px">Ihr Ergebnis '+(nurErgebnis?'aus dem Workshop':'von heute')+', auf diesem Handy gespeichert:</p>'+mineButtons():''}${nurErgebnis?'':'<p class="hand">Gute Heimfahrt!</p>'}`;bindMine()}
 
 /* ---------- Router ---------- */
 function render(){
@@ -203,6 +207,7 @@ function render(){
 }
 
 async function init(){
+  if(nurErgebnis){store.set('pending',{});$('#liveT').textContent='nach dem Workshop';state={slide:'end'};render();return}
   if(!sb){setLive(false);render();return}
   const {data,error}=await sb.from('sessions').select('state').eq('code',SESSION).single();
   if(error){setLive(false)}else{state=data.state||state;setLive(true)}

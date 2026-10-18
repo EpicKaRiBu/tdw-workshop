@@ -48,5 +48,11 @@
   </div>
 </main>
 <footer class="site"><span>Armin Fradler · <a href="https://arminfradler.at">arminfradler.at</a></span><span><a href="../../datenschutz.html">Datenschutz</a> · <a href="https://arminfradler.at/impressum">Impressum</a></span><span>Orientierung, keine Rechtsberatung</span></footer>
+<script src="../../config.js"></script>
+<script>
+/* Am Workshoptag während des Workshops: Hinweis auf die Mitmach-Seite (Wiener Zeit) */
+(()=>{try{const C=window.TDW;if(!C)return;const w=new Date().toLocaleString('sv',{timeZone:'Europe/Vienna'}),hm=w.slice(11,16);
+ if(w.slice(0,10)===C.date&&hm>=(C.openFrom||'00:00')&&hm<(C.openUntil||'24:00')){const p=document.createElement('p');p.className='card';p.style.borderLeft='5px solid var(--pencil)';p.innerHTML='Sind Sie gerade in der Arbeitsgruppe 2 im Franziskussaal? Dann geht es hier zur <a href="../../">Mitmach-Seite</a>.';document.querySelector('main').prepend(p)}}catch(e){}})();
+</script>
 </body>
 </html>
