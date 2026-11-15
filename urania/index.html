@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChatGPT &amp; Co. im Alltag · Urania Graz</title>
+<meta name="robots" content="noindex">
+<meta name="robots" content="noindex">
+<link href="fonts/fonts.css" rel="stylesheet">
+<link href="textures.css" rel="stylesheet">
+<style>
+:root{--paper:#F3ECDD;--card:#FBF7EE;--ink:#23201B;--muted:#6E6556;--line:#CBBDA3;--pencil:#C0392B;
+  --green:#3F7D4E;--yellow:#D3A221;--red:#B23A2E;--kontext:#2E6B66;
+  --type:"Special Elite","Courier New",monospace;--hand:"Caveat","Segoe Print",cursive;--sans:"Source Sans 3","Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.45}
+body{background-image:var(--tx-grain),var(--tx-fiber),var(--tx-mottle);background-size:256px 256px,512px 512px,1024px 1024px}
+main{max-width:720px;margin:0 auto;padding:24px 16px 60px}
+.kick{font-family:var(--type);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--type);font-weight:400;font-size:30px;line-height:1.2;margin:4px 0 10px}
+h2{font-family:var(--type);font-weight:400;font-size:22px;margin:28px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:18px;margin:14px 0 4px}
+p{margin:0 0 10px}
+.m{color:var(--muted)}.s{font-size:15.5px}
+.hand{font-family:var(--hand);color:var(--pencil);font-size:26px;line-height:1.15}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin:10px 0}
+.recipe{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.recipe span{font-family:var(--type);font-size:15px;border:1.5px solid var(--ink);border-radius:3px;padding:4px 10px 2px;background:#fff}
+.prompt{background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px 14px;margin:6px 0 10px;font-family:var(--type);font-size:15px;line-height:1.5;white-space:pre-wrap}
+.prompt .ph{color:var(--pencil)}
+.ampel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ampel div{border-radius:4px;padding:10px 12px;color:#fff;font-size:15px}
+.ampel b{display:block;font-family:var(--type);font-weight:400;font-size:17px}
+.g{background:var(--green)}.y{background:var(--yellow);color:var(--ink)!important}.r{background:var(--red)}
+ol,ul{padding-left:22px;margin:6px 0 10px}li{margin-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:15.5px;margin:6px 0 10px}
+td,th{border-bottom:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}
+th{font-family:var(--type);font-weight:400;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lines{border-bottom:1px solid var(--line);height:30px}
+.menu li{margin-bottom:7px}
+.menu b{font-family:var(--type);font-weight:400}
+.qr{display:flex;gap:14px;align-items:center}
+.qr img{width:92px;height:92px}
+a{color:var(--kontext)}
+footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:24px;padding-top:8px}
+@media (max-width:560px){.ampel,.two{grid-template-columns:1fr}}
+@media print{
+  @page{size:A4;margin:12mm 14mm}
+  html,body{background:#fff;font-size:12pt}
+  main{max-width:none;padding:0}
+  h1{font-size:20pt}h2{font-size:14pt;margin:10px 0 5px;padding-top:6px}h3{font-size:11pt;margin:8px 0 3px}
+  .s{font-size:11.5pt}
+  .card{background:none;padding:6px 10px;margin:5px 0}
+  .prompt{font-size:11pt;padding:6px 9px;margin:3px 0 6px}
+  .ampel div{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:11pt;padding:6px 8px}
+  .lines{height:30px}
+  .menu.s{font-size:11.5pt}.menu li{margin-bottom:9px}
+  .pb{break-before:page}
+  h2,h3{break-after:avoid}.prompt,.card,tr,.ampel,li{break-inside:avoid}
+  .noprint{display:none}
+}
+.prompt{position:relative;padding-right:92px}
+.prompt button{position:absolute;top:6px;right:6px;font:600 14px var(--sans);background:var(--ink);color:var(--paper);border:none;border-radius:4px;padding:8px 12px;cursor:pointer}
+.prompt button.ok{background:var(--green)}
+.lines{display:none}
+details{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:10px 14px;margin:8px 0}
+summary{font-family:var(--type);font-size:18px;cursor:pointer}
+@media (max-width:560px){.prompt{padding-right:14px;padding-bottom:46px}.prompt button{top:auto;bottom:6px}}
+#wunsch{display:none;background:#fff;border:2px solid var(--pencil);border-radius:6px;padding:14px 16px;margin:14px 0}
+#wunsch h2{border:0;margin:0 0 4px;padding:0;color:var(--pencil)}
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 8px}
+.wg button{font:600 17px var(--sans);text-align:left;background:var(--card);color:var(--ink);border:2px solid var(--line);border-radius:6px;padding:12px 12px;min-height:64px;cursor:pointer;line-height:1.2}
+.wg button small{display:block;font-weight:400;font-size:14px;color:var(--muted);margin-top:2px}
+.wg button.on{background:var(--kontext);border-color:var(--kontext);color:#fff}.wg button.on small{color:#e8f0ee}
+.wg button.on::after{content:" ✓"}
+#wst{font-size:16px;min-height:24px;font-weight:600}
+@media (max-width:360px){.wg{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<main>
+
+<!-- Seite 1 -->
+<div class="kick">Urania Graz · ChatGPT-Workshop · Samstag, 21. November 2026</div>
+<h1>ChatGPT &amp; Co. im Alltag</h1>
+<p>Ihr Begleitblatt für heute und für zu Hause. <span class="m">Die <span style="color:var(--pencil)">roten Stellen</span> in eckigen Klammern ersetzen Sie durch Ihr eigenes Thema. Sie müssen nichts auswendig können: Die KI versteht ganz normale Sprache, auch gesprochen.</span></p>
+
+
+<section id="wunsch" class="noprint" aria-live="polite">
+<h2>Wunschrunde</h2>
+<p class="s" style="margin:0"><b>Was möchten Sie heute noch kennenlernen?</b> Tippen Sie an, was Sie interessiert, höchstens drei. Ändern geht bis Mittag. Ohne Namen, ohne Anmeldung.</p>
+<div class="wg" id="wg"></div>
+<p id="wst" class="m"></p>
+</section>
+
+<div class="card">
+<p class="hand" style="margin-bottom:4px">Da kann nichts kaputt gehen.</p>
+<p class="s" style="margin:0">Probieren Sie ruhig. Wenn etwas komisch aussieht: neuer Chat, und noch einmal anders fragen.</p>
+</div>
+
+
+<h2>Heute Schritt für Schritt</h2>
+<p class="s">Tippen Sie auf den Teil, bei dem wir gerade sind. Jeder Auftrag hat einen Knopf zum Kopieren.</p>
+<details><summary>A · Gut ankommen, sicher starten</summary>
+<p class="s">ChatGPT öffnen: die App von OpenAI (iPhone und Android) oder <b>chatgpt.com</b> selbst eintippen. Anmelden (ohne Konto geht es auch, dann aber ohne Sprachgespräch, ohne Bilder-Malen, ohne Verlauf), dann gleich <a href="#training">Training ausschalten</a>. Zu zweit gilt: <b>Wer das Gerät hält, tippt selbst.</b> Bei jeder Aufgabe wechseln.</p>
+<p class="s"><b>Wunschrunde:</b> Am Handy auf dieser Seite (ganz oben) bis zu drei Wünsche antippen, was Sie am Nachmittag sehen möchten (Lied, Spiel, Kamera, Podcast, Karte, Sprache üben, Meta AI in WhatsApp, wie schnell KI besser wird).</p>
+<p class="s"><b>Wo ist was?</b> Plus: Foto oder Datei · Mikrofon: diktieren · runder Knopf mit Wellen: sprechen wie am Telefon · unter jeder Antwort: vorlesen, kopieren, neu versuchen, teilen · links oben: alte Gespräche · rechts oben: neues Gespräch, daneben der vorübergehende Chat (kommt nicht in den Verlauf).</p>
+<p class="s"><b>Konto klappt nicht?</b> Kein Stress: Erst einmal ohne Anmeldung weitermachen, oder am Android-Handy Gemini öffnen (das Google-Konto ist dort schon da). Das Konto machen wir in der Pause gemeinsam fertig.</p></details>
+<details><summary>B · Einfach reden</summary>
+<div class="prompt">Ich bin <span class="ph">[ein paar Worte über Sie]</span> und benutze dich zum ersten Mal. Was kannst du für mich tun? Gib mir fünf Beispiele aus meinem Alltag.</div>
+<p class="s">Dann nachfragen, widersprechen, „einfacher bitte“ sagen. <b>Sprechen:</b> zu zweit abwechselnd, mit dem runden Knopf mit Wellen rechts im Eingabefeld.</p>
+<p class="s"><b>Danach:</b> <a href="#vorhaben">Mein Vorhaben</a> wählen. Wechseln ist erlaubt.</p>
+<div class="prompt">Ich möchte <span class="ph">[mein Vorhaben]</span>. Wie kannst du mir dabei helfen?</div></details>
+<details><summary>C · Zuerst schützen, dann: wie sie tickt, wo sie irrt</summary>
+<p class="s">Zuerst das Wichtigste: das <a href="#betrug">Familien-Codewort</a> gegen den Enkeltrick mit KI-Stimme. Und bei Bildern und Videos: Erst prüfen, dann teilen.</p>
+<div class="prompt">Nenne mir drei Bücher über die Geschichte des Grazer Hauptplatzes, mit Autor und Jahr.</div>
+<div class="prompt">Such im Netz und gib zu jedem Buch einen Link an.</div>
+<p class="s">Öffnen Sie einen Link. Stimmt es? Dann: die <a href="#ampel">Datenampel</a>.</p></details>
+<details><summary>D · Sehen und Bilder machen</summary>
+<p class="s">Foto machen (Pflanze, Speisekarte, Beipackzettel) und fragen: „Was ist das? Erklär es mir einfach.“</p>
+<div class="prompt">Mal mir <span class="ph">[Motiv]</span> als Aquarell, freundlich und hell.</div>
+<p class="s m">Bilder entstehen auf zwei Wegen: aus Rauschen vom Groben zum Feinen, oder Stück für Stück wie ein Kreuzstich. In beiden steckt Zufall, darum wird jedes Bild anders.</p>
+<p class="s m">Gratis gibt es nur wenige Bilder am Tag. Ein schönes Bild genügt.</p>
+<p class="s"><b>Für die Mittagspause, wer mag:</b> Speisekarte fotografieren und sich etwas empfehlen lassen, oder per Sprache fragen:</p>
+<div class="prompt">Was kann ich in einer halben Stunde rund um den Hauptplatz entdecken?</div></details>
+<details><summary>E · Gut fragen: vom Chat zum Gedächtnis</summary>
+<p class="s">Zuerst: Zeigen Sie Ihrer Nachbarin oder Ihrem Nachbarn, was Sie mittags gefragt haben.</p>
+<div class="prompt">Ich möchte <span class="ph">[mein Vorhaben]</span>. Stell mir zuerst nacheinander fünf Fragen, damit du mir wirklich gut helfen kannst. Erst danach machst du einen Vorschlag.</div>
+<div class="prompt">Der Grazer Uhrturm als Aquarell, im warmen Abendlicht, Hochformat für eine Karte, ohne Menschen, ohne Schrift. Beschreib mir zuerst drei Varianten in Worten, dann malst du die, die ich aussuche.</div>
+<div class="prompt">Hilf mir, einen kurzen Text über mich zu schreiben, damit du mich künftig besser verstehst. Stell mir dazu ein paar Fragen. Keine Adresse, keine Gesundheitsdaten.</div>
+<p class="s">Den fertigen Text in ChatGPT unter Ihrem Namen › Personalisierung einfügen (nicht auf einem geliehenen Handy). Mehr dazu unter <a href="#gutfragen">Gut fragen</a>.</p></details>
+<details><summary>F · Werkstatt: mein Vorhaben fertig machen</summary>
+<p class="s">Vorweg: Sie antwortet, Suchen, Rechnen und Dateien machen Werkzeuge. Und Gesundheit: zum Vorbereiten ja, zum Entscheiden nein. Notfall (Brustschmerz, Atemnot, Lähmung): <b>144</b>. Unsicher: <b>1450</b>.</p>
+<div class="prompt">Ich habe am <span class="ph">[Tag]</span> einen Termin wegen <span class="ph">[Beschwerde]</span>. Welche fünf Fragen sollte ich stellen, und was nehme ich mit?</div>
+<p class="s">Dann zeige ich Ihre drei Wünsche aus der Wunschrunde vor, und Sie probieren selbst: gleich hier oder zu Hause.</p>
+<div class="prompt">Bau mir ein Quiz mit 10 Fragen über <span class="ph">[Thema]</span> für ein Kind mit <span class="ph">[Alter]</span> Jahren, das man am Handy spielen kann. Gib mir einen Link zum Weiterschicken.</div>
+<p class="s m">Das Spiel klappt am besten in Gemini oder Claude, dort bekommen Sie einen Link.</p>
+<p class="s">Zu zweit eine Aufgabe aus dem <a href="#menue">Aufgaben-Menü</a> wählen. Wer fertig ist, nimmt die nächste. Ein gelungener Text zählt auch.</p>
+<p class="s"><b>Dateien:</b> dazusagen „als PDF zum Herunterladen“, „als Word-Datei“ oder „als Tabelle“. <b>Wiederfinden:</b> am Handy in „Dateien“ bzw. „Downloads“, am Laptop im Ordner „Downloads“. <b>Weitergeben:</b> Teilen-Symbol. Klappt es nicht: zweiter Versuch, oder den Text kopieren und selbst in Word einfügen.</p></details>
+<details><summary>G · Gratis oder bezahlen, und wie es weitergeht</summary>
+<p class="s">Was ein Abo bringt und was gratis reicht (<a href="#bezahlen">Gratis oder bezahlen?</a>). Dann die Seilbahn: Was mache ich ab morgen selbst? Die übrigen Wünsche zum Selbst-Ausprobieren stehen im <a href="#menue">Aufgaben-Menü</a>.</p></details>
+<details><summary>H · Ernte</summary>
+<p class="s">Schreiben Sie Ihre drei Lieblingsfragen auf (Begleitblatt, Seite 6). Diese Seite bleibt online, auch für zu Hause.</p></details>
+
+<h2>Sicher starten</h2>
+<p><b>Nur über die echte Adresse oder die echte App.</b> Nicht über eine Suche mit Google: Ganz oben stehen dort oft bezahlte Anzeigen, und manche führen auf gefälschte Seiten. Tippen Sie die Adresse selbst ein und speichern Sie sie als Lesezeichen.</p>
+<table>
+<tr><th>Werkzeug</th><th>Echte Adresse</th><th>App im App Store / Play Store von</th></tr>
+<tr><td>ChatGPT</td><td>chatgpt.com</td><td>OpenAI</td></tr>
+<tr><td>Claude</td><td>claude.ai</td><td>Anthropic</td></tr>
+<tr><td>Gemini</td><td>gemini.google.com</td><td>Google</td></tr>
+<tr><td>Copilot</td><td>copilot.microsoft.com</td><td>Microsoft</td></tr>
+</table>
+<ul class="s">
+<li><b>„Anzeige“ oder „Gesponsert“</b> über einem Suchergebnis heißt: bezahlt, nicht unbedingt echt.</li>
+<li><b>Nie einen Befehl kopieren und einfügen</b>, weil eine Seite oder ein Chatbot das verlangt („Drücken Sie Windows + R …“). Fenster schließen.</li>
+<li><b>Zahlen müssen Sie für den Anfang nichts.</b> Die Gratis-Version reicht für alles, was wir heute machen. Unter manchen Antworten steht seit August 2026 Werbung („Gesponsert“), das ist normal.</li>
+<li><b>Mit Konto anmelden.</b> ChatGPT geht auch ohne, dann aber ohne Sprachgespräch, ohne Bilder-Malen, ohne Verlauf, und das Training ist eingeschaltet.</li>
+</ul>
+
+<h3 id="training">Gleich nach dem Anmelden: Training ausschalten</h3>
+<p class="s"><b>ChatGPT:</b> Einstellungen › Datenkontrollen › „Das Modell für alle verbessern“ aus. <span class="m">Zu den Einstellungen: am Laptop übers Profilbild, in der Handy-App übers Menü links oben und dann unten auf Ihren Namen.</span><br>
+<b>Claude:</b> Ihr Name › Einstellungen › Datenschutz › „Helfen Sie uns, unsere KI-Modelle zu verbessern“ aus.<br>
+<b>Gemini:</b> Profilbild › „Aktivitäten beibehalten“ (früher „Gemini-Apps-Aktivität“) › ausschalten.<br>
+<b>Copilot:</b> derzeit kein Schalter; laut Microsoft werden die Grundmodelle nicht mit Ihren Chats trainiert.<br>
+<span class="m">Dann lernt das Programm nicht aus Ihren Gesprächen. Gespeichert wird beim Anbieter trotzdem, darum gilt die <a href="#ampel">Ampel</a>.</span></p>
+
+<h2 class="pb" id="vorhaben">Mein Vorhaben für heute</h2>
+<p class="s">Wählen Sie etwas Echtes, das Ihnen Freude macht oder hilft. Daran üben wir ab dem späten Vormittag. Wechseln ist erlaubt. Ideen: eine Reise, eine Geburtstagsrede, ein Arzttermin, eine Familienchronik, ein Spiel für die Enkel, der Rundbrief vom Verein.</p>
+<div class="lines"></div><div class="lines"></div>
+
+<div class="card s">
+<b>Wenn ich hänge</b>
+<ol style="margin-bottom:0">
+<li>Seite neu laden oder App schließen und wieder öffnen.</li>
+<li>Einen <b>neuen Chat</b> beginnen und anders fragen.</li>
+<li>Die Nachbarin oder den Nachbarn fragen. Zu zweit gilt: <b>Wer das Gerät hält, tippt selbst.</b> Bei jeder Aufgabe wechseln.</li>
+<li>Die KI selbst fragen: „Ich komme nicht weiter, wie mache ich …?“</li>
+<li><b>„Limit erreicht“?</b> Mit Gemini weitermachen (geht mit Google-Konto), beim Tandem mitmachen oder später wieder.</li>
+<li>Frage auf den Fragen-Parkplatz schreiben.</li>
+</ol>
+</div>
+
+<!-- Seite 2 -->
+<h2>Einfach reden</h2>
+<p>Fragen Sie die KI ganz naiv, was sie für Sie tun kann. Sie dürfen nachfragen, widersprechen und „einfacher bitte“ sagen.</p>
+<div class="prompt">Ich bin <span class="ph">[ein paar Worte über Sie]</span> und benutze dich zum ersten Mal. Was kannst du für mich tun? Gib mir fünf Beispiele aus meinem Alltag.</div>
+<p class="s"><b>Sprechen statt tippen:</b> Das <b>Mikrofon</b> im Eingabefeld diktiert, Ihre Worte werden Text. Der <b>runde Knopf mit Wellen</b> daneben startet ein echtes Gespräch, dann reden Sie wie am Telefon. Im Kurs probieren wir das zu zweit abwechselnd.<br>
+<b>Unter jeder Antwort:</b> vorlesen lassen, kopieren, neu versuchen (Kreispfeil), teilen. Links oben finden Sie alle alten Gespräche, rechts oben beginnen Sie ein neues.<br>
+<b>Mit Foto:</b> Auf das Plus oder die Büroklammer tippen, ein Foto aufnehmen und fragen: „Was ist das?“ oder „Erklär mir das in einfachen Worten.“</p>
+
+<h2 class="pb" id="gutfragen">Gut fragen: was vom „Prompt Engineering“ bleibt</h2>
+<p>Ein <b>Prompt</b> ist Ihr Auftrag an die KI. Zauberformeln braucht es kaum mehr. Was wirklich zählt: <b>Kontext</b>. Die KI kennt Sie nicht. Je mehr sie über Ihre Lage weiß, desto passender wird die Antwort.</p>
+<div class="recipe"><span>Wer ich bin</span><span>Was ich vorhabe</span><span>Wofür</span><span>Ein Beispiel</span><span>Wie es aussehen soll</span></div>
+<div class="two">
+<div><p class="s m" style="margin-bottom:2px">Ohne Kontext</p><div class="prompt">Schreib eine Rede zum 70er.</div></div>
+<div><p class="s m" style="margin-bottom:2px">Mit Kontext</p><div class="prompt">Ich halte bei der Feier meines Bruders Franz eine kurze Rede, 3 Minuten. Er wird 70, war Tischler und wandert gern. Herzlich, mit einem Augenzwinkern, keine Peinlichkeiten.</div></div>
+</div>
+<h3>Der stärkste Trick: Lassen Sie sich fragen</h3>
+<div class="prompt">Ich möchte <span class="ph">[mein Vorhaben]</span>. Stell mir zuerst nacheinander fünf Fragen, damit du mir wirklich gut helfen kannst. Erst danach machst du einen Vorschlag.</div>
+<h3>Ein Bild bestellen wie beim Maler</h3>
+<div class="recipe"><span>Motiv</span><span>Stil</span><span>Licht und Stimmung</span><span>Format</span><span>Was nicht</span></div>
+<div class="prompt">Der Grazer Uhrturm als Aquarell, im warmen Abendlicht, Hochformat für eine Karte, ohne Menschen, ohne Schrift. Beschreib mir zuerst drei Varianten in Worten, dann malst du die, die ich aussuche.</div>
+<p class="s"><b>Nachschärfen statt neu anfangen:</b> „kürzer“, „wärmer“, „größere Schrift“, „als Tabelle“, „für Kinder erklärt“.<br>
+<b>Damit sie Sie kennt:</b> In ChatGPT können Sie unter Ihrem Namen › Personalisierung einmal hineinschreiben, wer Sie sind und wie Sie Antworten mögen. Mit „Projekte“ bleibt ein Vorhaben samt Dateien an einem Ort. <span class="m">Auf einem geliehenen Handy nichts davon einrichten: Das Gedächtnis gehört der Besitzerin.</span><br>
+<b>Ein Thema, ein Chat:</b> Sehr lange Gespräche werden ungenauer. Für etwas Neues einen neuen Chat beginnen.</p>
+
+<div class="card s"><b>Für Erfahrene: der nächste Schritt</b>
+<ul style="margin-bottom:0">
+<li>Ein Projekt pro Vorhaben anlegen und Unterlagen hineinlegen.</li>
+<li>Ein gutes Beispiel mitgeben: „So soll es klingen: …“</li>
+<li>Die Form vorgeben: Tabelle, Liste, Brief, PDF, Länge, Ton.</li>
+<li>Dieselbe Frage in zwei Werkzeugen stellen und vergleichen.</li>
+<li>Die KI ihre eigene Antwort prüfen lassen: „Was könnte daran falsch sein?“</li>
+</ul></div>
+<h2 class="pb">Die ehrliche Seite</h2>
+<p class="s"><b>Die KI kann sich irren und dabei sehr sicher klingen.</b> Sie erfindet manchmal Zahlen, Namen oder Quellen. Wichtiges prüfen Sie: „Nenne mir die Quelle mit Link“, dann den Link öffnen. <b>Vier Fragen, bevor ich etwas verwende:</b> Stimmt das? Woher kommt es? Passt es zu mir? Würde ich es mit meinem Namen abschicken? Bei Gesundheit, Geld und Recht ersetzt sie keine Ärztin, keine Bank und kein Amt, aber sie hilft Ihnen, das Gespräch gut vorzubereiten. <b>Gesundheit:</b> gut für Fragen an die Ärztin und für Fachwörter im eigenen (geschwärzten) Befund, nicht für Diagnosen. Brustschmerz, Atemnot, Lähmung: <b>144</b>. Unsicher: Gesundheitsnummer <b>1450</b>.</p>
+<div class="ampel" id="ampel">
+<div class="g"><b>Grün</b>Ausgedachtes, Allgemeines, Ihr Rezept, Ihre Reiseidee → einfach eingeben</div>
+<div class="y"><b>Gelb</b>Briefe vom Amt, Rechnungen, eigene Befunde, Lebenslauf → erst Namen, Adresse, Nummern schwärzen (ungeschwärzt: rot)</div>
+<div class="r"><b>Rot</b>Passwörter, PIN, Kontonummern, Ausweis, Name plus Krankheit anderer, Adresslisten, Fotos von Kindern und Enkeln → nie</div>
+</div>
+<p class="s m" style="margin-top:6px">Die Ampel ist kein Gesetz für Private, sondern eine Vorsichtsregel: Was Sie eintippen, liegt beim Anbieter, und andere wurden nicht gefragt. Fotos anderer Erwachsener nur mit deren Einverständnis.</p>
+
+<div class="card s" id="betrug" style="margin-top:12px">
+<b>Schutz vor Betrug mit KI</b><br>
+Mit wenigen Sekunden Tonaufnahme kann man heute eine Stimme nachmachen. Der Enkeltrick wird dadurch echter. <b>Vereinbaren Sie in der Familie ein Codewort.</b> Bei Druck und Geldbitte: auflegen und selbst unter der gespeicherten Nummer zurückrufen. Bank, Polizei und Ämter fragen nie am Telefon nach Codes oder Bargeld, auch wenn „Bank“ oder „Polizei“ am Display steht. Will jemand Geld an der Tür abholen: Polizei 133. Auch Fotos und Videos lassen sich fälschen, etwa Werbung mit Prominenten für Geldanlagen. Fragen Sie: Wer verbreitet das? Will es Geld oder Eile? Steht es auch woanders? <b>Erst prüfen, dann teilen.</b> Aktuelle Maschen: <b>watchlist-internet.at</b><br>
+<b>Wenn es passiert ist:</b> sofort die Bank anrufen, Karte sperren, Anzeige bei der Polizei. Nicht schämen, es trifft auch Vorsichtige. Vorsicht vor „Geld-zurück-Helfern“, die danach anrufen.
+</div>
+
+<!-- Seite 3 -->
+<h2 id="sotickt">So tickt sie, in fünf Sätzen</h2>
+<ol class="s" style="margin-top:4px">
+<li><b>Sie hat aus Beispielen gelernt</b>, aus unvorstellbar vielen Texten, nicht aus Regeln.</li>
+<li><b>Sie rät das wahrscheinlichste nächste Wortstück.</b> Darum kommt jedes Mal eine etwas andere Antwort.</li>
+<li><b>Wenn sie etwas nicht weiß, setzt sie Wahrscheinliches zusammen.</b> Das klingt sicher, kann aber erfunden sein.</li>
+<li><b>Sie kennt Sie nicht.</b> Und sie liest bei jeder Antwort das ganze Gespräch von vorn, bei sehr langen Gesprächen wird sie ungenauer. Ein neues Gespräch fängt fast leer an, nur mit dem, was sie sich über Sie gemerkt hat.</li>
+<li><b>Für Suchen, Rechnen und Dateien nutzt sie Werkzeuge.</b> Abgeben dürfen Sie viel. Bezahlen und entscheiden bleibt bei Ihnen.</li>
+</ol>
+<h2 class="pb" id="menue">Aufgaben-Menü für die Werkstatt</h2>
+<p class="s">Suchen Sie sich aus, was zu Ihrem Vorhaben passt. Allein oder zu zweit. Wer fertig ist, nimmt die nächste.</p>
+<ol class="menu s">
+<li><b>Kochbuch-Blatt.</b> „Hier ist mein Familienrezept: <span style="color:var(--pencil)">[Rezept]</span>. Mach daraus ein schön gestaltetes Rezeptblatt als PDF, mit einer kleinen Geschichte dazu.“</li>
+<li><b>Drei Tage unterwegs.</b> „Plane mir drei gemütliche Tage in <span style="color:var(--pencil)">[Ort]</span>, mit wenig Gehen, als Tabelle. Dazu ein Plan B bei Regen.“</li>
+<li><b>Spiel für die Enkel.</b> In Gemini oder Claude: „Bau mir ein Quiz mit 10 Fragen über <span style="color:var(--pencil)">[Thema]</span> für ein Kind mit <span style="color:var(--pencil)">[Alter]</span> Jahren, das man am Handy spielen kann. Gib mir einen Link zum Weiterschicken.“</li>
+<li><b>Arzttermin.</b> „Ich habe am <span style="color:var(--pencil)">[Tag]</span> einen Termin wegen <span style="color:var(--pencil)">[Beschwerde]</span>. Welche fünf Fragen sollte ich stellen, und was nehme ich mit?“</li>
+<li><b>Mail oder Rundbrief.</b> Was Sie ohnehin schreiben müssen (Mitgliederlisten mit Adressen nicht hineinkopieren): „Hilf mir, das freundlich und klar zu formulieren: <span style="color:var(--pencil)">[Stichworte]</span>.“</li>
+<li><b>Ein Lied.</b> Text mit ChatGPT schreiben, Musik mit Suno (suno.com, gratis einige Lieder am Tag, nur privat; gratis meist nur anhören und Link teilen).</li>
+<li><b>Glückwunschkarte.</b> „Mal eine Karte zum <span style="color:var(--pencil)">[Anlass]</span> mit dem Text ‚<span style="color:var(--pencil)">[Text]</span>‘, Hochformat.“ Schrift im Bild genau prüfen. Wenn Sie es posten: „mit KI gemacht“ dazuschreiben (für Private keine Pflicht, aber fair).</li>
+<li><b>Familienchronik.</b> Per Sprache: „Interview mich über meine Kindheit, eine Frage nach der anderen. Schreib danach eine Seite daraus.“</li>
+<li><b>Brief vom Amt verstehen.</b> Erst schwärzen (Ampel), dann: „Erklär mir diesen Brief in einfachen Worten. Was muss ich tun, bis wann?“</li>
+<li><b>Hausübung der Enkel.</b> „Erklär mir <span style="color:var(--pencil)">[Thema]</span> so, dass ich es meinem Enkel erklären kann. Gib nicht die Lösung, sondern stell Fragen.“</li>
+</ol>
+<p class="s" style="margin-bottom:4px"><b>Aus der Wunschrunde, zum Selbst-Ausprobieren:</b> Mit der Kamera reden (Gemini, Kamera-Symbol im Sprachmodus) · Podcast aus eigenem Text (Gemini Notebook von Google, früher NotebookLM: notebook.google) · Sprache üben für die Reise (Sprachmodus: „Sprich mit mir Italienisch, ganz langsam“) · Meta AI in WhatsApp (das lila Symbol; die Ampel gilt auch dort).</p>
+<p class="s m">Dateien wie PDF, Word oder Tabellen: einfach dazusagen „als PDF zum Herunterladen“. Klappt es nicht, hilft ein zweiter Versuch oder ein anderes Werkzeug.</p>
+
+<h2 id="bezahlen">Gratis oder bezahlen?</h2>
+<p class="s"><b>Für den Anfang reicht gratis.</b> Gratis-Versionen haben Grenzen: nach einigen Nachrichten oder Bildern heißt es warten. Seit August 2026 steht unter manchen Antworten von Gratis-ChatGPT Werbung („Gesponsert“). ChatGPT Go (7,99 € im Monat) gibt mehr Bilder und Nachrichten, zeigt aber weiter Werbung. Wer täglich damit arbeitet, kann über ein Abo um rund 22 bis 23 € im Monat nachdenken (ChatGPT Plus, Claude Pro, Google AI Pro). Monatlich kündbar, also erst einen Monat testen. Die Datenampel gilt auch im Abo.<br>
+<b>Werbung abschalten geht auch gratis:</b> Einstellungen › Werbeeinstellungen, dafür weniger Fragen pro Tag und weniger Bilder. <b>Kündigen</b> im App Store bzw. Play Store: App löschen beendet kein Abo. Vorsicht vor gefälschten Apps mit Abo.</p>
+
+<h2 id="fragen">Fragen, die fast alle haben</h2>
+<p class="s"><b>Hört das Handy mit?</b> Nur solange das Mikrofon- oder Wellen-Symbol aktiv ist. In den Handy-Einstellungen sehen Sie, welche App das Mikrofon darf.</p>
+<p class="s"><b>Wie lösche ich das?</b> Gespräch lange drücken › Löschen. Alles: Einstellungen › Datenkontrollen. Was sie sich gemerkt hat, extra: Personalisierung › Gedächtnis. „Training aus“ ist etwas anderes als Löschen.</p>
+<p class="s"><b>Was kostet das?</b> Gratis reicht. Ein Abo kündigen Sie im App Store bzw. Play Store. App löschen allein beendet kein Abo.</p>
+<p class="s"><b>Nimmt das Arbeit weg?</b> Seriös sagen kann das heute niemand. Österreich sorgt sich besonders, aber nur 6 % erwarten, selbst ersetzt zu werden (Allianz, Okt. 2026).</p>
+<p class="s"><b>Und die Umwelt?</b> Eine Textfrage: etwa 9 Sekunden Fernsehen. Bilder und Videos: ein Vielfaches. Lieber einmal gut fragen als zwanzigmal.</p>
+<p class="s"><b>Wer steckt dahinter?</b> Fast nur US-Firmen, Mistral aus Frankreich. Sie verdienen mit Abos und, bei ChatGPT gratis, mit Werbung.</p>
+<p class="s"><b>Gefährlich für die Enkel?</b> Altersgrenzen 13 bzw. 18, Eltern-Einstellungen in ChatGPT. Keine Fotos der Enkel hochladen. Zum Lernen: „Erklär, statt zu lösen.“</p>
+<p class="s"><b>Schon hereingefallen?</b> Sofort Bank anrufen, Karte sperren, Anzeige bei der Polizei. Nicht schämen. Vorsicht vor „Geld-zurück-Helfern“.</p>
+<h2>Zum Weiterschauen</h2>
+<ul class="s">
+<li><b>Digital im Alter</b>: ruhige Schritt-für-Schritt-Videos (YouTube, @digital-im-alter)</li>
+<li><b>Quarks (WDR)</b>: Wissenschaft verständlich, im Kanal nach „KI“ suchen (YouTube, @Quarks)</li>
+<li><b>AI mit Arnie</b>: neue KI-Werkzeuge kurz erklärt, eher für Fortgeschrittene (YouTube, @Arnold-Oberleiter)</li>
+<li><b>Elements of AI</b>: Online-Kurs der Uni Helsinki, ohne Mathematik (elementsofai.de)</li>
+<li><b>Digital Überall</b>: kostenlose Workshops in ganz Österreich, auch zu KI (digitalaustria.gv.at). Persönliche Hilfe: Digital Austria Servicestelle, +43 50 233770 (Mo–Fr 8–16 Uhr)</li>
+<li><b>Watchlist Internet · Mimikama</b>: Warnungen vor Betrug und Fälschungen (watchlist-internet.at · mimikama.org)</li>
+</ul>
+<h2>Zum Ausdrucken</h2>
+<p class="s"><a href="Handout-Urania-2026-11-21_A4.pdf">Begleitblatt als PDF (6 Seiten)</a> · mit Platz für Ihr Vorhaben, Notizen und Ihre drei Lieblingsfragen.</p>
+<footer>Armin Fradler · KI-Befähigung · arminfradler.at · Stand 15.11.2026. Funktionen und Preise der Anbieter ändern sich oft.</footer>
+</main>
+<script>
+document.querySelectorAll('.prompt').forEach(function(el){var b=document.createElement('button');b.type='button';b.textContent='Kopieren';
+b.onclick=function(){var t=el.innerText.replace(/Kopieren$|Kopiert ✓$/,'').trim();
+(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='Kopiert ✓';b.className='ok';setTimeout(function(){b.textContent='Kopieren';b.className=''},1800)}).catch(function(){var r=document.createRange();r.selectNodeContents(el);var sel=getSelection();sel.removeAllRanges();sel.addRange(r)})};el.appendChild(b)});
+</script>
+<script>
+/* Wunschrunde: zeigt sich nur am Workshop-Tag (bis zum Ende der Mittagspause) oder mit ?wunsch zum Testen. */
+(function(){
+var W={url:'https://nqkbtfhoixgplmxcpxyn.supabase.co',key:'sb_publishable_C4iTUIUu-CJA4WdyHxjAVw_VAL-cp2F',
+  session:'TEST',tage:['2026-11-21','2027-01-30'],von:'07:30',bis:'14:00',max:3,
+  wuensche:[['Ein eigenes Lied','Suno'],['Spiel für die Enkel','mit Link zum Weiterschicken'],['Mit der Kamera reden','Gemini Live'],['Podcast aus eigenem Text','Gemini Notebook (Google)'],['Glückwunschkarte mit Text','Bild mit Schrift'],['Sprache üben für die Reise','Sprachmodus'],['Meta AI in WhatsApp','das lila Symbol'],['Wie schnell wird KI besser?','die Kurve']]};
+var q=location.search,test=/[?&]wunsch/.test(q);
+function wien(){try{var p=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Vienna',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date());return {d:p.slice(0,10),t:p.slice(11,16)}}catch(e){return {d:'',t:''}}}
+var n=wien();if(!test&&!(W.tage.indexOf(n.d)>=0&&n.t>=W.von&&n.t<W.bis))return;
+var frage='urania-wunsch-'+(test?'test':n.d);
+var box=document.getElementById('wunsch'),grid=document.getElementById('wg'),st=document.getElementById('wst');box.style.display='block';
+function uuid(){if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0;return (c=='x'?r:(r&3|8)).toString(16)})}
+var me,sel=[];try{me=localStorage.getItem('urania-id');if(!me){me=uuid();localStorage.setItem('urania-id',me)}sel=JSON.parse(localStorage.getItem(frage)||'[]')}catch(e){me=me||uuid()}
+W.wuensche.forEach(function(w,i){var b=document.createElement('button');b.type='button';b.innerHTML=(i+1)+' · '+w[0]+'<small>'+w[1]+'</small>';
+  b.onclick=function(){var k=sel.indexOf(i);if(k>=0)sel.splice(k,1);else{if(sel.length>=W.max){st.textContent='Höchstens drei. Tippen Sie zuerst einen Wunsch noch einmal an, um ihn abzuwählen.';return}sel.push(i)}zeigen();senden()};grid.appendChild(b)});
+function zeigen(){[].forEach.call(grid.children,function(b,i){b.classList.toggle('on',sel.indexOf(i)>=0)})}
+var t;function senden(){st.textContent='Wird gespeichert …';clearTimeout(t);t=setTimeout(function(){
+  fetch(W.url+'/rest/v1/rpc/submit_response',{method:'POST',headers:{'apikey':W.key,'Authorization':'Bearer '+W.key,'Content-Type':'application/json'},
+    body:JSON.stringify({p_session:W.session,p_question:frage,p_participant:me,p_value:{w:sel.slice().sort()}})})
+  .then(function(r){if(!r.ok)throw 0;try{localStorage.setItem(frage,JSON.stringify(sel))}catch(e){}
+    st.textContent=sel.length?'Gespeichert ✓ Danke! Ihre Wahl sehen Sie gleich auf der Leinwand.':'Gespeichert ✓ (nichts gewählt)'})
+  .catch(function(){st.textContent='Hat nicht geklappt. Bitte noch einmal antippen, oder einfach die Hand heben, wenn Armin fragt.'})},400)}
+zeigen();if(sel.length)st.textContent='Ihre Wahl ist gespeichert. Sie können sie ändern.';
+})();
+</script>
+</body>
+</html>
